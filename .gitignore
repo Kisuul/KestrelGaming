@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.venv/
+.kestrel-work/
+.env
+.env.*
+!.env.example

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kestrel Remember"
+  short_description: "Save useful lessons and handoffs to shared memory"
+  default_prompt: "Use $kestrel-remember to save the useful findings from this task."

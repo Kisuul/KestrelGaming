@@ -1,0 +1,43 @@
+name: Kestrel engineering task
+description: Describe an engineering outcome with scope, checks, and boundaries.
+title: "[Kestrel] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use this to describe a goal, not to grant access beyond repository and tool permissions."
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Intended outcome
+      description: What observable behavior or artifact should exist?
+      placeholder: "When an expired session is supplied, the endpoint returns the documented unauthorized response."
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context and evidence
+      description: Reproduction steps, relevant files, or linked reports.
+    validations:
+      required: false
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance criteria
+      description: Concrete, independently checkable conditions.
+    validations:
+      required: false
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Scope, constraints, and approvals
+      description: Identify excluded areas or actions that require explicit authorization.
+    validations:
+      required: false
+  - type: textarea
+    id: verification
+    attributes:
+      label: Expected verification
+      description: Checks that would demonstrate the outcome.
+    validations:
+      required: false

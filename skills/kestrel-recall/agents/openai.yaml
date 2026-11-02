@@ -1,0 +1,4 @@
+interface:
+  display_name: "Kestrel Recall"
+  short_description: "Load relevant shared memory and resume from evidence"
+  default_prompt: "Use $kestrel-recall to find relevant Kestrel memory for the current project."
