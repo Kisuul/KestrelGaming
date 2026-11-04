@@ -33,6 +33,15 @@ class NumericalAnalysisFixtures(unittest.TestCase):
         self.assertTrue(math.isclose(1e-12, 0.0, rel_tol=1e-6, abs_tol=1e-11))
         self.assertFalse(math.isclose(math.nan, math.nan))
 
+    def test_num03_log1p_expm1_preserve_tiny_increments(self):
+        # Both naive expressions round to zero for this binary64 input.
+        x = 1e-16
+        self.assertEqual(math.log(1.0 + x), 0.0)
+        self.assertEqual(math.exp(x) - 1.0, 0.0)
+        # Taylor expansion: true results are x + O(x*x).
+        self.assertTrue(math.isclose(math.log1p(x), x, rel_tol=1e-15))
+        self.assertTrue(math.isclose(math.expm1(x), x, rel_tol=1e-15))
+
     def test_decimal_reference_is_not_binary_float(self):
         with localcontext() as ctx:
             ctx.prec = 30
@@ -56,10 +65,38 @@ class DimensionalAnalysisFixtures(unittest.TestCase):
         self.assertEqual(force, (1, 1, -2, 0, 0, 0, 0))
         self.assertNotEqual(force, acceleration)
 
-    def test_incompatible_dimensions_rejected_in_contract(self):
+    def test_incompatible_dimensions_rejected_in_reference_gate(self):
         length = (1, 0, 0, 0, 0, 0, 0)
         duration = (0, 0, 1, 0, 0, 0, 0)
-        self.assertNotEqual(length, duration)  # Never add them as one quantity.
+
+        def add_canonical_quantities(left, right):
+            # Test-local contract example, not a production units API.
+            # The two values must already use the same canonical unit scale.
+            if left[1] != right[1]:
+                raise ValueError("incompatible dimensions")
+            return (left[0] + right[0], left[1])
+
+        self.assertEqual(add_canonical_quantities((Fraction(2), length),
+                                                  (Fraction(3), length)),
+                         (Fraction(5), length))
+        with self.assertRaisesRegex(ValueError, "incompatible dimensions"):
+            add_canonical_quantities((Fraction(2), length),
+                                     (Fraction(3), duration))
+
+    def test_dim03_affine_temperature_conversion(self):
+        offset = Decimal('273.15')
+        self.assertEqual(Decimal('0') + offset, Decimal('273.15'))
+        self.assertEqual(Decimal('100') + offset, Decimal('373.15'))
+        self.assertEqual(Decimal('373.15') - Decimal('273.15'),
+                         Decimal('100'))
+
+    def test_dim04_consistent_logarithmic_ratios(self):
+        # Referenced amplitude ratio 2, associated power ratio 4.
+        amplitude_db = 20 * math.log10(2.0)
+        power_db = 10 * math.log10(4.0)
+        self.assertTrue(math.isclose(amplitude_db, power_db, rel_tol=1e-15))
+        self.assertTrue(math.isclose(amplitude_db, 6.020599913279624,
+                                     rel_tol=0, abs_tol=2e-15))
 
 
 class LinearAlgebraFixtures(unittest.TestCase):
@@ -103,8 +140,17 @@ class ComplexNumbersFixtures(unittest.TestCase):
         self.assertTrue(math.isclose(computed.imag, 0.0, abs_tol=2e-15))
 
     def test_phase_of_zero_not_used_as_measurement(self):
-        self.assertEqual(abs(0j), 0.0)
-        # Do not assert that the implementation's conventional phase(0) has meaning.
+        # Python cmath.phase(0) returns a convention, not a defined physical phase.
+        def phase_or_none(z):
+            return None if abs(z) == 0 else cmath.phase(z)
+
+        self.assertIsNone(phase_or_none(0j))
+        self.assertTrue(math.isclose(phase_or_none(3 + 4j),
+                                     math.atan2(4, 3), rel_tol=1e-15))
+
+    def test_cmp03_branch_cut_signed_zero(self):
+        self.assertEqual(cmath.phase(complex(-1.0, 0.0)), math.pi)
+        self.assertEqual(cmath.phase(complex(-1.0, -0.0)), -math.pi)
 
 
 class ProbabilityStatisticsFixtures(unittest.TestCase):
@@ -149,8 +195,24 @@ class VerificationFixtures(unittest.TestCase):
     def test_near_singular_rounding_is_distinct_from_exact_math(self):
         delta = 2.0 ** -53  # Half a binary64 ULP at 1, rounds to 1 on a common runtime.
         self.assertEqual(1.0 + delta, 1.0)
+        floating_determinant = 1.0 * (1.0 + delta) - 1.0 * 1.0
+        self.assertEqual(floating_determinant, 0.0)
         exact_determinant = Fraction(1) * (Fraction(1) + Fraction(1, 2**53)) - 1
         self.assertEqual(exact_determinant, Fraction(1, 2**53))
+
+    def test_explicit_nonfinite_comparison_gate(self):
+        def checked_close(actual, expected, *, relative, absolute):
+            # Test-local policy example, not a production verifier.
+            if not (math.isfinite(actual) and math.isfinite(expected)):
+                raise ValueError("nonfinite comparison")
+            return math.isclose(actual, expected,
+                                rel_tol=relative, abs_tol=absolute)
+
+        self.assertTrue(checked_close(1.0, 1.0, relative=1e-12, absolute=0))
+        for bad in (math.nan, math.inf, -math.inf):
+            with self.subTest(value=bad):
+                with self.assertRaisesRegex(ValueError, "nonfinite"):
+                    checked_close(bad, 0.0, relative=1e-12, absolute=1e-12)
 
 
 if __name__ == '__main__':

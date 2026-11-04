@@ -19,7 +19,7 @@ Use when code mixes units, physical quantities, sampled time, rates, distances, 
 
 ## Worked example
 
-`1000 samples / 48000 samples·s^-1 = 1/48 s ≈ 0.0208333333333333 s`. The sample count is not itself a duration, and changing sample rate changes the duration. Acceleration dimension: `L T^-2`; multiplying by mass yields force dimension `M L T^-2`.
+`1000 samples / 48000 samples·s^-1 = 1/48 s ≈ 0.0208333333333333 s`. The sample count is not itself a duration, and changing sample rate changes the duration. Acceleration dimension: `L T^-2`; multiplying by mass yields force dimension `M L T^-2`. Temperature points require an offset: `0 °C = 273.15 K`, while a temperature interval of `100 °C` equals `100 K`. With the same reference and the correct amplitude-power relationship, `20 log10(2) = 10 log10(4) ≈ 6.0206 dB`; this does not license adding unrelated dB values.
 
 ## Acceptance gate
 

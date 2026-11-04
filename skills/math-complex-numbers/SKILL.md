@@ -19,7 +19,7 @@ Use for Fourier-domain arithmetic, phasors, impedance, oscillations, analytic si
 
 ## Worked example
 
-`z=3+4i` has magnitude `5` and `z conj(z)=25`; angle is `atan2(4,3)`. Euler's identity gives `e^{iπ}=-1` mathematically; a floating computation returns a tiny residual imaginary component, not an exact zero.
+`z=3+4i` has magnitude `5` and `z conj(z)=25`; angle is `atan2(4,3)`. Euler's identity gives `e^{iπ}=-1` mathematically; a floating computation returns a tiny residual imaginary component, not an exact zero. On the negative real axis, signed imaginary zero affects Python's principal phase: `cmath.phase(complex(-1, +0.0))=+π`, while `cmath.phase(complex(-1, -0.0))=-π`.
 
 ## Acceptance gate
 

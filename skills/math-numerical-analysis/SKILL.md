@@ -21,7 +21,7 @@ Use when implementing or reviewing floating-point calculations, accumulations, l
 
 ## Worked example
 
-A binary64 evaluation of `(10^16 + 1) - 10^16` rounds the intermediate addition so the result becomes `0` rather than exact `1`. Summing the *three inputs* with `math.fsum([1e16, 1.0, -1e16])` gives `1.0` on a normal Python binary64 runtime. This is an **order/algorithm demonstration**, not a blanket promise for arbitrary precision or platforms. Separately, `math.hypot(1e308, 1e308)` can evaluate a finite magnitude where naïve `sqrt(x*x+y*y)` overflows.
+A binary64 evaluation of `(10^16 + 1) - 10^16` rounds the intermediate addition so the result becomes `0` rather than exact `1`. Summing the *three inputs* with `math.fsum([1e16, 1.0, -1e16])` gives `1.0` on a normal Python binary64 runtime. This is an **order/algorithm demonstration**, not a blanket promise for arbitrary precision or platforms. Separately, `math.hypot(1e308, 1e308)` can evaluate a finite magnitude where naïve `sqrt(x*x+y*y)` overflows. For `x=1e-16`, `log(1+x)` and `exp(x)-1` can round to zero in binary64, whereas `log1p(x)` and `expm1(x)` retain a result near `x`.
 
 ## Acceptance gate
 
