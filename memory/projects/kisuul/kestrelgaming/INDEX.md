@@ -3,8 +3,8 @@
 | Record | Status | Use |
 | --- | --- | --- |
 | [Project profile](PROFILE.md) | Active | Repository identity, source baseline, and maintenance map |
-
 | [Audio skill library implementation and backlog](handoffs/2026-11-03-audio-skills-roadmap.md) | Active | Current audio skills, numerical test evidence, pending modules, and next work |
+| [Independent audio skills audit](2026-11-03-audio-skills-independent-audit.md) | Active | Review findings, verification gaps, numerical edges, and targeted remediation |
 
 Task handoffs, when needed, belong under `handoffs/` with a unique task filename.
 Link each from this index and distinguish current work from archived outcomes.
