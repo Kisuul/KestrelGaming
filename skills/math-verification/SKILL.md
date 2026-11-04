@@ -25,7 +25,7 @@ Solve `[[3,1],[1,2]] · [x,y] = [9,8]`. The exact determinant is `5`; Cramer's r
 
 ## Acceptance gate
 
-The [fixture policy](references/FIXTURE_POLICY.md) is followed, positive and adversarial fixtures exist, expected results are independently derived or their shared dependencies identified, and CI results are tied to an exact commit. Never label synthetic test passing as compliance with IEEE, ISO, IEC, ITU, W3C or instrument standards.
+The [fixture policy](references/FIXTURE_POLICY.md) is followed, positive and adversarial fixtures exist, expected results are independently derived or their shared dependencies identified, and CI results are tied to an exact commit. Standard-library demonstrations do **not** establish independent comparison against a production implementation. Never label synthetic test passing as compliance with IEEE, ISO, IEC, ITU, W3C or instrument standards.
 
 ## References
 

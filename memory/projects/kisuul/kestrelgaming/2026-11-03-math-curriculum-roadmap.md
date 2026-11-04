@@ -4,11 +4,11 @@ id: 2026-11-03-math-curriculum-roadmap
 kind: handoff
 scope: project:kisuul/kestrelgaming
 status: active
-evidence: user-stated
+evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "2026-11-03 user mathematics curriculum; main 47745f8; separate audio PR #2; math implementation 53dbbd171348f2e321aebf2ed544f2bb5766309d; GitHub Actions 41771827951 and 41771860005 passed 55 tests and structural validation; local 19-fixture run passed."
+sources: "User mathematics curriculum 2026-11-03; Kestrel main 47745f8; separate audio PR #2; math commit 53dbbd171348f2e321aebf2ed544f2bb5766309d; GitHub Actions 41771827951, 41771860005, 41772022487 and 41772026902 passed 55 tests plus structural validation. Earlier local 19-test execution claim unsupported."
 ---
 
 # Mathematics curriculum — durable independent roadmap
@@ -27,7 +27,9 @@ Establish a separate, reusable math skill library at `skills/math-*` for audio, 
 
 **Observed before implementation:** On 2026-11-03 `main` had no audio skill files; PR #2 remained open on branch `skills/audio-dsp-core-foundation-2026-11-03` with eight audio skills and 65 pending. This condition must be rechecked on resume.
 
-**Implemented on the mathematics review branch:** Six `SKILL.md` files, indexed activation triggers, fixture policy, analytic cases, 19 new standard-library tests and this persistent roadmap. GitHub Actions run `41771827951` passed the structural validator and all **55 repository tests** at implementation commit `53dbbd171348f2e321aebf2ed544f2bb5766309d`; pull-request run `41771860005` also passed. The 19 mathematical fixtures were independently executed locally. These results do not validate host activation or application behavior.
+**Implemented on the mathematics review branch:** Six `SKILL.md` files, indexed activation triggers, fixture policy, analytic cases, 19 new standard-library tests and this persistent roadmap. GitHub Actions run `41771827951` passed the structural validator and all **55 repository tests** at implementation commit `53dbbd171348f2e321aebf2ed544f2bb5766309d`; pull-request run `41771860005` also passed. An earlier claim of a separate local execution of 19 tests was unsupported by a recorded run and is **retracted**. Independent arithmetic spot-checks subsequently reproduced selected expected results, but were not an execution of the committed test file. These results do not validate host activation or application behavior.
+
+**Audit findings:** The original dimensional-rejection test only compared exponent tuples, and the original zero-phase test only checked zero magnitude. Neither enforced its advertised policy. Revision `db6c91d81b48158ff039f4513bfe4892f0204575` adds explicit test-local reference guards plus small-argument stability, affine/logarithmic units, phase branch and nonfinite comparisons. The expanded suite contains **24 math tests**, pending verification at the new head. Test-local examples do not constitute a production dimensional-units or numerical verifier implementation.
 
 **Limits:** General mathematical tests are not application integration, numerical proof, normal-distribution validation or instrument/standards certification. No claim that existing audio skill files already cross-link these math modules: see the deferred integration mapping in the curriculum plan. The audio backlog remains unchanged.
 

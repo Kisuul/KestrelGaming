@@ -49,7 +49,7 @@ python3 -m unittest discover -s tests -v
 git diff --check
 ```
 
-These checks do not prove all math in the prose, all floating-point implementations, cross-language semantics, sampling models, standards compliance, or host skill activation. Pin software, configuration and tolerance policy whenever asserting reproducibility.
+The fixtures independently derive selected reference values and demonstrate defined standard-library behavior, but do **not** test a separate numerical production library; certain validity guards exist only inside the example tests. This is a foundation/reference verification layer, not independent cross-implementation conformance testing. These checks do not prove all math in the prose, all floating-point implementations, cross-language semantics, sampling models, standards compliance, or host skill activation. Pin software, configuration and tolerance policy whenever asserting reproducibility.
 
 ## Audio curriculum integration plan (deferred edits, not merged)
 
