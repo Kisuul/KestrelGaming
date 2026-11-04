@@ -1,4 +1,6 @@
 # KestrelGaming
+
+**Engineering Ensemble v1 (proposed):** [seven separate Kestrel agent characters](docs/ENGINEERING_PARTY_V1.md) with [branch manifest](agents/ROSTER_V1.json). The roster documents characters, not deployed agents or new permissions.
 Synthetic organization meant to exist within the UCSH framework. Agency is sacrosanct!
 
 **Common memory for Kestrel agents.** This repository holds the operating contract,
