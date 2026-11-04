@@ -20,6 +20,7 @@ are not standalone installed host plugins.
 | [audio-dsp-test-fixtures](audio-dsp-test-fixtures/SKILL.md) | Generate reproducible sample-timed audio vectors, test metamorphic and callback invariants, and check independent DSP references |
 | [audio-timebase-sync](audio-timebase-sync/SKILL.md) | Keep sample-frame time exact across blocks, gap/seek epochs, fractional rate mapping and external capture/playback/UI clock anchors |
 | [audio-sample-formats](audio-sample-formats/SKILL.md) | Decode, encode and verify bounded raw PCM integer/float formats, channel layouts, valid-bit packing, scaling, quantization and byte order |
+| [audio-resampling](audio-resampling/SKILL.md) | Rational audio sample-rate conversion with anti-alias FIR, group delay, exact output clocks, stream epochs, boundaries and independent fixtures |
 
 ## Core mathematics (independent curriculum)
 
