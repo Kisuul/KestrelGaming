@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User authorized 2026-11-03 audit remediation of the Kestrel audio skills; branch implementation through c786a713d97c6983e36aeb0692823a61d1978243; GitHub Actions run 41767618425 passed 95 repository tests and structural checks; independent SciPy 1.17.0 / NumPy 2.3.5 frozen golden vectors."
+sources: "User authorized continued Kestrel curriculum work on 2026-11-03; resumed from branch a6bef261bfe8cd04c4134f76916d2d3558c6a085 and the indexed handoff; reviewed official ITU-R BS.1770-5 (11/2023) Annex 2; new experimental true-peak batch, pending CI verification."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -69,11 +69,23 @@ The audit remediation improved existing modules; it did not create a
 new audio skill. No production DSP, dynamic external-library CI or
 formal BS.1770 instrument validation was performed.
 
+### New audio-true-peak module — verification pending
+
+The next authorized curriculum increment adds `audio-true-peak`: a bounded
+experimental finite-buffer Lanczos-windowed sinc estimator, specification
+references, and numerical fixtures. The oracle reports sample peaks, global
+zero-extended oversampled-grid peaks, separately supported interior peaks,
+and exact integer subsample positions. **It does not implement Annex 2's
+example four-phase FIR and must not be described as a compliant dBTP meter.**
+Full application/device integration, true-peak conformance and dynamic
+cross-library comparisons are still outstanding. Verify fresh CI before
+recording this batch as passed.
+
 ## Running backlog
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (7 of 73 candidates total, including the existing foundation):**
+**Current developed skills (8 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -82,15 +94,16 @@ formal BS.1770 instrument validation was performed.
 - `audio-rms-crest-factor` — BRANCH (this batch); sample RMS, mean square, sample crest and silence/channel reference fixtures; CI tests passed for `a18c90e`.
 - `audio-spectrogram-waterfall` — BRANCH (this batch); STFT sample-time frames, calibrated PSD/amplitude histories and visualization integrity; GitHub Actions `41759127730` passed on `5db1972`.
 - `audio-sample-peak` — BRANCH (this batch); sample maxima, earliest tie, per-channel program/rolling peak, exact hold expiry and threshold semantics; CI `41762257230` passed on `d76a278`.
-- **Outstanding: 66 candidates**, including at least the following nine-family backlog.
+- `audio-true-peak` — BRANCH (this batch); **experimental** zero-extended Lanczos reference, distinct sample/intersample and interior/edge peaks, analytic timing fixtures. Not BS.1770 conformant; CI pending.
+- **Outstanding: 65 candidates**, including at least the following nine-family backlog.
 
 ### Foundation and numerical DSP (7 pending)
 
 `audio-sample-formats`, `audio-timebase-sync`, `audio-resampling`, `audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
 
-### Levels, loudness, and dynamics (6 pending)
+### Levels, loudness, and dynamics (5 pending)
 
-`audio-vu-metering`, `audio-ppm-metering`, `audio-true-peak`, `audio-program-loudness`, `audio-loudness-range`, `audio-envelope-dynamics`.
+`audio-vu-metering`, `audio-ppm-metering`, `audio-program-loudness`, `audio-loudness-range`, `audio-envelope-dynamics`.
 
 ### Spectra and frequency-domain analysis (5 pending)
 
@@ -124,7 +137,7 @@ formal BS.1770 instrument validation was performed.
 
 **Open blockers or risks:** Revalidate newest branch/CI before resuming or merging; `41767618425` covers implementation head `c786a71`, not this memory-only evidence commit or later edits. Live SciPy differential CI, host integration and instrument conformance remain open. The reference rolling maximum is a trailing sample-count window, not a display envelope with separate release ballistics; threshold hits do not prove recorded clipping. No visual meter integration, oversampled true-peak test, hardware calibration or realtime performance profiling has been done. The reference is O(frames*M*Nfft) and supports complete left-aligned frames but not gap detection, GPU rendering, live reconfiguration or app-level visual regression. Actual target-app integration, sound-level calibration and production timing remain untested. No calibration, real-time benchmarking, third-party instrument comparison, or end-to-end host activation has been performed. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
 
-**Next useful step:** The bounded audit remediation is verified on the implementation commit. Continue with `audio-true-peak`, first investigating ITU-R BS.1770-5, the oversampling/reconstruction and latency/filter tradeoffs, and independent test vectors; mark an initial estimator experimental until conformance evidence exists. Separately extend the five pinned external goldens into optional dynamic SciPy differential/property tests. Preserve all 66 pending candidate skills and update this handoff at each verified milestone.
+**Next useful step:** Verify the committed experimental `audio-true-peak` module in GitHub Actions and record its checks. Then consider `audio-dsp-test-fixtures` to expand independent cross-library acceptance, or research a distinct BS.1770-5-conformance implementation. The initial true-peak estimator is explicitly *not* compliant. Preserve the 65 pending candidates and continue tracked handoffs.
 
 ## Revisit when
 

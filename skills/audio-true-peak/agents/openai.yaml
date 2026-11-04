@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio True-Peak Estimation"
+  short_description: "Check intersample reconstruction and accuracy"
+  default_prompt: "Use $audio-true-peak to examine intersample peaks with a declared reconstruction kernel, boundary policy, verified fixtures and no unsupported dBTP conformance claims."

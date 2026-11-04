@@ -16,6 +16,7 @@ are not standalone installed host plugins.
 | [audio-rms-crest-factor](audio-rms-crest-factor/SKILL.md) | Measure RMS, mean-square level, sample-peak-to-RMS ratio, and channel/silence semantics |
 | [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
 | [audio-sample-peak](audio-sample-peak/SKILL.md) | Implement channel-specific sample peaks, timestamps, rolling holds, program peaks and reference threshold diagnostics |
+| [audio-true-peak](audio-true-peak/SKILL.md) | Analyze intersample reconstruction, boundary error, oversampling and BS.1770-5 evidence; experimental reference only |
 
 Add future procedures here as they become useful. Keep project-specific recipes
 explicit about their applicability and verified revision. A skill may suggest a
