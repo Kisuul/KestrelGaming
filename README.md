@@ -9,6 +9,17 @@ agent runtime, or automatic background process is required.
 The implementation starts from the supplied `kestrel-seed-v0.1.0.zip` and preserves
 its **Operating Contract v1.0 (candidate)**. See [provenance](docs/PROVENANCE.md).
 
+## Individual engineer roles
+
+A Kestrel-based engineer can have a distinct long-lived character and independent
+engineering instincts without gaining permissions from its personality. Read
+the [agent structure](docs/AGENT_STRUCTURE.md) and the
+[role pickup runbook](docs/AGENT_PICKUP.md) before assigning a character.
+New characters start from the [first-person template](kestrel/templates/AGENT_CHARACTER.md)
+and [structured profile template](kestrel/templates/AGENT_PROFILE.json).
+Each character lives on its own `agents/<id>-v1` branch; `main` keeps the
+generic shared contract and skills.
+
 ## Start here
 
 1. Read [AGENTS.md](AGENTS.md) and [KESTREL.md](KESTREL.md).
@@ -21,7 +32,7 @@ its **Operating Contract v1.0 (candidate)**. See [provenance](docs/PROVENANCE.md
 For use from another project, follow [integration](docs/INTEGRATION.md). A short
 [project pointer](docs/PROJECT_POINTER.md), or equivalent session instructions,
 is sufficient; do not copy this memory system into every project repository.
-The agent still needs access to this private repository. A URL alone does not load it.
+This repository is publicly visible; the agent still needs a real checkout or host connection. A URL alone does not load the selected character or its skills.
 
 ## What lives where
 
