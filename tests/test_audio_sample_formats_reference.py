@@ -43,7 +43,7 @@ class PCMReferenceTests(unittest.TestCase):
 
     def test_20_valid_bits_in_24_container_are_left_aligned(self):
         f = PCMFormat("s24", 1, valid_bits=20)
-        raw = bytes.fromhex("f0ffffff7f000080")  # -1, +524287, -524288, shifted 4
+        raw = bytes.fromhex("f0fffff0ff7f000080")  # -1, +524287, -524288, shifted 4
         r = decode_pcm(raw, f)["planar_samples"][0]
         self.assertEqual(r, [-1/(2**19), (2**19-1)/(2**19), -1.0])
         self.assertEqual(encode_pcm([r], f)["payload"], raw)
