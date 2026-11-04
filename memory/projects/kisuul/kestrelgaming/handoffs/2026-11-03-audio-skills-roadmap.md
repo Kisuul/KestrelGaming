@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User 2026-11-03 requested continued audio skill implementation and explicit project memory update; resumed from verified PR #2 head a119527c57e24790363e00fca6d9a91dfc2463cd (Math integration and 153 tests); new audio-timebase-sync module and independent analytic fixtures; GitHub CI pending on implementation commit."
+sources: "User 2026-11-03 requested continued audio skills and explicit memory update; new timebase implementation commit 0dd28fcae6efaedc688ab4980851dfee4a68327b passed 169 tests in GitHub Actions 41791939201; hardening commit 1927b4d0d82ec8687c0578eadc77413ebdb71435 passed 170 tests and structural validation in run 41792085786; W3C Web Audio, PortAudio and FFmpeg timing sources."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -21,9 +21,9 @@ sources: "User 2026-11-03 requested continued audio skill implementation and exp
 
 **Authorized scope and boundaries (historical; recheck on resume):** User explicitly requested implementation on the existing audio-skill branch, in manageable batches, with a running log in Kestrel memory. Kestrel is the skill library. Do not rewrite KESTREL.md/AGENTS.md or imply changes to external audio applications. Branch publication for PR review is intended; merging to main remains a separate decision.
 
-**Target repository, branch, and commit (historical fixture milestone):** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`; PR #2. Fixture-bank test implementation head `74b4d8a5293e6e2db1782732fc76f57a5a35e065`, GitHub Actions `41775340813` (118 tests passed); this handoff update is a subsequent memory-only commit. Recheck live branch head and CI when resuming.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, `skills/audio-dsp-core-foundation-2026-11-03`, open PR #2. The current audio-timebase implementation head `1927b4d0d82ec8687c0578eadc77413ebdb71435` passed run `41792085786` (170 tests); this later evidence-only memory commit needs its own CI result. Recheck live branch head on pickup.
 
-**Memory revision loaded:** PR #2 branch `7a627f72ec63248db92c5e683bb3ca695e8b60d6` with eight audio skills and the prior verified true-peak experimental module. User explicitly redirected work back to audio while independent mathematics PR #3 proceeds separately.
+**Memory revision loaded:** PR #2 at `a119527c57e24790363e00fca6d9a91dfc2463cd` with nine audio skills, integrated merged mathematics, and 153 passing repository tests. User authorized further audio skills with project-memory updates.
 
 ## Evidence
 
@@ -54,7 +54,7 @@ this evidence; consult current-head CI separately. That math-integration milesto
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
-**Changed files and uncommitted state to preserve:** Latest audit-remediation batch changed the RMS and sample-peak reference scripts and tests, associated skill/reference guides, the FFT spectrum cross-skill trigger, and added `tests/test_audio_external_goldens.py` plus `tests/fixtures/AUDIO_EXTERNAL_GOLDENS.md`. It also updates this existing indexed audit and handoff; no target-app or governing contract files changed.
+**Changed files and uncommitted state to preserve:** The latest scoped timebase increment changed `skills/audio-timebase-sync/` (skill, contract, optional metadata, reference tracker), `tests/test_audio_timebase_reference.py`, `skills/INDEX.md` and this running indexed handoff; no application or Kestrel governing contract was changed. The separate math curriculum is merged upstream and has not been modified here.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
@@ -65,6 +65,7 @@ this evidence; consult current-head CI separately. That math-integration milesto
 | Spectrogram STFT and waterfall fixtures | GitHub Actions run `41759127730`: structural checks passed and 72 tests, OK | Commit `5db19722d453c2447c015ecc85fcc795a11161ad`; only mathematical/reference fixtures; no GUI visual regression, gap detector or production latency measured |
 | Sample-peak reference fixtures and peak-hold behavior | GitHub Actions run `41762257230`: Kestrel structural checks passed; 84 repository tests, OK (12 new sample-peak tests) | Implementation commit `d76a2780f49ecf262dc9d41e72eb230036446d2d`; no production/app/true-peak validation performed |
 | Audit remediation and independent library golden tests | GitHub Actions `41767618425`, implementation head `c786a713d97c6983e36aeb0692823a61d1978243`: 95 tests passed, structural checks passed | Frozen SciPy/NumPy vectors generated outside Kestrel and committed; no dynamic SciPy CI, host integration or formal instrument compliance |
+| Audio timebase rational-clock/epoch reference | GitHub Actions `41792085786`: structural validator passed and 170 tests, including 17 new timebase tests | `1927b4d0d82ec8687c0578eadc77413ebdb71435`; no physical-device or UI clock verification |
 | DSP instrument compliance | Not assessed | No normative conformance claim |
 
 **Persistence:** Nine audio skills, their procedures, reference material, tests and this persistent indexed handoff are saved in the existing PR #2 branch. The new sample-peak implementation is `d76a2780f49ecf262dc9d41e72eb230036446d2d`, and this evidence correction is a following memory-only commit. Nothing is integrated into `main` until PR #2 is merged.
@@ -134,7 +135,7 @@ real-time, instrument, device or standards correctness.
 **Audio curriculum tally:** 9 developed / 73 candidates, 64 pending.
 Mathematics PR #3 is independent and was not modified.
 
-### New increment — audio timebase and epoch integrity (verification pending)
+### New increment — audio timebase and epoch integrity (verified reference)
 
 **Authorization:** The owner requested that we continue writing audio skills and
 check/update Kestrel project memory. Scope is PR #2's existing review branch;
@@ -154,8 +155,14 @@ implementations or any audio application.
 
 **Authoritative context:** W3C Web Audio API `getOutputTimestamp()` clock
 correlation, PortAudio input ADC/callback/output DAC timing guidance, and
-FFmpeg time-base semantics. Check the final new commit and actual CI results
-before upgrading this milestone from pending to verified.
+FFmpeg time-base semantics. Implementation commit `0dd28fc` passed 169
+repository tests in CI `41791939201`; follow-up `1927b4d` prevents
+reusing a non-consecutive historical epoch identifier and adds an adversarial
+regression. CI `41792085786` passed the structural validator and **170 tests**.
+The new script remains a small pure-stdlib oracle, not a calibrated device
+sync/clock-recovery system, streaming resampler, measured jitter model, or
+host/UI integration. Initial 9/73 program count advanced to **10/73**;
+**63 candidates remain**.
 
 **Curriculum now:** 10 developed / 73 candidate audio skills, 63 pending.
 
@@ -174,7 +181,7 @@ before upgrading this milestone from pending to verified.
 - `audio-sample-peak` — BRANCH (this batch); sample maxima, earliest tie, per-channel program/rolling peak, exact hold expiry and threshold semantics; CI `41762257230` passed on `d76a278`.
 - `audio-true-peak` — BRANCH (this batch); **experimental** zero-extended Lanczos reference, distinct sample/intersample and interior/edge peaks, analytic timing fixtures. Not BS.1770 conformant; CI `41768969111` passed on `9bf8ac2` (106 repository tests).
 - `audio-dsp-test-fixtures` — BRANCH (this batch); deterministic bounded PCM generation with sample/channel metadata, uint32-seeded noise, callback partitions, 12 analytic/metamorphic regression tests, optional SciPy differential CLI. GitHub Actions `41775340813` passed 118 tests at `74b4d8a`.
-- `audio-timebase-sync` — BRANCH (new); integer sample-clock epochs, exact rational span/center and sample-rate conversion, explicit discontinuities, clock-anchor provenance and deterministic tests; CI pending.
+- `audio-timebase-sync` — BRANCH; exact integer/rational sample time, gap/overlap rejection, immutable clock anchors, no historical epoch ID reuse and sample-rate conversion. **17 new tests**; GitHub Actions `41792085786` passed structural checks and the full **170-test** suite on `1927b4d0`.
 - **Outstanding: 63 candidates**, including at least the following nine-family backlog.
 
 ### Foundation and numerical DSP (6 pending)
@@ -215,11 +222,14 @@ before upgrading this milestone from pending to verified.
 
 ## Next action
 
-Review the completed math integration on PR #2 against its current head and CI; do
-not merge without owner direction. Source changes and live differential evidence are
-recorded in the completed integration handoff. The optional comparator is still not
-part of dependency-free CI. Production/device/GUI integration, runtime activation,
-realtime behavior, physical calibration and ITU/AES conformance remain unverified.
+The timebase skill is verified on `1927b4d` by GitHub Actions `41792085786`
+(170 tests, validator passed); check this follow-up memory-only commit's CI
+separately. Keep PR #2 open pending owner review; the merged mathematics
+foundation and its completed integration are preserved. Source changes and
+independent SciPy differential evidence for earlier audio modules are in the
+archived integration handoff. The optional live comparison remains outside
+standard dependency-free CI. No target-app, browser UI or real audio-device
+clock/jitter/latency verification has been performed.
 
 The latest authorized curriculum batch implements `audio-timebase-sync`, using the
 merged dimensional/numerical/verification skill routing only where justified.
