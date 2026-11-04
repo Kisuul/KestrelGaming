@@ -45,7 +45,7 @@ This checkpoint records the **observed engineering program state**, not completi
 4. **Historical wording:** Math integration documentation describing 9 audio skills / 64 pending is a dated earlier milestone; prefer this snapshot and the active roadmap for current count rather than silently treating dated history as current.
 5. **Review discipline:** Preserve independent expected values, failure-mode tests, explicit channel/time/reference conventions, numerical precision and version provenance. A green synthetic test is not the same as proven audio software engineering performance.
 
-## Coordination and next action
+## Next action
 
 **Next suggested module:** `audio-filter-design`, especially choosing and verifying FIR/IIR designs, passband/stopband and transition behavior, phase/group delay, numerical stability and implementation form. This is **proposed work, not claimed or started**. A separate authorized agent could take `audio-stream-buffering`; PSD/STFT numeric hardening and an agent-efficacy pilot are separate audit/verification tasks, not extra counted modules. See the [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md).
 
