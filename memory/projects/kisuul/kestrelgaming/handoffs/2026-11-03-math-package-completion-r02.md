@@ -8,7 +8,7 @@ evidence: observed
 author: Codex
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User request to take over PR #3 and finish the mathematics skills package; starting branch head bcdab5aa8070c8be3a3d9f5d4f18273cc6507c82; current source, executed local checks and independent mathematical review described below."
+sources: "User request to take over PR #3 and finish the mathematics skills package; starting branch head bcdab5aa8070c8be3a3d9f5d4f18273cc6507c82; current source, executed local checks and independent mathematical review described below; delivered implementation 57b6f8572f24426c9db828782f509bad5ee8dd6c; successful PR CI 41785745700."
 ---
 
 # Mathematics package completion — PR #3
@@ -95,6 +95,17 @@ term is the deliberately faulty Euler call used to demonstrate the old bug.
 Checks run before commit apply to the inspected working-tree contents, not to an
 invented execution at a future SHA. The resulting immutable commit is reported on PR #3.
 
+### Published implementation
+
+Implementation commit `57b6f8572f24426c9db828782f509bad5ee8dd6c` was pushed to the
+existing PR #3 branch and its remote SHA confirmed through GitHub. Its tree
+`da2862db30dc7933d19c3d6a1c7d3887b727c354` matches the final locally validated
+staged tree. PR [CI 41785745700](https://github.com/Kisuul/KestrelGaming/actions/runs/41785745700)
+passed structural validation and all **67 tests**; job `126427366908` logs confirmed
+that count. The following memory-only commit records this observed evidence without
+claiming that its own future SHA has already been tested. The PR records current-head
+CI separately. No merge or host trial was performed.
+
 ## Limits and remaining work
 
 No agent-level trials, host activation, Python-version matrix, production numerical
@@ -106,10 +117,9 @@ Branch-scoped memory is not integrated into the shared default branch merely by 
 
 ## Next action
 
-Publish this validated source state to PR #3's existing branch and confirm its
-remote SHA; no merge is requested. The PR records the immutable delivery commit and
-CI results after publication. A later independent harness may run the registered
-behavioral pilot; publish measured results separately.
+Review the delivered package on PR #3; no merge is requested. Keep current-head CI
+evidence on the PR. A later independent harness may run the registered behavioral
+pilot; publish measured results separately.
 
 ## Revisit when
 
