@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-04
-sources: "2026-11-04 channel-mapping implementation eb6c42813dafef64faf0b543ccb42a9f5a55d185; GitHub Actions 41812716355 passed structural validation and 235 repository tests (24 new cases); user requires all 73 modules before PR #2 merge; Microsoft WAVEFORMATEXTENSIBLE and FFmpeg AVChannelLayout sources."
+sources: "2026-11-04 audio-filter-design implementation d7e5e9cdd8f005a1d87356b287f0cf5b058ab567; GitHub Actions 41818240791 passed structural checks and 272 repository tests, 37 new; local NumPy 2.3.5 and SciPy 1.17.0 differential passed 24 cases (1920 coefficients, 288 responses, 3660 signals, 18 group delays); user requires all 73 before PR #2 merges."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -19,21 +19,34 @@ sources: "2026-11-04 channel-mapping implementation eb6c42813dafef64faf0b543ccb4
 
 **Task outcome:** PARTIAL
 
-13 of 73 audio modules developed, 60 remaining; PR #2 stays open and unmerged.
+14 of 73 audio modules developed, 59 remaining; PR #2 stays open and unmerged.
 
 **Authorized scope and boundaries (historical; recheck on resume):** Keep development on PR #2's audio branch in bounded, reviewable batches; the owner expressly prohibits merging the umbrella PR to main until **all curriculum modules** finish and owner acceptance follows. Other agents may contribute through separate, authorized branches and handoffs following [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md). Do not edit application repositories or Kestrel root contract from this memory task.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming, open PR #2 on `skills/audio-dsp-core-foundation-2026-11-03`; implementation head `eb6c42813dafef64faf0b543ccb42a9f5a55d185`, Actions `41812716355` passed 235 tests and structural checks. A later memory-only commit needs its own CI check.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, open PR #2 on `skills/audio-dsp-core-foundation-2026-11-03`; filter design implementation head `d7e5e9cdd8f005a1d87356b287f0cf5b058ab567` passed Actions `41818240791` with 272 repository tests and structural checks. This memory-only evidence commit requires its own CI validation.
 
 **Memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
 
 ## Current owner directive — whole curriculum before merge
 
-The owner explicitly set **all 73 audio modules complete** as the necessary condition for finishing umbrella PR #2. As of the latest inspected implementation head, **13 are implemented and 60 remain**. Neither green CI nor a conditional architecture assessment authorizes early merge. See the [owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md) and [parallel-agent coordination handoff](2026-11-04-audio-parallel-work-onboarding-r01.md). No other agents have been assigned or started by this record. The existing backlog below remains canonical; do not silently reduce the 73 obligations.
+The owner explicitly set **all 73 audio modules complete** as the necessary condition for finishing umbrella PR #2. As of the latest inspected implementation head, **14 are implemented and 59 remain**. Neither green CI nor a conditional architecture assessment authorizes early merge. See the [owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md) and [parallel-agent coordination handoff](2026-11-04-audio-parallel-work-onboarding-r01.md). No other agents have been assigned or started by this record. The existing backlog below remains canonical; do not silently reduce the 73 obligations.
 
-**Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current thirteen. These are not newly completed modules or verified repairs.
+**Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current fourteen. These are not newly completed modules or verified repairs.
 
 ## Evidence
+
+### Latest increment — FIR/IIR audio filter design (verified bounded reference)
+
+Module `audio-filter-design` is now **developed and indexed**. It teaches explicit specifications and measured acceptance over FIR low/high/bandpass/bandstop and IIR low/high/notch/peaking biquads, and distinguishes FIR windowed-sinc near-half-amplitude cutoff from RBJ/Butterworth corner conventions. The standard-library reference supports odd linear-phase FIR 5–129 taps and RBJ/W3C Cookbook normalized biquads, up to 4 second-order sections, exact Fraction sample rates, complex frequency response, group-delay estimates, pole-stability and coefficient-quantization checks, and bounded per-channel stateful streaming with exact epochs and atomic validation.
+
+**Observed implementation and CI:** `d7e5e9cdd8f005a1d87356b287f0cf5b058ab567` (byte-identical local/tested code via Git object hashes). GitHub Actions [41818240791](https://github.com/Kisuul/KestrelGaming/actions/runs/41818240791) succeeded: Kestrel structural validator and **272 full-suite tests**, including **37 new targeted regression cases**. Tests cover analytic coefficient and frequency/phase expectations, gain/low/high/notch, rank/separation where appropriate, stability/pole radii, sampled pass/stop grid, quantization, callback chunk equivalence, nonfinite/overflow/gap rejection and state reset.
+
+**Optional differential, run locally only:** NumPy 2.3.5 / SciPy 1.17.0, seed `20261104`, 24 cases; **1920 coefficients, 288 complex frequency-response points, 3660 output samples, 18 group-delay checks all passed**. Frozen external golden provenance is in `tests/fixtures/AUDIO_FILTER_DESIGN_EXTERNAL_GOLDENS.md`. SciPy and the reference share a declared design family, so this is independent implementation arithmetic evidence, not independent validation of audio quality.
+
+**Unverified boundaries:** Filter specs on a sampled grid do not guarantee full-band behavior; no performance/CPU profiling, actual audio host, real-time scheduling, hardware sample precision or device response, adaptive filter state morphing, perceptual quality or normative certification has been demonstrated. Preserve relevant shared Math skills for complex response, numerical stability and verification without duplicating their general procedures.
+
+**Current milestone:** **14 developed / 73 audio candidates; 59 pending**. The owner has not authorized early merge.
+
 
 ### Latest increment — audio channel identity and routing (verified)
 
@@ -69,11 +82,11 @@ this evidence; consult current-head CI separately. That math-integration milesto
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.
 
-**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Thirteen of 73 candidate skills are developed on PR #2; 60 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
+**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Fourteen of 73 candidate skills are developed on PR #2; 59 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
-**Changed files and uncommitted state to preserve:** The latest implementation added `skills/audio-channel-mapping/` (SKILL, technical contract, agent metadata, Python oracle), `tests/test_audio_channel_mapping_reference.py`, and `skills/INDEX.md`; this handoff update changes memory only. No root contract, mathematics implementation, application, dependency or workflow was changed.
+**Changed files and uncommitted state to preserve:** Skill #14 added `skills/audio-filter-design/` (skill, technical contract, metadata, FIR/IIR reference, optional SciPy checker), `tests/test_audio_filter_design_reference.py`, `tests/fixtures/AUDIO_FILTER_DESIGN_EXTERNAL_GOLDENS.md` and a `skills/INDEX.md` entry. This milestone's source commit is `d7e5e9c` and this follow-up modifies memory only. No audio application, root Kestrel contract, Math implementation, CI dependency or workflow was changed.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
@@ -271,7 +284,7 @@ the filter retains all source frames per bounded epoch.
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (13 of 73 candidates total, including the existing foundation):**
+**Current developed skills (14 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -286,11 +299,12 @@ the filter retains all source frames per bounded epoch.
 - `audio-sample-formats` — BRANCH; u8/s16/s24/s32/f32/f64 raw PCM byte-order/layout/valid-bit rules, quantization and float headroom; **19 new regression tests**, full CI **189 tests** on `f7a95a4`, run `41794191643`.
 - `audio-resampling` — BRANCH; bounded Kaiser-windowed FIR resampler, exact Fraction sample clocks, antialias/phase/delay, stable streaming with explicit finalize/epochs, 22 focused tests and independently generated SciPy golden vectors; CI `41800254484` passed **211** tests at `a388abd`, with optional local SciPy differential 3669 samples / 24 cases.
 - `audio-channel-mapping` — BRANCH; WAVE speaker/unknown/Mid-Side identities, explicit rational routing matrices, loss/silence/gain opt-ins, rank diagnostic, sample-clock continuity. Actions `41812716355` passed 235 tests at `eb6c428` (24 new tests).
-- **Outstanding: 60 candidates**, including the following nine-family backlog.
+- `audio-filter-design` — BRANCH; FIR low/high/bandpass/bandstop, IIR biquad/SOS, gain/phase/group delay, stability and coefficient quantization, atomic sample-epoch streaming. 37 new tests; Actions `41818240791` passed **272 tests** at `d7e5e9c`; optional SciPy differential 24 cases / 1920 coefficients / 288 response points / 3660 output samples / 18 group-delay checks.
+- **Outstanding: 59 candidates**, including the following nine-family backlog.
 
-### Foundation and numerical DSP (3 pending)
+### Foundation and numerical DSP (2 pending)
 
-`audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
+`audio-stream-buffering`, `audio-numerical-stability`.
 
 ### Levels, loudness, and dynamics (5 pending)
 
@@ -326,9 +340,11 @@ the filter retains all source frames per bounded epoch.
 
 ## Next action
 
-Keep umbrella PR #2 open and unmerged until all 73 audio modules are completed and owner review authorizes final integration. The canonical current tally is **13 / 73 developed, 60 pending**; do not silently reduce it.
+**Owner completion gate:** Keep umbrella PR #2 **open and unmerged** until all **73** audio modules are completed and the owner explicitly accepts final integration. Latest observed implemented count is **14 of 73; 59 outstanding**. Do not silently alter the denominator, assert production maturity or substitute synthetic tests for a real agent evaluation.
 
-**Recommended next bounded module:** `audio-filter-design` with FIR/IIR choices, frequency response, stability, phase/group delay and independently computed error cases. A separate agent may take `audio-stream-buffering` or the open PSD/STFT extreme-input audit; verify live ownership and permissions first. Do **not** reassign `audio-channel-mapping`—it is implemented and indexed. Preserve the [parallel-agent onboarding rules](2026-11-04-audio-parallel-work-onboarding-r01.md).
+**Next bounded curriculum skill:** `audio-stream-buffering`, specifying ring-buffer capacity and occupancy, producer/consumer rates, latency/backpressure, underrun/overrun semantics, callback partition invariance, timestamps, atomic discontinuities and independent fixtures. `audio-numerical-stability` is a separate remaining foundation module. The PSD/STFT extreme finite-input overflow audit and audio agent behavioral A/B pilot remain open as review tasks, not extra completed skill modules.
+
+Do **not** reassign `audio-channel-mapping` or `audio-filter-design`; both are already implemented on PR #2. Other agents should use [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md), and consult the [filter-design completion handoff](2026-11-04-audio-filter-design-completion-r01.md) before modifying related code.
 
 ## Revisit when
 
