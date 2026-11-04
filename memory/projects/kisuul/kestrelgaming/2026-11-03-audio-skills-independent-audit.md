@@ -8,14 +8,14 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "PR #2 review at a0901b1cd9a01e118c5f9270e82424bdd155a214; GitHub Actions 41762386365 passed 84 tests; reviewed skills, scripts, tests, indexes and handoff; independently cross-checked one-sided PSD formulas against local SciPy 1.17.0 periodogram (8 configurations on 2026-11-03); reproduced finite-ratio log-underflow and RMS-square-underflow behavior from exact source expressions."
+sources: "PR #2 hostile audit at a0901b1cd9a01e118c5f9270e82424bdd155a214; audit record 51a27e3d94202b01bf58e52b1541b9849bc81bcc; remediation commits 6d635acf6e81c32015a837768cb5f65e0f7b504e, 32f7b05ea4bbd2392ea5dad381d778ff40d6ee44, 15d3eec49dd367cd634eec387bd9ede1fb5ff7b1, c786a713d97c6983e36aeb0692823a61d1978243; CI 41767618425 passed 95 tests, structural checks."
 ---
 
 # Independent audit of the seven audio-analysis skills (review r01)
 
 ## Summary
 
-**Review status:** FOLLOW-UP REQUIRED; no high-severity error found in the conventional FFT/PSD/level formulas during this inspection, but the branch has correctness/verification limitations and documentation drift worth fixing **before** advanced normative true-peak work.
+**Review status:** FOCUSED REMEDIATION VERIFIED on the PR branch as of `c786a71`. The initial findings remain below as historical evidence; remaining gaps are full dynamic differential testing, application/host integration, realtime behavior and normative instrument validation. The original inspection found no high-severity error in ordinary-range FFT/PSD/level formulas.
 
 Reviewed PR #2 at `a0901b1cd9a01e118c5f9270e82424bdd155a214`, with 7 implemented audio skills of a 73-candidate taxonomy (66 candidates remain). This is a read/review of current feature branch source, not a claim of instrument certification, host integration, or review of uncommitted local changes. No application or DSP implementation has been changed by this review.
 
@@ -49,12 +49,41 @@ This record stores findings independently of the [running curriculum handoff](ha
 - The SciPy mathematical cross-check above is an independent one-off **audit calculation**, not a committed regression test.
 - Formal ITU-R BS.1770-5 true-peak compliance was **not** examined because `audio-true-peak` is still pending.
 
+## Remediation r02 — implemented and independently checked
+
+**Branch:** `skills/audio-dsp-core-foundation-2026-11-03` (PR #2, still a
+review branch, not `main`). **Final implementation head:**
+`c786a713d97c6983e36aeb0692823a61d1978243`. GitHub Actions
+[41767618425](https://github.com/Kisuul/KestrelGaming/actions/runs/41767618425)
+reported **95 tests passed** plus successful structural validation. The
+original audit head had 84 tests; existing tests were retained.
+
+| Prior finding | Remediation and evidence | Status |
+| --- | --- | --- |
+| dB ratio underflow/overflow | `reference_levels.py` and `reference_peak.py` now compute nonzero ratios as `20*(log10(value)-log10(reference))`; tests include ±12000 dB finite extremes | Fixed and tested in CI |
+| Tiny nonzero signal misreported as RMS silence | RMS uses scaled sum-of-squares. Output flags `mean_square_underflowed` when Q cannot be represented, and `rms_underflowed` when isolated subnormal samples still round to zero RMS; explicitly distinct from zero input | Fixed and tested; binary64 representation limits remain |
+| Outdated PSD specialist trigger | `audio-fft-spectrum/SKILL.md` now links to the existing PSD skill | Fixed |
+| AES17 link precision | RMS skill now links to [the official AES17-2020 preview](https://www.aes.org/publications/standards/preview.cfm?ID=21) | Fixed; preview does not grant full normative text |
+| Short hold vs long callback | Sample-peak skill/reference now warns that final rolling peak may omit an early transient; fixture tests preserved block/program peak visibility | Addressed and tested |
+| Project memory index broken table | Original audit commit fixed the blank line in the table | Fixed |
+| Independent validation gap | Five pinned spectral fixture tests were generated with external **SciPy 1.17.0 / NumPy 2.3.5** and run with stdlib-only GitHub CI; inputs, source calls and golden outputs in [fixture instructions](../../../tests/fixtures/AUDIO_EXTERNAL_GOLDENS.md) | Partially addressed |
+
+**Unresolved verification:** CI exercises frozen *external-library goldens*, not
+a live SciPy installation or randomized differential test on every push.
+Standalone mathematical references are not target-app DSP integrations,
+instrument calibration, true-peak conformance or realtime performance tests.
+No production web visualizer has been verified by this hardening batch.
+
+**Remediation scope:** Seven developed audio skills remain seven, with 66
+candidate skills outstanding. No audio application source or governing Kestrel
+contract was changed by this work.
+
 ## Recommended next action
 
-1. Correct the stale spectrum skill description, tighten AES source, and add the two numerical stress tests/implementation fixes (plus long-block/short-hold meter guidance). Keep this a focused remediation batch with existing test coverage protected.
-2. Add an independent differential-test layer for FFT/PSD/STFT (not merely cross-calling the reference implementation). Enforce practical output-range expectations and measurable tolerances.
-3. Reverify current branch/CI and record the exact fix revision in this audit and curriculum handoff.
-4. Only then continue to `audio-true-peak`, distinguishing an experimental oversampled estimator from a validated standards-conforming instrument.
+1. Next curriculum skill: `audio-true-peak`, with explicitly specified oversampling, filter calibration, reconstruction/boundary choices and analytic vectors. Mark it **experimental** until independently evaluated for the intended BS.1770 revision; sample peak is not true peak.
+2. Expand frozen external goldens into a *live* cross-library differential harness, with random/stress scenarios and version-pinned dependencies in an optional verification environment. The five pinned fixtures are a baseline, not complete statistical coverage.
+3. Before claiming host/device conformance, test real-time callbacks, visual consumers, gaps, resets and channel correctness in the target audio application, plus calibrated reference measurements.
+4. Recheck live PR head, code review and fresh CI before merging; keep the hardening evidence and original audit history in Kestrel memory.
 
 ## Revisit when
 
