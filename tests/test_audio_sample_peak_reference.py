@@ -127,5 +127,20 @@ class SamplePeakTests(unittest.TestCase):
             amplitude_level_db(1., reference=0)
 
 
+    def test_extreme_finite_peak_reference_ratios(self):
+        self.assertAlmostEqual(amplitude_level_db(1e-300, reference=1e300), -12000)
+        self.assertAlmostEqual(amplitude_level_db(1e300, reference=1e-300), 12000)
+
+    def test_long_block_can_hide_transient_from_final_rolling_hold(self):
+        meter = RollingPeakMeter(channels=1, hold_samples=2)
+        result = meter.update([[0.95, 0.1, 0.1, 0.1, 0.1]], start_sample=100)
+        channel = result["channels"][0]
+        self.assertEqual(channel["block"]["peak"], 0.95)
+        self.assertEqual(channel["block"]["at_sample"], 100)
+        self.assertEqual(channel["program_peak"]["peak"], 0.95)
+        self.assertEqual(channel["rolling_peak"]["peak"], 0.1)
+        self.assertEqual(channel["rolling_peak"]["at_sample"], 103)
+
+
 if __name__ == "__main__":
     unittest.main()

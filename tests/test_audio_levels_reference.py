@@ -69,5 +69,28 @@ class LevelsReferenceTests(unittest.TestCase):
             level_db(1, 0)
 
 
+    def test_extreme_finite_log_ratios(self):
+        self.assertAlmostEqual(level_db(1e-300, reference=1e300), -12000)
+        self.assertAlmostEqual(level_db(1e300, reference=1e-300), 12000)
+        self.assertAlmostEqual(level_db(5e-324, reference=1e308), -12626.124306862315)
+
+    def test_tiny_nonzero_rms_not_false_silence(self):
+        result = sample_levels([1e-200] * 4)
+        self.assertEqual(result["rms"], 1e-200)
+        self.assertTrue(result["mean_square_underflowed"])
+        self.assertEqual(result["mean_square"], 0.0)
+        self.assertAlmostEqual(result["crest_factor"], 1)
+        silence = sample_levels([0.] * 4)
+        self.assertFalse(silence["mean_square_underflowed"])
+        ordinary = sample_levels([0.5] * 4)
+        self.assertFalse(ordinary["mean_square_underflowed"])
+        self.assertEqual(ordinary["mean_square"], 0.25)
+
+    def test_smallest_subnormal_is_nonzero_rms(self):
+        result = sample_levels([5e-324] * 4)
+        self.assertGreater(result["rms"], 0)
+        self.assertTrue(result["mean_square_underflowed"])
+
+
 if __name__ == "__main__":
     unittest.main()

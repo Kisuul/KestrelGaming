@@ -14,7 +14,7 @@ def level_db(amplitude: float, reference: float = 1.0) -> float:
         raise ValueError("amplitude must be finite and nonnegative")
     if not math.isfinite(reference) or reference <= 0:
         raise ValueError("reference amplitude must be positive and finite")
-    return -math.inf if amplitude == 0 else 20 * math.log10(amplitude / reference)
+    return -math.inf if amplitude == 0 else 20 * (math.log10(amplitude) - math.log10(reference))
 
 
 def sample_levels(samples: list[float]) -> dict[str, Optional[float]]:
@@ -27,14 +27,24 @@ def sample_levels(samples: list[float]) -> dict[str, Optional[float]]:
     if any(not math.isfinite(x) for x in samples):
         raise ValueError("non-finite samples")
     peak = max(abs(x) for x in samples)
-    mean_square = math.fsum(x*x for x in samples) / len(samples)
+    # Scale first: a nonzero RMS may be representable even if individual
+    # sample squares underflow binary64. The reference is not realtime code.
+    if peak:
+        normalized_mean_square = math.fsum((x / peak)**2 for x in samples) / len(samples)
+        rms = peak * math.sqrt(normalized_mean_square)
+    else:
+        rms = 0.0
+    if not math.isfinite(rms):
+        raise ValueError("non-finite RMS")
+    mean_square = rms * rms
     if not math.isfinite(mean_square):
-        raise ValueError("non-finite accumulated energy")
-    rms = math.sqrt(mean_square)
+        raise ValueError("mean square is outside the supported floating-point range")
+    mean_square_underflowed = bool(rms > 0 and mean_square == 0)
     crest = peak/rms if rms else None
     return {
         "sample_peak": peak,
         "mean_square": mean_square,
+        "mean_square_underflowed": mean_square_underflowed,
         "rms": rms,
         "crest_factor": crest,
         "crest_db": 20*math.log10(crest) if crest is not None else None,

@@ -15,7 +15,7 @@ def amplitude_level_db(peak: float, reference: float = 1.0) -> float:
         raise ValueError("reference must be finite and positive")
     if not math.isfinite(peak) or peak < 0:
         raise ValueError("peak must be finite and nonnegative")
-    return -math.inf if peak == 0 else 20 * math.log10(peak / reference)
+    return -math.inf if peak == 0 else 20 * (math.log10(peak) - math.log10(reference))
 
 
 def scan_peak(samples: list[float], start_sample: int = 0,
