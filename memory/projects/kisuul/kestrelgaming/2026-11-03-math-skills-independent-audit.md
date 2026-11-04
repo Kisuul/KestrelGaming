@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-03-math-skills-independent-audit
 kind: lesson
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: ChatGPT
 created: 2026-11-03
@@ -14,6 +14,8 @@ sources: "2026-11-03 reinspection of math PR #3 at 29650913968e8e193cd5650da420e
 # Independent audit — first mathematics curriculum
 
 ## Summary
+
+Historical audit of the revisions listed below. Additional tolerance and dimension-shape defects were subsequently confirmed and fixed; use the [completion handoff](handoffs/2026-11-03-math-package-completion-r02.md) for the current package and evidence. The earlier broad assessment is not a certification of later revisions.
 
 The six foundational mathematics skills on [draft PR #3](https://github.com/Kisuul/KestrelGaming/pull/3) form a sound, narrowly activated educational/reference curriculum. The original green CI was genuine, but an asserted additional local test run was unsupported and two fixture names overstated the behaviors they exercised. The audit corrected evidence wording, repaired reference test guards, added five tests, and retained important verification limits. **Math reference fixtures are not a production mathematics runtime or conformance suite.**
 

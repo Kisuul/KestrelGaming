@@ -1,47 +1,57 @@
 # Kestrel core mathematics curriculum
 
-**Status:** independent foundation initiative; candidate modules committed for review on a separate mathematics branch, not a declaration of installed host capability.
-**Owner repository:** Kisuul/KestrelGaming.
-**Relationship:** [Audio curriculum PR #2](https://github.com/Kisuul/KestrelGaming/pull/2) is separate; its 73 candidates (8 developed on its branch, 65 remaining) are not counted here.
+**Scope:** six selectively loaded engineering procedures, supporting arithmetic
+fixtures and an unexecuted behavioral evaluation protocol. This package is not a
+numerical runtime or an installed host capability. The owner is Kisuul/KestrelGaming.
 
-## Purpose and activation
+## Use and shared conventions
 
-Build reusable mathematical reasoning and verification for audio, graphics, physics, simulation, data, and programming. Mathematics defines general methods and invariants; specialist skills own their measurement models, code integration and standards requirements. Read the [skill index](../skills/INDEX.md), activate only what the task uses, and consult [verification](../kestrel/VERIFICATION.md). Skill text is not an executable package or authorization.
+Start at the [skill catalog](../skills/INDEX.md). Load a module when the task needs
+its concepts; review numerical error and verification before accepting numerical
+claims. Cross-links are navigation, not automatic loading or new authority.
 
-General convention unless a task declares another one: SI quantities with explicit unit references; radians for trigonometric arguments; real column vectors; matrices acting on the left (`y = A x`); right-handed coordinates only when an oriented 3D context requires a choice; zero-based indices in examples; linear-domain calculations before specified logarithmic conversion. Binary64 means the host actually provides IEEE 754 binary64 semantics; validate platform behavior rather than assuming all languages/backends match. State any changed convention at the interface boundary.
+Unless the task declares otherwise, use explicit SI quantity kinds and units,
+radians, column vectors, matrices acting on the left (`y=Ax`), and zero-based
+example indices. Composition `ABx` applies `B` first. State frames and active/passive
+meaning for spatial transforms; choose handedness explicitly when orientation matters.
+Complex matrices use conjugate transpose `A*`. A real-only convention is not imposed
+on complex problems. Storage layout is separate from multiplication order.
 
-## Candidate families (not a promise of exhaustive coverage)
+The example SI dimension vector order is `(length, mass, time, electric current,
+thermodynamic temperature, amount of substance, luminous intensity)`. Require seven
+finite real exponents before arithmetic. Preserve semantic labels for dimension-one
+angles, samples and counts. Temperature points differ from intervals, and logarithmic
+levels require references. Define empty, zero, missing and nonfinite input behavior
+at each interface rather than inventing a universal zero result.
 
-| Family | Scope | Implementation criterion |
-| --- | --- | --- |
-| Mathematical foundations | Algebra, functions, notation, domains, quantities, dimensional analysis | Add when cross-domain tasks expose repeated failures |
-| Numerical analysis | Floating point, precision, rounding, conditioning, stability, error propagation | Initial skill |
-| Linear algebra | Vectors, matrices, eigenvalues, factorizations, transformations | Initial skill; advanced decompositions deferred |
-| Calculus | Derivatives, integrals, quadrature, finite differences | Future candidate, driven by demand |
-| Complex analysis | Complex arithmetic, polar/phasors, exponentials | Initial complex-numbers skill; broader analysis deferred |
-| Discrete mathematics | Logic, sets, graphs, combinatorics, recurrences | Future candidate |
-| Probability and statistics | Sampling, distributions, estimators, uncertainty, intervals | Initial skill; inference details need explicit model |
-| Transform mathematics | Fourier, Laplace, Z, convolution, correlation | Future; domain skills retain chosen transform calibration |
-| Geometry | Frames, projections, rotations, coordinates | Future; use linear algebra where sufficient |
-| Optimization | Objectives, gradients, constraints, convergence | Future |
-| Mathematical verification | Invariants, exact examples, external oracles, numerical error budgets | Initial skill |
+Floating fixtures target binary64 with round-to-nearest and gradual underflow;
+inspect the actual backend before relying on those properties. Precision, measurement
+uncertainty and sampling uncertainty are separate. A comparison budget must state
+units, scale, finite-value policy and actual absolute/relative semantics.
 
-## First phase: engineering review and dependencies
+## Module contracts and evidence map
 
-| Priority | Skill | Why an engineer needs it | Boundary / caveat |
+Each entrypoint supplies required inputs, a decision procedure, worked success and
+failure cases, output/evidence requirements, limits and technical references.
+
+| Module / activate for | Required decision and acceptance gate | Existing reference evidence | Evidence boundary |
 | --- | --- | --- | --- |
-| P0 | [math-numerical-analysis](../skills/math-numerical-analysis/SKILL.md) | Cancellation, summation, finite representation, scale, conditioning | Not a universal accuracy guarantee |
-| P0 | [math-verification](../skills/math-verification/SKILL.md) | Reproducible counterexamples and error-bounded evidence | Tests are not formal proofs or instrument certification |
-| P1 | [math-dimensional-analysis](../skills/math-dimensional-analysis/SKILL.md) | Units, rate conversions, domain-specific quantity labels | Dimensionless does not mean interchangeable (dB, rad, counts) |
-| P1 | [math-linear-algebra](../skills/math-linear-algebra/SKILL.md) | Geometry transforms, simulation state, least squares | Matrix order, conditioning, singularity must be declared |
-| P1 | [math-complex-numbers](../skills/math-complex-numbers/SKILL.md) | Phasors, spectral representations, rotations | Complex conventions do not define FFT normalization |
-| P1 | [math-probability-statistics](../skills/math-probability-statistics/SKILL.md) | Sampling variability, measurement uncertainty | Sampling assumptions and coverage differ by application |
+| [Numerical analysis](../skills/math-numerical-analysis/SKILL.md): scale, rounding, cancellation or precision | Separate input sensitivity from algorithmic stability; choose arithmetic and justify an error budget | NUM-01–05, binary64/near-zero/radix cases | Bounded arithmetic examples, not a universal libm or accuracy guarantee |
+| [Verification](../skills/math-verification/SKILL.md): a mathematical correctness claim | Choose a sufficiently independent oracle and negative cases; enforce explicit comparison semantics | VER-01–03, Euler-budget and representation regressions | Tests and identities do not prove a production implementation or agent competence |
+| [Dimensional analysis](../skills/math-dimensional-analysis/SKILL.md): units, conversions, sampled time or levels | Check quantity kind, dimensions, scale, reference and point/interval or clock model | DIM-01–04, incompatible-dimension and malformed-length gates | Test-local guards do not implement all kind/type/finite checks or a units engine |
+| [Linear algebra](../skills/math-linear-algebra/SKILL.md): matrices, transforms, solves or least squares | Match solver prerequisites; inspect rank, conditioning and residual versus requested solution accuracy | LIN-01–03 and noncommuting transforms | Exact fixtures do not test a production decomposition, rank estimator or solver |
+| [Complex numbers](../skills/math-complex-numbers/SKILL.md): polar/rectangular values, phasors or rotations | Declare exponent sign, branches and phase validity; use a suitable error metric | CMP-01–03, zero-phase and strict Euler gate | Python branch examples do not select domain FFT conventions or calibrate phase thresholds |
+| [Probability/statistics](../skills/math-probability-statistics/SKILL.md): samples, estimators or uncertainty | Identify the independent unit and sampling model before inferential precision; distinguish interval targets | STA-01–03 and single-observation rejection | Exact enumeration verifies specified models, not real-world assumptions or interval coverage |
 
-These six are **narrow procedural modules** and can be adopted independently. Numerical analysis and verification are the **first required review gates** for numerical work; other modules are only activated when their concepts are needed. Cross-links among skills are advisory and do not cause automatic loading.
+See the [fixture policy](../skills/math-verification/references/FIXTURE_POLICY.md)
+and [complete 31-case catalog](../tests/fixtures/MATH_FOUNDATION_VECTORS.md) for inputs,
+derivations, representations, effective tolerances and negative-case limits. Prose
+examples beyond those cases are not silently counted as executable coverage.
 
-## Verification evidence and fixture policy
+## Verification and falsifiable skill evaluation
 
-See [math verification fixture policy](../skills/math-verification/references/FIXTURE_POLICY.md) and [frozen test-vector derivations](../tests/fixtures/MATH_FOUNDATION_VECTORS.md). The dependency-free `tests/test_math_foundations.py` exercises selected exact, analytic and metamorphic cases using the Python standard library. Run:
+Repository checks are dependency-free Python 3.9+ source; the completion run uses
+CPython 3.12.14 on Linux. Other interpreter versions and backends are unverified.
 
 ```sh
 python3 tools/validate_seed.py
@@ -49,34 +59,57 @@ python3 -m unittest discover -s tests -v
 git diff --check
 ```
 
-The fixtures independently derive selected reference values and demonstrate defined standard-library behavior, but do **not** test a separate numerical production library; certain validity guards exist only inside the example tests. This is a foundation/reference verification layer, not independent cross-implementation conformance testing. These checks do not prove all math in the prose, all floating-point implementations, cross-language semantics, sampling models, standards compliance, or host skill activation. Pin software, configuration and tolerance policy whenever asserting reproducibility.
+Structural validation checks links, records and skill mechanics. The 31 mathematics
+tests check small analytic claims, standard-library behavior and test-local guards.
+The [completion handoff](../memory/projects/kisuul/kestrelgaming/handoffs/2026-11-03-math-package-completion-r02.md)
+records the observed baseline, final commands and results. Historical CI passes are
+not evidence for a later source revision.
 
-## Audio curriculum integration plan (deferred edits, not merged)
+The [seven behavioral scenarios](../kestrel/evals/MATH_SCENARIOS.md) and separate
+[evaluator keys and scorecard](../kestrel/evals/MATH_SCORECARD.md) define reproducible
+module and combined tasks, planted misconceptions, acceptance gates and a paired
+baseline/with-skill pilot. **These host-level trials are NOT RUN.** The evaluator must
+withhold answer keys from the tested agent and record model/harness, context, tools,
+budget, outputs, independent scores and cost. No measured improvement or host
+activation is claimed by publishing a protocol.
 
-PR #2 is not in `main` at this writing. Do **not** copy its audio skills onto this mathematics branch just to edit them, and do not modify its 73-candidate backlog. After suitable merge/review, integrate the following one-way conceptual links **from audio into math** while keeping audio calibration procedures local:
+## Cross-domain boundaries
 
-| Audio skill in PR #2 | Shared math foundation | Remains owned by audio |
+General skills own transferable mathematics; domain procedures own measurement
+models, calibration, interfaces and standards. Audio PR #2 is a separate initiative:
+[this package](https://github.com/Kisuul/KestrelGaming/pull/3) adds no audio files,
+edits no audio backlog, and applies no audio-to-math cross-links. Its merge status
+or candidate counts are not inferred from an old memory record.
+
+After compatible bases exist, domain owners can link to these entrypoints without
+copying their content. Conceptual examples are:
+
+| Domain topic | Shared mathematics | Stays domain-owned |
 | --- | --- | --- |
-| `audio-dsp-core` | numerical analysis; dimensional analysis; verification | Signal tap, timing, realtime constraints, detector contracts |
-| `audio-window-functions` | numerical analysis; verification | Coherent gain, ENBW, window semantics |
-| `audio-fft-spectrum`, `audio-power-spectral-density` | complex numbers; numerical analysis; verification | DFT sign/scaling, one-sided bins, PSD normalization |
-| `audio-rms-crest-factor`, `audio-sample-peak`, `audio-true-peak` | numerical analysis; verification; statistics when uncertainty is stated | Crest/sample/true peak definitions, algorithm, calibration, compliance claims |
-| `audio-spectrogram-waterfall` | dimensional analysis; linear algebra when needed; verification | STFT frame clocks, display history semantics |
+| Sampled signal timing and detectors | Numerical analysis, units, verification | Signal tap, detector definition, clocks and realtime constraints |
+| Windows, FFTs, PSD and STFT displays | Complex numbers, numerical analysis, verification | Transform sign/scaling, coherent gain, ENBW, one-sided bins, calibration and display clocks |
+| Graphics transforms and simulation | Linear algebra, units, verification | Frames, handedness, integration model and application error budgets |
+| Experimental/measurement data | Statistics, units, numerical analysis | Sampling design, measurement equation, calibration and coverage requirements |
 
-Until then, the links above are **integration instructions**, not an assertion that PR #2 audio files already refer back to these math skills. An audio PR review comment may point to the math PR without changing its code or count.
+No comment or change to PR #2 is needed to complete this package.
 
-## Roadmap and review gates
+## Further curriculum
 
-1. **Now:** publish P0 numerical-analysis and verification guidance with executable analytically checkable fixtures; review the four P1 skills for engineering value; keep examples bounded, not universal.
-2. **On review:** verify CI and independently inspect the exact checked commit; resolve conceptual inaccuracies; check index and memory navigation.
-3. **After audio and math reach compatible bases:** add targeted one-way links in audio skill files, without transporting domain calculations into math.
-4. **Demand driven:** transforms, calculus, geometry, discrete mathematics, optimization and advanced statistics; prioritize demonstrated failures and reusable needs, not taxonomy completeness.
+The initial six modules are complete as bounded procedural documents. Calculus,
+discrete mathematics, Fourier/Laplace/Z transforms, geometry, optimization and advanced
+statistics remain demand-driven candidates. They are not missing acceptance gates for
+this phase or implicit claims of existing capability. Broader complex analysis is
+outside the complex-numbers module. Add a new procedure when a demonstrated repeated
+need justifies its inputs, method, failure cases and independent verification.
 
-**Acceptance evidence to gather:** index discoverability, dependency boundaries, six practical reviews, arithmetic fixtures, branch-scoped memory, audio bridge plan, and explicit unverified claims. Formal standards certification, physical calibration and GPU/realtime behavior are out of scope.
+Next independent work: run the registered behavioral pilot in an authorized harness;
+add target-specific numerical integration tests when a production implementation
+exists; then assess useful domain links. Formal proof, standards certification,
+physical calibration and GPU/realtime behavior need separate evidence.
 
-## Primary technical sources
+## Technical sources
 
-- [BIPM, SI Brochure (9th edition, updated 2026)](https://www.bipm.org/en/publications/si-brochure/) — units and definitions.
-- [Python `math` documentation](https://docs.python.org/3/library/math.html) — `fsum`, `hypot`, `isclose` semantics in the test runtime.
-- [NumPy linear algebra reference](https://numpy.org/doc/stable/reference/routines.linalg.html) — operations, conditioning and decompositions (optional production backend, not test dependency).
-- [NIST Technical Note 1297](https://www.nist.gov/publications/guidelines-evaluating-and-expressing-uncertainty-nist-measurement-results-1994-edition) — uncertainty reporting framework.
+- [BIPM SI Brochure, 9th edition](https://www.bipm.org/en/publications/si-brochure/) — quantity and unit definitions; identify the update actually used for normative claims.
+- [Python 3.12 standard library](https://docs.python.org/3.12/library/) — demonstrated runtime behavior; the fixture catalog identifies individual APIs.
+- [NumPy linear algebra](https://numpy.org/doc/stable/reference/routines.linalg.html) — optional production-backend semantics, not a test dependency.
+- [NIST TN 1297, 1994 edition](https://www.nist.gov/publications/guidelines-evaluating-and-expressing-uncertainty-nist-measurement-results-1994-edition) — measurement uncertainty framework, not certification of these examples.

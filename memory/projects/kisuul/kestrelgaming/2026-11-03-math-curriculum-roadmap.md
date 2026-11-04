@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-03-math-curriculum-roadmap
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: ChatGPT
 created: 2026-11-03
@@ -14,6 +14,8 @@ sources: "User mathematics curriculum 2026-11-03; Kestrel main 47745f8; separate
 # Mathematics curriculum — durable independent roadmap
 
 ## Summary
+
+Historical initialization roadmap; the completed first-phase package and current evidence are recorded in the [completion handoff](handoffs/2026-11-03-math-package-completion-r02.md). Future curriculum and domain integration remain separate work.
 
 **Task outcome:** PARTIAL
 

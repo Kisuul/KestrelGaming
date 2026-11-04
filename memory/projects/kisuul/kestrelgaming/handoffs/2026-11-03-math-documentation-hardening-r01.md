@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-03-math-documentation-hardening-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: superseded
 evidence: user-stated
 author: ChatGPT
 created: 2026-11-03
@@ -12,6 +12,10 @@ sources: "User's 2026-11-03 documentation-agent work-order request; draft PR #3 
 ---
 
 # Documentation work order — PR #3 mathematics hardening
+
+## Superseded by
+
+[Package completion handoff](2026-11-03-math-package-completion-r02.md). The current user authorized finishing the full skills package, including the executable fixture fixes; this earlier documentation-only work order is retained as history.
 
 ## Summary
 
