@@ -1,0 +1,33 @@
+# Numerical diagnostics and adversarial examples
+
+Use these after the [numerical procedure](../SKILL.md) identifies the relevant failure. Examples assume Python floats backed by IEEE 754 binary64, round-to-nearest ties-to-even, and gradual underflow unless noted. Confirm these properties before interpreting a different runtime's result. Exact arithmetic is the mathematical reference; library calls are behavior under examination.
+
+## Separate conditioning from stability
+
+**Stable computation of an ill-conditioned problem.** For `a=1`, `b=-1+2^-40`, exact addition gives `s=2^-40`; both inputs and the sum are representable. Under separately variable componentwise relative perturbations bounded by `epsilon`, the absolute sum perturbation is bounded by `epsilon*(abs(a)+abs(b))`. Dividing by `abs(s)` gives `(2-2^-40)/2^-40 = 2^41-1`. This is a deterministic sensitivity bound, requiring no probabilistic independence. The sum may be computed exactly and still be sensitive to uncertain input. Perturbing both inputs in a constrained way can give a different condition measure: state which perturbations are permitted.
+
+**Unstable evaluation of a well-conditioned problem.** For `g(x)=sqrt(1+x)-1`, rationalization gives `g(x)=x/(sqrt(1+x)+1)` wherever `x>=-1`; the denominator is nonzero on this real domain. At nonzero `x`, the local relative condition number simplifies to `(sqrt(1+x)+1)/(2*sqrt(1+x))`, tending to `1` as `x→0`; it diverges at the endpoint `x=-1`. The Taylor expansion is `g(x)=x/2-x*x/8+O(x^3)`. For `x=1e-16`, binary64 rounds `1+x` to `1`, so the direct answer is `0`; the rationalized result is approximately `5e-17`. Absolute error is tiny but relative error in the direct answer is about `1`. The reformulation has not removed endpoint sensitivity or guaranteed correct rounding for all inputs.
+
+**Diagnostic experiment.** First evaluate the same represented inputs with an independent exact/high-precision reference. Improvement under precision or reformulation points to arithmetic error. Next perturb the specified input within its uncertainty. Large changes in the accurate reference point to conditioning. Model/discretization changes are a third experiment; mixing them prevents attribution. An experiment is evidence for sampled cases, not a general stability proof.
+
+## Bounded adversarial catalog
+
+| Case | Plausible wrong approach and observable failure | Better approach | Remaining limit |
+| --- | --- | --- | --- |
+| Order-sensitive sum | `(1e16+1)-1e16` gives `0`; exact represented-input sum is `1` | Accumulate the original terms with `math.fsum`; preserve the lost term before rounding | Compensation cannot restore a term already discarded by an earlier operation; `fsum` is not a universal exact arithmetic promise |
+| Small increments | At `x=1e-16`, `log(1+x)` and `exp(x)-1` give `0` | `log1p(x)` and `expm1(x)` retain values near `x`; Taylor remainder supplies a small-input reference | Respect `log1p`'s real domain `x>-1`; overflow and large-input errors still need policy |
+| Intermediate overflow | `sqrt(x*x+y*y)` overflows for `x=y=1e308` although the norm is finite | Use a scaled norm such as `hypot`; exact target for equal positive represented inputs is `sqrt(2)*x` | A true norm exceeding the largest finite value remains unrepresentable; using the same square-root kernel as reference reduces independence |
+| Intermediate underflow | `(1e-200*1e-200)*1e200` gives `0`, although the exact represented-input product is close to `1e-200` | Regroup this positive example as `1e-200*(1e-200*1e200)` or scale exponents | Reordering changes rounding and may instead overflow for other data; verify the input range |
+| Subnormal rounding | Let `eta=2^-1074`, the smallest positive binary64 value. `eta/2` rounds to `0`; relative-error reasoning alone fails | Check absolute underflow loss; retain a scale or higher precision if the requirement needs smaller values | Flush-to-zero modes differ. Doubling `eta` is representable; halving cannot preserve a positive binary64 value |
+| Signed zero | Treating `-0.0` and `+0.0` as interchangeable at every interface loses branch information | Ordinary value comparison may equate them; inspect sign when branch cuts or directional limits require it | `cmath.phase(complex(-1, ±0.0))` selects `±pi`; this is a Python convention, not a nonzero phase at zero magnitude |
+| Near singularity | `1+2^-53` rounds to `1`, so the determinant of `[[1,1],[1,1+2^-53]]` becomes zero | Separate exact specified coefficients from represented coefficients; inspect conditioning and use appropriate precision/solver | A solver cannot reconstruct a coefficient rounded away before it receives the matrix; determinant size alone is not a scale-independent rank test |
+| Nonfinite comparison | `isclose(inf,inf)` is true in Python, although an unexpected infinite result violates a finite-output contract | Check finiteness before approximate equality unless nonfinite is explicitly expected | NaN, expected infinities and overflow exceptions need distinct contract semantics |
+| Tolerance default | `isclose(-1+5e-10,-1,abs_tol=1e-14)` passes through default `rel_tol=1e-9` | Specify both terms; an absolute-only contract uses `rel_tol=0` | A passing comparison establishes only the chosen threshold, not that the threshold is justified |
+
+The catalog is deliberately finite. Consult the [fixture inventory](../../../tests/fixtures/MATH_FOUNDATION_VECTORS.md) for which examples are executable tests; prose examples without a mapped test are not additional passing fixtures.
+
+## Error budget example with units
+
+Suppose a task allocates a maximum absolute duration error of `1 microsecond`. Independently justified worst-case bounds of `0.6 microseconds` from the timebase, `0.2 microseconds` from input quantization and `0.1 microseconds` from arithmetic sum to `0.9 microseconds`, leaving `0.1 microseconds` for other effects. This is an allocation example, not a measured instrument specification. If the timebase bound is unknown, the total is unknown; replacing it with a floating epsilon does not establish timing accuracy. Do not combine these as root-sum-squares unless a suitable probabilistic dependence model justifies it.
+
+For deterministic algorithm comparison, state absolute error in the output's unit and relative error without units. Near zero, relative error can be undefined or misleading; select an application-derived absolute floor. For a general floating sum, sensitivity scales with the sum of term magnitudes, not merely the small final result. A heuristic `k*epsilon` lacks meaning until the scale, operation count, conditioning and rounding assumptions are given.
