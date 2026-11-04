@@ -10,7 +10,7 @@ The DFT frequency at k is k*fs/Nfft. One-sided output has floor(Nfft/2)+1 bins:
 - Positive interior bins have negative-frequency counterparts; scale by 2/sum(w) for the declared **peak-amplitude bin** convention.
 - For even Nfft, the last (Nyquist) bin is unpaired and scales by 1/sum(w).
 - For odd Nfft, the highest returned bin is **not** Nyquist and takes the interior factor of two.
-- The sum(w) divisor uses **M nonzero window samples**, not Nfft. Zero padding does not change window coherent gain.
+- The sum(w) divisor uses **all M window coefficients**, including any zeros, not Nfft padded positions. Zero padding does not change window coherent gain.
 
 This calibration is valid for appropriate coherent, sufficiently isolated on-bin tones. Do not generalize a single-bin maximum into exact off-bin tone amplitude, total band power, or noise PSD. A log amplitude expressed as dBFS requires its explicitly declared full-scale *amplitude* reference. For a coherent full-scale peak sinusoid, conventions can differ from RMS-based references by about 3.0103 dB; label the reference.
 
@@ -25,6 +25,7 @@ This calibration is valid for appropriate coherent, sufficiently isolated on-bin
 | Same sinusoid, periodic Hann (M=64) | A[7] = 0.7 within numerical tolerance |
 | On-bin peak 0.6 sinusoid at k=8, odd Nfft=M=63, rectangular | A[8] = 0.6 within numerical tolerance |
 | Off-bin sinusoid | Spectral leakage; maximum bin not guaranteed to equal input peak |
+| Unit impulse at sample 1, M=Nfft=8, rectangular | For the negative-exponent forward DFT, complex bin k=2 is -i; a conjugated/wrong-sign transform preserves magnitudes but fails this phase anchor |
 | Window length M=64, Nfft=256 | df=fs/256 but window normalization still uses sum over 64 samples |
 
 Fixtures above presume well-defined sample positions and a chosen sine phase. For Nyquist, alternation provides a directly sampled test; a sine at the exact Nyquist rate has phase-dependent degeneracy.

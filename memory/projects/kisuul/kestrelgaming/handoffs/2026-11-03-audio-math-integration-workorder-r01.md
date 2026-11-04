@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-03-audio-math-integration-workorder-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User requested a staged next-agent assignment using Kestrel protocol memory; inspected Kisuul/KestrelGaming PR #2 at f149d7946167da90841065f83139dfd97444b6d7, merged PR #3 at main merge c268a4d0be121738cbfdb0d7a90de7874299c0f2, and Kestrel memory/state/verification/permission protocols; integration not executed."
+sources: "User requested a staged next-agent assignment using Kestrel protocol memory; inspected Kisuul/KestrelGaming PR #2 at f149d7946167da90841065f83139dfd97444b6d7, merged PR #3 at main merge c268a4d0be121738cbfdb0d7a90de7874299c0f2, and Kestrel memory/state/verification/permission protocols; execution authorized by the current request; refreshed PR #2 head d02c8ea11949198b22ae9291529aac217fecf6f2 and upstream main c268a4d0be121738cbfdb0d7a90de7874299c0f2; merge 78cea4e825c851a158eaf5de4780a23d061a27d3; local execution results below."
 ---
 
 # Work order — integrate merged mathematics into PR #2 audio skills
@@ -17,15 +17,82 @@ sources: "User requested a staged next-agent assignment using Kestrel protocol m
 
 **Goal and acceptance criteria:** Reconcile open audio PR #2 with `main` (which now contains merged mathematics PR #3), then integrate *selective, one-way, task-conditional* mathematics skill references and close specific numerical-verification gaps. Preserve audio-domain calibration, independently derived DSP fixtures, memory history, and token-efficient skill activation. Finish with an inspectable diff, current-head validation, honest evidence and an owner-reviewable PR; do not merge PR #2.
 
-**Task outcome:** PARTIAL
+**Task outcome:** COMPLETE
 
-**Assignment state:** The assignment and source review are prepared; implementation, branch reconciliation, tests of combined source, and agent-behavior trials are **NOT RUN**.
+**Assignment state:** Implemented and locally verified on the existing PR #2 branch. The original staged plan below is retained as history. Current execution evidence follows; agent-behavior trials remain NOT RUN.
 
 **Authorized scope and boundaries (historical; recheck on resume):** The user requested preparation of this next-agent assignment and durable protocol-memory storage, not execution of its integration steps in this session. A future agent must confirm its current authorization, actual tool permissions and branch state before editing. Work only on `Kisuul/KestrelGaming` and the existing PR #2 branch `skills/audio-dsp-core-foundation-2026-11-03`, unless the owner directs otherwise. Keep the root agent contract, permissions, protocols, workflows, tool dependencies, audio applications and merged math implementations unchanged. No production/library APIs, unrequested audio skill families, new standalone math runtime, or merge to `main`. The 64 pending audio candidates remain a separate backlog.
 
 **Target repository, branch, and commit:** `Kisuul/KestrelGaming`, PR #2, branch `skills/audio-dsp-core-foundation-2026-11-03`, observed head `f149d7946167da90841065f83139dfd97444b6d7`, historical base `47745f8a41463e1a202a2f9f84385f3ab61d49a1`. At assignment preparation, `main` head `c268a4d0be121738cbfdb0d7a90de7874299c0f2` is the PR #3 merge commit. All SHAs are historical markers: refresh before action.
 
 **Memory revision loaded:** Existing [audio implementation handoff](2026-11-03-audio-skills-roadmap.md), [audio audit](../2026-11-03-audio-skills-independent-audit.md), [project index](../INDEX.md), plus merged main's mathematics curriculum/skills and Kestrel's governance documents.
+
+## Completed integration
+
+**Current authorization:** The user requested adapting the existing PR #2 and branch
+to merged Math core, with Step 0 requiring the environment to match upstream main.
+This authorizes this execution; the older preparation-only boundary below is history.
+
+**Step 0 observed:** Fetched upstream, switched to a clean local `main`, and confirmed
+`HEAD == origin/main == c268a4d0be121738cbfdb0d7a90de7874299c0f2` with an empty
+working-tree status and no diff. Structural checks and all **67 tests** passed there.
+
+**Reconciliation:** The actual audio head was `d02c8ea11949198b22ae9291529aac217fecf6f2`,
+newer than the preparation revision. A regular merge (no history rewrite) produced
+`78cea4e825c851a158eaf5de4780a23d061a27d3`. The skill catalog merged automatically;
+the project memory index had one content conflict, resolved by retaining all audio
+and mathematics records and statuses. The reconciled baseline passed structural
+validation and **149 tests** before the integration edits.
+
+**Delivered:** All nine audio entrypoints selectively consult the relevant merged
+math procedures, and the fixture contract reuses generic oracle/comparator policy.
+Audio retains FFT sign/scaling, CG/ENBW, density/dB references, clock/channel contracts,
+calibration and experimental true-peak limits. The curriculum and catalogs describe
+actual links, not a deferred integration. Welch overlap is not treated as independent
+samples or an implied degrees-of-freedom count. The live NumPy comparator's additive,
+asymmetric rule, units, finite/shape checks and heuristic budgets are explicit.
+No linear-algebra dependency was added merely for a rectangular spectrogram.
+
+**Targeted findings and fixes:**
+
+- Finite PSD factors could yield an infinite or zero `fs*sum(w²)`. With four unit
+  samples, window `[1e153]*4` and `fs=48000`, the old result incorrectly gave DC
+  density 0 instead of mathematical `4/48000`. PSD and both STFT paths now reject
+  unrepresentable normalizations with `ValueError`; no wide-range solver is claimed.
+- Floating STFT centers lose sample precision at origin `2**54`. The additive integer
+  field `center_sample_twice=2*start+M-1` preserves exact half-sample centers; existing
+  floating center/seconds fields remain convenience approximations. Start/end stay exact.
+- A shifted-impulse complex DFT anchor checks the declared negative exponent: sample 1,
+  bin 2, N=8 must be `-i`. Magnitude/round-trip checks alone cannot reject its conjugate.
+- Corrected reference wording: all M window coefficients, including zeros, define
+  coherent gain; nonrectangular PSD integration uses window-weighted segment power.
+
+**Four added tests:** DFT sign, PSD normalization range, STFT normalization range
+(including chunked mode), and exact even/odd-window centers at a large origin.
+The existing RMS/subnormal/nonfinite, channel-shape and frozen external-golden tests
+were preserved; generic mathematics fixtures were not duplicated.
+
+**Executed evidence (CPython 3.12.14/Linux, working tree after merge above):**
+
+| Command / check | Observed result | Scope |
+| --- | --- | --- |
+| `python3 tools/validate_seed.py` | Passed | Local links, records, catalog and skill structure |
+| `python3 -m unittest discover -s tests -p 'test_audio_*reference.py' -v` | 69 tests passed | Focused reference tests after the four additions |
+| `python3 -m unittest discover -s tests -v` | **153 tests passed** | Combined repository, including 31 math cases and all prior audio fixtures |
+| `python3 skills/audio-dsp-test-fixtures/scripts/check_scipy_differential.py --seed 20261103 --cases 12` | **84 comparisons passed**, NumPy **2.3.5**, SciPy **1.17.0** | Actually imported this checkout's reference implementations; run before and after reference fixes |
+| `git diff --check` | Passed | Reviewed integration changes |
+| Isolated mutation probes | Both deliberately reversed DFT sign and rounded exact-center metadata failed the new regressions | Disposable copies only; command `python3 /workspace/work/audio_math_mutations.py` |
+| Comparison with `origin/main` | Math skills/tests, root contract, protocols and workflows unchanged | Only math curriculum integration status changed on the math side |
+
+Independent read-only review verified the routing and found the PSD range and large
+clock issues; exact analytic anchors and tests checked the fixes. Live SciPy agreement
+is bounded to the declared configurations, shares conventions with frozen SciPy
+vectors, and does not verify complex phase, standards, hardware or host behavior.
+
+**Delivery:** These source checks precede the integration commit. Confirm its immutable
+SHA and current-head CI on PR #2 after publication; do not relabel historical checks
+as a run at an untested future SHA. No PR merge, new audio skill, dependency or
+application change was performed. Audio tally remains **9/73, 64 pending**.
 
 ## Required boot and working rules
 
@@ -139,9 +206,11 @@ Choose a small set based on actual uncovered behavior. For each added test, iden
 
 ## Next action
 
-**Open blockers or risks:** PR #2 has a dirty merge state against merged PR #3, and validation of the combined tree is outstanding; current branch state may have changed since inspection. Skill effectiveness and runtime activation are unverified.
-
-**Next useful step:** With current execution authorization, boot Kestrel, refresh PR #2 and `main` heads, inventory uncommitted changes and conflict paths, then reconcile `main` into a safe copy of the PR #2 branch. Do not start by rewriting DSP implementations.
+Publish the validated integration to the existing PR #2 branch, record its confirmed
+head/CI on the PR, and leave it open for owner review. Any later audio-timebase-sync
+module, further 64-candidate backlog work, production integration or behavioral trial
+needs its own task and evidence. Host activation, agent improvement, realtime load,
+physical calibration and normative compliance remain unverified.
 
 ## Revisit when
 

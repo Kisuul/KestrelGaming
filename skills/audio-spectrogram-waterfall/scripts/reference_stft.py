@@ -35,6 +35,8 @@ def _settings(window, fs, hop, nfft, scaling, origin):
         raise ValueError("window energy must be positive and finite")
     if scaling == "amplitude" and (not math.isfinite(total) or total <= 0):
         raise ValueError("amplitude calibration requires positive finite coherent sum")
+    if scaling == "psd" and (not math.isfinite(fs * square) or fs * square <= 0):
+        raise ValueError("PSD normalization must be positive and finite")
     return m, total, square
 
 
@@ -58,6 +60,7 @@ def _frame(segment, window, fs, nfft, scaling, origin_sample, total, square):
     return {
         "start_sample": origin_sample,
         "end_sample_exclusive": origin_sample + m,
+        "center_sample_twice": 2 * origin_sample + m - 1,
         "center_sample": center,
         "center_seconds": center / fs,
         "values": values,

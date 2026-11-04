@@ -33,12 +33,14 @@ def periodogram(
     energy = math.fsum(w * w for w in window)
     if energy <= 0 or not math.isfinite(energy):
         raise ValueError("window energy must be positive and finite")
+    norm = sample_rate_hz * energy
+    if not math.isfinite(norm) or norm <= 0:
+        raise ValueError("PSD normalization must be positive and finite")
 
     mean = math.fsum(samples) / m if detrend_mean else 0.0
     weighted = [(value - mean) * weight for value, weight in zip(samples, window)]
     if any(not math.isfinite(v) for v in weighted):
         raise ValueError("detrending/windowing produced a non-finite value")
-    norm = sample_rate_hz * energy
     spectrum = []
     frequencies = []
     for k in range(nfft // 2 + 1):

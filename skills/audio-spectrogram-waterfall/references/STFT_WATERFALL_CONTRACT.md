@@ -9,6 +9,7 @@ For real input x[n], effective sample rate fs > 0, analysis window w[j] of M sam
 - Frame q takes exactly x[q*H + j] for j in 0..M-1, provided q*H + M <= total sample count. No synthetic tail frame.
 - Start sample s[q] = absolute_origin + q*H; end-exclusive e[q] = s[q] + M.
 - **Nominal sample-coordinate center** c[q] = s[q] + (M-1)/2. Even-size frames have half-integer centers. The corresponding seconds are c[q]/fs in this convention.
+- The reference encodes that center exactly as integer `center_sample_twice = 2*s[q]+M-1`, with implicit denominator 2. Use this field for precise sample-clock mapping. The existing `center_sample` and `center_seconds` fields are floating convenience coordinates and may round at large origins; adjacent centers can collapse in them. Start and end-exclusive sample fields remain integers.
 - Frame-center spacing is H/fs; FFT bin spacing is fs/Nfft.
 - A real-input one-sided transform has floor(Nfft/2)+1 bins; the last bin is Nyquist only for even Nfft.
 - A source chunk boundary must not reset the frame origin or alter values. Seek, missing samples and sample-rate changes require explicit epoch/gap behavior.
@@ -39,6 +40,7 @@ With unnormalized DFT X_q[k] of windowed samples:
 | Odd Nfft and even Nfft | Correct one-sided bin count and Nyquist doubling policy |
 | Nfft > M zero padding | PSD integration remains tied to M window energy and physical df; more displayed bins do not mean higher resolution |
 | Input split into arbitrary source chunks | Bitwise/sufficiently close identical numerical frames and exactly identical sample timestamps |
+| Origin `2**54`, even M=4 and odd M=5 | Exact integer `center_sample_twice` advances by `2*H`, including half-sample centers; floating convenience fields are not the exact clock |
 | Length shorter than M; incomplete final tail | No frames emitted; no silent zero padding without an explicit policy |
 | Stream seek, dropped blocks, sample-rate reset | A visible discontinuity/new analysis epoch, not a fabricated contiguous waterfall |
 
@@ -54,6 +56,8 @@ With unnormalized DFT X_q[k] of windowed samples:
 ## Fixture implementation and limits
 
 The dependency-free [reference STFT](../scripts/reference_stft.py) computes complete left-aligned frames with no centering/padding and supports only PSD or peak-amplitude bin modes. It is intentionally O(frames*M*Nfft), limited to small inputs, and rejects invalid input. [Tests](../../../tests/test_audio_stft_reference.py) exercise mathematical expectations and chunking invariance.
+
+In PSD mode, `fs*sum(w²)` must be finite and strictly positive after floating evaluation. Reject overflowing or underflowed normalization before division, as in the [PSD range contract](../../audio-power-spectral-density/references/PSD_CALIBRATION.md); a numerical range failure is not a valid silent frame. This denominator check does not make the reference a general wide-dynamic-range implementation. Seconds and other floating convenience coordinates must also be representable in the selected backend.
 
 The reference does **not** implement an application waterfall widget, callback interruption/gap detector, GPU rendering, inverse STFT, or physical instrument calibration. Those remain target-app verification requirements.
 

@@ -11,6 +11,8 @@ For intersample peaks, true-peak meters, reconstructed overshoots, limiter-headr
 
 **Maturity:** experimental reference guidance and fixtures. The provided code is **not** a BS.1770-conformant or calibrated instrument.
 
+Consult [math-numerical-analysis](../math-numerical-analysis/SKILL.md) when separating arithmetic error from interpolation-kernel/truncation and grid-sampling error, and [math-verification](../math-verification/SKILL.md) when choosing independent analytic expectations, error budgets and negative cases. Load only the relevant procedure: nested-grid agreement alone does not establish accuracy. Filter choice, finite-record extension, sample-time coordinates and standards/calibration claims remain owned by this audio contract.
+
 ## Procedure
 
 1. **Name the measured stream.** Specify PCM origin, channel identity, processing tap, effective sample rate, full-scale amplitude reference, and sample-clock epochs. Measure each channel independently before any aggregation; phase-inverted stereo channels still have nonzero peaks.

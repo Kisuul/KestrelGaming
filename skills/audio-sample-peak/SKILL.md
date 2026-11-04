@@ -11,6 +11,8 @@ Load this skill for PCM sample-peak metering, per-channel peak locations, peak h
 
 Consult [sample-peak contract and fixtures](references/SAMPLE_PEAK_CONTRACT.md) before implementing a meter.
 
+Consult [math-numerical-analysis](../math-numerical-analysis/SKILL.md) when handling extreme/nonfinite values or avoiding overflow/underflow in logarithmic ratios, and [math-verification](../math-verification/SKILL.md) when checking independent peak expectations, exact timestamps and state transitions. Load only the relevant procedure. The amplitude reference, tie/threshold rules, block/program/rolling scopes and sample-clock lifecycle remain defined here.
+
 ## Procedure
 
 1. **Establish the exact measured stream.** Record the measurement tap (decoded PCM, pre/post gain, effects, limiter or output), sample representation (integer or float), normalization, full-scale/reference amplitude, per-channel identity and sample rate. Do not silently clip valid floating-point samples outside [-1, 1].

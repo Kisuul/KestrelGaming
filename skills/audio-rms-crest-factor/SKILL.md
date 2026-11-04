@@ -9,6 +9,8 @@ description: Implement and audit finite-window RMS, mean-square amplitude, sampl
 
 Use for sample-window RMS measurements, mean-square energy proxies, sample-peak/RMS ratios, crest factors, RMS trend displays, or audits of these computations. This is not a VU meter, standardized broadcast loudness implementation, true-peak instrument, or calibrated dB SPL meter. For an upstream signal-pipeline redesign load [audio-dsp-core](../audio-dsp-core/SKILL.md). For spectral noise density load [audio-power-spectral-density](../audio-power-spectral-density/SKILL.md).
 
+Consult [math-numerical-analysis](../math-numerical-analysis/SKILL.md) when diagnosing scaled sums of squares, overflow/underflow or extreme logarithmic ratios, and [math-verification](../math-verification/SKILL.md) when choosing independent oracles and explicit error tolerances. Load only the relevant procedure. The sample window, channel aggregation, full-scale convention, silence/underflow flags and analytic signal fixtures remain defined here.
+
 ## Procedure
 
 1. **Define the input and measured point.** State normalized PCM or physical sample units, gain/processing tap, channel configuration, sample rate, frame length, and frame timestamps. Distinguish raw float sample excursion beyond ±1 from integer PCM clipping and do not silently clamp valid floating-point values.

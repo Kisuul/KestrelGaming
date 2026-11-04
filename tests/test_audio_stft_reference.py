@@ -131,6 +131,29 @@ class STFTReferenceTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             stft_chunked([[1., math.inf]], [1., 1.], 8000, 1)
 
+    def test_large_origin_retains_exact_integer_twice_center(self):
+        origin = 2**54
+        for m in (4, 5):
+            with self.subTest(window_length=m):
+                data = [0.] * (m + 4)
+                whole = stft_frames(data, [1.] * m, 8000, 1, origin_sample=origin)
+                chunked = stft_chunked([data[:2], data[2:]], [1.] * m, 8000, 1,
+                                       origin_sample=origin)
+                self.assertEqual(whole, chunked)
+                for index, frame in enumerate(whole["frames"]):
+                    self.assertEqual(frame["start_sample"], origin + index)
+                    self.assertIsInstance(frame["center_sample_twice"], int)
+                    self.assertEqual(frame["center_sample_twice"],
+                                     2 * (origin + index) + m - 1)
+
+    def test_unrepresentable_psd_normalization_rejected(self):
+        for window, fs in (([1e153] * 4, 48000), ([1e-154] * 4, 1e-308)):
+            with self.subTest(window=window[0], fs=fs):
+                with self.assertRaisesRegex(ValueError, "PSD normalization"):
+                    stft_frames([1.] * 4, window, fs, 1)
+                with self.assertRaisesRegex(ValueError, "PSD normalization"):
+                    stft_chunked([[1.] * 4], window, fs, 1)
+
 
 if __name__ == "__main__":
     unittest.main()

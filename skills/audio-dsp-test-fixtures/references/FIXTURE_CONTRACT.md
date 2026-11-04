@@ -2,6 +2,8 @@
 
 Companion to [audio-dsp-test-fixtures](../SKILL.md).
 
+When designing or auditing an oracle/comparator, use [math-verification](../../math-verification/SKILL.md) and its [fixture policy](../../math-verification/references/FIXTURE_POLICY.md) for generic independence, shape, finite-value and error-budget decisions. Consult [numerical analysis](../../math-numerical-analysis/SKILL.md) only for a finite-arithmetic issue. The DSP schema, clocks, channel contracts, analytic signals and calibration conventions below remain audio-owned.
+
 ## Fixture schema v1
 
 The [reference generator](../scripts/fixture_bank.py) emits:
@@ -37,8 +39,29 @@ A fixture generator is not a clock-recovery mechanism or an audio file decoder. 
 1. **Analytic cases:** independent expression for RMS, coherent tones, Parseval on declared windows, or impulse placement. Exact sample indices and channel data use exact comparison.
 2. **Metamorphic cases:** scale factors, sign inversion, anti-phase preservation, and callback chunk partitions yield expected relationships without requiring copied DSP formulas.
 3. **Frozen independent external goldens:** [existing SciPy-generated vectors](../../../tests/fixtures/AUDIO_EXTERNAL_GOLDENS.md). Do not regenerate expected arrays merely because a test fails.
-4. **Optional live differential:** [seeded SciPy comparison](../scripts/check_scipy_differential.py) tests multiple frame lengths (including odd FFTs), windows, zero-padding, signal families and Welch/STFT modes. Explicitly pass `detrend=False`, periodogram `scaling="density"`, correct one-sided real scaling and frame geometries. Use `2e-9` relative and `3e-12` absolute tolerance for the **bounded test amplitudes**; this is a practical comparison threshold, not a universal DSP error budget.
+4. **Optional live differential:** [seeded SciPy comparison](../scripts/check_scipy_differential.py) tests multiple frame lengths (including odd FFTs), windows, zero-padding, signal families and Welch/STFT modes. Explicitly pass `detrend=False`, periodogram `scaling="density"`, correct one-sided real scaling and frame geometries. Its comparator and heuristic margins are specified below. Frozen SciPy goldens and live SciPy comparisons share backend conventions; keep analytic and metamorphic checks as complementary evidence. The live FFT comparison checks real amplitudes, not complex phase/sign.
 5. **Production and normative evidence:** real application integration, hardware timing, signal calibration, latency/CPU under supported load, external true-peak instruments and standard-specific fixtures remain separate and unverified.
+
+### Live differential comparison contract
+
+The harness converts both quantities to NumPy `float64`, requires identical array shapes **before** comparison (no broadcasting), and rejects nonfinite values in either array. The compared outputs are bounded, nonempty real measurement arrays generated from the declared finite fixtures. Ragged/non-convertible arrays also fail rather than being partially compared. No complex phase comparison is implied by this real-valued gate.
+
+For each finite element, `np.allclose(got, want, rtol=2e-9, atol=3e-12)` uses the asymmetric additive rule:
+
+`abs(got-want) <= 3e-12 + 2e-9*abs(want)`.
+
+`want` is the external NumPy/SciPy result. The relative term is dimensionless; the absolute term has the units of the compared quantity:
+
+| Compared quantity | Absolute margin | Relative margin |
+| --- | --- | --- |
+| Periodogram / Welch frequency coordinates | `3e-12 Hz` | `2e-9` times the external frequency magnitude |
+| One-sided FFT peak amplitude | `3e-12` in normalized sample-amplitude units | `2e-9` times the external amplitude magnitude |
+| Periodogram / STFT / Welch PSD | `3e-12` in normalized sample-amplitude squared per Hz | `2e-9` times the external PSD magnitude |
+| RMS | `3e-12` in normalized sample-amplitude units | `2e-9` times the external RMS magnitude |
+
+These are **fixture-specific heuristic comparison margins**, not derived universal error bounds or calibrated measurement uncertainties. They apply to the harness's bounded amplitudes, sizes, windows and declared normalization; do not reuse them for arbitrary signals, units or precision without a new budget. Near zero, the absolute term controls. This NumPy rule differs from the symmetric **max** rule of `math.isclose`; specifying both budgets does not make the APIs interchangeable. Frame counts and sample start/center coordinates are checked separately against the declared frame geometry, not admitted through these floating margins; an even-length frame's center may lie at a half-sample coordinate.
+
+The mismatch message reports the largest absolute discrepancy, which need not be the first element that violates its relative/absolute gate. Preserve the fixture label/seed and actual array when investigating a failure rather than interpreting that diagnostic alone as an error bound. For checks built outside this harness, follow the shared [comparison policy](../../math-verification/references/FIXTURE_POLICY.md) and document any different rule explicitly.
 
 ### Optional command
 

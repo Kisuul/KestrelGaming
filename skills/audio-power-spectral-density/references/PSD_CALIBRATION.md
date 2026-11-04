@@ -32,11 +32,13 @@ For a stationary zero-mean noise process with known variance, the expected integ
 | Welch (mean), hop=M and hop<M | Mean of corresponding linear segment PSDs; explicit segment count |
 | Detrended constant signal | All-zero PSD after mean subtraction |
 
-For a seeded nonstationary noise record, compare integration to the *actual* average segment mean square, rather than falsely asserting it must equal a desired ensemble variance. The Welch estimator is statistical; one short realization is not proof of unbiasedness across arbitrary processes.
+For a seeded nonstationary record, compare integration to the actual average of `sum((x_segment*w)^2)/S2` over the included segments, using detrended segment values if that option is enabled. This is ordinary segment mean square only for a rectangular window. Do not assert equality to a desired ensemble variance. Overlapping Welch segments generally share data and are not independent draws; segment count alone does not give effective sample size or degrees of freedom. The estimator requires a stated process/window/overlap model before uncertainty claims.
 
 ## Edge cases and limitations
 
 Reject M < 2, Nfft < M, nonpositive/nonfinite fs, zero-power or nonfinite window, nonfinite samples, nonpositive hops, and signals shorter than a full Welch segment. A sample-buffer overrun must create a discontinuity; never average across a gap as though samples had been contiguous.
+
+The bounded reference also requires the floating normalization `fs*S2` to be finite and strictly positive. Finite positive factors can multiply to infinity or underflow to zero; reject these range failures rather than reporting zero PSD as silence. For example, `x=[1]*4`, `w=[1e153]*4`, `fs=48000` has mathematical DC density `4/48000`, but its binary64 normalization overflows. This reference rejects it; a wider-range implementation needs separately verified scaling.
 
 The reference implementation intentionally supports only small transforms and **mean** Welch averaging, no padding of incomplete tail frames, and optional per-segment constant detrending. It intentionally does not claim median-bias correction, confidence intervals, physical calibration, or standardized instrument precision.
 

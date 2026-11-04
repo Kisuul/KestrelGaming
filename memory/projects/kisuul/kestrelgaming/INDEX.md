@@ -9,7 +9,7 @@
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
 | [Audio skill library implementation and backlog](handoffs/2026-11-03-audio-skills-roadmap.md) | Active | Current audio skills, numerical test evidence, pending modules, and next work |
 | [Independent audio skills audit](2026-11-03-audio-skills-independent-audit.md) | Active | Review findings, verification gaps, numerical edges, and targeted remediation |
-| [PR #2 mathematics integration assignment](handoffs/2026-11-03-audio-math-integration-workorder-r01.md) | Active | Staged post-PR #3 branch reconciliation, selective math reuse, DSP verification gates, and next-agent handoff |
+| [PR #2 mathematics integration assignment](handoffs/2026-11-03-audio-math-integration-workorder-r01.md) | Archived | Completed Math core merge, conditional audio reuse, numerical/timing repairs and 153-test/live differential evidence |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.

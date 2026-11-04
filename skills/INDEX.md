@@ -21,7 +21,7 @@ are not standalone installed host plugins.
 
 ## Core mathematics (independent curriculum)
 
-Load **only** the relevant module; consult [the mathematics curriculum](../docs/MATH_CURRICULUM.md) for dependencies, assumptions, and the deferred audio integration plan.
+Load **only** the relevant module; consult [the mathematics curriculum](../docs/MATH_CURRICULUM.md) for dependencies, assumptions, and the implemented conditional audio-to-math routing. Audio skills retain their measurement and calibration contracts.
 
 | Skill | Trigger |
 | --- | --- |

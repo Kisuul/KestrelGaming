@@ -9,6 +9,8 @@ description: Choose, implement, verify, and document analysis window functions f
 
 Use when selecting or changing an FFT/STFT window, correcting spectral amplitudes or noise bandwidth, or diagnosing leakage, scalloping, sidelobes, and spectral resolution. Do **not** load for ordinary unwindowed peak or RMS tasks. Read [audio-dsp-core](../audio-dsp-core/SKILL.md) when the signal path, timing, or numerical interface itself needs investigation. Consult the [window calibration reference](references/WINDOW_CALIBRATION.md) for derivations and acceptance fixtures.
 
+**Consult mathematics when needed:** use [numerical analysis](../math-numerical-analysis/SKILL.md) when window sums, squared sums or precision affect calibration, and [mathematical verification](../math-verification/SKILL.md) when choosing independent analytic checks and tolerances. Window definitions, coherent gain, ENBW and reconstruction conditions remain audio decisions; these links do not require loading other math modules.
+
 ## Procedure
 
 1. **Name the measurement.** Is the objective a coherent tone amplitude, adjacent-tone discrimination, noise power/density, transient localization, or overlap-add reconstruction? Do not optimize every objective as though it were the same. Establish sample rate, true frame length M, FFT length Nfft, hop size, and channel policy.

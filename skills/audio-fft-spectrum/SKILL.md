@@ -9,6 +9,8 @@ description: Implement, review, and calibrate FFT-based audio amplitude spectra,
 
 Use for FFT amplitude/magnitude displays, tone measurements, frequency-axis mapping, spectrum scaling, and audits of spectral visualization accuracy. Load [audio-window-functions](../audio-window-functions/SKILL.md) when window selection, leakage, or correction factors are involved, and [audio-dsp-core](../audio-dsp-core/SKILL.md) for timing or ingestion changes. For PSD and noise-power questions, load [audio-power-spectral-density](../audio-power-spectral-density/SKILL.md); its power-density scaling differs from the coherent-tone amplitude convention here.
 
+**Consult mathematics when needed:** use [complex numbers](../math-complex-numbers/SKILL.md) for phase, branch cuts or exponential-sign reasoning, [numerical analysis](../math-numerical-analysis/SKILL.md) for precision/range questions, and [mathematical verification](../math-verification/SKILL.md) for independent reference checks and comparison policy. Load only the relevant procedure; DFT sign/scaling, bin layout, sample origin and amplitude calibration remain specified here.
+
 ## Procedure
 
 1. **Trace the measured signal.** Identify source, channel mapping, pre/post-gain tap, sample rate fs, frame length M, FFT length Nfft (possibly zero padded), frame start and timestamp, window choice, and any built-in API scaling or smoothing. Do not double-normalize a library that has already scaled the transform.

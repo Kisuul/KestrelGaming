@@ -57,6 +57,16 @@ class ReferenceDFTTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             one_sided_amplitude([0., 0.], [0., 0.])
 
+    def test_shifted_impulse_fixes_forward_transform_phase_sign(self):
+        # With the declared negative exponent, n=1, k=2, N=8 gives -i.
+        # Conjugating the DFT preserves magnitudes but must fail this anchor.
+        samples = [0.] * 8
+        samples[1] = 1.
+        value = one_sided_dft(samples, [1.] * 8)[2]
+        self.assertTrue(math.isfinite(value.real) and math.isfinite(value.imag))
+        self.assertTrue(math.isclose(value.real, 0., rel_tol=0, abs_tol=2e-15))
+        self.assertTrue(math.isclose(value.imag, -1., rel_tol=0, abs_tol=2e-15))
+
 
 if __name__ == "__main__":
     unittest.main()

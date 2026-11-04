@@ -15,6 +15,12 @@ sources: "PR #2 hostile audit at a0901b1cd9a01e118c5f9270e82424bdd155a214; audit
 
 ## Summary
 
+**Later evidence:** The [completed Math core integration](handoffs/2026-11-03-audio-math-integration-workorder-r01.md)
+records an actual live SciPy comparison against the repository implementations:
+84 comparisons passed with seed 20261103, 12 cases, NumPy 2.3.5/SciPy 1.17.0.
+Earlier *not run* statements below describe earlier revisions. This closes that
+bounded execution gap, not production, host, realtime or normative conformance.
+
 **Review status:** FOCUSED REMEDIATION VERIFIED on the PR branch as of `c786a71`. The initial findings remain below as historical evidence; remaining gaps are full dynamic differential testing, application/host integration, realtime behavior and normative instrument validation. The original inspection found no high-severity error in ordinary-range FFT/PSD/level formulas.
 
 Reviewed PR #2 at `a0901b1cd9a01e118c5f9270e82424bdd155a214`, with 7 implemented audio skills of a 73-candidate taxonomy (66 candidates remain). This is a read/review of current feature branch source, not a claim of instrument certification, host integration, or review of uncommitted local changes. No application or DSP implementation has been changed by this review.

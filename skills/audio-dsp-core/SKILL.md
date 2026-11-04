@@ -11,6 +11,8 @@ Use this skill for audio sample ingestion, analysis scheduling, shared numerical
 
 Before changing a target project, follow its own instructions and Kestrel's [verification](../../kestrel/VERIFICATION.md) and [permissions](../../kestrel/PERMISSIONS.md) guidance. A skill supplies method and context, **not** additional authority.
 
+**Consult mathematics when needed:** use [dimensional analysis](../math-dimensional-analysis/SKILL.md) for quantity/reference and sample-timebase conversions, [numerical analysis](../math-numerical-analysis/SKILL.md) for finite-arithmetic or stability questions, and [mathematical verification](../math-verification/SKILL.md) for oracle selection and error budgets. Follow only the links relevant to the task; audio retains measurement taps, timing/reset contracts and transform/window calibration.
+
 ## Procedure
 
 1. **Trace the actual signal path.** Locate capture/decode, resampling, gain, channel mapping, ring buffers, FFT or filter-bank input, smoothing, event emission, and render consumers. Determine the measurement tap: pre/post gain, limiter, effects, or output. Record existing behavior and tests before replacing it.

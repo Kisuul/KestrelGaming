@@ -107,6 +107,13 @@ class PSDReferenceTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             welch_mean([1.] * 3, [1.] * 8, 48000, hop=2)
 
+    def test_unrepresentable_normalization_rejected_not_reported_as_silence(self):
+        # Finite positive fs and energy can still multiply to infinity or zero.
+        for window, fs in (([1e153] * 4, 48000), ([1e-154] * 4, 1e-308)):
+            with self.subTest(window=window[0], fs=fs):
+                with self.assertRaisesRegex(ValueError, "PSD normalization"):
+                    periodogram([1.] * 4, window, fs)
+
 
 if __name__ == "__main__":
     unittest.main()
