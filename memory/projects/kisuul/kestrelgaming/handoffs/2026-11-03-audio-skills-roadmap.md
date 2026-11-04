@@ -8,22 +8,28 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-04
-sources: "User 2026-11-04 authorized audio-resampling implementation with careful independent verification and project memory update; commit a388abdbb54ec601ed80b943ec33c3be8f5b6511 passed GitHub Actions 41800254484 with 211 tests and structural checks; local Python 3.13.5 NumPy 2.3.5 SciPy 1.17.0 independent differential passed 3669 samples across 24 seeded cases; SciPy resample_poly and upfirdn documentation."
+sources: "Owner 2026-11-04 requires completing all 73 audio curriculum modules before PR #2 merges; branch efe1da189968f789a36fcc53110c15d94a62a4c7 had 12 indexed skills, 61 pending, and Actions 41800550295 passed 211 tests; preceding resampling milestone evidence remains in this record."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
 
 ## Summary
 
-**Goal and acceptance criteria:** Grow Kestrel's reusable, selectively loaded audio engineering skills incrementally. Each completed module needs exact Kestrel skill frontmatter, an indexed trigger, an actionable procedure with real mathematical/standards references, explicit limitations, and proportionate validation. Maintain a checkable backlog and distinguish draft guidance from executed tests and actual host integration.
+**Goal and acceptance criteria:** Complete **all 73 audio engineer modules** before PR #2 may merge to main, with scoped skill procedures, registered triggers, independent verification, honest maturity limits and full-curriculum review. Owner decision: [full-completion gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md).
 
-**Task outcome:** PARTIAL
+**Task outcome:** PARTIAL — 12 of 73 developed, 61 remaining; PR #2 stays open and unmerged.
 
-**Authorized scope and boundaries (historical; recheck on resume):** User explicitly requested implementation on the existing audio-skill branch, in manageable batches, with a running log in Kestrel memory. Kestrel is the skill library. Do not rewrite KESTREL.md/AGENTS.md or imply changes to external audio applications. Branch publication for PR review is intended; merging to main remains a separate decision.
+**Authorized scope and boundaries (historical; recheck on resume):** Keep development on PR #2's audio branch in bounded, reviewable batches; the owner expressly prohibits merging the umbrella PR to main until **all curriculum modules** finish and owner acceptance follows. Other agents may contribute through separate, authorized branches and handoffs following [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md). Do not edit application repositories or Kestrel root contract from this memory task.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming, `skills/audio-dsp-core-foundation-2026-11-03`, open PR #2. `audio-resampling` implementation head `a388abdbb54ec601ed80b943ec33c3be8f5b6511` passed GitHub Actions `41800254484` (211 repository tests and structural checks). This follow-up is a memory-only evidence commit: verify its own CI when available and recheck live branch head on pickup.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, PR #2, §skills/audio-dsp-core-foundation-2026-11-03§, head §efe1da189968f789a36fcc53110c15d94a62a4c7§, Actions §41800550295§ passed 211 tests and structural checks. This coordination memory commit must be checked independently after writing.
 
 **Memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
+
+## Current owner directive — whole curriculum before merge
+
+The owner explicitly set **all 73 audio modules complete** as the necessary condition for finishing umbrella PR #2. As of the inspected head, **12 are implemented and 61 remain**. Neither green CI nor a conditional architecture assessment authorizes early merge. See the [owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md) and [parallel-agent coordination handoff](2026-11-04-audio-parallel-work-onboarding-r01.md). No other agents have been assigned or started by this record. The existing backlog below remains canonical; do not silently reduce the 73 obligations.
+
+**Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current twelve. These are not newly completed modules or verified repairs.
 
 ## Evidence
 
@@ -305,18 +311,11 @@ the filter retains all source frames per bounded epoch.
 
 ## Next action
 
-Confirm the final memory-only commit's GitHub Actions run and current PR #2
-diff. Keep PR #2 open for owner review; do not merge without owner
-authorization. The new resampling reference is intentionally bounded
-and **not** a production audio backend.
+**No merge to main before all 73 are completed.** Give other authorized Kestrel agents disjoint tasks, starting from the latest audio PR #2 head, each with its own branch and indexed Kestrel handoff. Review and integrate child contributions into the *audio development branch* sequentially; the coordinator updates the canonical count and shared indexes after each verified integration.
 
-**Recommended next bounded module:** `audio-channel-mapping` for explicit
-channel identity, layout masks, downmix/upmix policy, stereo/antiphase
-handling and independently checked sample/channel transforms. Alternatively,
-`audio-filter-design` can build on the resampling FIR concepts, but must
-earn its own frequency-response and numerical acceptance checks.
-Preserve the **61 pending** candidate audio skills and reuse mathematics
-skills only for genuinely shared quantitative foundations.
+**First proposed wave:** `audio-channel-mapping` and `audio-filter-design` in separate branches, with a separate audit task for PSD/STFT extreme finite-input numerics and an audio agent-efficacy pilot design. These are proposals, not already assigned tasks. Follow [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md).
+
+**Program finish line:** 12 / 73 implemented; **61 pending**. On completion of all 73, perform cross-skill audit, whole-branch test verification, and explicit owner review before requesting PR #2 to main merge.
 
 ## Revisit when
 
