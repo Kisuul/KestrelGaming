@@ -92,5 +92,15 @@ class LevelsReferenceTests(unittest.TestCase):
         self.assertTrue(result["mean_square_underflowed"])
 
 
+    def test_subnormal_impulse_explicitly_flags_rms_underflow(self):
+        readings = sample_levels([5e-324] + [0.] * 15)
+        self.assertGreater(readings["sample_peak"], 0)
+        self.assertEqual(readings["rms"], 0.0)
+        self.assertTrue(readings["rms_underflowed"])
+        self.assertTrue(readings["mean_square_underflowed"])
+        silence = sample_levels([0.] * 16)
+        self.assertFalse(silence["rms_underflowed"])
+        self.assertFalse(silence["mean_square_underflowed"])
+
 if __name__ == "__main__":
     unittest.main()

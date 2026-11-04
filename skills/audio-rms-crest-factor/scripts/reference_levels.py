@@ -39,12 +39,14 @@ def sample_levels(samples: list[float]) -> dict[str, Optional[float]]:
     mean_square = rms * rms
     if not math.isfinite(mean_square):
         raise ValueError("mean square is outside the supported floating-point range")
-    mean_square_underflowed = bool(rms > 0 and mean_square == 0)
+    rms_underflowed = bool(peak > 0 and rms == 0)
+    mean_square_underflowed = bool(peak > 0 and mean_square == 0)
     crest = peak/rms if rms else None
     return {
         "sample_peak": peak,
         "mean_square": mean_square,
         "mean_square_underflowed": mean_square_underflowed,
+        "rms_underflowed": rms_underflowed,
         "rms": rms,
         "crest_factor": crest,
         "crest_db": 20*math.log10(crest) if crest is not None else None,
