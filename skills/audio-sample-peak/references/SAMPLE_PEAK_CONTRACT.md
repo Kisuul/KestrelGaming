@@ -17,7 +17,7 @@ The reference implementation rejects missing, empty, out-of-order, negative-orig
 
 ## Units and labels
 
-With positive reference A_ref, amplitude ratio level is 20*log10(P/A_ref), -infinity for exact zero. For normalized PCM with reference=1, P=0.5 is about -6.0206 dB **re 1 peak-amplitude unit**. A floating point processing bus may have P>1, so the ratio may be positive. Do not conflate this convention with an AES17 RMS-defined full-scale reading, physical dB SPL, dB TP, or loudness LUFS.
+With positive reference A_ref, amplitude ratio level is mathematically 20*log10(P/A_ref), -infinity for exact zero. For nonzero input use `20*(log10(P)-log10(A_ref))` to avoid spurious division underflow/overflow for accepted finite values. For normalized PCM with reference=1, P=0.5 is about -6.0206 dB **re 1 peak-amplitude unit**. A floating point processing bus may have P>1, so the ratio may be positive. Do not conflate this convention with an AES17 RMS-defined full-scale reading, physical dB SPL, dB TP, or loudness LUFS.
 
 **True peak** can exceed maximum abs(PCM samples) because the bandlimited reconstructed waveform has extrema between samples. Estimating that requires oversampling/filtering and a separate error/calibration budget; see [ITU-R BS.1770-5 Annex 2](https://www.itu.int/rec/R-REC-BS.1770-5-202311-I). Calling P_block “true peak” is incorrect.
 
@@ -34,6 +34,7 @@ With positive reference A_ref, amplitude ratio level is 20*log10(P/A_ref), -infi
 | Seek or missing sample index | Reject continuity mismatch until explicit reset |
 | Bad channel count / NaN in any channel | Reject entire update; prior valid program and rolling states remain untouched |
 | Short positive/negative impulse, any channel | Peak position equals the actual sampled location, independent of display FPS |
+| Block longer than rolling hold: H=2, samples [0.95, 0.1, 0.1, 0.1, 0.1] | `block.peak` and `program_peak` are 0.95; final `rolling_peak` is 0.1. A display must not treat final rolling state as the callback's entire event peak |
 
 ## Deliberate limits
 

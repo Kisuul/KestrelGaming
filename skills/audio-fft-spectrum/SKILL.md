@@ -7,7 +7,7 @@ description: Implement, review, and calibrate FFT-based audio amplitude spectra,
 
 ## When to load
 
-Use for FFT amplitude/magnitude displays, tone measurements, frequency-axis mapping, spectrum scaling, and audits of spectral visualization accuracy. Load [audio-window-functions](../audio-window-functions/SKILL.md) when window selection, leakage, or correction factors are involved, and [audio-dsp-core](../audio-dsp-core/SKILL.md) for timing or ingestion changes. For PSD and noise-power questions, this skill can expose mislabeling but a dedicated `audio-power-spectral-density` skill is still planned.
+Use for FFT amplitude/magnitude displays, tone measurements, frequency-axis mapping, spectrum scaling, and audits of spectral visualization accuracy. Load [audio-window-functions](../audio-window-functions/SKILL.md) when window selection, leakage, or correction factors are involved, and [audio-dsp-core](../audio-dsp-core/SKILL.md) for timing or ingestion changes. For PSD and noise-power questions, load [audio-power-spectral-density](../audio-power-spectral-density/SKILL.md); its power-density scaling differs from the coherent-tone amplitude convention here.
 
 ## Procedure
 

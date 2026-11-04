@@ -7,11 +7,11 @@ Companion to [audio-rms-crest-factor](../SKILL.md). These are analytical fixture
 Given M finite real samples x[n], M>0:
 
 - Peak sample excursion P = max(abs(x[n])).
-- Mean square Q = sum(x[n]²) / M.
-- RMS amplitude R = sqrt(Q).
+- Mean square Q = sum(x[n]²) / M. For tiny finite binary64 inputs with unrepresentable Q, the reference returns Q=0 with `mean_square_underflowed=True` and separately computed nonzero RMS. Do not interpret zero Q alone as proof of silence.
+- RMS amplitude R = sqrt(Q) mathematically. Numerically scale by maximum |x[n]| before squaring, so nonzero RMS remains observable even when individual x[n]² underflows.
 - Crest factor C = P/R for R>0; undefined for exact silence.
 - Crest level in dB = 20*log10(C), not 10*log10(C).
-- dB relative to unit sample amplitude = 20*log10(R), **not automatically AES17 dBFS**.
+- dB relative to unit sample amplitude = 20*log10(R), **not automatically AES17 dBFS**. Compute nonzero amplitude ratios as `20*(log10(R)-log10(reference))` to avoid an intermediate underflow/overflow.
 - Negative infinity is the mathematical log-level of exact zero. A UI floor is separate.
 - dB is unitless without a reference; store the actual reference or naming convention.
 
