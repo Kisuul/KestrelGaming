@@ -23,7 +23,7 @@ sources: "Owner 2026-11-04 full-curriculum no-merge rule; PR #2 observed open at
 
 **Target repository and branch:** [Kisuul/KestrelGaming PR #2](https://github.com/Kisuul/KestrelGaming/pull/2), `skills/audio-dsp-core-foundation-2026-11-03`. Observed head `efe1da189968f789a36fcc53110c15d94a62a4c7`; base main `c268a4d0be121738cbfdb0d7a90de7874299c0f2`. These SHAs are snapshots, **not** perpetual branch assumptions. Retrieve memory from this **PR branch**, not from main.
 
-**Memory revision loaded:** [Running audio handoff](2026-11-03-audio-skills-roadmap.md), [audio independent audit](../2026-11-03-audio-skills-independent-audit.md), [math integration handoff](2026-11-03-audio-math-integration-workorder-r01.md), [Kestrel memory protocol](../../../../kestrel/MEMORY_PROTOCOL.md), [kestrel-remember](../../../../skills/kestrel-remember/SKILL.md), and the current skill catalog.
+**Memory revision loaded:** [Running audio handoff](2026-11-03-audio-skills-roadmap.md), [audio independent audit](../2026-11-03-audio-skills-independent-audit.md), [math integration handoff](2026-11-03-audio-math-integration-workorder-r01.md), [Kestrel memory protocol](../../../../../kestrel/MEMORY_PROTOCOL.md), [kestrel-remember](../../../../../skills/kestrel-remember/SKILL.md), and the current skill catalog.
 
 ## Evidence
 
