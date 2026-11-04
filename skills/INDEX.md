@@ -22,6 +22,7 @@ are not standalone installed host plugins.
 | [audio-sample-formats](audio-sample-formats/SKILL.md) | Decode, encode and verify bounded raw PCM integer/float formats, channel layouts, valid-bit packing, scaling, quantization and byte order |
 | [audio-resampling](audio-resampling/SKILL.md) | Rational audio sample-rate conversion with anti-alias FIR, group delay, exact output clocks, stream epochs, boundaries and independent fixtures |
 | [audio-channel-mapping](audio-channel-mapping/SKILL.md) | Identify WAVE speaker/unknown/Mid-Side layouts, use exact rational routing matrices, flag gain/loss, and protect sample-clock continuity |
+| [audio-filter-design](audio-filter-design/SKILL.md) | Choose and verify FIR/IIR filters, band specifications, group delay, SOS stability, coefficient quantization and streaming state |
 
 ## Core mathematics (independent curriculum)
 
