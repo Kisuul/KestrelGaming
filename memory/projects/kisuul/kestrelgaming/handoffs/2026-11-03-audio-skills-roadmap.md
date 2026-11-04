@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User authorized 2026-11-03 continuation of the Kestrel curriculum; experimental true-peak implementation commit 9bf8ac2f017b8d740c9285f19522eda65e8abba1; official ITU-R BS.1770-5 Annex 2 reviewed; GitHub Actions 41768969111 passed structural checks and 106 repository tests."
+sources: "User authorized 2026-11-03 continuation of Kestrel audio curriculum while mathematics PR #3 stays separate; new audio-dsp-test-fixtures skill and reference tests at 74b4d8a5293e6e2db1782732fc76f57a5a35e065; GitHub Actions 41775340813 structural validator and 118 repository tests passed; optional SciPy differential script committed but not executed in project CI."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -21,9 +21,9 @@ sources: "User authorized 2026-11-03 continuation of the Kestrel curriculum; exp
 
 **Authorized scope and boundaries (historical; recheck on resume):** User explicitly requested implementation on the existing audio-skill branch, in manageable batches, with a running log in Kestrel memory. Kestrel is the skill library. Do not rewrite KESTREL.md/AGENTS.md or imply changes to external audio applications. Branch publication for PR review is intended; merging to main remains a separate decision.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`; PR #2. True-peak experimental implementation head `9bf8ac2f017b8d740c9285f19522eda65e8abba1`, GitHub Actions `41768969111` (106 tests passed); this handoff update is a later memory-only commit. Always check live head and CI when resuming.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`; PR #2. Fixture-bank test implementation head `74b4d8a5293e6e2db1782732fc76f57a5a35e065`, GitHub Actions `41775340813` (118 tests passed); this handoff update is a subsequent memory-only commit. Recheck live branch head and CI when resuming.
 
-**Memory revision loaded:** PR #2 branch at `a6bef261bfe8cd04c4134f76916d2d3558c6a085`, with seven audio skills and the verified independent-audit remediation; user explicitly authorized further curriculum implementation.
+**Memory revision loaded:** PR #2 branch `7a627f72ec63248db92c5e683bb3ca695e8b60d6` with eight audio skills and the prior verified true-peak experimental module. User explicitly redirected work back to audio while independent mathematics PR #3 proceeds separately.
 
 ## Evidence
 
@@ -83,11 +83,41 @@ cross-library comparisons are still outstanding. GitHub Actions run
 passed structural checks and the full **106-test** suite (11 new true-peak
 fixture tests). This validates limited analytic reference behavior only.
 
+### Latest batch — reusable DSP test fixtures (verified)
+
+**User authorization:** Resume the audio curriculum on existing PR #2; leave
+mathematics PR #3 to its separate team. No crossover code or integration edits.
+
+**Scope:** `skills/audio-dsp-test-fixtures/` with a focused `SKILL.md`,
+`references/FIXTURE_CONTRACT.md`, optional agent metadata,
+`scripts/fixture_bank.py` deterministic generator,
+`scripts/check_scipy_differential.py` optional live SciPy comparison tool,
+and `tests/test_audio_dsp_fixture_bank.py`. Registered centrally in
+`skills/INDEX.md`.
+
+**Actual evidence:** The first commit `e6780f1` created the skill and
+generator; intermediate CI failed because its references pointed to a test
+file not yet present. The follow-up implementation commit
+`74b4d8a5293e6e2db1782732fc76f57a5a35e065` added that test file and
+the differential tool. GitHub Actions run `41775340813` passed Kestrel
+structural checks plus **118 repository tests, OK** (12 additional fixture
+tests). The fixture generator was also exercised in a local basic smoke
+test. No external DSP application was modified.
+
+**Important limits:** Standard CI runs only stdlib tests. The optional live
+SciPy/NumPy differential script is present but **has not been run on this
+repository implementation**; frozen external SciPy golden fixtures from
+the prior audit are still exercised by standard CI. Do not claim measured
+real-time, instrument, device or standards correctness.
+
+**Audio curriculum tally:** 9 developed / 73 candidates, 64 pending.
+Mathematics PR #3 is independent and was not modified.
+
 ## Running backlog
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (8 of 73 candidates total, including the existing foundation):**
+**Current developed skills (9 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -97,7 +127,8 @@ fixture tests). This validates limited analytic reference behavior only.
 - `audio-spectrogram-waterfall` — BRANCH (this batch); STFT sample-time frames, calibrated PSD/amplitude histories and visualization integrity; GitHub Actions `41759127730` passed on `5db1972`.
 - `audio-sample-peak` — BRANCH (this batch); sample maxima, earliest tie, per-channel program/rolling peak, exact hold expiry and threshold semantics; CI `41762257230` passed on `d76a278`.
 - `audio-true-peak` — BRANCH (this batch); **experimental** zero-extended Lanczos reference, distinct sample/intersample and interior/edge peaks, analytic timing fixtures. Not BS.1770 conformant; CI `41768969111` passed on `9bf8ac2` (106 repository tests).
-- **Outstanding: 65 candidates**, including at least the following nine-family backlog.
+- `audio-dsp-test-fixtures` — BRANCH (this batch); deterministic bounded PCM generation with sample/channel metadata, uint32-seeded noise, callback partitions, 12 analytic/metamorphic regression tests, optional SciPy differential CLI. GitHub Actions `41775340813` passed 118 tests at `74b4d8a`.
+- **Outstanding: 64 candidates**, including at least the following nine-family backlog.
 
 ### Foundation and numerical DSP (7 pending)
 
@@ -131,15 +162,15 @@ fixture tests). This validates limited analytic reference behavior only.
 
 `audio-voice-activity`, `audio-formant-analysis`, `audio-speech-intelligibility`, `audio-perceptual-quality`, `audio-psychoacoustics`, `audio-sound-classification`, `audio-source-separation`, `audio-denoising-evaluation`.
 
-### Validation, visualization, and infrastructure (8 pending)
+### Validation, visualization, and infrastructure (7 pending)
 
-`audio-reference-validation`, `audio-dsp-test-fixtures`, `audio-measurement-uncertainty`, `audio-visualization-integrity`, `audio-color-scale-design`, `audio-realtime-integration`, `audio-offline-analysis`, `audio-analysis-provenance`.
+`audio-reference-validation`, `audio-measurement-uncertainty`, `audio-visualization-integrity`, `audio-color-scale-design`, `audio-realtime-integration`, `audio-offline-analysis`, `audio-analysis-provenance`.
 
 ## Next action
 
-**Open blockers or risks:** Revalidate newest branch/CI before resuming or merging; `41768969111` covers experimental true-peak implementation head `9bf8ac2`, not this memory-only evidence commit or later edits. No BS.1770 conformance, production audio-tap integration, analog device calibration, full filter error budget or live external-library comparison has been performed. Live SciPy differential CI, host integration and instrument conformance remain open. The reference rolling maximum is a trailing sample-count window, not a display envelope with separate release ballistics; threshold hits do not prove recorded clipping. No visual meter integration, oversampled true-peak test, hardware calibration or realtime performance profiling has been done. The reference is O(frames*M*Nfft) and supports complete left-aligned frames but not gap detection, GPU rendering, live reconfiguration or app-level visual regression. Actual target-app integration, sound-level calibration and production timing remain untested. No calibration, real-time benchmarking, third-party instrument comparison, or end-to-end host activation has been performed. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
+**Open blockers or risks:** Revalidate newest branch/CI before resuming or merging; `41775340813` covers fixture-bank implementation head `74b4d8a`, not this memory-only evidence update. The optional SciPy differential script is committed but not executed as a live differential test in standard CI. The initial intermediate commit `e6780f1` failed structural CI because its reference documentation linked to a test not yet in the same commit; the next commit added the test and full CI passed. No dynamic standard compliance, device calibration or actual target-audio app integration is claimed. No BS.1770 conformance, production audio-tap integration, analog device calibration, full filter error budget or live external-library comparison has been performed. Live SciPy differential CI, host integration and instrument conformance remain open. The reference rolling maximum is a trailing sample-count window, not a display envelope with separate release ballistics; threshold hits do not prove recorded clipping. No visual meter integration, oversampled true-peak test, hardware calibration or realtime performance profiling has been done. The reference is O(frames*M*Nfft) and supports complete left-aligned frames but not gap detection, GPU rendering, live reconfiguration or app-level visual regression. Actual target-app integration, sound-level calibration and production timing remain untested. No calibration, real-time benchmarking, third-party instrument comparison, or end-to-end host activation has been performed. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
 
-**Next useful step:** The experimental `audio-true-peak` skill is verified against its bounded fixtures (106 tests, CI `41768969111`). Implement `audio-dsp-test-fixtures` next to broaden independent cross-library validation and protect against future changes, **or** separately investigate BS.1770-5-conformant FIR true-peak metering. Do not promote the present oracle to dBTP/instrument compliance. Preserve the 65 outstanding candidates and the handoff.
+**Next useful step:** The `audio-dsp-test-fixtures` skill is implemented and its 12 standard-library regression cases passed within the full 118-test GitHub suite (`41775340813`). Recommended next small module: `audio-timebase-sync`, scoped to exact sample-index mapping across buffer chunks, pause/seek/discontinuity/reset and independently timestamped consumers. Separately, execute the optional seeded SciPy differential harness in an environment with NumPy/SciPy before upgrading its claim beyond *available, not run*; preserve the 64 remaining candidate modules. Keep mathematics PR #3 independent.
 
 ## Revisit when
 
