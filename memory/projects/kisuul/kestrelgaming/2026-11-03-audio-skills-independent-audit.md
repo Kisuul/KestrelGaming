@@ -66,7 +66,7 @@ original audit head had 84 tests; existing tests were retained.
 | AES17 link precision | RMS skill now links to [the official AES17-2020 preview](https://www.aes.org/publications/standards/preview.cfm?ID=21) | Fixed; preview does not grant full normative text |
 | Short hold vs long callback | Sample-peak skill/reference now warns that final rolling peak may omit an early transient; fixture tests preserved block/program peak visibility | Addressed and tested |
 | Project memory index broken table | Original audit commit fixed the blank line in the table | Fixed |
-| Independent validation gap | Five pinned spectral fixture tests were generated with external **SciPy 1.17.0 / NumPy 2.3.5** and run with stdlib-only GitHub CI; inputs, source calls and golden outputs in [fixture instructions](../../../tests/fixtures/AUDIO_EXTERNAL_GOLDENS.md) | Partially addressed |
+| Independent validation gap | Five pinned spectral fixture tests were generated with external **SciPy 1.17.0 / NumPy 2.3.5** and run with stdlib-only GitHub CI; inputs, source calls and golden outputs in [fixture instructions](../../../../tests/fixtures/AUDIO_EXTERNAL_GOLDENS.md) | Partially addressed |
 
 **Unresolved verification:** CI exercises frozen *external-library goldens*, not
 a live SciPy installation or randomized differential test on every push.
