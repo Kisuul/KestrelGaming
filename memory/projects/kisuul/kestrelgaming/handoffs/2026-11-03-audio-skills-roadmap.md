@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User authorized 2026-11-03 continuation of Kestrel audio curriculum while mathematics PR #3 stays separate; new audio-dsp-test-fixtures skill and reference tests at 74b4d8a5293e6e2db1782732fc76f57a5a35e065; GitHub Actions 41775340813 structural validator and 118 repository tests passed; optional SciPy differential script committed but not executed in project CI."
+sources: "User 2026-11-03 requested continued audio skill implementation and explicit project memory update; resumed from verified PR #2 head a119527c57e24790363e00fca6d9a91dfc2463cd (Math integration and 153 tests); new audio-timebase-sync module and independent analytic fixtures; GitHub CI pending on implementation commit."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -45,13 +45,12 @@ for exact starting heads, merge resolution, changed paths, commands and limits.
 Published integration is `a933450ad4ae3f8a0cca8efce38a7decb4056c5f`; PR CI
 [41789060842](https://github.com/Kisuul/KestrelGaming/actions/runs/41789060842)
 passed structural validation and all 153 tests. A following memory-only commit records
-this evidence; consult current-head CI separately. The curriculum remains
-**9 developed / 64 pending**; integration adds no new skill.
+this evidence; consult current-head CI separately. That math-integration milestone preserved **9 developed / 64 pending**; the subsequent timebase module advances the audio curriculum to **10 developed / 63 pending**, pending new CI verification.
 
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.
 
-**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Nine of 73 candidate skills are developed on PR #2; 64 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
+**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Ten of 73 candidate skills are developed on PR #2; 63 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
@@ -135,11 +134,36 @@ real-time, instrument, device or standards correctness.
 **Audio curriculum tally:** 9 developed / 73 candidates, 64 pending.
 Mathematics PR #3 is independent and was not modified.
 
+### New increment — audio timebase and epoch integrity (verification pending)
+
+**Authorization:** The owner requested that we continue writing audio skills and
+check/update Kestrel project memory. Scope is PR #2's existing review branch;
+the merged mathematics core is reused conditionally. PR #3 and applications
+remain untouched.
+
+**Changed this batch:** `skills/audio-timebase-sync/SKILL.md`,
+`references/TIMEBASE_CONTRACT.md`, `agents/openai.yaml`, and
+`scripts/reference_timebase.py`, plus
+`tests/test_audio_timebase_reference.py`, `skills/INDEX.md`,
+and this existing indexed roadmap. The simple reference uses exact integer
+sample origins and `fractions.Fraction` frame times, finite-rate rational
+conversion, explicit epoch resets and atomic discontinuity rejection.
+Timestamp anchors are explicitly **nominal mappings, not hardware timing
+calibration, jitter or latency evidence**. It does not alter Kestrel Math
+implementations or any audio application.
+
+**Authoritative context:** W3C Web Audio API `getOutputTimestamp()` clock
+correlation, PortAudio input ADC/callback/output DAC timing guidance, and
+FFmpeg time-base semantics. Check the final new commit and actual CI results
+before upgrading this milestone from pending to verified.
+
+**Curriculum now:** 10 developed / 73 candidate audio skills, 63 pending.
+
 ## Running backlog
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (9 of 73 candidates total, including the existing foundation):**
+**Current developed skills (10 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -150,11 +174,12 @@ Mathematics PR #3 is independent and was not modified.
 - `audio-sample-peak` — BRANCH (this batch); sample maxima, earliest tie, per-channel program/rolling peak, exact hold expiry and threshold semantics; CI `41762257230` passed on `d76a278`.
 - `audio-true-peak` — BRANCH (this batch); **experimental** zero-extended Lanczos reference, distinct sample/intersample and interior/edge peaks, analytic timing fixtures. Not BS.1770 conformant; CI `41768969111` passed on `9bf8ac2` (106 repository tests).
 - `audio-dsp-test-fixtures` — BRANCH (this batch); deterministic bounded PCM generation with sample/channel metadata, uint32-seeded noise, callback partitions, 12 analytic/metamorphic regression tests, optional SciPy differential CLI. GitHub Actions `41775340813` passed 118 tests at `74b4d8a`.
-- **Outstanding: 64 candidates**, including at least the following nine-family backlog.
+- `audio-timebase-sync` — BRANCH (new); integer sample-clock epochs, exact rational span/center and sample-rate conversion, explicit discontinuities, clock-anchor provenance and deterministic tests; CI pending.
+- **Outstanding: 63 candidates**, including at least the following nine-family backlog.
 
-### Foundation and numerical DSP (7 pending)
+### Foundation and numerical DSP (6 pending)
 
-`audio-sample-formats`, `audio-timebase-sync`, `audio-resampling`, `audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
+`audio-sample-formats`, `audio-resampling`, `audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
 
 ### Levels, loudness, and dynamics (5 pending)
 
@@ -196,9 +221,12 @@ recorded in the completed integration handoff. The optional comparator is still 
 part of dependency-free CI. Production/device/GUI integration, runtime activation,
 realtime behavior, physical calibration and ITU/AES conformance remain unverified.
 
-For a later authorized curriculum batch, `audio-timebase-sync` remains a candidate;
-use the merged dimensional/numerical/verification procedures where needed. The
-backlog stays at 64 pending candidates, and no efficacy claim follows from math links.
+The latest authorized curriculum batch implements `audio-timebase-sync`, using the
+merged dimensional/numerical/verification skill routing only where justified.
+Next recommended bounded module: `audio-sample-formats` (PCM normalization,
+integer quantization, float headroom, endianness and channel layout), or a focused
+`audio-resampling` investigation after sample-format contracts. Preserve the
+63 pending candidates. No efficacy claim follows from adding skill cross-links.
 
 ## Revisit when
 

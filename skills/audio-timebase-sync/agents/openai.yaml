@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Sample Timebase and Sync"
+  short_description: "Exact sample clocks, epochs and timestamp domains"
+  default_prompt: "Use $audio-timebase-sync to define exact PCM block coordinates, rational frame/time conversion, gap and seek epoch handling, and accurately labelled external clock anchors; verify with deterministic fixtures."

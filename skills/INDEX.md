@@ -18,6 +18,7 @@ are not standalone installed host plugins.
 | [audio-sample-peak](audio-sample-peak/SKILL.md) | Implement channel-specific sample peaks, timestamps, rolling holds, program peaks and reference threshold diagnostics |
 | [audio-true-peak](audio-true-peak/SKILL.md) | Analyze intersample reconstruction, boundary error, oversampling and BS.1770-5 evidence; experimental reference only |
 | [audio-dsp-test-fixtures](audio-dsp-test-fixtures/SKILL.md) | Generate reproducible sample-timed audio vectors, test metamorphic and callback invariants, and check independent DSP references |
+| [audio-timebase-sync](audio-timebase-sync/SKILL.md) | Keep sample-frame time exact across blocks, gap/seek epochs, fractional rate mapping and external capture/playback/UI clock anchors |
 
 ## Core mathematics (independent curriculum)
 
