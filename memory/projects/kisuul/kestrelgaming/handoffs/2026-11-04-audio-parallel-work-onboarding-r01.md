@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-04
 updated: 2026-11-04
-sources: "Owner 2026-11-04 full-curriculum no-merge rule; PR #2 observed open at efe1da189968f789a36fcc53110c15d94a62a4c7 with 12/73 audio skills, 61 pending; CI 41800550295 211 tests; read-only engineering assessment of current FFT/PSD/STFT/SRC and evaluation coverage."
+sources: "Owner 2026-11-04 requires all 73 audio modules before merging PR #2; channel-mapping implementation eb6c42813dafef64faf0b543ccb42a9f5a55d185 passed GitHub Actions 41812716355 with 235 tests (24 new) and structural checks; prior onboarding recorded 12/73 at efe1da189968f789a36fcc53110c15d94a62a4c7."
 ---
 
 # Audio curriculum — handoff for parallel Kestrel agents
@@ -19,27 +19,27 @@ sources: "Owner 2026-11-04 full-curriculum no-merge rule; PR #2 observed open at
 
 **Task outcome:** PARTIAL
 
-The coordination handoff is prepared and active. No other agent has been assigned or started by this record; no skill source was changed in this memory-only task.
+The parallel coordination handoff remains active. A separately authorized audio skill (`audio-channel-mapping`) is now implemented and verified; 60 modules remain. This handoff neither assigns nor starts another agent.
 
 **Authorization boundary:** This is a plan, **not** standing authority to write, force-push, merge or deploy. Every agent must verify current user assignment and actual permissions. **Do not merge umbrella PR #2 into main before all curriculum modules are finished and the owner approves.**
 
-**Target repository and branch:** [Kisuul/KestrelGaming PR #2](https://github.com/Kisuul/KestrelGaming/pull/2), `skills/audio-dsp-core-foundation-2026-11-03`. Observed head `efe1da189968f789a36fcc53110c15d94a62a4c7`; base main `c268a4d0be121738cbfdb0d7a90de7874299c0f2`. These SHAs are snapshots, **not** perpetual branch assumptions. Retrieve memory from this **PR branch**, not from main.
+**Target repository and branch:** [Kisuul/KestrelGaming PR #2](https://github.com/Kisuul/KestrelGaming/pull/2), `skills/audio-dsp-core-foundation-2026-11-03`; latest verified implementation head `eb6c42813dafef64faf0b543ccb42a9f5a55d185`, base `main` observed at `c268a4d0be121738cbfdb0d7a90de7874299c0f2`. These are snapshots; fetch current GitHub state and load memory on the audio PR branch rather than default `main`.
 
 **Memory revision loaded:** [Running audio handoff](2026-11-03-audio-skills-roadmap.md), [audio independent audit](../2026-11-03-audio-skills-independent-audit.md), [math integration handoff](2026-11-03-audio-math-integration-workorder-r01.md), [Kestrel memory protocol](../../../../../kestrel/MEMORY_PROTOCOL.md), [kestrel-remember](../../../../../skills/kestrel-remember/SKILL.md), and the current skill catalog.
 
 ## Evidence
 
-- **Observed:** 12 audio skills are indexed in PR #2 and **61 modules remain** in nine families. GitHub Actions [41800550295](https://github.com/Kisuul/KestrelGaming/actions/runs/41800550295) passed structural validation and the 211-test repository suite at the observed head. Reference results do not verify host skill activation, production audio performance, calibrated instruments or standard compliance.
+- **Observed:** 13 audio skills are indexed in PR #2 and **60 modules remain** in nine families. GitHub Actions [41812716355](https://github.com/Kisuul/KestrelGaming/actions/runs/41812716355) passed structural validation and 235 repository tests (24 new mapping cases) on implementation commit `eb6c428`. Reference results do not verify host skill activation, production audio performance, calibrated instruments or standard compliance.
 - **Observed/source-derived review concerns:** The PSD/STFT reference code squares Fourier magnitudes before normalization, so extreme but finite intermediates can overflow. This is a numerical-range review finding; reproduce it and add bounded/negative regression evidence before calling it fixed. An audio-specific agent-efficacy with/without-skill trial has not been run. Resampling's frequency sweep, device clock and realtime performance remain unverified. `docs/MATH_CURRICULUM.md` retains historically correct 9/64 integration-time wording, which may need a clearly dated status note.
 - **User-stated:** All modules must be completed before merging PR #2. No lowering the remaining count simply to satisfy an arbitrary milestone.
 
 ### Available, unclaimed work lanes
 
-This table groups the **same 61** named modules already enumerated in the roadmap; it does not create another backlog or assign work.
+This table groups the **same 60** named modules already enumerated in the roadmap; it does not create another backlog or assign work.
 
 | Area | Pending | Dependencies and review focus |
 | --- | ---: | --- |
-| Foundation/numerical DSP | 4 | Channel mapping, filter design, buffering, numerical stability; reuse PCM/timebase/SRC |
+| Foundation/numerical DSP | 3 | Filter design, buffering and numerical stability; channel mapping is completed and can inform downstream work |
 | Levels/loudness/dynamics | 5 | VU, PPM, loudness, LRA, envelopes; edition-specific calibration |
 | Spectra/frequency domain | 5 | Fractional octave, resolution, descriptors, harmonics, cepstrum; FFT/PSD |
 | Oscilloscopes/phase | 8 | Scope, phase, stereo, correlation and group delay; channel semantics |
@@ -48,7 +48,7 @@ This table groups the **same 61** named modules already enumerated in the roadma
 | Acoustics/spatial | 8 | SPL, microphone/room/impulse, surround and latency; instrument evidence |
 | Speech/perception | 8 | Speech, VAD, psychoacoustics and intelligent analysis; dataset claims |
 | Validation/visualization/infrastructure | 7 | Independent checks, uncertainty, UI integrity, realtime and provenance |
-| **Total pending** | **61** | **One canonical module list in the running roadmap** |
+| **Total pending** | **60** | **One canonical module list in the running roadmap** |
 
 An optional **audit lane** can investigate PSD/STFT numerical extremes and design audio agent behavioral trials without counting itself as a new audio curriculum module.
 
@@ -70,13 +70,13 @@ Parallelism might increase throughput, but conflict-resolution cost and skill du
 
 ## Changes and persistence
 
-Memory-only onboarding; no code, tests, agents, external systems or application repos changed. This record becomes available to subsequent agents **only by checking out or explicitly reading the PR branch** before it reaches main.
+Original onboarding was memory-only. This revision records the independently committed and CI-verified channel-mapping skill; no other agent was assigned or started here. Active memory remains available only on the audio PR branch until integrated with `main`.
 
 ## Next action
 
-**Open issues:** 61 curriculum obligations, unexecuted audio agent-use pilot, numerical-extreme review, and incomplete production/device/standards evidence where relevant.
+**Open issues:** 60 curriculum obligations, unexecuted audio agent-use pilot, numerical-extreme review, and incomplete production/device/standards evidence where relevant.
 
-**Suggested next assignments:** `audio-channel-mapping`, `audio-filter-design`, plus a separate PSD/STFT numerical audit. Use separate branches and separate task handoffs, then converge through the audio integration coordinator. No assignments are implied to have begun.
+**Suggested next assignments:** `audio-filter-design`, `audio-stream-buffering`, and an independent PSD/STFT numerical audit. Do not duplicate the already completed `audio-channel-mapping` module. Use separate reviewed branches and task handoffs, then converge through the audio integration coordinator. No other agents are implied to have begun.
 
 ## Revisit when
 
