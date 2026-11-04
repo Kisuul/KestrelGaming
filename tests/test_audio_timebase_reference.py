@@ -151,6 +151,19 @@ class AudioTimebaseTests(unittest.TestCase):
                     t.reset_epoch(*args)
         self.assertEqual((t.epoch_id, t.next_sample, t.channel_count), ("a", 10, 1))
 
+    def test_epoch_identifiers_are_never_reused_even_after_intervening_reset(self):
+        t = SampleTimeline("first", 0, SampleRate(48000), 1)
+        t.ingest(0, 8, 1)
+        t.reset_epoch("second", 500, SampleRate(44100), 2)
+        t.ingest(500, 5, 2)
+        with self.assertRaises(ValueError):
+            t.reset_epoch("first", 0)
+        self.assertEqual((t.epoch_id, t.next_sample, t.sample_rate.hz,
+                          t.channel_count, t.accepted_blocks),
+                         ("second", 505, Fraction(44100), 2, 1))
+        t.reset_epoch("third", 0)
+        self.assertEqual((t.epoch_id, t.next_sample), ("third", 0))
+
     def test_bad_inputs_fail_closed_without_advancing(self):
         invalid_rates = [(0, 1), (48000, 0), (True, 1), (48000, False), (-1, 1)]
         for n, d in invalid_rates:

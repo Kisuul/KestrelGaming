@@ -84,6 +84,7 @@ class SampleTimeline:
         if not isinstance(sample_rate, SampleRate):
             raise ValueError("sample_rate must be a SampleRate")
         _integer(channel_count, "channel_count", 1)
+        self._used_epoch_ids = {epoch_id}
         self.epoch_id = epoch_id
         self.origin_sample = origin_sample
         self.sample_rate = sample_rate
@@ -125,8 +126,8 @@ class SampleTimeline:
                     channel_count: int | None = None) -> None:
         """Declare a discontinuity, seek, restart or reconfiguration explicitly."""
         _epoch_id(new_epoch_id)
-        if new_epoch_id == self.epoch_id:
-            raise ValueError("new epoch must have a distinct identifier")
+        if new_epoch_id in self._used_epoch_ids:
+            raise ValueError("epoch identifier has already been used by this tracker")
         _integer(origin_sample, "origin_sample")
         rate = self.sample_rate if sample_rate is None else sample_rate
         channels = self.channel_count if channel_count is None else channel_count
@@ -139,6 +140,7 @@ class SampleTimeline:
         self.channel_count = channels
         self.next_sample = origin_sample
         self.accepted_blocks = 0
+        self._used_epoch_ids.add(new_epoch_id)
 
 
 @dataclass(frozen=True)

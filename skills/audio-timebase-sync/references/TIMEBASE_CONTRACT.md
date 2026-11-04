@@ -15,7 +15,7 @@ Define one *epoch* with unique identifier E, an integer first-sample origin `o >
 
 ## Discontinuities and epochs
 
-The tracker rejects a start greater than expected as `gap` (count of skipped/missing sample indices), or less than expected as `overlap` (duplicate, replay or out-of-order positions). Rejections are atomic: the expected next-sample index and last valid span remain unchanged, so the caller can diagnose and choose a policy. An explicit `reset_epoch` must change epoch ID; it declares a new origin, and may declare a new sample rate and channel count. A seek/restart/gap/reconfiguration must not reuse the same epoch ID because historical observations would then have ambiguous timestamps.
+The tracker rejects a start greater than expected as `gap` (count of skipped/missing sample indices), or less than expected as `overlap` (duplicate, replay or out-of-order positions). Rejections are atomic: the expected next-sample index and last valid span remain unchanged, so the caller can diagnose and choose a policy. An explicit `reset_epoch` must use an epoch ID never previously used by that tracker (including non-consecutive epochs); it declares a new origin, and may declare a new sample rate and channel count. A seek/restart/gap/reconfiguration must not reuse the same epoch ID because historical observations would then have ambiguous timestamps.
 
 A pause without any incoming samples leaves the sample cursor unchanged. If a device continues to generate samples during a pause, those samples are not automatically present or continuous on this measurement tap; account for them explicitly. The reference cannot detect gaps for which no source-provided sample indices/status exist. Upstream callback indices and known overrun status must be trustworthy.
 
