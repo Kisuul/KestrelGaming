@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio skills and resume from memory; previous handoff head 14dcdd2eb3ed9afa0d1dad0049cd1a3672b36db1; PSD/RMS implementation commit a18c90e1ff416ba085a9b2272fcb2f513a7f0885; GitHub Actions run 41757356509, structural checks and 60 tests passed."
+sources: "User instructions on 2026-11-03 to implement Kestrel skills incrementally and update memory; resumed from branch f657bf554c1f4af998596c8815bae8e3b9cb3e34 and its running backlog; new STFT/spectrogram skill batch, with CI still to be verified; SciPy ShortTimeFFT and spectrogram documentation."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -23,17 +23,17 @@ sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio s
 
 **Target repository, branch, and commit:** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`. Initial head `00de8633c83e6bf1103f624b5ac513387e40e96b`; first skill-expansion commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`. Resume from the live PR #2 branch head, not this historical SHA.
 
-**Memory revision loaded:** `14dcdd2eb3ed9afa0d1dad0049cd1a3672b36db1`, including the current handoff, project index, DSP, window and FFT skills; current user request explicitly resumes this task.
+**Memory revision loaded:** `f657bf554c1f4af998596c8815bae8e3b9cb3e34`, including latest indexed handoff, current skill catalog, memory protocols and relevant FFT/window/PSD guidance. User authorized continuation of the planned spectrogram batch.
 
 ## Evidence
 
-**Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Prior DSP/window/FFT batch has green GitHub workflow checks (`41756464057`). Current resumed batch added `audio-power-spectral-density` and `audio-rms-crest-factor`, references, Python small-fixture oracles, and deterministic unit tests in commit `a18c90e1ff416ba085a9b2272fcb2f513a7f0885`. GitHub Actions run `41757356509` reported successful structural validation and 60 passing repository unit tests; this is not validation of production audio software.
+**Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch, which had five developed skills and green CI for prior commits. This batch adds `audio-spectrogram-waterfall`, a time-frequency/rendering reference document, optional host metadata, a tiny slow STFT oracle, and deterministic numerical/timing fixtures. Do not claim this batch passed CI until the committed code is tested on GitHub Actions.
 
 **Hypotheses and assumptions:** Nine families with eight candidate skills each (72 additions) form a useful *candidate taxonomy*, not an accepted mandatory scope. Two are developed in this batch; some remaining candidates may be renamed, combined, split, or retired after research. A successful mathematical fixture is not proof of production integration, acoustic calibration, realtime performance, or formal standard compliance.
 
 **Decisions and rationale:** Start with shared FFT/window calibration because multiple later skills depend on exact definitions. Keep the skill library centralized and selectively loaded. Include executable pure-stdlib reference checks rather than depending on a production DSP implementation as its own oracle.
 
-**Changed files and uncommitted state to preserve:** This batch: `skills/INDEX.md`, `skills/audio-power-spectral-density/` (skill, reference, agent metadata and oracle), `skills/audio-rms-crest-factor/` (skill, reference, metadata and oracle), `tests/test_audio_psd_reference.py`, `tests/test_audio_levels_reference.py`, and this same handoff. Existing other files are unchanged. Intended for existing PR #2 branch; no application repository changes.
+**Changed files and uncommitted state to preserve:** This batch: `skills/audio-spectrogram-waterfall/SKILL.md`, its `references/STFT_WATERFALL_CONTRACT.md`, `agents/openai.yaml`, `scripts/reference_stft.py`, `tests/test_audio_stft_reference.py`, `skills/INDEX.md` and this same handoff. No target audio application, root governing contract, or CI policy edited.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
@@ -41,6 +41,7 @@ sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio s
 | `python -m py_compile reference_dft.py test_audio_fft_reference.py` | Passed | Local isolated copy |
 | Kestrel structural validator and full regression suite | Both GitHub Actions steps passed in run `41756464057` | Commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`; no production analyzer exercised |
 | New PSD and RMS deterministic reference tests | GitHub CI run `41757356509` passed; full suite ran 60 tests, OK | Against `a18c90e1ff416ba085a9b2272fcb2f513a7f0885`; not a production DSP or instrument test |
+| Spectrogram STFT and waterfall fixtures | Not run yet when writing this batch | Check actual committed GitHub Actions tests; no graphical rendering implemented |
 | DSP instrument compliance | Not assessed | No normative conformance claim |
 
 **Persistence:** The DSP/window/FFT modules and first handoff were saved to PR #2 in earlier commits. PSD/RMS modules and updated roadmap were saved on the same branch in commit `a18c90e1ff416ba085a9b2272fcb2f513a7f0885`. This evidence correction is in a following memory-only branch commit. The branch is **not** integrated into `main` unless merged.
@@ -49,14 +50,15 @@ sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio s
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (5 of 73 candidates total, including the existing foundation):**
+**Current developed skills (6 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
 - `audio-fft-spectrum` — BRANCH (this batch); amplitude DFT, one-sided bins, calibration and oracle.
 - `audio-power-spectral-density` — BRANCH (this batch); density normalization, integrated power, Welch averaging and reference fixtures; CI tests passed for `a18c90e`.
 - `audio-rms-crest-factor` — BRANCH (this batch); sample RMS, mean square, sample crest and silence/channel reference fixtures; CI tests passed for `a18c90e`.
-- **Outstanding: 68 candidates**, including at least the following nine-family backlog.
+- `audio-spectrogram-waterfall` — BRANCH (this batch); STFT sample-time frames, calibrated PSD/amplitude histories, visualization integrity; check new CI.
+- **Outstanding: 67 candidates**, including at least the following nine-family backlog.
 
 ### Foundation and numerical DSP (7 pending)
 
@@ -66,9 +68,9 @@ sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio s
 
 `audio-vu-metering`, `audio-ppm-metering`, `audio-sample-peak`, `audio-true-peak`, `audio-program-loudness`, `audio-loudness-range`, `audio-envelope-dynamics`.
 
-### Spectra and frequency-domain analysis (6 pending)
+### Spectra and frequency-domain analysis (5 pending)
 
-`audio-spectrogram-waterfall`, `audio-fractional-octave-rta`, `audio-multiresolution-spectrum`, `audio-spectral-descriptors`, `audio-harmonic-analysis`, `audio-cepstral-analysis`.
+`audio-fractional-octave-rta`, `audio-multiresolution-spectrum`, `audio-spectral-descriptors`, `audio-harmonic-analysis`, `audio-cepstral-analysis`.
 
 ### Oscilloscopes and phase (8 pending)
 
@@ -96,9 +98,9 @@ sources: "User requests on 2026-11-03 to incrementally implement Kestrel audio s
 
 ## Next action
 
-**Open blockers or risks:** Verify the *newest* head and workflow run before merging or resuming; current cited green run covered commit `a18c90e`, and later memory-only commits need their own checks. No calibration, real-time benchmarking, third-party instrument comparison, or end-to-end host activation has been performed. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
+**Open blockers or risks:** Verify the *newest* head and workflow before merging or resuming; prior PSD/RMS run `41757356509` is historical, and this batch needs fresh CI. The STFT oracle supports complete left-aligned frames but not gap detection, GPU rendering, or app-level visual regression tests. No calibration, real-time benchmarking, third-party instrument comparison, or end-to-end host activation has been performed. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
 
-**Next useful step:** After verifying CI on this batch, implement `audio-spectrogram-waterfall` with sample-accurate STFT frames, overlap, window choices, color semantics, and synthetic ridge/impulse fixtures. Then consider `audio-sample-peak`/`audio-true-peak` or `audio-dsp-test-fixtures`. Always update this same handoff, preserve actual checks/commits and recheck project priorities.
+**Next useful step:** After verifying CI on the spectrogram batch, implement a small `audio-sample-peak` module with per-channel peak, peak hold, overload/clip policy, timestamp and channel fixtures; then consider `audio-true-peak` as a separate, oversampled estimator or `audio-dsp-test-fixtures` for broadly reusable oracle harnesses. Preserve candidate scope boundaries, update this same handoff and never infer audio-app integration from standalone oracle tests.
 
 ## Revisit when
 

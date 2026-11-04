@@ -14,6 +14,7 @@ are not standalone installed host plugins.
 | [audio-fft-spectrum](audio-fft-spectrum/SKILL.md) | Build and audit amplitude spectra, calibrated frequency bins, one-sided FFT scaling, and analytic reference tests |
 | [audio-power-spectral-density](audio-power-spectral-density/SKILL.md) | Estimate and verify power density, window-energy normalization, Welch averaging, and Parseval integration |
 | [audio-rms-crest-factor](audio-rms-crest-factor/SKILL.md) | Measure RMS, mean-square level, sample-peak-to-RMS ratio, and channel/silence semantics |
+| [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
 
 Add future procedures here as they become useful. Keep project-specific recipes
 explicit about their applicability and verified revision. A skill may suggest a
