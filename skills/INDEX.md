@@ -13,3 +13,16 @@ are not standalone installed host plugins.
 Add future procedures here as they become useful. Keep project-specific recipes
 explicit about their applicability and verified revision. A skill may suggest a
 method; it does not supply permission to execute it or override project instructions.
+
+## Core mathematics (independent curriculum)
+
+Load **only** the relevant module; consult [the mathematics curriculum](../docs/MATH_CURRICULUM.md) for dependencies, assumptions, and the deferred audio integration plan.
+
+| Skill | Trigger |
+| --- | --- |
+| [math-numerical-analysis](math-numerical-analysis/SKILL.md) | Floating point, error budgets, cancellation, overflow, conditioning and precision |
+| [math-verification](math-verification/SKILL.md) | Independent numerical oracles, analytic fixtures, invariants, error bounds and regression evidence |
+| [math-dimensional-analysis](math-dimensional-analysis/SKILL.md) | Physical quantities, units, rates, scaling, sample time and dimensional consistency |
+| [math-linear-algebra](math-linear-algebra/SKILL.md) | Vectors, matrix operations, coordinate transforms, solves and conditioning |
+| [math-complex-numbers](math-complex-numbers/SKILL.md) | Complex arithmetic, polar representations, conjugates, Euler exponentials and phasors |
+| [math-probability-statistics](math-probability-statistics/SKILL.md) | Sampling, estimators, distributions, variability and uncertainty |
