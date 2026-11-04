@@ -10,6 +10,8 @@ are not standalone installed host plugins.
 | [kestrel-remember](kestrel-remember/SKILL.md) | Save a useful lesson, decision, project profile, or resumable handoff |
 | [kestrel-html-conformance](kestrel-html-conformance/SKILL.md) | Lesson 1: create, edit, generate, or ship HTML; validate final artifacts with the official Nu Html Checker and require a verified zero-error gate |
 | [audio-dsp-core](audio-dsp-core/SKILL.md) | Architect or harden audio-analysis data paths, FFT input preparation, energy detection, timing, and measurement contracts; verify with deterministic fixtures |
+| [audio-window-functions](audio-window-functions/SKILL.md) | Select and calibrate FFT/STFT windows, including coherent gain, ENBW, leakage, periodicity and verification |
+| [audio-fft-spectrum](audio-fft-spectrum/SKILL.md) | Build and audit amplitude spectra, calibrated frequency bins, one-sided FFT scaling, and analytic reference tests |
 
 Add future procedures here as they become useful. Keep project-specific recipes
 explicit about their applicability and verified revision. A skill may suggest a

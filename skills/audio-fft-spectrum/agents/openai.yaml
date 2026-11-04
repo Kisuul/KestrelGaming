@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio FFT Spectrum"
+  short_description: "Calibrate and validate FFT amplitude spectra"
+  default_prompt: "Use $audio-fft-spectrum to define FFT scaling and axes precisely, then verify against known tones and the reference DFT."
