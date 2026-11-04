@@ -17,7 +17,9 @@ sources: "User requested a staged next-agent assignment using Kestrel protocol m
 
 **Goal and acceptance criteria:** Reconcile open audio PR #2 with `main` (which now contains merged mathematics PR #3), then integrate *selective, one-way, task-conditional* mathematics skill references and close specific numerical-verification gaps. Preserve audio-domain calibration, independently derived DSP fixtures, memory history, and token-efficient skill activation. Finish with an inspectable diff, current-head validation, honest evidence and an owner-reviewable PR; do not merge PR #2.
 
-**Task outcome:** PARTIAL — the assignment and source review are prepared; implementation, branch reconciliation, tests of combined source, and agent-behavior trials are **NOT RUN**.
+**Task outcome:** PARTIAL
+
+**Assignment state:** The assignment and source review are prepared; implementation, branch reconciliation, tests of combined source, and agent-behavior trials are **NOT RUN**.
 
 **Authorized scope and boundaries (historical; recheck on resume):** The user requested preparation of this next-agent assignment and durable protocol-memory storage, not execution of its integration steps in this session. A future agent must confirm its current authorization, actual tool permissions and branch state before editing. Work only on `Kisuul/KestrelGaming` and the existing PR #2 branch `skills/audio-dsp-core-foundation-2026-11-03`, unless the owner directs otherwise. Keep the root agent contract, permissions, protocols, workflows, tool dependencies, audio applications and merged math implementations unchanged. No production/library APIs, unrequested audio skill families, new standalone math runtime, or merge to `main`. The 64 pending audio candidates remain a separate backlog.
 
@@ -49,6 +51,7 @@ Read [AGENTS.md](../../../../../AGENTS.md), [KESTREL.md](../../../../../KESTREL.
 | GitHub PR #3 metadata and `main` branch | PR #3 merged; main `c268a4d` | Does not prove PR #2 compatibility |
 | Audio skills, reference scripts, relevant math skills and protocols | Reviewed for ownership boundaries and cross-link opportunities | Read-only inspection; not a full executable audit |
 | Combined-tree structural validation, unit tests, diff check, optional SciPy, host trials | **NOT RUN** for this work order | Must be run or explicitly left unverified by executing agent |
+| GitHub Actions initial work-order publication at `1629170473ae` | CI run `41787790969` failed structural validation: Task outcome had extra prose on its required standalone line | This was a handoff-format defect, not a combined audio/math test result; corrected in the subsequent memory-only commit |
 
 **Persistence:** This record is intended for PR #2's review branch, not `main`. Its actual commit and branch must be confirmed after publication; do not infer successful synchronization from the text alone.
 
