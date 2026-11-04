@@ -21,13 +21,13 @@ sources: "User request of 2026-11-03 to implement the Kestrel audio skills incre
 
 **Authorized scope and boundaries (historical; recheck on resume):** User explicitly requested implementation on the existing audio-skill branch, in manageable batches, with a running log in Kestrel memory. Kestrel is the skill library. Do not rewrite KESTREL.md/AGENTS.md or imply changes to external audio applications. Branch publication for PR review is intended; merging to main remains a separate decision.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`. Starting head `00de8633c83e6bf1103f624b5ac513387e40e96b`; inspect Git history/PR #2 for newest commit after this handoff was written.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming; `skills/audio-dsp-core-foundation-2026-11-03`. Initial head `00de8633c83e6bf1103f624b5ac513387e40e96b`; first skill-expansion commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`. Resume from the live PR #2 branch head, not this historical SHA.
 
 **Memory revision loaded:** `00de8633c83e6bf1103f624b5ac513387e40e96b`, including memory protocol, state protocol, project profile, skill index, and original DSP-core skill.
 
 ## Evidence
 
-**Confirmed observations with sources:** Original branch contains `audio-dsp-core` and PR #2. Prior PR CI passed. This batch adds `audio-window-functions` and `audio-fft-spectrum`, reference documents, a deliberately slow Python DFT oracle, and unit tests. Seven isolated numerical tests were run in a local Python environment and passed; GitHub CI and final branch comparison must be checked after publishing this batch.
+**Confirmed observations with sources:** Original branch contains `audio-dsp-core` and PR #2. Prior PR CI passed. This batch adds `audio-window-functions` and `audio-fft-spectrum`, reference documents, a deliberately slow Python DFT oracle, and unit tests. Seven isolated numerical tests were run in a local Python environment and passed. GitHub Actions workflow run `41756464057` passed on feature commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`, including Kestrel structural checks and repository unit tests.
 
 **Hypotheses and assumptions:** Nine families with eight candidate skills each (72 additions) form a useful *candidate taxonomy*, not an accepted mandatory scope. Two are developed in this batch; some remaining candidates may be renamed, combined, split, or retired after research. A successful mathematical fixture is not proof of production integration, acoustic calibration, realtime performance, or formal standard compliance.
 
@@ -39,10 +39,10 @@ sources: "User request of 2026-11-03 to implement the Kestrel audio skills incre
 | --- | --- | --- |
 | `python -m unittest -v test_audio_fft_reference.py` | 7 tests passed | Local isolated copy of reference script and tests; check GitHub CI on committed versions |
 | `python -m py_compile reference_dft.py test_audio_fft_reference.py` | Passed | Local isolated copy |
-| Kestrel structural validator and full regression suite | Not yet run for this new batch at handoff authoring | Inspect PR workflow; do not infer success |
+| Kestrel structural validator and full regression suite | Both GitHub Actions steps passed in run `41756464057` | Commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`; no production analyzer exercised |
 | DSP instrument compliance | Not assessed | No normative conformance claim |
 
-**Persistence:** This handoff and skills are proposed in branch PR #2; confirm remote branch commit after writing. This is **not** integrated into `main`.
+**Persistence:** The skills and handoff were saved to review branch PR #2, initially in commit `035cb2b03d7cfdb84b8690f1d5ef0be3c6d5148a`; this handoff verification edit is a subsequent branch commit. Neither is integrated into `main` unless PR #2 is merged.
 
 ## Running backlog
 
@@ -93,7 +93,7 @@ sources: "User request of 2026-11-03 to implement the Kestrel audio skills incre
 
 ## Next action
 
-**Open blockers or risks:** Check the published branch, PR diff, and GitHub CI on the new batch. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
+**Open blockers or risks:** Review the latest branch diff and CI again before merging or resuming; the cited CI pass covers a particular commit, not future edits. The simple reference DFT is O(N^2) and for small analytical fixtures only; it does not establish performance or entire-system correctness. Scope boundaries among candidate skills remain provisional. Agent-host activation is explicitly separate from committing Kestrel skill files.
 
 **Next useful step:** Implement `audio-power-spectral-density` next (separate power normalization and Welch averaging, with independent noise/Parseval checks); then `audio-sample-peak` / `audio-rms-crest-factor` or `audio-spectrogram-waterfall`. Update this *same* handoff record and project index after each meaningful batch, preserving actual commit IDs and checks. Check for user priorities at the next conversation if their direction has changed.
 
