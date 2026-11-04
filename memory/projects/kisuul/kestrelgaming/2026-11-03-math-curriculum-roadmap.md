@@ -8,7 +8,7 @@ evidence: user-stated
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-03
-sources: "User-provided core mathematics curriculum, 2026-11-03; Kisuul/KestrelGaming main at 47745f8a41463e1a202a2f9f84385f3ab61d49a1; separate audio PR #2 inspected 2026-11-03; new math branch verification pending."
+sources: "2026-11-03 user mathematics curriculum; main 47745f8; separate audio PR #2; math implementation 53dbbd171348f2e321aebf2ed544f2bb5766309d; GitHub Actions 41771827951 and 41771860005 passed 55 tests and structural validation; local 19-fixture run passed."
 ---
 
 # Mathematics curriculum — durable independent roadmap
@@ -27,13 +27,13 @@ Establish a separate, reusable math skill library at `skills/math-*` for audio, 
 
 **Observed before implementation:** On 2026-11-03 `main` had no audio skill files; PR #2 remained open on branch `skills/audio-dsp-core-foundation-2026-11-03` with eight audio skills and 65 pending. This condition must be rechecked on resume.
 
-**Proposed on the math review branch:** Six `SKILL.md` files; indexed activation triggers; math fixture policy; analytic cases and standard-library regression tests; this persistent roadmap. Check exact branch commit and CI before promoting any assertion from 'proposed' to 'verified'.
+**Implemented on the mathematics review branch:** Six `SKILL.md` files, indexed activation triggers, fixture policy, analytic cases, 19 new standard-library tests and this persistent roadmap. GitHub Actions run `41771827951` passed the structural validator and all **55 repository tests** at implementation commit `53dbbd171348f2e321aebf2ed544f2bb5766309d`; pull-request run `41771860005` also passed. The 19 mathematical fixtures were independently executed locally. These results do not validate host activation or application behavior.
 
 **Limits:** General mathematical tests are not application integration, numerical proof, normal-distribution validation or instrument/standards certification. No claim that existing audio skill files already cross-link these math modules: see the deferred integration mapping in the curriculum plan. The audio backlog remains unchanged.
 
 ## Next action
 
-Review commit-level CI (structural validator and full tests); inspect negative cases and numerical tolerances, then open/maintain a dedicated mathematics PR. Cross-link existing audio skill files *after* the independent initiatives reach compatible bases, without copying math implementations or changing the 73-candidate backlog. Prioritize transform mathematics, calculus and geometry only when demonstrated cross-domain needs justify separate modules.
+Maintain [draft mathematics PR #3](https://github.com/Kisuul/KestrelGaming/pull/3), inspect negative cases and numerical tolerances, and check CI on any new commit before merge. Cross-link existing audio skill files *after* the independent initiatives reach compatible bases, without copying math implementations or changing the 73-candidate backlog. Prioritize transform mathematics, calculus and geometry only when demonstrated cross-domain needs justify separate modules.
 
 ## Revisit when
 
