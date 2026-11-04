@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Power Spectral Density"
+  short_description: "Measure spectrum power per hertz honestly"
+  default_prompt: "Use $audio-power-spectral-density to specify PSD normalization, segment averaging, units, and independent Parseval tests."
