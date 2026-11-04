@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio DSP Test Fixtures"
+  short_description: "Reproducible signal fixtures and independent checks"
+  default_prompt: "Use $audio-dsp-test-fixtures to construct bounded, sample-timed and channel-aware DSP test vectors; verify analytical and metamorphic claims with independent references, explicit tolerances, and honest evidence limits."
