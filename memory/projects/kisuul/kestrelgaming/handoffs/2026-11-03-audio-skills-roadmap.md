@@ -42,7 +42,11 @@ not the broader unverified application/standards/agent-behavior claims.
 
 See the [completed integration record](2026-11-03-audio-math-integration-workorder-r01.md)
 for exact starting heads, merge resolution, changed paths, commands and limits.
-The curriculum remains **9 developed / 64 pending**; integration adds no new skill.
+Published integration is `a933450ad4ae3f8a0cca8efce38a7decb4056c5f`; PR CI
+[41789060842](https://github.com/Kisuul/KestrelGaming/actions/runs/41789060842)
+passed structural validation and all 153 tests. A following memory-only commit records
+this evidence; consult current-head CI separately. The curriculum remains
+**9 developed / 64 pending**; integration adds no new skill.
 
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.

@@ -89,10 +89,15 @@ clock issues; exact analytic anchors and tests checked the fixes. Live SciPy agr
 is bounded to the declared configurations, shares conventions with frozen SciPy
 vectors, and does not verify complex phase, standards, hardware or host behavior.
 
-**Delivery:** These source checks precede the integration commit. Confirm its immutable
-SHA and current-head CI on PR #2 after publication; do not relabel historical checks
-as a run at an untested future SHA. No PR merge, new audio skill, dependency or
-application change was performed. Audio tally remains **9/73, 64 pending**.
+**Confirmed publication:** Integration commit `a933450ad4ae3f8a0cca8efce38a7decb4056c5f`
+was pushed to the existing PR #2 branch and its remote head verified through GitHub.
+Its source tree is `cfaad59210b2c4533002331653cad43fb2a39881`.
+[PR CI 41789060842](https://github.com/Kisuul/KestrelGaming/actions/runs/41789060842)
+passed structural validation and **153 tests**; job `126437919557` logs confirm the
+count. This following memory-only commit records those observed results; its own
+head/CI must be checked separately and is reported on the PR. No PR merge, new audio
+skill, dependency or application change was performed. Audio tally remains
+**9/73, 64 pending**.
 
 ## Required boot and working rules
 
@@ -206,8 +211,8 @@ Choose a small set based on actual uncovered behavior. For each added test, iden
 
 ## Next action
 
-Publish the validated integration to the existing PR #2 branch, record its confirmed
-head/CI on the PR, and leave it open for owner review. Any later audio-timebase-sync
+Review the published integration on existing PR #2 and its current-head CI. Leave
+the PR open for owner review; no merge is requested. Any later audio-timebase-sync
 module, further 64-candidate backlog work, production integration or behavioral trial
 needs its own task and evidence. Host activation, agent improvement, realtime load,
 physical calibration and normative compliance remain unverified.
