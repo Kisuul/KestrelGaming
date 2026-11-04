@@ -119,8 +119,11 @@ class SeedValidatorTests(unittest.TestCase):
         self.assert_error("Record not indexed")
 
     def test_project_catalog_must_reach_project_index(self):
+        # Isolate the catalog edge: real skill/evidence docs may also link to a
+        # project. Registration despite alternate paths is tested separately.
+        self.write("memory/INDEX.md", "# Memory index\n\n[Projects](projects/INDEX.md)\n")
         self.write("memory/projects/INDEX.md", "# Project catalog\n")
-        self.assert_error("Unreachable memory file")
+        self.assert_error("Unreachable memory file: " + PROJECT + "/INDEX.md")
 
     def test_project_index_must_be_registered_even_if_linked_elsewhere(self):
         self.write("memory/projects/INDEX.md", "# Project catalog\n")
