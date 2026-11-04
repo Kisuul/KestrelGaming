@@ -7,8 +7,8 @@ status: active
 evidence: observed
 author: ChatGPT
 created: 2026-11-03
-updated: 2026-11-03
-sources: "User 2026-11-03 requested another audio skill and careful reuse of the Math core; audio-sample-formats implementation f9224b4cf89cbc5d4e840dca5577992b0acf9c6a and documented/fixed head f7a95a4cd9342be2bb6fdb5746d2ab71bc67557d; GitHub Actions 41794191643 succeeded, 189 tests and structural checks; Microsoft PCM and WAVEFORMATEXTENSIBLE, FFmpeg sample format sources."
+updated: 2026-11-04
+sources: "User 2026-11-04 authorized audio-resampling implementation with careful independent verification and project memory update; commit a388abdbb54ec601ed80b943ec33c3be8f5b6511 passed GitHub Actions 41800254484 with 211 tests and structural checks; local Python 3.13.5 NumPy 2.3.5 SciPy 1.17.0 independent differential passed 3669 samples across 24 seeded cases; SciPy resample_poly and upfirdn documentation."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -21,9 +21,9 @@ sources: "User 2026-11-03 requested another audio skill and careful reuse of the
 
 **Authorized scope and boundaries (historical; recheck on resume):** User explicitly requested implementation on the existing audio-skill branch, in manageable batches, with a running log in Kestrel memory. Kestrel is the skill library. Do not rewrite KESTREL.md/AGENTS.md or imply changes to external audio applications. Branch publication for PR review is intended; merging to main remains a separate decision.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming, `skills/audio-dsp-core-foundation-2026-11-03`, open PR #2. New sample-formats implementation head `f7a95a4cd9342be2bb6fdb5746d2ab71bc67557d` passed GitHub Actions `41794191643` (189 repository tests and structural validation). This handoff update is a subsequent evidence-only commit; recheck its CI and actual live head on pickup.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, `skills/audio-dsp-core-foundation-2026-11-03`, open PR #2. `audio-resampling` implementation head `a388abdbb54ec601ed80b943ec33c3be8f5b6511` passed GitHub Actions `41800254484` (211 repository tests and structural checks). This follow-up is a memory-only evidence commit: verify its own CI when available and recheck live branch head on pickup.
 
-**Memory revision loaded:** Current audio PR #2 branch at `256382f48287c0952f364e0cc11b73e88ec43547`, with ten audio skills, the merged Math foundation integration, and 170 verified repository tests. New user instruction authorized continued audio development with project memory updates.
+**Memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
 
 ## Evidence
 
@@ -50,11 +50,11 @@ this evidence; consult current-head CI separately. That math-integration milesto
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.
 
-**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Eleven of 73 candidate skills are developed on PR #2; 62 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
+**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Twelve of 73 candidate skills are developed on PR #2; 61 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
-**Changed files and uncommitted state to preserve:** The newest bounded PCM increment added `skills/audio-sample-formats/SKILL.md`, `references/PCM_FORMAT_CONTRACT.md`, optional `agents/openai.yaml`, `scripts/reference_pcm.py`, `tests/test_audio_sample_formats_reference.py`, an index entry, and this memory revision. Audio application source, root Kestrel contracts, the merged Math curriculum, workflow and dependencies were not modified.
+**Changed files and uncommitted state to preserve:** The new bounded SRC increment added `skills/audio-resampling/SKILL.md`, `references/RESAMPLING_CONTRACT.md`, optional `agents/openai.yaml`, `scripts/reference_resampling.py`, optional `scripts/check_scipy_resampling.py`, `tests/test_audio_resampling_reference.py`, frozen `tests/fixtures/AUDIO_RESAMPLING_EXTERNAL_GOLDENS.md`, an indexed entry, and this existing handoff update. No audio application, Kestrel governing contract, Math skill implementation, workflows or dependencies were changed.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
@@ -69,7 +69,7 @@ this evidence; consult current-head CI separately. That math-integration milesto
 | Raw PCM byte conversion / valid-bit alignment and quantization | GitHub Actions run `41794191643`: structural validation passed; 189 total repository tests including 19 new PCM tests | Implementation `f7a95a4cd9342be2bb6fdb5746d2ab71bc67557d`; no full file parser, codec, real-time or instrument testing |
 | DSP instrument compliance | Not assessed | No normative conformance claim |
 
-**Persistence:** Eleven developed audio skill procedures with reference material and tests are committed to PR #2 and registered in `skills/INDEX.md`; this active indexed handoff records the backlog and verified results. The PCM source/test commit is `f9224b4`, corrected/documented implementation head is `f7a95a4`. Nothing is in `main` until PR #2 is merged.
+**Persistence:** Twelve developed audio skills, their references, tests, source provenance and this active indexed handoff are committed to open PR #2. The new resampling implementation and frozen-golden commit is `a388abdbb54ec601ed80b943ec33c3be8f5b6511`, with 211 passing tests on GitHub Actions `41800254484`. Nothing is in `main` until PR #2 is merged.
 
 ### Latest milestone: audit remediation verified
 
@@ -204,11 +204,54 @@ other libraries' default conversions.
 
 **Current curriculum:** **11 developed of 73; 62 pending**.
 
+### Latest milestone — audio resampling (verified bounded reference)
+
+**Authorized scope:** Build the next audio curriculum module, `audio-resampling`,
+on the existing open PR #2 branch; reuse relevant Math procedures without changing
+the mathematics department, application repositories or Kestrel agent contract.
+
+**Implementation and decisions:** A 256-frame-bounded standard-library
+reference uses an exact reduced destination/source rate L/M, centered
+Kaiser-windowed sinc FIR (beta 5, half-length 10 max(L,M) in intermediate
+samples), explicit finite zero extension, rational integer-clock output
+mapping, linear-phase group-delay metadata, per-output boundary flags and
+per-epoch output origins. Its `StreamResampler` withholds incomplete
+noncausal outputs until future source samples arrive. An explicit finalize
+authorizes end-of-record extension; gaps, overlaps, malformed channels,
+nonfinite input and overflow reject without changing accepted state.
+Stream resets require never-reused epoch IDs. Processing is offline and
+**not realtime-optimized**, clock-adaptive or a file decoder.
+
+**Actual verification:**
+- Local Python 3.13.5 test run exercised **22** new analytic, metamorphic,
+  boundary, noise/anti-alias, timebase, negative and frozen-golden tests.
+  An initially incorrect chunk-dependent boundary flag and overstrict
+  ideal-unit-impulse expectation were caught and corrected before publication.
+- SciPy 1.17.0 / NumPy 2.3.5 separately generated frozen numerical references
+  for 2:3, 3:2, 147:160 and 160:147 ratios. The new optional
+  `scripts/check_scipy_resampling.py --seed 20261104 --cases 24`
+  passed **3,669 sample comparisons** locally. SciPy shares the
+  *intended* Kaiser/sinc design family but uses a different convolution
+  implementation; this checks numerics and alignment, not optimum
+  filter quality or independent theory.
+- GitHub Actions [41800254484](https://github.com/Kisuul/KestrelGaming/actions/runs/41800254484)
+  passed Kestrel structural validation and the complete **211-test**
+  standard-library suite on `a388abdbb54ec601ed80b943ec33c3be8f5b6511`.
+  Optional SciPy dependencies were **not added** to ordinary CI.
+
+**Limits:** No measured end-to-end device sync, production streaming
+latency/CPU, full stopband sweep, perceptual quality, asynchronous drift
+compensation, arbitrary codecs/PCM quantization or normative instrument
+conformance. Test bands/thresholds are fixture-specific heuristics;
+the filter retains all source frames per bounded epoch.
+
+**Current curriculum:** **12 developed / 73 candidates, 61 pending**.
+
 ## Running backlog
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (11 of 73 candidates total, including the existing foundation):**
+**Current developed skills (12 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -221,11 +264,12 @@ other libraries' default conversions.
 - `audio-dsp-test-fixtures` — BRANCH (this batch); deterministic bounded PCM generation with sample/channel metadata, uint32-seeded noise, callback partitions, 12 analytic/metamorphic regression tests, optional SciPy differential CLI. GitHub Actions `41775340813` passed 118 tests at `74b4d8a`.
 - `audio-timebase-sync` — BRANCH; exact integer/rational sample time, gap/overlap rejection, immutable clock anchors, no historical epoch ID reuse and sample-rate conversion. **17 new tests**; GitHub Actions `41792085786` passed structural checks and the full **170-test** suite on `1927b4d0`.
 - `audio-sample-formats` — BRANCH; u8/s16/s24/s32/f32/f64 raw PCM byte-order/layout/valid-bit rules, quantization and float headroom; **19 new regression tests**, full CI **189 tests** on `f7a95a4`, run `41794191643`.
-- **Outstanding: 62 candidates**, including at least the following nine-family backlog.
+- `audio-resampling` — BRANCH; bounded Kaiser-windowed FIR resampler, exact Fraction sample clocks, antialias/phase/delay, stable streaming with explicit finalize/epochs, 22 focused tests and independently generated SciPy golden vectors; CI `41800254484` passed **211** tests at `a388abd`, with optional local SciPy differential 3669 samples / 24 cases.
+- **Outstanding: 61 candidates**, including at least the following nine-family backlog.
 
-### Foundation and numerical DSP (5 pending)
+### Foundation and numerical DSP (4 pending)
 
-`audio-resampling`, `audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
+`audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering`, `audio-numerical-stability`.
 
 ### Levels, loudness, and dynamics (5 pending)
 
@@ -261,18 +305,18 @@ other libraries' default conversions.
 
 ## Next action
 
-The latest `audio-sample-formats` skill implementation passed GitHub
-Actions run `41794191643` at `f7a95a4` (189 tests, structural
-validation). Recheck the newer memory-only head's CI and review PR #2;
-do **not** merge absent owner direction. The PCM reference is
-not a full-file parser, calibrated converter or realtime audio stream.
+Confirm the final memory-only commit's GitHub Actions run and current PR #2
+diff. Keep PR #2 open for owner review; do not merge without owner
+authorization. The new resampling reference is intentionally bounded
+and **not** a production audio backend.
 
-**Recommended next bounded module:** `audio-resampling` with explicit
-timebase mapping, anti-alias filters, kernel/group-delay error, output
-clock origin and independent numerical fixtures; alternatively develop
-`audio-channel-mapping` as a narrower layout-policy prerequisite.
-Review existing math skills selectively; audio keeps signal/measurement
-contracts. Preserve the 62 pending candidate audio skills.
+**Recommended next bounded module:** `audio-channel-mapping` for explicit
+channel identity, layout masks, downmix/upmix policy, stereo/antiphase
+handling and independently checked sample/channel transforms. Alternatively,
+`audio-filter-design` can build on the resampling FIR concepts, but must
+earn its own frequency-response and numerical acceptance checks.
+Preserve the **61 pending** candidate audio skills and reuse mathematics
+skills only for genuinely shared quantitative foundations.
 
 ## Revisit when
 
