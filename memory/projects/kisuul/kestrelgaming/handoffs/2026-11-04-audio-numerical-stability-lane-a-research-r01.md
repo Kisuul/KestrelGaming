@@ -17,7 +17,9 @@ sources: "Owner conversation 2026-11-04: assigned Lane A, insisted on mathematic
 
 **Goal and acceptance criteria:** Develop `audio-numerical-stability`, the last outstanding foundation/numerical-DSP skill in Kestrel's 73-module audio curriculum. Teach *transferable numerical mathematics and audio-engineering reasoning*, not Python library usage. A future agent must be able to analyze equations, finite representations, conditioning, stability and error budgets, choose and justify a robust algorithm, and verify it in an unfamiliar language/runtime.
 
-**Task outcome:** PARTIAL — research and final design review COMPLETE; skill implementation, integration, repository validation and agent behavioral trials NOT RUN/NOT DONE.
+**Task outcome:** PARTIAL
+
+Research and final design review are complete; skill implementation, integration, repository validation and agent behavioral trials are NOT RUN/NOT DONE.
 
 **Authorization (user-stated):** Owner assigned Lane A to this session and explicitly requested saving this work using Kestrel memory. Lane B (`audio-analysis-provenance`) is a separate parallel assignment; do not duplicate it. PR #2 must remain unmerged into `main` until all 73 modules are complete, independently reviewed and owner-approved. This handoff is not standing permission for unrelated remote changes.
 
