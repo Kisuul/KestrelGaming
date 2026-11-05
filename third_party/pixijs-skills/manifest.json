@@ -1,0 +1,333 @@
+{
+  "source": "https://github.com/pixijs/pixijs-skills",
+  "upstream_commit": "83760c6f53462ca9cecd68055041f5a8c94758ce",
+  "release_basis": "PixiJS v8.22.0",
+  "license": "MIT",
+  "files": [
+    {
+      "path": "skills/pixijs-accessibility/SKILL.md",
+      "sha": "5b3219f9e6cb458b9ce3df9d8a1b21c3e4707f64",
+      "size": 8128
+    },
+    {
+      "path": "skills/pixijs-application/references/application-options.md",
+      "sha": "1eb109b74449636c4dd38e4ecc40b7243d001958",
+      "size": 24151
+    },
+    {
+      "path": "skills/pixijs-application/SKILL.md",
+      "sha": "16adff1375ed1595ea2817cc9ac0bdd58549f38f",
+      "size": 11656
+    },
+    {
+      "path": "skills/pixijs-assets/references/background.md",
+      "sha": "8cb7a366ac9ee08475cc23113cb896c1902a9759",
+      "size": 4099
+    },
+    {
+      "path": "skills/pixijs-assets/references/bundles.md",
+      "sha": "39ae384ba37577bc70b5d8b124749a180439777c",
+      "size": 3943
+    },
+    {
+      "path": "skills/pixijs-assets/references/caching.md",
+      "sha": "6785a581dc875ccbb1142352af5a254edb04ae47",
+      "size": 4361
+    },
+    {
+      "path": "skills/pixijs-assets/references/compressed-textures.md",
+      "sha": "2dd5edd6f2c5e9d93ecf14fd7ceb1f40a99cfdb8",
+      "size": 4335
+    },
+    {
+      "path": "skills/pixijs-assets/references/fonts.md",
+      "sha": "258defd1c31d3ba5b4f3df1800b78e24535227b5",
+      "size": 7597
+    },
+    {
+      "path": "skills/pixijs-assets/references/gif.md",
+      "sha": "7b1d21f5891bafc2498ba5429776c372b52160c6",
+      "size": 4947
+    },
+    {
+      "path": "skills/pixijs-assets/references/manifests.md",
+      "sha": "939d9a76beed14fdc96ff08bf004726ebcc773a7",
+      "size": 4565
+    },
+    {
+      "path": "skills/pixijs-assets/references/progress.md",
+      "sha": "93e4122b51520ad7ae31e863df7e0f308db0b36d",
+      "size": 4066
+    },
+    {
+      "path": "skills/pixijs-assets/references/resolution.md",
+      "sha": "cc312ca79e4aa1ab4d77ce72537645349b202e02",
+      "size": 4471
+    },
+    {
+      "path": "skills/pixijs-assets/references/spritesheet.md",
+      "sha": "194ffd3d79978fed0aec22f68194e060ab4078b9",
+      "size": 4091
+    },
+    {
+      "path": "skills/pixijs-assets/references/svg.md",
+      "sha": "01cf5567a762c37db014e0ce85b36346739633b9",
+      "size": 5522
+    },
+    {
+      "path": "skills/pixijs-assets/references/video.md",
+      "sha": "ff5d61e061f82b83817b9a960d9bd5affadff8f6",
+      "size": 5713
+    },
+    {
+      "path": "skills/pixijs-assets/SKILL.md",
+      "sha": "004e6413c1f28e96a3a39b782ab7ce70ba1774f5",
+      "size": 20122
+    },
+    {
+      "path": "skills/pixijs-blend-modes/SKILL.md",
+      "sha": "9c991ee3e079386f99a323c08e5bf977fe9768b2",
+      "size": 8173
+    },
+    {
+      "path": "skills/pixijs-color/SKILL.md",
+      "sha": "dc587b51fe7c7fec956e3ed37657eee2baf761b0",
+      "size": 8832
+    },
+    {
+      "path": "skills/pixijs-core-concepts/references/render-loop.md",
+      "sha": "379a6dddb5c5c9d3bc1d1a2ce1a613c7b7008052",
+      "size": 6618
+    },
+    {
+      "path": "skills/pixijs-core-concepts/references/renderers.md",
+      "sha": "fe69db98bee0163fea91ba183948aaebef1a0b0a",
+      "size": 11362
+    },
+    {
+      "path": "skills/pixijs-core-concepts/SKILL.md",
+      "sha": "7135a30968fba610fc0e0cc3777690a886f6395e",
+      "size": 7495
+    },
+    {
+      "path": "skills/pixijs-create/SKILL.md",
+      "sha": "6f0cf2dad28207db2bc10f4ac0a313e4f2ec6f09",
+      "size": 12308
+    },
+    {
+      "path": "skills/pixijs-custom-rendering/references/advanced-gpu.md",
+      "sha": "b235bf4719930804faa7b554601554a470cd9469",
+      "size": 13237
+    },
+    {
+      "path": "skills/pixijs-custom-rendering/references/uniform-types.md",
+      "sha": "3dffc760133408829e91a6c120107d4bb2c70afb",
+      "size": 3760
+    },
+    {
+      "path": "skills/pixijs-custom-rendering/SKILL.md",
+      "sha": "946f33b5088aefa0a26143a897a3ea10f70f58dc",
+      "size": 15892
+    },
+    {
+      "path": "skills/pixijs-environments/SKILL.md",
+      "sha": "a437c9e9141c4d59522ad3fa08c6f7cbc4ed310e",
+      "size": 8496
+    },
+    {
+      "path": "skills/pixijs-events/SKILL.md",
+      "sha": "3f1b92a61ca061e1a6dbc722ca433a44fbe58170",
+      "size": 12737
+    },
+    {
+      "path": "skills/pixijs-filters/SKILL.md",
+      "sha": "332b9802a09909250ad279ade2b99949bf1b35d1",
+      "size": 9869
+    },
+    {
+      "path": "skills/pixijs-html-source/SKILL.md",
+      "sha": "9a786028542836bb290eefa82e142c0b0adfc209",
+      "size": 13438
+    },
+    {
+      "path": "skills/pixijs-math/SKILL.md",
+      "sha": "abd761323110bfa3aeb6c071cadce13f3e28bfa4",
+      "size": 16624
+    },
+    {
+      "path": "skills/pixijs-migration-v8/SKILL.md",
+      "sha": "540222293d1b9fc8e9eea07d180f604db4738024",
+      "size": 15092
+    },
+    {
+      "path": "skills/pixijs-performance/SKILL.md",
+      "sha": "cb43e40c12010991c27223009e79baaed1b2b765",
+      "size": 18391
+    },
+    {
+      "path": "skills/pixijs-scene-container/SKILL.md",
+      "sha": "51de7a8c5d667b6bc22e74d5f4abe1945b58da5d",
+      "size": 15808
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/constructor-options.md",
+      "sha": "66fd6940cbde20a3bc1e3e1c7c4ae5136b883fc7",
+      "size": 8417
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/container-hierarchy.md",
+      "sha": "db5e95fc6a561e4d1eb28e0ea2311eeb39d4c0ad",
+      "size": 7557
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/layers.md",
+      "sha": "ab8521f6506d999ad7068f514401aa23c054ba76",
+      "size": 4582
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/masking.md",
+      "sha": "c62cfd6156169cd5319fdb2ef466e1c213d123e4",
+      "size": 5914
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/render-groups.md",
+      "sha": "b3f45534583ab7a2252a9d25cf2d8387b65e857a",
+      "size": 4991
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/scene-management.md",
+      "sha": "40abe43efd324c2f90bcb56f6857407511cb5b71",
+      "size": 6069
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/references/transforms.md",
+      "sha": "6898cd1867571ae3e5bc9d6dd658a9e6cac0a98e",
+      "size": 8359
+    },
+    {
+      "path": "skills/pixijs-scene-core-concepts/SKILL.md",
+      "sha": "fbb5501dabebe8e5806587e0f6f365ebf3fa238d",
+      "size": 15626
+    },
+    {
+      "path": "skills/pixijs-scene-dom-container/SKILL.md",
+      "sha": "7c67f6d731482a8fe33a05b878e7acfbbfd4f003",
+      "size": 8752
+    },
+    {
+      "path": "skills/pixijs-scene-gif/SKILL.md",
+      "sha": "15170be08184d6ce076e46f5a3a4a5b0ad3773f7",
+      "size": 10002
+    },
+    {
+      "path": "skills/pixijs-scene-graphics/SKILL.md",
+      "sha": "e231cc7bd677e2297be7d0d6a1a5823066e06c59",
+      "size": 27103
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/references/mesh-perspective.md",
+      "sha": "2605f2916b040095315b1cd7a424f0bf7ae1dfb0",
+      "size": 7162
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/references/mesh-plane.md",
+      "sha": "af88cccda9313fec456975a36bdc2038717ceece",
+      "size": 5521
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/references/mesh-rope.md",
+      "sha": "2337efe4ca827d349eb4ccaf488e36f636cac654",
+      "size": 7070
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/references/mesh-simple.md",
+      "sha": "b22ec79c830569380056a522b755e2927bd7035b",
+      "size": 5676
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/references/mesh.md",
+      "sha": "e9cd71f437feaaa4a9de86cf7a194d2dbb0c79c7",
+      "size": 8181
+    },
+    {
+      "path": "skills/pixijs-scene-mesh/SKILL.md",
+      "sha": "eaf044fc0fd1a58a9324b02c926e2e2681a0cd61",
+      "size": 7083
+    },
+    {
+      "path": "skills/pixijs-scene-particle-container/SKILL.md",
+      "sha": "042a82b9d7d6f026eb4cc8b5794fec6e79a727d8",
+      "size": 16307
+    },
+    {
+      "path": "skills/pixijs-scene-sprite/references/animated-sprite.md",
+      "sha": "b90d32e5df7111f260f2efa795da7493e5e87fdf",
+      "size": 9136
+    },
+    {
+      "path": "skills/pixijs-scene-sprite/references/nineslice-sprite.md",
+      "sha": "d643f5f3f2d09d9b1da69e959941a73a692055ab",
+      "size": 7345
+    },
+    {
+      "path": "skills/pixijs-scene-sprite/references/sprite.md",
+      "sha": "dc49bdbe39328f854160356d87a9b683d15e9aca",
+      "size": 6474
+    },
+    {
+      "path": "skills/pixijs-scene-sprite/references/tiling-sprite.md",
+      "sha": "1c3309ccc2ee3b1806f616eccf31e879521abdf2",
+      "size": 7697
+    },
+    {
+      "path": "skills/pixijs-scene-sprite/SKILL.md",
+      "sha": "aa27364146a9b97cd5f4bbefbb04e9caf46384bf",
+      "size": 6510
+    },
+    {
+      "path": "skills/pixijs-scene-text/references/bitmap-text.md",
+      "sha": "e0e7f7e191693d614f0dcccf91cca253660911f1",
+      "size": 11508
+    },
+    {
+      "path": "skills/pixijs-scene-text/references/html-text.md",
+      "sha": "981d87d3184913db08c5752be892490d3e5a290b",
+      "size": 7413
+    },
+    {
+      "path": "skills/pixijs-scene-text/references/split-bitmap-text.md",
+      "sha": "193a8fe8ff7c237d363240bc9e9998c12f6490a1",
+      "size": 8089
+    },
+    {
+      "path": "skills/pixijs-scene-text/references/split-text.md",
+      "sha": "fcb703810a9baec1cd8c1161c5653d1affef2e9a",
+      "size": 6770
+    },
+    {
+      "path": "skills/pixijs-scene-text/references/text.md",
+      "sha": "47fa017647f1b4421247e3401be91b59ae9faa3a",
+      "size": 11498
+    },
+    {
+      "path": "skills/pixijs-scene-text/SKILL.md",
+      "sha": "592cce057c7c0198cd49cb778ee69ca07db8aec8",
+      "size": 8281
+    },
+    {
+      "path": "skills/pixijs-ticker/SKILL.md",
+      "sha": "e9ca8e1fd3133f23237e047b2fc184c13a6ffdbb",
+      "size": 8992
+    },
+    {
+      "path": "skills/pixijs/references/index.md",
+      "sha": "eddffe91551a4b705085a1d262beaaa19d7c2c7d",
+      "size": 13699
+    },
+    {
+      "path": "skills/pixijs/SKILL.md",
+      "sha": "6e57af633bdc3f11c4d06d19550348de20c439c2",
+      "size": 7359
+    }
+  ]
+}

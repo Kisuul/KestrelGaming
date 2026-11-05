@@ -8,6 +8,7 @@
 | [Mathematics adversarial review (2026-11-04)](2026-11-04-math-core-adversarial-audit-v01.md) | Active | Pinned independent audit, bounded helper counterexamples, positive checks and evidence limits |
 | [Mathematics documentation hardening work order](handoffs/2026-11-03-math-documentation-hardening-r01.md) | Superseded | Earlier documentation-only plan; replaced by the full package completion handoff |
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
+| [PixiJS v8 skill import handoff](handoffs/2026-11-05-pixijs-skills-import-r01.md) | Active | Prepared integration branch, official upstream provenance, compatibility risks, and scoped acceptance checks |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
