@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Sample Formats"
+  short_description: "Raw PCM encoding, normalization and channel layout"
+  default_prompt: "Use $audio-sample-formats to inspect and convert raw PCM with explicit valid bits, endian/layout, float headroom, integer saturation policy, and byte-level regression evidence."

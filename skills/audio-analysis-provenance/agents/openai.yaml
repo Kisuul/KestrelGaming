@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Analysis Provenance"
+  short_description: "Trace audio samples, processing, results and visualization integrity"
+  default_prompt: "Use $audio-analysis-provenance to preserve exact source/epoch/range/channel identity, DSP and rendering steps, parameters and output units, explicit gaps and uncertainty, and honest digest checks without assuming source authenticity or standards compliance."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio RMS and Crest Factor"
+  short_description: "Verify RMS, sample-peak, and crest-factor math"
+  default_prompt: "Use $audio-rms-crest-factor to define RMS and crest references, check channel semantics, and validate analytic fixtures."

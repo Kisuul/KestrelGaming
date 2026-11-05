@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Channel Mapping"
+  short_description: "Explicit channel layouts, rational routing matrices and safe mixing"
+  default_prompt: "Use $audio-channel-mapping to distinguish speaker, discrete and Mid/Side channels, validate WAVE masks, specify an exact destination-by-source matrix and acknowledgements for loss/gain/silence, and verify channel and sample-clock invariants."

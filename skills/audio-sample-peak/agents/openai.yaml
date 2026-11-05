@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Sample Peak"
+  short_description: "Sample-indexed peak meters and holds"
+  default_prompt: "Use $audio-sample-peak to define per-channel PCM peak semantics, absolute sample positions, reference threshold counters, hold/reset policies, and deterministic fixtures."

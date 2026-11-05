@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio DSP Core"
+  short_description: "Build and audit truthful audio-analysis foundations"
+  default_prompt: "Use $audio-dsp-core to inspect the audio signal path, measurement contracts, and deterministic verification before changing analysis algorithms."

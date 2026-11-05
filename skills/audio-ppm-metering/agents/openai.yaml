@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio PPM Metering"
+  short_description: "Quasi-peak PPM profiles, historic burst tests and calibration"
+  default_prompt: "Use $audio-ppm-metering to identify the requested historical PPM profile, establish calibration and timebase, distinguish it from VU, sample peak, true peak and loudness, apply published burst/return acceptance checks and state any unverified conformance claims."

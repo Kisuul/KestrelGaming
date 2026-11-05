@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio VU Metering"
+  short_description: "VU alignment, rectified detector, pointer ballistics and honest calibration"
+  default_prompt: "Use $audio-vu-metering to choose VU versus RMS/PPM/LUFS/true-peak, specify a 1 kHz lineup reference, detector and 300 ms ballistics, preserve channel/sample-epoch semantics, and independently verify any meter claims."

@@ -75,23 +75,38 @@ activation is claimed by publishing a protocol.
 
 ## Cross-domain boundaries
 
-General skills own transferable mathematics; domain procedures own measurement
-models, calibration, interfaces and standards. Audio PR #2 is a separate initiative:
-[this package](https://github.com/Kisuul/KestrelGaming/pull/3) adds no audio files,
-edits no audio backlog, and applies no audio-to-math cross-links. Its merge status
-or candidate counts are not inferred from an old memory record.
+General skills own transferable mathematics; audio owns measurement models,
+calibration, interfaces and standards. PR #3's Math core is merged into `main`.
+The [existing audio PR #2](https://github.com/Kisuul/KestrelGaming/pull/2) now includes
+that main through a regular merge and implements the following **one-way,
+task-conditional** references. Read the audio entrypoint first, then only the math
+procedure needed for the task; these links do not load every math module or imply
+installed host capability. The nine audio skills and 64 pending candidates are
+unchanged by integration.
 
-After compatible bases exist, domain owners can link to these entrypoints without
-copying their content. Conceptual examples are:
-
-| Domain topic | Shared mathematics | Stays domain-owned |
+| Existing audio skill | Consult mathematics when | Remains audio-owned |
 | --- | --- | --- |
-| Sampled signal timing and detectors | Numerical analysis, units, verification | Signal tap, detector definition, clocks and realtime constraints |
-| Windows, FFTs, PSD and STFT displays | Complex numbers, numerical analysis, verification | Transform sign/scaling, coherent gain, ENBW, one-sided bins, calibration and display clocks |
-| Graphics transforms and simulation | Linear algebra, units, verification | Frames, handedness, integration model and application error budgets |
-| Experimental/measurement data | Statistics, units, numerical analysis | Sampling design, measurement equation, calibration and coverage requirements |
+| `audio-dsp-core` | Units/timebases, finite arithmetic or verification need review: dimensions, numerical analysis, verification | Signal tap, sample clocks, channel/measurement contract, realtime limits |
+| `audio-window-functions` | Sum/precision issues or independent window checks: numerical analysis, verification | Window variants, coherent gain, ENBW, leakage |
+| `audio-fft-spectrum` | Phase/branch/sign, precision or oracle checks: complex numbers, numerical analysis, verification | Forward exponent sign, bin layout, one-sided scaling, amplitude reference |
+| `audio-power-spectral-density` | Numerical/normalization checks: numerical analysis, verification; uncertainty/independence claims only: statistics | Density units, window energy, Welch estimator, detrending and overlap model |
+| `audio-rms-crest-factor` | Scaling, underflow or fixture checks: numerical analysis, verification | RMS/mean-square, sample crest, silence/channel and dB reference semantics |
+| `audio-spectrogram-waterfall` | Time/frequency axes or frame checks: dimensions, verification | STFT placement, exact center encoding, transform/density scaling, gaps and rendering |
+| `audio-sample-peak` | Extreme/invalid values or timestamp/state verification: numerical analysis, verification | Sample maxima, channel scope, hold/reset and threshold semantics |
+| `audio-true-peak` | Interpolation error/range or independent checks: numerical analysis, verification | Reconstruction kernel, supported interior/edge policy; experimental, not BS.1770 compliant |
+| `audio-dsp-test-fixtures` | Oracle/comparator policy or arithmetic claims: verification and its fixture policy, numerical analysis | PCM schema, deterministic generators, exact sample/channel metadata, analytic/frozen/live DSP checks |
 
-No comment or change to PR #2 is needed to complete this package.
+A rectangular spectrogram array alone is not a reason to load linear algebra.
+Use that module for an actual matrix operation, solve or transformation. The math
+entrypoints and math fixtures are unchanged by this integration. Frozen and live
+SciPy checks share backend conventions; they complement rather than replace analytic
+DSP anchors. NumPy's additive asymmetric `allclose` gate is documented separately
+from the math policy's symmetric maximum-based `isclose` rule.
+
+Other domain integrations remain demand driven: graphics/simulation owns frames and
+model error; experimental data owns sampling design, measurement equations and
+coverage requirements. No application, calibration or standards compliance follows
+from adding a math reference.
 
 ## Further curriculum
 
@@ -104,7 +119,7 @@ need justifies its inputs, method, failure cases and independent verification.
 
 Next independent work: run the registered behavioral pilot in an authorized harness;
 add target-specific numerical integration tests when a production implementation
-exists; then assess useful domain links. Formal proof, standards certification,
+exists; assess further domain links as needs arise. Formal proof, standards certification,
 physical calibration and GPU/realtime behavior need separate evidence.
 
 ## Technical sources

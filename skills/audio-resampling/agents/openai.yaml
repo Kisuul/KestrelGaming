@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Resampling"
+  short_description: "Rational SRC, anti-alias FIR filters and stream phase"
+  default_prompt: "Use $audio-resampling to define exact rates/epochs, anti-alias FIR and group delay, delayed callback-safe output, boundary rules and independently checked numerical fixtures without claiming realtime or device synchronization."

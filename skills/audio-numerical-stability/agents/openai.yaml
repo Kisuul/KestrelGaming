@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Numerical Stability"
+  short_description: "Math-first audio finite arithmetic, ranges and independent oracles"
+  default_prompt: "Use $audio-numerical-stability to derive audio measurement units, distinguish conditioning from intermediate over/underflow, choose a portable scaled algorithm and verify it against independent analytic fixtures before claiming DSP correctness."

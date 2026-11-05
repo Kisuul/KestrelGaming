@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Window Functions"
+  short_description: "Choose and calibrate spectral windows"
+  default_prompt: "Use $audio-window-functions to choose the proper window, quantify coherent gain and ENBW, and verify calibration fixtures."

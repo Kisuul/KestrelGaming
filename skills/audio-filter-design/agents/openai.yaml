@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Filter Design"
+  short_description: "Choose and verify FIR/IIR filters, group delay and SOS stability"
+  default_prompt: "Use $audio-filter-design to translate audio goals into explicit passband/stopband and latency constraints, choose FIR versus SOS biquad design, verify actual response and pole stability with independent fixtures, and report uncertainty without claiming a production realtime filter."

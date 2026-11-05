@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Spectrogram & Waterfall"
+  short_description: "Build calibrated, sample-timed STFT histories"
+  default_prompt: "Use $audio-spectrogram-waterfall to establish sample-accurate STFT timing, calibrated spectral values, honest time/frequency/color axes and deterministic ridge/impulse fixtures."
