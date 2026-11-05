@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-04
-sources: "2026-11-04 audio-stream-buffering implementation 304b1cdc1c7275af98892f1ef980e309bfdfaaee passed GitHub Actions 41951059313 structural checks and 308 repository tests, 36 new; local Python 3.13.5 tests included two independent deque/dictionary FIFO models with seeded traces; owner requires all 73 before PR #2 merges; PortAudio callback docs and JACK SPSC ringbuffer API."
+sources: "2026-11-04 Lane B PR #11 integrated at 23cef6aa5b38658b984c1348c8e63c296d3320b6; red regression run 41975971906, corrected run 41976186728, post-merge passing Actions 41976263860 and 41976269773 (337 tests); owner prohibits umbrella PR #2 to main before 73/73."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -19,19 +19,27 @@ sources: "2026-11-04 audio-stream-buffering implementation 304b1cdc1c7275af98892
 
 **Task outcome:** PARTIAL
 
-15 of 73 audio modules developed, 58 remaining; PR #2 stays open and unmerged.
+16 of 73 audio modules developed, 57 remaining; PR #2 stays open and unmerged.
 
 **Authorized scope and boundaries (historical; recheck on resume):** Keep development on PR #2's audio branch in bounded, reviewable batches; the owner expressly prohibits merging the umbrella PR to main until **all curriculum modules** finish and owner acceptance follows. Other agents may contribute through separate, authorized branches and handoffs following [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md). Do not edit application repositories or Kestrel root contract from this memory task.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming, PR #2, `skills/audio-dsp-core-foundation-2026-11-03`; latest stream-buffering implementation head `304b1cdc1c7275af98892f1ef980e309bfdfaaee` passed Actions `41951059313` with 308 tests and structural validation. This follow-up is a memory-only evidence commit and requires its own CI confirmation.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, PR #2, `skills/audio-dsp-core-foundation-2026-11-03`; latest reviewed provenance merge `23cef6aa5b38658b984c1348c8e63c296d3320b6` passed Actions 41976263860 and 41976269773 with 337 tests and structural validation. This follow-up is a memory-only evidence commit and needs its own CI confirmation.
 
-**Memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
+**Historical memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
+
+### Latest integrated increment — audio analysis provenance (16/73)
+
+PR #11 was independently reviewed, corrected, and merged **into the audio development branch only** at [23cef6aa](https://github.com/Kisuul/KestrelGaming/commit/23cef6aa5b38658b984c1348c8e63c296d3320b6). The versioned `audio-analysis-provenance` skill tracks sample epoch/rate/ranges, channel/format identity, transformations, output measurements and displays, content-digest claims and conservative quality flags. It is not W3C PROV-O, RFC 8785/JCS, a proof of audio authenticity, or a claim of demonstrated reproducibility.
+
+An independent hostile review exposed **three real metadata validation failures**: channel changes during injected silence, non-resampling frame inflation, and unannounced sample-format changes. Isolated negative tests failed at `694c7514093e8dabab2e0c5715b403066b1249d0` ([Actions 41975971906](https://github.com/Kisuul/KestrelGaming/actions/runs/41975971906)); correction `26ebc24863eef59b2fca91db8c2598fd7d3541d6` passed [Actions 41976186728](https://github.com/Kisuul/KestrelGaming/actions/runs/41976186728). The bounded v1 contract now demands one-to-one frame counts for non-resampling transforms, explicit signed sample offsets/epoch/format metadata when changed, and preserved channel identity for silence injection. Five focused regression tests were added; combined provenance coverage is 29 tests.
+
+**Verified post-merge:** [Actions 41976263860](https://github.com/Kisuul/KestrelGaming/actions/runs/41976263860) and [41976269773](https://github.com/Kisuul/KestrelGaming/actions/runs/41976269773) passed the structural validator and **337 repository tests**. The [integration handoff](2026-11-04-audio-provenance-integration-r01.md) records precise evidence and remaining limitations. Actual device capture, replay-based reproducibility, formal standards conformance and agent efficacy are still unverified. Umbrella PR #2 remains held until all 73 modules and owner approval.
 
 ## Current owner directive — whole curriculum before merge
 
-The owner explicitly set **all 73 audio modules complete** as the necessary condition for finishing umbrella PR #2. As of the latest inspected implementation head, **15 are implemented and 58 remain**. Neither green CI nor a conditional architecture assessment authorizes early merge. See the [owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md) and [parallel-agent coordination handoff](2026-11-04-audio-parallel-work-onboarding-r01.md). No other agents have been assigned or started by this record. The existing backlog below remains canonical; do not silently reduce the 73 obligations.
+The owner explicitly set **all 73 audio modules complete** as the necessary condition for finishing umbrella PR #2. As of the verified provenance integration, **16 are implemented and 57 remain**. Neither green CI nor a conditional architecture assessment authorizes early merge. See the [owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md) and [parallel-agent coordination handoff](2026-11-04-audio-parallel-work-onboarding-r01.md). No other agents have been assigned or started by this record. The existing backlog below remains canonical; do not silently reduce the 73 obligations.
 
-**Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current fifteen. These are not newly completed modules or verified repairs.
+**Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current sixteen. These are not newly completed modules or verified repairs.
 
 ## Evidence
 
@@ -43,7 +51,7 @@ New indexed skill `audio-stream-buffering` specifies **frame-based** FIFO capaci
 
 **Limitations and next evidence:** No measured real-time scheduling or lock-free/thread safety, hardware drift/synchronization, device/output latency, CPU load, production callback implementation, dropouts on audio hardware or agent-use A/B efficacy. PortAudio/JACK documentation informs the *engineering guidance* but does not certify this Python simulator.
 
-**Current working count: 15 developed / 73 total; 58 pending.** The owner no-early-merge rule is unchanged.
+**Historical stream-buffering checkpoint: 15 developed / 73; 58 pending.** The owner no-early-merge rule is unchanged.
 
 
 ### Latest increment — FIR/IIR audio filter design (verified bounded reference)
@@ -93,7 +101,7 @@ this evidence; consult current-head CI separately. That math-integration milesto
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.
 
-**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Fifteen of 73 candidate skills are developed on PR #2; 58 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
+**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Sixteen of 73 candidate skills are developed on PR #2; 57 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
@@ -295,7 +303,7 @@ the filter retains all source frames per bounded epoch.
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (15 of 73 candidates total, including the existing foundation):**
+**Current developed skills (16 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -312,7 +320,8 @@ the filter retains all source frames per bounded epoch.
 - `audio-channel-mapping` — BRANCH; WAVE speaker/unknown/Mid-Side identities, explicit rational routing matrices, loss/silence/gain opt-ins, rank diagnostic, sample-clock continuity. Actions `41812716355` passed 235 tests at `eb6c428` (24 new tests).
 - `audio-filter-design` — BRANCH; FIR low/high/bandpass/bandstop, IIR biquad/SOS, gain/phase/group delay, stability and coefficient quantization, atomic sample-epoch streaming. 37 new tests; Actions `41818240791` passed **272 tests** at `d7e5e9c`; optional SciPy differential 24 cases / 1920 coefficients / 288 response points / 3660 output samples / 18 group-delay checks.
 - `audio-stream-buffering` — BRANCH; frame-indexed ring buffers, occupancy and rational latency, explicit overrun-gap/underrun-silence spans, producer/consumer backpressure, atomic epoch/clock continuity. 36 independent and adversarial regression tests; Actions `41951059313` passed **308 tests** on `304b1cd`.
-- **Outstanding: 58 candidates**, including the following nine-family backlog.
+- `audio-analysis-provenance` — BRANCH; versioned graph of source samples, DSP lineage, measured units, visualization, digests and quality flags. PR #11 merged at `23cef6aa`; 337 full tests (29 provenance) and structural validation passed.
+- **Outstanding: 57 candidates**, including the following nine-family backlog.
 
 ### Foundation and numerical DSP (1 pending)
 
@@ -346,17 +355,17 @@ the filter retains all source frames per bounded epoch.
 
 `audio-voice-activity`, `audio-formant-analysis`, `audio-speech-intelligibility`, `audio-perceptual-quality`, `audio-psychoacoustics`, `audio-sound-classification`, `audio-source-separation`, `audio-denoising-evaluation`.
 
-### Validation, visualization, and infrastructure (7 pending)
+### Validation, visualization, and infrastructure (6 pending)
 
-`audio-reference-validation`, `audio-measurement-uncertainty`, `audio-visualization-integrity`, `audio-color-scale-design`, `audio-realtime-integration`, `audio-offline-analysis`, `audio-analysis-provenance`.
+`audio-reference-validation`, `audio-measurement-uncertainty`, `audio-visualization-integrity`, `audio-color-scale-design`, `audio-realtime-integration`, `audio-offline-analysis`.
 
 ## Next action
 
-**Owner full-curriculum gate:** Keep umbrella PR #2 open and unmerged until **all 73** audio modules are completed and the owner authorizes final integration. Current verified milestone is **15 developed / 58 pending**; a green reference suite is not evidence of actual agent skill efficacy or production real-time behavior.
+**Owner full-curriculum gate:** Keep umbrella PR #2 open and unmerged until **all 73** audio modules are completed and the owner authorizes final integration. Current verified milestone is **16 developed / 57 pending**; a green reference suite is not evidence of actual agent skill efficacy or production real-time behavior.
 
 **Next bounded module:** `audio-numerical-stability`—the last remaining foundational/numerical audio skill. Specify finite-arithmetic stability, overflow/underflow and cancellation in level/FFT/PSD/STFT/filter processing, dtype and scaling policy, exception behavior, independent oracles and error budgets. The existing PSD/STFT extreme-input intermediate-overflow finding is a useful adversarial case, but treat an audit as separate from a verified fix.
 
-The [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md) can coordinate other independent family tasks; no other agent assignments are inferred. Do not reassign `audio-channel-mapping`, `audio-filter-design` or `audio-stream-buffering`, all already indexed on PR #2. Consult the [stream-buffering completion handoff](2026-11-04-audio-stream-buffering-completion-r01.md) for exact tests and limitations.
+The [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md) can coordinate other independent family tasks; no other agent assignments are inferred. Do not reassign `audio-channel-mapping`, `audio-filter-design`, `audio-stream-buffering` or `audio-analysis-provenance`, all already indexed on PR #2. Consult the [stream-buffering completion handoff](2026-11-04-audio-stream-buffering-completion-r01.md) for exact tests and limitations.
 
 ## Revisit when
 
