@@ -333,10 +333,28 @@ def validate_graph(graph: dict) -> None:
             st, dt = src["timebase"], dst["timebase"]
             if st["rate"] != dt["rate"] or st["clock_domain"] != dt["clock_domain"]:
                 _fail("non-resampling activity cannot silently change rate/clock")
-            if kind == "process" and st["channels"] != dt["channels"]:
+            # The bounded v1 model has no trim/padding/delay operation: only
+            # one-to-one frame mapping is supported without resampling.
+            source_frames = int(st["end"]) - int(st["start"])
+            output_frames = int(dt["end"]) - int(dt["start"])
+            if source_frames != output_frames:
+                _fail("non-resampling transform changes frame count")
+            offset = int(dt["start"]) - int(st["start"])
+            declared_offset = a["parameters"].get("sample_offset")
+            if (offset != 0 or declared_offset is not None) and declared_offset != str(offset):
+                _fail("sample offset change requires exact signed decimal sample_offset")
+            if a["parameters"].get("output_epoch", st["epoch"]) != dt["epoch"]:
+                _fail("epoch change requires explicit output_epoch")
+            if a["parameters"].get("output_format", st["sample_format"]) != dt["sample_format"]:
+                _fail("sample format change requires explicit output_format")
+            if kind == "process":
                 label = ",".join(dt["channels"])
-                if a["parameters"].get("channel_map") != label:
+                if st["channels"] != dt["channels"] and a["parameters"].get("channel_map") != label:
                     _fail("channel identity reorder requires explicit channel_map")
+                if "channel_map" in a["parameters"] and a["parameters"]["channel_map"] != label:
+                    _fail("channel_map contradicts destination channel order")
+            if kind == "inject_silence" and st["channels"] != dt["channels"]:
+                _fail("injected silence cannot change channel identity")
             if kind == "inject_silence" and not any(x["status"] == "synthetic_silence" for x in dst["coverage"]):
                 _fail("injected silence must be explicitly marked")
     for e in graph["entities"]:

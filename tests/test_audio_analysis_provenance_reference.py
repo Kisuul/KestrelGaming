@@ -238,6 +238,11 @@ class ProvenanceTests(unittest.TestCase):
         rec["entities"][1]["timebase"]["rate"]={"num":"44100","den":"1"}
         rec["entities"][1]["timebase"]["clock_domain"]="decoded-44100"
         rec["entities"][1]["timebase"]["channels"]=["r","l"]
+        rec["entities"][1]["timebase"]["end"] = "108"
+        rec["entities"][1]["coverage"] = [{"start":"100","end":"108","status":"derived"}]
+        rec["entities"][2]["basis"][0]["end"] = "108"
+        rec["activities"][0]["parameters"].update({
+            "sample_offset":str(100 - BASE), "output_epoch":"analysis-e2"})
         self.assertBad(rec)
         rec["activities"][0]["parameters"]["channel_map"]="r,l"
         validate_graph(rec)
@@ -248,8 +253,12 @@ class ProvenanceTests(unittest.TestCase):
         rec["activities"][0].pop("rate_mapping")
         rec["entities"][1]["timebase"]["rate"]={"num":"44100","den":"1"}
         rec["entities"][1]["timebase"]["clock_domain"]="decoded-44100"
+        rec["entities"][1]["timebase"]["end"] = "108"
+        rec["entities"][2]["basis"][0]["end"] = "108"
+        rec["activities"][0]["parameters"].update({
+            "sample_offset":str(100 - BASE), "output_epoch":"analysis-e2"})
         self.assertBad(rec)
-        rec["entities"][1]["coverage"]=[{"start":"100","end":"109","status":"synthetic_silence"}]
+        rec["entities"][1]["coverage"]=[{"start":"100","end":"108","status":"synthetic_silence"}]
         validate_graph(rec)
 
     def test_reject_noncanonical_decimal_rate_and_implicit_float(self):
@@ -360,6 +369,53 @@ class ProvenanceTests(unittest.TestCase):
         with self.assertRaisesRegex(ProvenanceError, "format"):
             validate_graph(rec)
 
+
+    def test_explicit_offset_epoch_and_format_declarations(self):
+        rec = fixture()
+        rec["entities"] = rec["entities"][:2]
+        rec["activities"] = rec["activities"][:1]
+        a = rec["activities"][0]
+        a["kind"] = "process"
+        a.pop("rate_mapping")
+        source, output = rec["entities"]
+        output["timebase"] = deepcopy(source["timebase"])
+        output["timebase"].update({
+            "start": "100", "end": "108", "epoch": "processed-e2",
+            "sample_format": "s16-interleaved"})
+        output["coverage"] = [{"start":"100","end":"108","status":"derived"}]
+        a["parameters"].update({
+            "sample_offset": str(100 - BASE),
+            "output_epoch": "processed-e2",
+            "output_format": "s16-interleaved"})
+        validate_graph(rec)
+        for key, reason in (("sample_offset", "offset"),
+                            ("output_epoch", "epoch"),
+                            ("output_format", "format")):
+            case = deepcopy(rec)
+            case["activities"][0]["parameters"].pop(key)
+            with self.subTest(missing=key):
+                with self.assertRaisesRegex(ProvenanceError, reason):
+                    validate_graph(case)
+        case = deepcopy(rec)
+        case["activities"][0]["parameters"]["sample_offset"] = str(101 - BASE)
+        with self.assertRaisesRegex(ProvenanceError, "offset"):
+            validate_graph(case)
+
+    def test_injection_cannot_claim_channel_mapping_as_workaround(self):
+        rec = fixture()
+        rec["entities"] = rec["entities"][:2]
+        rec["activities"] = rec["activities"][:1]
+        a = rec["activities"][0]
+        a["kind"] = "inject_silence"
+        a.pop("rate_mapping")
+        source, output = rec["entities"]
+        output["timebase"] = deepcopy(source["timebase"])
+        output["timebase"]["channels"] = ["r", "l"]
+        output["coverage"] = [{"start":str(BASE),"end":str(BASE+8),
+                               "status":"synthetic_silence"}]
+        a["parameters"]["channel_map"] = "r,l"
+        with self.assertRaisesRegex(ProvenanceError, "channel"):
+            validate_graph(rec)
 
 if __name__ == "__main__":
     unittest.main()
