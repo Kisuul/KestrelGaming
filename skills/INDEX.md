@@ -26,6 +26,7 @@ are not standalone installed host plugins.
 | [audio-stream-buffering](audio-stream-buffering/SKILL.md) | Design frame-indexed rings, producer-consumer buffering, overflow/underrun recovery, latency, epoch continuity and independent FIFO verification |
 | [audio-analysis-provenance](audio-analysis-provenance/SKILL.md) | Preserve source-to-DSP-to-visualization lineage, sample timebases, explicit gaps, units, uncertainty and honest content digest claims |
 | [audio-numerical-stability](audio-numerical-stability/SKILL.md) | Diagnose audio finite-arithmetic errors in RMS, FFT, PSD, Welch, ENBW, quantization and IIR poles; verify portable mathematical remedies with independent extreme-input fixtures |
+| [audio-vu-metering](audio-vu-metering/SKILL.md) | Calibrate and verify VU-style mean-rectified indication, 300 ms second-order needle ballistics, analog/digital alignment, sample clocks and distinct peak/RMS/loudness semantics |
 
 ## Core mathematics (independent curriculum)
 
