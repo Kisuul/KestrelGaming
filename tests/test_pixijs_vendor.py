@@ -34,7 +34,7 @@ class PixiVendorTests(unittest.TestCase):
             with self.subTest(path=entry["path"]):
                 data = (ROOT / entry["path"]).read_bytes()
                 self.assertEqual(len(data), entry["size"])
-                object_bytes = f"blob {len(data)}\\0".encode("ascii") + data
+                object_bytes = f"blob {len(data)}\0".encode("ascii") + data
                 self.assertEqual(hashlib.sha1(object_bytes).hexdigest(), entry["sha"])
 
     def test_catalog_routes_to_all_imported_skills(self):

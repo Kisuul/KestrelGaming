@@ -186,7 +186,7 @@ class SeedValidatorTests(unittest.TestCase):
 
     def test_first_party_skills_cannot_add_vendor_license(self):
         self.replace("skills/kestrel-recall/SKILL.md",
-                     "name: kestrel-recall", "name: kestrel-recall\\nlicense: MIT")
+                     "name: kestrel-recall", "name: kestrel-recall\nlicense: MIT")
         self.assert_error("Skill needs name and description only")
 
     def test_pixijs_vendor_cannot_change_license(self):
