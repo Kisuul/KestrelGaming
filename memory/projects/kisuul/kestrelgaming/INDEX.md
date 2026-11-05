@@ -9,6 +9,7 @@
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
 | [Audio skill library implementation and backlog](handoffs/2026-11-03-audio-skills-roadmap.md) | Active | Current audio skills, numerical test evidence, pending modules, and next work |
 | [Audio parallel execution plan](handoffs/2026-11-04-audio-parallel-execution-plan-r01.md) | Active | Bounded concurrent development, coordinator-owned ledger and reviewable child branches; 15/73 baseline |
+| [Lane A — audio numerical stability research and implementation specification](handoffs/2026-11-04-audio-numerical-stability-lane-a-research-r01.md) | Active | Owner-assigned mathematics-first Lane A; source findings, portable test vectors, review gates and next implementation steps |
 | [Parallel Task 1 — analysis provenance agent brief](handoffs/2026-11-04-audio-analysis-provenance-agent-task-01-r01.md) | Active | Ready-to-copy assignment for last pending module; prepared and unclaimed, no implementation credited |
 | [Audio stream-buffering skill #15 completion](handoffs/2026-11-04-audio-stream-buffering-completion-r01.md) | Active | Verified FIFO/xrun module with 36 tests, CI evidence, 15/73 milestone and next numerical-stability assignment |
 | [Audio filter-design skill #14 completion](handoffs/2026-11-04-audio-filter-design-completion-r01.md) | Active | Verified FIR/IIR module and SciPy evidence; 14/73, 59 pending; next audio-buffering assignment |
