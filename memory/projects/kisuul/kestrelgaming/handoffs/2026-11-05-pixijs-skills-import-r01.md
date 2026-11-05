@@ -55,7 +55,7 @@ sources: "User-authorized integration on 2026-11-05; Kestrel main 719e88cd; Pixi
 | GitHub branch creation | `skills/pixijs-v8-integration` created from `719e88cd` | Does not imply a PR or merge |
 | Structural validator and Python regression tests (GitHub Actions run [42011009617](https://github.com/Kisuul/KestrelGaming/actions/runs/42011009617)) | PASS: 75 tests; imported Markdown matched 65/65 upstream hashes | Linux CI on commit `9abc6576`; tests are structural, not live PixiJS rendering |
 
-**Persistence:** Import and validation changes committed on `skills/pixijs-v8-integration`, not integrated into `main`. Review the latest branch head and PR before resuming.
+**Persistence:** Import and validation changes committed on `skills/pixijs-v8-integration`, and [PR #13](https://github.com/Kisuul/KestrelGaming/pull/13) is open for review. Nothing integrated into `main`. Confirm the latest branch head and checks before resuming.
 
 ## Next action
 
@@ -63,7 +63,7 @@ sources: "User-authorized integration on 2026-11-05; Kestrel main 719e88cd; Pixi
 
 **Next useful step:**
 
-1. Open a review PR against `main` with the 65-file import, attribution, manifest, validator and tests.
+1. Independently review [PR #13](https://github.com/Kisuul/KestrelGaming/pull/13) against `main` (opened 2026-11-05). GitHub reports the PR mergeable, and its pull-request validation job completed successfully at `7527d31e`.
 2. Request independent inspection of the scoped validator exception, provenance and direct index entries; compare all vendor blob hashes to upstream.
 3. In an execution-capable agent environment, run bounded end-to-end prompts (application startup, assets, events, graphics, performance), compile examples against a pinned PixiJS version, and exercise a non-PixiJS prompt to confirm selective loading. Record results before claiming agent capability validation.
 4. Let the repository owner make the merge decision; do not auto-merge.
