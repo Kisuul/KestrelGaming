@@ -8,6 +8,7 @@
 | [Mathematics documentation hardening work order](handoffs/2026-11-03-math-documentation-hardening-r01.md) | Superseded | Earlier documentation-only plan; replaced by the full package completion handoff |
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
 | [Audio skill library implementation and backlog](handoffs/2026-11-03-audio-skills-roadmap.md) | Active | Current audio skills, numerical test evidence, pending modules, and next work |
+| [Audio stream-buffering skill #15 completion](handoffs/2026-11-04-audio-stream-buffering-completion-r01.md) | Active | Verified FIFO/xrun module with 36 tests, CI evidence, 15/73 milestone and next numerical-stability assignment |
 | [Audio filter-design skill #14 completion](handoffs/2026-11-04-audio-filter-design-completion-r01.md) | Active | Verified FIR/IIR module and SciPy evidence; 14/73, 59 pending; next audio-buffering assignment |
 | [Audio curriculum checkpoint — 13/73](handoffs/2026-11-04-audio-curriculum-checkpoint-13-of-73-r01.md) | Active | Verified 2026-11-04 branch snapshot, 60 pending modules, owner merge gate and safe next-agent pickup |
 | [Audio owner full-completion merge gate](2026-11-04-audio-curriculum-full-completion-gate-r01.md) | Active | Owner decision: no merge of PR #2 until all 73 audio modules are completed |
