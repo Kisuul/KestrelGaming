@@ -228,8 +228,13 @@ def validate(root: Path) -> list[str]:
         if path.is_relative_to(root / "skills") and path.name == "SKILL.md":
             try:
                 data, body = frontmatter(texts[path])
-                if set(data) != {"name", "description"}:
-                    raise ValueError("Skill needs name and description only")
+                required_fields = {"name", "description"}
+                is_vendored_pixijs = path.parent.name == "pixijs" or path.parent.name.startswith("pixijs-")
+                allowed_fields = required_fields | ({"license"} if is_vendored_pixijs else set())
+                if not required_fields.issubset(data) or not set(data).issubset(allowed_fields):
+                    raise ValueError("Skill needs name and description only (PixiJS vendor may include MIT license)")
+                if "license" in data and data["license"] != "MIT":
+                    raise ValueError("Vendored PixiJS license must be MIT")
                 if not SLUG.fullmatch(data["name"]) or len(data["name"]) > 64 or data["name"] != path.parent.name:
                     raise ValueError("Invalid skill name or directory mismatch")
                 if not body.strip() or "TODO" in texts[path]:
