@@ -324,7 +324,8 @@ class ProvenanceTests(unittest.TestCase):
         dst["timebase"] = deepcopy(src["timebase"])
         dst["timebase"]["channels"] = ["r", "l"]
         dst["coverage"] = [{"start":str(BASE),"end":str(BASE+8),"status":"synthetic_silence"}]
-        self.assertBad(rec)
+        with self.assertRaisesRegex(ProvenanceError, "channel"):
+            validate_graph(rec)
 
     def test_nonresampling_process_must_not_invent_output_frames(self):
         rec = fixture()
@@ -335,7 +336,8 @@ class ProvenanceTests(unittest.TestCase):
         dst["timebase"] = deepcopy(src["timebase"])
         dst["timebase"]["end"] = str(BASE + 9)
         dst["coverage"] = [{"start":str(BASE),"end":str(BASE+9),"status":"derived"}]
-        self.assertBad(rec)
+        with self.assertRaisesRegex(ProvenanceError, "frame"):
+            validate_graph(rec)
 
     def test_nonresampling_process_must_declare_sample_format_change(self):
         rec = fixture()
@@ -346,7 +348,8 @@ class ProvenanceTests(unittest.TestCase):
         dst["timebase"] = deepcopy(src["timebase"])
         dst["timebase"]["sample_format"] = "s16-interleaved"
         dst["coverage"] = [{"start":str(BASE),"end":str(BASE+8),"status":"derived"}]
-        self.assertBad(rec)
+        with self.assertRaisesRegex(ProvenanceError, "format"):
+            validate_graph(rec)
 
 
 if __name__ == "__main__":
