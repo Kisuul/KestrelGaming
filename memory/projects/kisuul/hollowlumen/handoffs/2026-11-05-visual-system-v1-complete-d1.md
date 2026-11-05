@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-05-hollowlumen-visual-system-v1-d1
 kind: handoff
 scope: project:kisuul/hollowlumen
-status: active
+status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
@@ -12,6 +12,8 @@ sources: "User-reported approval of both palettes on 2026-11-05; HollowLumen mai
 ---
 
 # HollowLumen visual design system v1.0 — specification completion
+
+**Historical snapshot (archived):** The design PR described below was subsequently merged. The current engineering handoff is [Stage 2 foundations](2026-11-05-stage2-foundations-e1.md). Historical evidence is intentionally preserved.
 
 ## Summary
 
