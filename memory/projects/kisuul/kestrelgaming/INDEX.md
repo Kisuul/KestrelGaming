@@ -10,5 +10,7 @@
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
 | [PixiJS v8 skill import handoff](handoffs/2026-11-05-pixijs-skills-import-r01.md) | Active | Prepared integration branch, official upstream provenance, compatibility risks, and scoped acceptance checks |
 
+| [Audio engineering curriculum progress and audit checkpoint (2026-11-05)](handoffs/2026-11-05-audio-curriculum-mainline-checkpoint-r01.md) | Active | PR #2 pinned 19/73 status, no-early-merge gate, 451-test CI provenance, numerical audit findings, PPM limitation, next-agent directions |
+
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
