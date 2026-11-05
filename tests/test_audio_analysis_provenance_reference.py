@@ -315,5 +315,39 @@ class ProvenanceTests(unittest.TestCase):
         rec=fixture();rec["activities"][1]["use_partial_inputs"] = True;self.assertBad(rec)
 
 
+    def test_injected_silence_must_not_change_channel_identity(self):
+        rec = fixture()
+        a = rec["activities"][0]
+        a["kind"] = "inject_silence"
+        a.pop("rate_mapping")
+        src, dst = rec["entities"][:2]
+        dst["timebase"] = deepcopy(src["timebase"])
+        dst["timebase"]["channels"] = ["r", "l"]
+        dst["coverage"] = [{"start":str(BASE),"end":str(BASE+8),"status":"synthetic_silence"}]
+        self.assertBad(rec)
+
+    def test_nonresampling_process_must_not_invent_output_frames(self):
+        rec = fixture()
+        a = rec["activities"][0]
+        a["kind"] = "process"
+        a.pop("rate_mapping")
+        src, dst = rec["entities"][:2]
+        dst["timebase"] = deepcopy(src["timebase"])
+        dst["timebase"]["end"] = str(BASE + 9)
+        dst["coverage"] = [{"start":str(BASE),"end":str(BASE+9),"status":"derived"}]
+        self.assertBad(rec)
+
+    def test_nonresampling_process_must_declare_sample_format_change(self):
+        rec = fixture()
+        a = rec["activities"][0]
+        a["kind"] = "process"
+        a.pop("rate_mapping")
+        src, dst = rec["entities"][:2]
+        dst["timebase"] = deepcopy(src["timebase"])
+        dst["timebase"]["sample_format"] = "s16-interleaved"
+        dst["coverage"] = [{"start":str(BASE),"end":str(BASE+8),"status":"derived"}]
+        self.assertBad(rec)
+
+
 if __name__ == "__main__":
     unittest.main()
