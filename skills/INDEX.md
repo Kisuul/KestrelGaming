@@ -25,6 +25,7 @@ are not standalone installed host plugins.
 | [audio-filter-design](audio-filter-design/SKILL.md) | Choose and verify FIR/IIR filters, band specifications, group delay, SOS stability, coefficient quantization and streaming state |
 | [audio-stream-buffering](audio-stream-buffering/SKILL.md) | Design frame-indexed rings, producer-consumer buffering, overflow/underrun recovery, latency, epoch continuity and independent FIFO verification |
 | [audio-analysis-provenance](audio-analysis-provenance/SKILL.md) | Preserve source-to-DSP-to-visualization lineage, sample timebases, explicit gaps, units, uncertainty and honest content digest claims |
+| [audio-numerical-stability](audio-numerical-stability/SKILL.md) | Diagnose audio finite-arithmetic errors in RMS, FFT, PSD, Welch, ENBW, quantization and IIR poles; verify portable mathematical remedies with independent extreme-input fixtures |
 
 ## Core mathematics (independent curriculum)
 
