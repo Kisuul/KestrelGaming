@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-04
 updated: 2026-11-04
-sources: "2026-11-04 stream-buffering skill 304b1cdc1c7275af98892f1ef980e309bfdfaaee passed GitHub Actions 41951059313 (308 repository tests and structural validation, 36 new); prior verified filter-design head d37ffa3e200b9065fafa312ee5f60c9fbc973ba1 had 14/73; owner requires all 73 completed before PR #2 merges."
+sources: "2026-11-04 Lane A audio-numerical-stability child PR #12 merged to audio branch at d3a2a3d1d4e6b17d9cb2a953a06f38a9f87c4691, post-merge successful Actions 41991534955 377 tests; Lane B provenance PR #11 previously merged; owner 73/73 no-early-main-merge rule."
 ---
 
 # Audio curriculum — handoff for parallel Kestrel agents
@@ -19,27 +19,27 @@ sources: "2026-11-04 stream-buffering skill 304b1cdc1c7275af98892f1ef980e309bfdf
 
 **Task outcome:** PARTIAL
 
-The parallel coordination handoff remains active. Separately authorized `audio-channel-mapping`, `audio-filter-design` and `audio-stream-buffering` skills are implemented and verified; **58 modules remain**. This handoff neither assigns nor starts another agent.
+The coordination handoff remains active. Both parallel lanes now produced reviewed, merged child contributions: Lane B `audio-analysis-provenance` and Lane A `audio-numerical-stability`. **17 of 73 audio modules are developed; 56 remain**. This record does not claim any agent-effectiveness trial was run or assign a new agent.
 
 **Authorization boundary:** This is a plan, **not** standing authority to write, force-push, merge or deploy. Every agent must verify current user assignment and actual permissions. **Do not merge umbrella PR #2 into main before all curriculum modules are finished and the owner approves.**
 
-**Target repository and branch:** [Kisuul/KestrelGaming PR #2](https://github.com/Kisuul/KestrelGaming/pull/2), `skills/audio-dsp-core-foundation-2026-11-03`; latest verified implementation head `304b1cdc1c7275af98892f1ef980e309bfdfaaee` (308 tests, Actions `41951059313`). Main branch and PR base may change; recheck live refs and read this memory on the audio PR branch.
+**Target repository and branch:** [Kisuul/KestrelGaming PR #2](https://github.com/Kisuul/KestrelGaming/pull/2), `skills/audio-dsp-core-foundation-2026-11-03`; latest verified post-Lane-A integration head `d3a2a3d1d4e6b17d9cb2a953a06f38a9f87c4691`, GitHub Actions `41991534955` passed structural checks and 377 tests. Always recheck current refs, and read memory from the unmerged audio PR branch.
 
 **Memory revision loaded:** [Running audio handoff](2026-11-03-audio-skills-roadmap.md), [audio independent audit](../2026-11-03-audio-skills-independent-audit.md), [math integration handoff](2026-11-03-audio-math-integration-workorder-r01.md), [Kestrel memory protocol](../../../../../kestrel/MEMORY_PROTOCOL.md), [kestrel-remember](../../../../../skills/kestrel-remember/SKILL.md), and the current skill catalog.
 
 ## Evidence
 
-- **Observed:** 15 audio skills are indexed in PR #2 and **58 modules remain** in nine families. GitHub Actions [41951059313](https://github.com/Kisuul/KestrelGaming/actions/runs/41951059313) passed structural validation and **308 repository tests** (36 new stream-buffering cases) at `304b1cd`. Two seeded independent queue oracles verify FIFO and synthetic discontinuity accounting in the new unit suite; no live audio concurrency was exercised. Reference results do not verify host skill activation, production audio performance, calibrated instruments or standard compliance.
+- **Observed:** 17 audio skills are indexed on PR #2 and **56 remain** in eight still-pending families (one foundation family now has 0 pending). Both [Lane B PR #11](https://github.com/Kisuul/KestrelGaming/pull/11) and [Lane A PR #12](https://github.com/Kisuul/KestrelGaming/pull/12) were independently reviewed and merged into the **audio branch only**. [Actions 41991534955](https://github.com/Kisuul/KestrelGaming/actions/runs/41991534955) passed 377 repository tests and structural validation at the Lane A merge head. The Lane A test gate includes one expected-red state-mutation failure, fixed before merge. These tests do not establish agent behavioral efficacy or calibrated device behavior.
 - **Observed/source-derived review concerns:** The PSD/STFT reference code squares Fourier magnitudes before normalization, so extreme but finite intermediates can overflow. This is a numerical-range review finding; reproduce it and add bounded/negative regression evidence before calling it fixed. An audio-specific agent-efficacy with/without-skill trial has not been run. Resampling's frequency sweep, device clock and realtime performance remain unverified. `docs/MATH_CURRICULUM.md` retains historically correct 9/64 integration-time wording, which may need a clearly dated status note.
 - **User-stated:** All modules must be completed before merging PR #2. No lowering the remaining count simply to satisfy an arbitrary milestone.
 
 ### Available, unclaimed work lanes
 
-This table groups the **same 58** named modules already enumerated in the roadmap; it does not create another backlog or assign work.
+This table groups the **same 56** named modules already enumerated in the roadmap; it does not create another backlog or assign work.
 
 | Area | Pending | Dependencies and review focus |
 | --- | ---: | --- |
-| Foundation/numerical DSP | 1 | Numerical stability only; channel mapping, filter design and stream buffering are completed |
+| Foundation/numerical DSP | 0 | All foundation modules implemented; separate remediation of existing PSD/STFT numerical issues still requires its own review |
 | Levels/loudness/dynamics | 5 | VU, PPM, loudness, LRA, envelopes; edition-specific calibration |
 | Spectra/frequency domain | 5 | Fractional octave, resolution, descriptors, harmonics, cepstrum; FFT/PSD |
 | Oscilloscopes/phase | 8 | Scope, phase, stereo, correlation and group delay; channel semantics |
@@ -47,8 +47,8 @@ This table groups the **same 58** named modules already enumerated in the roadma
 | Quality/distortion | 8 | Test signals, THD/IMD, SNR, clipping, codecs, dropout; known-bad vectors |
 | Acoustics/spatial | 8 | SPL, microphone/room/impulse, surround and latency; instrument evidence |
 | Speech/perception | 8 | Speech, VAD, psychoacoustics and intelligent analysis; dataset claims |
-| Validation/visualization/infrastructure | 7 | Independent checks, uncertainty, UI integrity, realtime and provenance |
-| **Total pending** | **58** | **One canonical module list in the running roadmap** |
+| Validation/visualization/infrastructure | 6 | Independent checks, uncertainty, UI integrity and realtime; provenance is implemented and reviewed |
+| **Total pending** | **56** | **One canonical module list in the running roadmap** |
 
 An optional **audit lane** can investigate PSD/STFT numerical extremes and design audio agent behavioral trials without counting itself as a new audio curriculum module.
 
@@ -70,13 +70,13 @@ Parallelism might increase throughput, but conflict-resolution cost and skill du
 
 ## Changes and persistence
 
-Original onboarding was memory-only. This revision records CI-verified channel mapping, filter design and **stream buffering**. No other agent was assigned or started by this record; program count is **15/73 developed, 58 pending**. Active memory remains available only on the audio PR branch until integrated with `main`.
+The initial onboarding was memory-only. Reviewed child contributions in Lane B and Lane A have since been integrated into the audio branch. This update preserves their separate handoffs and the **17/73 developed, 56 pending** canonical count. It creates no new agent assignment and does not alter production repositories. Active memory is available on the audio PR branch, not necessarily `main`.
 
 ## Next action
 
-**Open issues:** 58 curriculum obligations, unexecuted audio agent-use pilot, numerical-extreme review, and incomplete production/device/standards evidence where relevant.
+**Open issues:** 56 curriculum obligations, unexecuted audio agent-use pilot, numerical-extreme review, and incomplete production/device/standards evidence where relevant.
 
-**Suggested next assignments:** `audio-numerical-stability` (last remaining numerical foundation skill), or disjoint modules from the loudness/spectra family lanes, with PSD/STFT numerical audit and an audio agent-use A/B trial as independent review tasks. Do not duplicate the completed channel mapping, filter design or stream buffering. Read the [stream-buffering completion handoff](2026-11-04-audio-stream-buffering-completion-r01.md) and current [roadmap](2026-11-03-audio-skills-roadmap.md) before starting. No other agents are implied to have begun.
+**Suggested next assignments:** `audio-vu-metering` and `audio-ppm-metering` as separately bounded work, or another unclaimed module in the [canonical roadmap](2026-11-03-audio-skills-roadmap.md). Do not reassign the reviewed completed Lane A numerical-stability or Lane B provenance modules. Numerical remediation of existing DSP references and the audio-agent with/without-skill evaluation are **separate audit tasks, not creditable new modules**. New agents must check live claims and branch heads; none are implied assigned here.
 
 ## Revisit when
 
