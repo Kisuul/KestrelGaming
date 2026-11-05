@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-05-hollowlumen-night-cycle-c1
 kind: handoff
 scope: project:kisuul/hollowlumen
-status: active
+status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
@@ -12,6 +12,8 @@ sources: "User-reported approval of day reference and request for dark mode plus
 ---
 
 # Moonlit Lavender palette and solar cycle
+
+**Historical task snapshot (archived):** The original proposal preceded the user-reported approval of night palette choices. For the approved palettes and remaining implementation risks, see [Visual System v1.0 handoff](2026-11-05-visual-system-v1-complete-d1.md). Historical observations below are preserved as originally recorded.
 
 ## Summary
 

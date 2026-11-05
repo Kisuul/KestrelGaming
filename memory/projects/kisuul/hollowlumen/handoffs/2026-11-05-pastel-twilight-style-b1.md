@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-05-hollowlumen-style-b1
 kind: handoff
 scope: project:kisuul/hollowlumen
-status: active
+status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
@@ -12,6 +12,8 @@ sources: "HollowLumen main 4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9; PR #2 head 
 ---
 
 # Pastel Twilight Craft visual guide v0.1
+
+**Historical task snapshot (archived):** This record describes the earlier draft before both palettes were approved. For the completed design specification and exact PR #2 revision, see [Visual System v1.0 handoff](2026-11-05-visual-system-v1-complete-d1.md). Prior observations below retain their original dates and evidentiary scope.
 
 ## Summary
 
