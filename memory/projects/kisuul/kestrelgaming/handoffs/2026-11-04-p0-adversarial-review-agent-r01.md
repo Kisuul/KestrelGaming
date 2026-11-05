@@ -15,11 +15,11 @@ sources: "User request to delegate P0 skill development; GitHub issue #7; progra
 
 ## Summary
 
-**Task outcome:** IN PROGRESS
+**Task outcome:** PARTIAL (candidate skill and synthetic fixtures verified locally; full CI and agent trials pending)
 
 **Assignment:** Deliver [issue #7](https://github.com/Kisuul/KestrelGaming/issues/7): a skeptical, evidence-disciplined `engineering-adversarial-review` procedure with demonstrably discriminating checks and false-positive restraint.
 
-**Repository:** Kisuul/KestrelGaming. **Program branch:** `skills/p0-engineering-foundations-2026-11-04` (based on `main` at `c268a4d0be121738cbfdb0d7a90de7874299c0f2`). **Task status:** proposed/awaiting agent; refresh revisions when resuming.
+**Repository:** Kisuul/KestrelGaming. **Program branch:** `skills/p0-engineering-foundations-2026-11-04` (based on `main` at `c268a4d0be121738cbfdb0d7a90de7874299c0f2`). **Task status:** candidate skill on fork task branch awaiting independent review; refresh revisions when resuming.
 
 **Required startup:** Read [AGENTS.md](../../../../../AGENTS.md), [KESTREL.md](../../../../../KESTREL.md), [memory protocol](../../../../../kestrel/MEMORY_PROTOCOL.md), [state protocol](../../../../../kestrel/STATE_PROTOCOL.md), [verification](../../../../../kestrel/VERIFICATION.md), [permissions](../../../../../kestrel/PERMISSIONS.md), the [project memory index](../INDEX.md), and the [program design](../../../../../docs/P0_ENGINEERING_SKILLS.md). Inspect actual branch, source and prior work, not just remembered assumptions.
 
@@ -34,7 +34,9 @@ sources: "User request to delegate P0 skill development; GitHub issue #7; progra
 
 **Observed when planned:** [Kestrel's verification rules](../../../../../kestrel/VERIFICATION.md) cover evidence integrity, but a dedicated reusable hostile review workflow was not introduced in this planning task. Issue #7 is the detailed specification.
 
-**Unverified:** No new reviewer skill, reproducibility harness, hidden-grading trial, or independently observed improvement has yet been implemented or run.
+**Local implementation (2026-11-04):** Prepared the selectively loaded procedure, review worksheet, four synthetic baseline/head cases, read-only probe, eight dedicated tests and paired behavioral trial plan. Local synthetic cases distinguished two introduced regressions, one pre-existing defect and one clean decoy. Full repository integration and behavioral effectiveness remain unverified.
+
+**Unverified:** No independent host-agent review trials have run. Fixture checks do not establish LLM review efficacy.
 
 ## Staged execution
 
@@ -54,7 +56,7 @@ Shows reproducible true defects, distinguishes baseline failures, does not repor
 
 ## Next action
 
-A review-specialist agent should take issue #7, perform Stage 0 and produce an independently testable first skill draft.
+Verify the candidate branch/PR and exact commit, run full Kestrel validation and regression suite in CI, inspect the complete diff and review independently. Behavioral claims remain NOT RUN until controlled trials are executed.
 
 ## Revisit when
 
