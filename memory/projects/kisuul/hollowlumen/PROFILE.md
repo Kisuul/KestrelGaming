@@ -19,7 +19,7 @@ sources: "HollowLumen README; PR #1 merged at 2026-11-05T11:39:21Z; main 4e2ade8
 - Initially, `main` at `ac0317e` contained only README, despite claiming a playable prototype.
 - The first source implementation landed via [PR #1](https://github.com/Kisuul/hollowlumen/pull/1), merged 2026-11-05, with `main` at `4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9` on latest inspection.
 - User reports hands-on playtesting found stage-one functionality worked as expected and gives **provisional** sign-off. This is **user-stated acceptance evidence**, not proof of CI/build/accessibility or the original designer's visual approval.
-- A new proposed lavender/pastel visual identity, **Pastel Twilight Craft**, is captured in [style guide PR #2](https://github.com/Kisuul/hollowlumen/pull/2), a separate draft/docs-only PR pending designer review.
+- A new proposed lavender/pastel visual identity, **Pastel Twilight Craft**, is captured in [style guide PR #2](https://github.com/Kisuul/hollowlumen/pull/2), a draft/docs-only PR. The earlier daylight **visual reference is now approved by the original designer according to the user**; specific CSS tokens and accessibility still await implementation review. The PR also includes a proposed dark-mode palette and realistic solar-cycle note (nighttime review pending).
 - Implementation: React, Vite, TanStack Router, Tailwind CSS v4 and Zustand; domain logic `src/state/game.js`; see [prototype notes](https://github.com/Kisuul/hollowlumen/blob/main/docs/PROTOTYPE.md).
 - Constraints: 1–5 minute optional sessions; no guilt/streak pressure; original yarn-ball art; friendly cosmetics without paid power; mobile-friendly layouts. Native widgets, multiplayer, cloud accounts and payment infrastructure are deferred.
 - Unknowns: original designer's preferred exact look; production build/browser/accessibility QA; hosting, licensing, distribution strategy.
@@ -33,4 +33,4 @@ sources: "HollowLumen README; PR #1 merged at 2026-11-05T11:39:21Z; main 4e2ade8
 
 ## Revisit when
 
-Designer reviews PR #2, new code lands, release/hosting decisions change, or technical checks contradict prior reported results.
+Designer reviews the night portion of PR #2, new code lands, release/hosting decisions change, or technical checks contradict prior reported results.
