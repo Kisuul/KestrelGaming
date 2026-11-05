@@ -317,6 +317,9 @@ class ProvenanceTests(unittest.TestCase):
 
     def test_injected_silence_must_not_change_channel_identity(self):
         rec = fixture()
+        # Isolate the transform so downstream analysis basis ranges cannot mask the defect.
+        rec["entities"] = rec["entities"][:2]
+        rec["activities"] = rec["activities"][:1]
         a = rec["activities"][0]
         a["kind"] = "inject_silence"
         a.pop("rate_mapping")
@@ -329,6 +332,9 @@ class ProvenanceTests(unittest.TestCase):
 
     def test_nonresampling_process_must_not_invent_output_frames(self):
         rec = fixture()
+        # Isolate the transform so downstream analysis basis ranges cannot mask the defect.
+        rec["entities"] = rec["entities"][:2]
+        rec["activities"] = rec["activities"][:1]
         a = rec["activities"][0]
         a["kind"] = "process"
         a.pop("rate_mapping")
@@ -341,6 +347,9 @@ class ProvenanceTests(unittest.TestCase):
 
     def test_nonresampling_process_must_declare_sample_format_change(self):
         rec = fixture()
+        # Isolate the transform so downstream analysis basis ranges cannot mask the defect.
+        rec["entities"] = rec["entities"][:2]
+        rec["activities"] = rec["activities"][:1]
         a = rec["activities"][0]
         a["kind"] = "process"
         a.pop("rate_mapping")
