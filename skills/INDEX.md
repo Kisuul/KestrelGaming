@@ -23,6 +23,7 @@ are not standalone installed host plugins.
 | [audio-resampling](audio-resampling/SKILL.md) | Rational audio sample-rate conversion with anti-alias FIR, group delay, exact output clocks, stream epochs, boundaries and independent fixtures |
 | [audio-channel-mapping](audio-channel-mapping/SKILL.md) | Identify WAVE speaker/unknown/Mid-Side layouts, use exact rational routing matrices, flag gain/loss, and protect sample-clock continuity |
 | [audio-filter-design](audio-filter-design/SKILL.md) | Choose and verify FIR/IIR filters, band specifications, group delay, SOS stability, coefficient quantization and streaming state |
+| [audio-stream-buffering](audio-stream-buffering/SKILL.md) | Design frame-indexed rings, producer-consumer buffering, overflow/underrun recovery, latency, epoch continuity and independent FIFO verification |
 
 ## Core mathematics (independent curriculum)
 

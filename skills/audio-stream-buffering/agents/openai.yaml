@@ -1,0 +1,4 @@
+interface:
+  display_name: "Audio Stream Buffering"
+  short_description: "Sample-clock-safe ring buffers and xrun recovery"
+  default_prompt: "Use $audio-stream-buffering to specify exact frame capacity, producer/consumer ownership, atomic overflow/underflow behavior, explicit source-versus-synthetic spans, nominal queue latency and epoch continuity; test independently without claiming real-time thread safety."
