@@ -25,7 +25,7 @@ sources: "Owner conversation 2026-11-04: assigned Lane A, insisted on mathematic
 
 **Relevant context:** [Canonical audio roadmap](2026-11-03-audio-skills-roadmap.md); [parallel execution plan](2026-11-04-audio-parallel-execution-plan-r01.md); [owner completion gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md); central math skill `skills/math-numerical-analysis/SKILL.md` and `skills/math-verification/SKILL.md` (relative to repository root). Existing math is authoritative for general methods; this audio skill owns signal semantics, measurement units, scaling conventions and domain-specific numerical policies.
 
-## Observations and verified evidence
+## Evidence
 
 - **Source inspection:** `skills/audio-power-spectral-density/scripts/reference_psd.py` computes one-sided power as `multiplier * (abs(value) ** 2) / norm`; `skills/audio-spectrogram-waterfall/scripts/reference_stft.py` uses analogous `factor*abs(z)**2/(fs*square)`. These orders can overflow before division even when the normalized mathematical result is finite. `reference_psd.py` accumulates Welch ordinates into `total[k] += value`, a separate potential intermediate overflow. No change/fix is claimed.
 - `skills/audio-fft-spectrum/scripts/reference_dft.py` uses `abs(value) * multiplier / total` for one-sided amplitude and computes window energy as `math.fsum(w*w for w in window)`. The summands can underflow before accurate summation, and multiplication can overflow before division.
