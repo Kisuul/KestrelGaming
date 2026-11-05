@@ -242,6 +242,15 @@ class AudioNumericalStabilityTests(unittest.TestCase):
                 with self.assertRaises(ValueError):acc.push(index,values)
                 self.assertEqual((acc.next_sample,acc.count,acc.scale,acc.sumsq),before)
 
+    def test_accumulator_underflow_is_atomic(self):
+        # Exact RMS = 2^-1074/sqrt(256) -> nonzero but below binary64 output range.
+        # A rejected block must not consume samples or poison a running stream.
+        acc = RmsAccumulator('subnormal', 70)
+        before = (acc.next_sample, acc.count, acc.scale, acc.sumsq)
+        with self.assertRaisesRegex(ValueError, 'accumulated RMS'):
+            acc.push(70, [5e-324] + [0.0] * 255)
+        self.assertEqual((acc.next_sample, acc.count, acc.scale, acc.sumsq), before)
+
     def test_invalid_reference_inputs(self):
         for fn,args in [(stable_rms,([True],)),(stable_rms,([math.nan],)),
                         (stable_enbw_bins,([math.inf],)),
