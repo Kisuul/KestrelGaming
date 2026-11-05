@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-03
 updated: 2026-11-05
-sources: "2026-11-05 audio-vu-metering implementation f00616fc1a9cd13a3058992d1a36e36451871b7b; Actions 41996516499 passed 419 tests and structural validation (42 new); optional local SciPy 1.17.0 differential passed 24 cases/14456 samples/415 callbacks; owner demands all 73 modules before PR #2 merging."
+sources: "2026-11-05 audio-ppm-metering educational reference 4ee7e72c0457d9a71d35b799c0b7cc62374b74e0; GitHub Actions 42004049812 passed 451 repository tests and structural checks (32 new); local optional SciPy 1.17.0 NumPy 2.3.5 differential 24 cases/15186 sample comparisons; EBU Tech 3205-E Table 2 trained burst fit, 31.5Hz-16kHz flatness fails; owner prohibits early PR #2 merge."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
@@ -19,11 +19,11 @@ sources: "2026-11-05 audio-vu-metering implementation f00616fc1a9cd13a3058992d1a
 
 **Task outcome:** PARTIAL
 
-18 of 73 audio modules developed, 55 remaining; PR #2 stays open and unmerged.
+19 of 73 audio modules developed, 54 remaining; PR #2 stays open and unmerged.
 
 **Authorized scope and boundaries (historical; recheck on resume):** Keep development on PR #2's audio branch in bounded, reviewable batches; the owner expressly prohibits merging the umbrella PR to main until **all curriculum modules** finish and owner acceptance follows. Other agents may contribute through separate, authorized branches and handoffs following [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md). Do not edit application repositories or Kestrel root contract from this memory task.
 
-**Target repository, branch, and commit:** Kisuul/KestrelGaming, PR #2 on `skills/audio-dsp-core-foundation-2026-11-03`; `audio-vu-metering` implementation head `f00616fc1a9cd13a3058992d1a36e36451871b7b` passed [Actions 41996516499](https://github.com/Kisuul/KestrelGaming/actions/runs/41996516499), 419 tests and structural checks. This memory-only follow-up must pass its own final-head CI.
+**Target repository, branch, and commit:** Kisuul/KestrelGaming, PR #2 on `skills/audio-dsp-core-foundation-2026-11-03`; `audio-ppm-metering` implementation commit `4ee7e72c0457d9a71d35b799c0b7cc62374b74e0` passed [Actions 42004049812](https://github.com/Kisuul/KestrelGaming/actions/runs/42004049812), **451 tests and structural validation**. Subsequent memory-only synchronization must pass its own final-head CI.
 
 **Historical memory revision loaded:** PR #2 branch `3d1708c01facfcbe35e83c4619740221a55b42fb` with eleven indexed audio skills, merged Math foundation integration and 189 passing repository tests. User explicitly authorized a carefully verified twelfth audio module, while preserving Kestrel's persistent memory.
 
@@ -57,6 +57,19 @@ The owner explicitly set **all 73 audio modules complete** as the necessary cond
 **Read-only audit work to allocate separately:** exercise audio agent-use evaluations, reproduce or explicitly bound PSD/STFT intermediate overflow for extreme finite inputs, and reconcile historical nine-skill wording against the current seventeen. These are not newly completed modules or verified repairs.
 
 ## Evidence
+
+### Latest increment — explicit historical PPM, fitted burst study with negative conformance evidence
+
+An indexed `audio-ppm-metering` **educational decision and audit skill** now distinguishes EBU Type IIb quasi-peak PPM from IEC Type I, BBC Type IIa, 300ms VU, sample peak, true peak and modern EBU R128 loudness. The bounded model uses calibrated full-wave rectification, fitted two-time-scale attack and a separate slow release, with exact Fraction sample clocks, explicit EBU TEST reference amplitudes and atomic per-channel epochs. It does **not** certify a historical PPM device.
+
+**Observed code:** `4ee7e72c0457d9a71d35b799c0b7cc62374b74e0`; [GitHub Actions 42004049812](https://github.com/Kisuul/KestrelGaming/actions/runs/42004049812) passed structural validation and **451 repository tests**, including **32 new tests**. The EBU Tech 3205-E, November 1979, burst indications are pre-registered in `tests/fixtures/AUDIO_PPM_EBU_1979_GOLDENS.md`. The model's two attack constants were **fitted to those published burst data**, so those passing tests verify the fit, **not independent physical conformance**. Additional checks cover 44.1/48/96/192k rates and multiple phases, TEST voltage calibration, 24dB return, 1kHz onset, overswing, tone/pulse/polarity behavior, atomic error handling and chunk invariance. All seven implementation/test blobs matched the exact locally tested Git SHA before publication.
+
+**Critical explicit FAILURE of standard conformance:** At 48kHz the fitted detector reads approximately **+2.15dB at 31.5Hz** and **-0.82dB at 16kHz** compared to ~+0.02dB at 5kHz on unit-peak 400ms tones, violating the EBU Tech 3205-E §2.3 **±0.3dB frequency-flatness specification**. A regression deliberately requires this failed compliance check to remain visible. `standards_conformance: False` appears in reference results. Physical IEC audio-electrical input requirements, complete IEC proprietary text, production realtime/host and actual agent-use efficacy remain unverified. The module is counted only as an honestly limited *skill*, NOT as a certified instrument.
+
+**Optional independent arithmetic corroboration:** Local NumPy 2.3.5 / SciPy 1.17.0 differential passed **24 cases, 15,186 sample comparisons**, maximum difference ~**4.6e-14dB**. It checks implementation arithmetic of the same fitted model, not the physics or adequacy of its profile. See the [PPM completion record](2026-11-05-audio-ppm-metering-completion-r01.md) and earlier [research acceptance handoff](2026-11-05-audio-ppm-metering-research-r01.md).
+
+**Program milestone:** **19 developed / 73 planned, 54 pending**, PR #2 still open and unmerged. The PPM reference's known failed requirement remains a follow-up for any future historical Type IIb compliance claim.
+
 
 ### Latest increment — audio stream buffering and discontinuity provenance (verified)
 
@@ -116,11 +129,11 @@ this evidence; consult current-head CI separately. That math-integration milesto
 
 **Confirmed observations with sources:** PR #2 remains open on the existing audio skill branch. Commit `d76a2780f49ecf262dc9d41e72eb230036446d2d` added distinct `audio-sample-peak` technical guidance, per-channel rolling/program peak reference code, and analytical fixtures. GitHub Actions run `41762257230` passed Kestrel structural checks and **84 repository tests**, including 12 new sample-peak tests. This is evidence for mathematical reference behavior and indexing, not target-app accuracy, clipping diagnosis or true-peak conformance.
 
-**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Sixteen of 73 candidate skills are developed on PR #2; 57 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
+**Hypotheses and assumptions:** Nine families of candidate audio skills form a useful *provisional taxonomy*, not an unchangeable mandate. Nineteen of 73 candidate skills are developed on PR #2; 54 remain proposed. Some remaining candidates may be renamed, combined, split or retired after research. Reference fixtures do not prove production integration, acoustic calibration, realtime performance or standard compliance.
 
 **Decisions and rationale:** Keep Kestrel skills central, individually discoverable, with executable pure-stdlib small-fixture oracles. Prior spectrogram oracle uses left-aligned, complete, unpadded frames and explicitly defined sample-clock coordinates. The new sample-peak skill separates current-block maxima, maximum-since-reset, and rolling maximum over the last H actual samples, with earliest-tie index, per-channel isolation and explicit reference hit/exceedance counts. Clipping diagnosis and ITU true peak deliberately remain distinct.
 
-**Changed files and uncommitted state to preserve:** Skill #15 added `skills/audio-stream-buffering/` (skill, FIFO contract, agent metadata and bounded Python reference), `tests/test_audio_stream_buffering_reference.py`, `tests/fixtures/AUDIO_STREAM_BUFFERING_TRACES.md`, and a catalog entry in `skills/INDEX.md`. Implementation head `304b1cd` passed CI; this follow-up edits memory only. No root contract, Math skill, application code, workflow or third-party dependency was altered.
+**Changed files and uncommitted state to preserve:** Skill #19 added `skills/audio-ppm-metering/` (skill procedure, EBU research contract, bounded Python model, optional SciPy checker, agent metadata), `tests/test_audio_ppm_reference.py`, `tests/fixtures/AUDIO_PPM_EBU_1979_GOLDENS.md`, and a catalog row. Implementation head `4ee7e72` passed CI; this follow-up edits only Kestrel project memory. No unrelated agent work, source app, governance, shared Math, host dependencies or CI workflows were changed.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
@@ -318,7 +331,7 @@ the filter retains all source frames per bounded epoch.
 
 **Status key:** `BRANCH` = committed to review branch (not necessarily merged); `PENDING` = not yet implemented; `PLANNED` = scope subject to review.
 
-**Current developed skills (18 of 73 candidates total, including the existing foundation):**
+**Current developed skills (19 of 73 candidates total, including the existing foundation):**
 
 - `audio-dsp-core` — BRANCH; central signal path and measurement contracts; earlier batch, PR #2.
 - `audio-window-functions` — BRANCH (this batch); periodic/symmetric windows, calibration and ENBW.
@@ -338,15 +351,16 @@ the filter retains all source frames per bounded epoch.
 - `audio-analysis-provenance` — BRANCH; versioned graph of source samples, DSP lineage, measured units, visualization, digests and quality flags. PR #11 merged at `23cef6aa`; 337 full tests (29 provenance) and structural validation passed.
 - `audio-numerical-stability` — BRANCH; mathematics-first finite-arithmetic, conditioning, RMS/ENBW/Welch scaling, exact-rational spectral oracles, quantization and biquad pole checks, atomic streaming RMS. PR #12 merged at `d3a2a3d`; expected-red `41990915892`, green integrated CI `41991534955`, **377 repository tests** (**40 new**).
 - `audio-vu-metering` — BRANCH; 1 kHz reference calibration, mean-rectified VU-inspired detector, 300 ms idealized second-order needle response, sample-accurate timestamps and distinct RMS/peak/loudness semantics. `f00616f`, Actions `41996516499`, 42 new tests, 419 green total; optional SciPy differential 24 cases.
-- **Outstanding: 55 candidates**, including the following nine-family backlog.
+- `audio-ppm-metering` — BRANCH; calibrated EBU Type IIb **partial burst-fit study**, dual-time-constant quasi-peak indication, explicit TEST alignment and sample epochs, EBU burst/return/phase and negative frequency-flatness tests. **NOT IEC/EBU-compliant**; known low/high-frequency flatness fails. 32 focused tests; [Actions 42004049812](https://github.com/Kisuul/KestrelGaming/actions/runs/42004049812) **451 repository tests passed** on `4ee7e72`. Optional SciPy differential 15,186 samples / 24 cases.
+- **Outstanding: 54 candidates**, including the following nine-family backlog.
 
 ### Foundation and numerical DSP (0 pending)
 
 All four modules in this foundational family are developed; downstream application and agent-use effectiveness remain unverified.
 
-### Levels, loudness, and dynamics (4 pending)
+### Levels, loudness, and dynamics (3 pending)
 
-`audio-ppm-metering`, `audio-program-loudness`, `audio-loudness-range`, `audio-envelope-dynamics`.
+`audio-program-loudness`, `audio-loudness-range`, `audio-envelope-dynamics`.
 
 ### Spectra and frequency-domain analysis (5 pending)
 
@@ -378,11 +392,11 @@ All four modules in this foundational family are developed; downstream applicati
 
 ## Next action
 
-**Owner's non-negotiable finish line:** PR #2 stays open and unmerged into `main` until **all 73 audio modules** are complete and the owner explicitly approves final integration. Current milestone **18 developed / 55 pending**. The entire foundation/numerical DSP family is now developed, but this is not proof that using the skills improves agent engineering work.
+**Owner's non-negotiable merge gate:** Keep PR #2 open and unmerged into `main` until **every one of 73** audio modules is complete and the owner separately approves final integration. Current verified state: **19 developed / 54 pending**. A bounded skill with an expressly nonconformant educational model can count as curriculum documentation, but neither this nor other Python fixtures prove instrument compliance or actual agent engineering efficacy.
 
-**Next proposed counted module:** `audio-ppm-metering` from the four-skill remaining levels/loudness/dynamics family. Other agents may work disjointly across the remaining eight families under the [parallel-agent onboarding protocol](2026-11-04-audio-parallel-work-onboarding-r01.md). Require an isolated task branch, independent fixtures, human-understandable measurement units, source editions, acceptance gates, reviewable child PR and integrated CI before changing the canonical count.
+**Next proposed counted module:** `audio-program-loudness` (or a disjoint family lane for parallel agents); establish the applicable ITU-R BS.1770/EBU R128 edition, K-weighting/gating/channel weight and true-peak boundaries as *independent* engineering requirements. `audio-loudness-range` and `audio-envelope-dynamics` also remain. The completed VU and PPM skills should not be redundantly assigned. Keep the PPM **frequency-flatness failure** as an explicit, separately audited remediation before any Type IIb compliance claim.
 
-**Separate audits, not completed fixes:** reproduce and repair the existing PSD/STFT/FFT intermediate-scaling concerns against the actual affected implementations; test production device/backend behavior; and run a controlled audio-agent with/without-skill evaluation in the future. The numerical-stability curriculum module alone does not resolve these.
+Preserve [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r01.md), use isolated reviewed tasks, and keep the existing PSD/STFT overflow and audio agent with/without-skill efficacy tests as separate unresolved audits.
 
 ## Revisit when
 
