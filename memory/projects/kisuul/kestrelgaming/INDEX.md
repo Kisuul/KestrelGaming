@@ -10,5 +10,10 @@
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
 | [PixiJS v8 skill import handoff](handoffs/2026-11-05-pixijs-skills-import-r01.md) | Active | Prepared integration branch, official upstream provenance, compatibility risks, and scoped acceptance checks |
 
+| [P0 engineering program coordination](handoffs/2026-11-04-p0-engineering-program-coordination-r01.md) | Active | Three-skill proposal program, child PR strategy, evaluation separation, merge gates |
+| [P0 requirements agent handoff](handoffs/2026-11-04-p0-requirements-acceptance-agent-r01.md) | Active | Issue #5 staged implementation and evidence requirements |
+| [P0 interface evolution agent handoff](handoffs/2026-11-04-p0-interface-evolution-agent-r01.md) | Active | Issue #6 staged architecture and migration skill development |
+| [P0 adversarial review agent handoff](handoffs/2026-11-04-p0-adversarial-review-agent-r01.md) | Active | Issue #7 staged review, regression and evaluator discipline |
+
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
