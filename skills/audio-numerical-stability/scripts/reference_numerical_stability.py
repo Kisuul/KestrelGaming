@@ -246,19 +246,26 @@ class RmsAccumulator:
         count = self.count + len(seq)
         if not math.isfinite(sumsq):
             raise ValueError('accumulator out of range')
+        # Check the *candidate* final result before committing any new state.
+        # Even valid finite inputs can imply a nonzero RMS smaller than the
+        # output format can represent. A rejected block is not consumed.
+        result = self._rms_state(scale, sumsq, count)
         self.scale, self.sumsq = scale, sumsq
         self.count, self.next_sample = count, self.next_sample + len(seq)
-        result = self.rms()
         return {'epoch':self.epoch,'end_sample_exclusive':self.next_sample,
                 'frames_total':self.count,'rms':result}
 
-    def rms(self) -> float:
-        if self.count == 0 or self.scale == 0:
+    @staticmethod
+    def _rms_state(scale: float, sumsq: float, count: int) -> float:
+        if count == 0 or scale == 0:
             return 0.0
-        result = self.scale * math.sqrt(self.sumsq / self.count)
+        result = scale * math.sqrt(sumsq / count)
         if not math.isfinite(result) or result == 0:
             raise ValueError('nonzero accumulated RMS is not representable')
         return result
+
+    def rms(self) -> float:
+        return self._rms_state(self.scale, self.sumsq, self.count)
 
     def reset_epoch(self, epoch: str, origin: int) -> None:
         self._initialize(epoch, origin)
