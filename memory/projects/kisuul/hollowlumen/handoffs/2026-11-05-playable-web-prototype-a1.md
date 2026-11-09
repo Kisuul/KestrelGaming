@@ -7,7 +7,7 @@ status: active
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-08
 sources: "GitHub PR #1 merged 2026-11-05; main 4e2ade8; user stage-one provisional sign-off 2026-11-05; earlier local nine-test run and remote 12-file content verification."
 ---
 
@@ -17,13 +17,18 @@ sources: "GitHub PR #1 merged 2026-11-05; main 4e2ade8; user stage-one provision
 
 **Goal and acceptance criteria:** Implement a small web vertical slice from the README-only source, preserving main during development and testing economy/domain logic.
 
-**Task outcome:** PARTIAL technically; **provisional gameplay acceptance** after user reported successful hands-on testing. GitHub confirms PR #1 is **merged**. Build, browser compatibility matrix, accessibility, security and original designer's visual approval are still not claimed.
+**Task outcome:** PARTIAL
+
+**Historical outcome detail:** PARTIAL technically; **provisional gameplay acceptance** after user reported successful hands-on testing. GitHub confirms PR #1 is **merged**. Build, browser compatibility matrix, accessibility, security and original designer's visual approval are still not claimed.
 
 **Authorized scope and boundaries (historical; recheck on resume):** The earlier user request authorized greenfield development and review flow. Historical authorization alone does not permit release, deployment, payment integration or destructive changes.
 
 **Target repository, branch, and commit:** [Kisuul/hollowlumen](https://github.com/Kisuul/hollowlumen), first implementation branch `feat/playable-hollow-v0-1` at `917ca66cc811052898349f25de0d7c25255d70e6`; [PR #1](https://github.com/Kisuul/hollowlumen/pull/1) now merged; main at `4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9`.
 
 **Memory revision loaded:** KestrelGaming `d591d8ac2ad96ea20370d67cf8df010dac995a02` at initial work, this note supersedes stale PR-open status.
+
+Formatting maintenance on 2026-11-08 separated the machine-readable outcome
+from its original qualification. Historical project claims were not revalidated.
 
 ## Evidence
 

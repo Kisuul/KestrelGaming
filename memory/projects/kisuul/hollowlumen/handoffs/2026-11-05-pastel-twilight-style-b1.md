@@ -7,7 +7,7 @@ status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-08
 sources: "HollowLumen main 4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9; PR #2 head ec201b71281e993026d3c463c41267eda80b159f; user's purple and pastel preferences and stage-one signoff in conversation on 2026-11-05."
 ---
 
@@ -19,13 +19,18 @@ sources: "HollowLumen main 4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9; PR #2 head 
 
 **Goal and acceptance criteria:** Establish a compact, implementable lavender-led visual standard for Lumenette Hollow, with explicit semantic tokens, accessible text combinations, component language, materials, motion and approval criteria.
 
-**Task outcome:** PARTIAL — [docs-only draft PR #2](https://github.com/Kisuul/hollowlumen/pull/2) now includes the original day guide and a separate night-cycle design note. The original designer approved the **earlier daylight visual reference** according to the user, but actual style-token implementation and the new night direction still need review. No application styling was changed.
+**Task outcome:** PARTIAL
+
+**Historical outcome detail:** PARTIAL — [docs-only draft PR #2](https://github.com/Kisuul/hollowlumen/pull/2) now includes the original day guide and a separate night-cycle design note. The original designer approved the **earlier daylight visual reference** according to the user, but actual style-token implementation and the new night direction still need review. No application styling was changed.
 
 **Authorized scope and boundaries (historical; recheck on resume):** User asked to proceed with mini style guide after stage-one provisional signoff; no automatic approval to merge or reskin.
 
 **Target repository, branch, and commit:** [Kisuul/hollowlumen](https://github.com/Kisuul/hollowlumen), `design/pastel-twilight-craft-v0-1`, `ec201b71281e993026d3c463c41267eda80b159f`; `docs/design/STYLE_GUIDE_v0.1.md` plus `docs/design/NIGHT_MODE_v0.1.md`; draft PR #2.
 
 **Memory revision loaded:** Kestrel project profile and earlier stage-one handoff on the existing memory work branch, revised in this same task.
+
+Formatting maintenance on 2026-11-08 separated the machine-readable outcome
+from its original qualification. Historical project claims were not revalidated.
 
 ## Evidence
 

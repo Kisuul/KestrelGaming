@@ -7,7 +7,7 @@ status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-08
 sources: "User-reported approval of both palettes on 2026-11-05; HollowLumen main 4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9; design PR #2 head 61211b88778239f92fe668d0614daba0688e3b24; independent token checks on committed branch."
 ---
 
@@ -19,13 +19,18 @@ sources: "User-reported approval of both palettes on 2026-11-05; HollowLumen mai
 
 **Goal and acceptance criteria:** Conclude design-language work without changing playable prototype runtime: preserve approved day/night palettes, produce canonical semantic tokens, define interaction/lighting rules and acceptance tests.
 
-**Task outcome:** COMPLETE **for design specification only**. Open design PR #2 is **ready for review** and not merged. No CSS/runtime changes, no planet/solar engine implemented.
+**Task outcome:** COMPLETE
+
+**Historical outcome detail:** COMPLETE **for design specification only**. Open design PR #2 is **ready for review** and not merged. No CSS/runtime changes, no planet/solar engine implemented.
 
 **Authorized scope and boundaries (historical; recheck on resume):** User requested design-language completion after reporting that original designer approved day and night palette choices. This does not authorize design PR merge, release, native widgets, location tracking or gameplay rewrites.
 
 **Target repository, branch, and commit:** [Kisuul/hollowlumen](https://github.com/Kisuul/hollowlumen), `design/pastel-twilight-craft-v0-1`, head `61211b88778239f92fe668d0614daba0688e3b24`, [PR #2](https://github.com/Kisuul/hollowlumen/pull/2) open, ready for review. `main` had `4e2ade8a019f45bc39a6ea0d17b949eb4ced97b9` at design work.
 
 **Memory revision loaded:** KestrelGaming `bfda4efd156d5a182c4481bfe43d3d9c7b375b49`; previous day/night design memory on this PR's branch was archived rather than erased.
+
+Formatting maintenance on 2026-11-08 separated the machine-readable outcome
+from its original qualification. Historical project claims were not revalidated.
 
 ## Evidence
 

@@ -7,7 +7,7 @@ status: active
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-08
 sources: "HollowLumen main 701dd55b983bf244a46187bc8bd8ef90d260ba8d; merged PR #2; new draft PR #3 head b46ab05157fb66aecc035bdcca0af2a6ecd39ba6; new draft PR #4 head 9bb8e78cfb71facbadb67bbded5acc9b1f08cf1e; local Node game tests and isolated V8 logic checks 2026-11-05."
 ---
 
@@ -17,13 +17,18 @@ sources: "HollowLumen main 701dd55b983bf244a46187bc8bd8ef90d260ba8d; merged PR #
 
 **Goal and acceptance criteria:** Advance planned Stage 2 after design-spec merge, with baseline P0 tests, independent P1 theme and P2 solar math branches, and a hard P3 scene-integration gate until required verification passes.
 
-**Task outcome:** PARTIAL. Two independent draft implementation PRs created. P0 domain tests pass, but reproducible dependency install/build remains BLOCKED by unavailable registry. P3 Home/Pip integration **not started**.
+**Task outcome:** PARTIAL
+
+**Historical outcome detail:** PARTIAL. Two independent draft implementation PRs created. P0 domain tests pass, but reproducible dependency install/build remains BLOCKED by unavailable registry. P3 Home/Pip integration **not started**.
 
 **Authorized scope/boundaries (historical; recheck on resume):** User said proceed along the agreed staged plan. Authorized in-scope branches/PRs and tests; no code merges, deployment, irreversible release or game-economy modifications.
 
 **Target repo and revisions:** [Kisuul/hollowlumen](https://github.com/Kisuul/hollowlumen), main `701dd55b983bf244a46187bc8bd8ef90d260ba8d`; [PR #3](https://github.com/Kisuul/hollowlumen/pull/3) `feat/stage2-theme-foundation` at `b46ab05157fb66aecc035bdcca0af2a6ecd39ba6`; [PR #4](https://github.com/Kisuul/hollowlumen/pull/4) `feat/stage2-solar-model` at `9bb8e78cfb71facbadb67bbded5acc9b1f08cf1e`.
 
 **Memory revision loaded:** KestrelGaming main `0fedc7d5abc5c0d714ada03228cf8c7a5be48b4d`, after the former design-memory PR #15 merged.
+
+Formatting maintenance on 2026-11-08 separated the machine-readable outcome
+from its original qualification. Historical project claims were not revalidated.
 
 ## Evidence
 
