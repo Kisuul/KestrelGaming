@@ -1,4 +1,6 @@
 # KestrelGaming
+
+**Engineering Ensemble v1 (proposed):** [seven separate Kestrel agent characters](docs/ENGINEERING_PARTY_V1.md) with [branch manifest](agents/ROSTER_V1.json). The roster documents characters, not deployed agents or new permissions.
 Synthetic organization meant to exist within the UCSH framework. Agency is sacrosanct!
 
 **Common memory for Kestrel agents.** This repository holds the operating contract,
@@ -8,6 +10,21 @@ agent runtime, or automatic background process is required.
 
 The implementation starts from the supplied `kestrel-seed-v0.1.0.zip` and preserves
 its **Operating Contract v1.0 (candidate)**. See [provenance](docs/PROVENANCE.md).
+
+## Individual engineer roles
+
+A Kestrel-based engineer can have a distinct long-lived character and independent
+engineering instincts without gaining permissions from its personality. Read
+the [agent structure](docs/AGENT_STRUCTURE.md) and the
+[role pickup runbook](docs/AGENT_PICKUP.md) before assigning a character.
+New characters start from the [first-person template](kestrel/templates/AGENT_CHARACTER.md)
+and [structured profile template](kestrel/templates/AGENT_PROFILE.json).
+Each character lives on its own `agents/<id>-v1` branch; `main` keeps the
+generic shared contract and skills.
+
+The [shared baseline reconciliation](docs/BASELINE_RECONCILIATION.md) records
+the upstream/fork integration, preserved agent homes, and the procedure for
+bringing both shared branches to the same commit without rewriting history.
 
 ## Start here
 
@@ -21,7 +38,7 @@ its **Operating Contract v1.0 (candidate)**. See [provenance](docs/PROVENANCE.md
 For use from another project, follow [integration](docs/INTEGRATION.md). A short
 [project pointer](docs/PROJECT_POINTER.md), or equivalent session instructions,
 is sufficient; do not copy this memory system into every project repository.
-The agent still needs access to this private repository. A URL alone does not load it.
+This repository is publicly visible; the agent still needs a real checkout or host connection. A URL alone does not load the selected character or its skills.
 
 ## What lives where
 

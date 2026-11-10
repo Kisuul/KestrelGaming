@@ -7,7 +7,7 @@ status: archived
 evidence: observed
 author: kestrel-gpt6-session-2026-11-05
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-08
 sources: "User-reported approval of day reference and request for dark mode plus realistic day/night cycle; HollowLumen draft PR #2 head ec201b71281e993026d3c463c41267eda80b159f; NOAA/USNO/W3C source references linked in design doc."
 ---
 
@@ -19,13 +19,18 @@ sources: "User-reported approval of day reference and request for dark mode plus
 
 **Goal and acceptance criteria:** Propose a companion night palette consistent with approved daylight visual reference, alongside a realistic, privacy-preserving day/night scene lighting system that does not alter gameplay incentives.
 
-**Task outcome:** PARTIAL — full night concept committed to [HollowLumen PR #2](https://github.com/Kisuul/hollowlumen/pull/2), pending original designer approval and code implementation.
+**Task outcome:** PARTIAL
+
+**Historical outcome detail:** PARTIAL — full night concept committed to [HollowLumen PR #2](https://github.com/Kisuul/hollowlumen/pull/2), pending original designer approval and code implementation.
 
 **Authorized scope and boundaries (historical; recheck on resume):** User asks to prepare a dark palette and consider realistic night/day system. Documentation only; no authorization to change production gameplay logic, access GPS automatically or deploy.
 
 **Target repository, branch, and commit:** `Kisuul/hollowlumen`; `design/pastel-twilight-craft-v0-1`; head `ec201b71281e993026d3c463c41267eda80b159f`. Design doc: [NIGHT_MODE_v0.1.md](https://github.com/Kisuul/hollowlumen/blob/design/pastel-twilight-craft-v0-1/docs/design/NIGHT_MODE_v0.1.md).
 
 **Memory revision loaded:** KestrelGaming `bfda4efd156d5a182c4481bfe43d3d9c7b375b49` at this task's start.
+
+Formatting maintenance on 2026-11-08 separated the machine-readable outcome
+from its original qualification. Historical project claims were not revalidated.
 
 ## Evidence
 
