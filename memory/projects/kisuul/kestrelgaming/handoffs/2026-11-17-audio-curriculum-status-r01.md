@@ -15,7 +15,9 @@ sources: "Owner reports Skill #23 merged on 2026-11-17; Kisuul/KestrelGaming PR 
 
 ## Summary
 
-**Task outcome:** PARTIAL (curriculum in progress). **23 of 73 audio skills accepted; 50 pending.** Six independent mathematics skills are foundations and **do not** count toward the 73 audio modules.
+**Task outcome:** PARTIAL
+
+The curriculum is in progress: **23 of 73 audio skills accepted; 50 pending.** Six independent mathematics skills are foundations and **do not** count toward the 73 audio modules.
 
 **Development branch:** `skills/audio-dsp-core-foundation-2026-11-03`. The last inspected branch commit is `aa54d7c55a313e144b21e09605701cdd7faa5276` (merged [PR #23](https://github.com/Kisuul/KestrelGaming/pull/23)). This is a dated snapshot, **not** a continuously updated branch probe.
 
