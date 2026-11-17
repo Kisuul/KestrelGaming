@@ -14,7 +14,7 @@ import sys
 import wave
 import zipfile
 
-from reference_program_loudness import LoudnessConfig, ProgramLoudnessStream
+from reference_program_loudness import LoudnessConfig, ProgramLoudnessStream, SAMPLE_RATE_HZ
 
 
 _STEREO = ("L", "R")
@@ -32,7 +32,7 @@ _MAX_EXPANDED_BYTES = 2 << 30
 _MAX_PCM_FRAMES = 48_000 * 300
 
 
-def _validate_entries(archive):
+def _validate_entries(archive, required_entries=None):
     entries = archive.infolist()
     if len(entries) > _MAX_ENTRIES:
         raise ValueError("too many ZIP entries")
@@ -46,13 +46,15 @@ def _validate_entries(archive):
             raise ValueError(f"ZIP entry exceeds size limit: {entry.filename}")
         if entry.flag_bits & 1:
             raise ValueError(f"encrypted ZIP entry: {entry.filename}")
-    for _, name, _ in _fixtures():
+    if required_entries is None:
+        required_entries = (name for _, name, _ in _fixtures())
+    for name in required_entries:
         if name not in names or archive.getinfo(name).is_dir():
             raise ValueError(f"missing fixture entry: {name}")
 
 
 @contextmanager
-def _official_archive(path):
+def _official_archive(path, *, required_entries=None):
     # Hash and parse the same open file; reject unpinned bytes before ZIP parsing.
     print("Verification mode: official EBU v5.0 (pinned SHA-256)", flush=True)
     with path.open("rb") as source:
@@ -69,7 +71,7 @@ def _official_archive(path):
             raise ValueError(f"official archive SHA-256 mismatch; expected {_OFFICIAL_SHA256}")
         source.seek(0)
         with zipfile.ZipFile(source) as archive:
-            _validate_entries(archive)
+            _validate_entries(archive, required_entries)
             yield archive
 
 
@@ -123,18 +125,24 @@ def _pcm_chunks(pcm, source, name):
     raise ValueError(f"truncated PCM: {name}")
 
 
-def _measure(archive, name, labels):
-    momentary, short_term = [], []
+@contextmanager
+def open_fixture_planes(archive, name, channel_count):
+    """Validate the WAV header, then yield bounded chunks of normalized PCM."""
     with archive.open(name) as source, wave.open(source, "rb") as pcm:
         rate, channels, width = pcm.getframerate(), pcm.getnchannels(), pcm.getsampwidth()
-        if rate != 48_000 or channels != len(labels) or width not in (2, 3):
+        if rate != SAMPLE_RATE_HZ or channels != channel_count or width not in (2, 3):
             raise ValueError(f"unexpected PCM format: {name}")
         if not 0 < pcm.getnframes() <= _MAX_PCM_FRAMES:
             raise ValueError(f"PCM frame count exceeds limits: {name}")
-        config = LoudnessConfig(rate, labels, "EBU v5.0 test PCM")
+        yield (_decode_planes(data, width, channels) for data in _pcm_chunks(pcm, source, name))
+
+
+def _measure(archive, name, labels):
+    momentary, short_term = [], []
+    with open_fixture_planes(archive, name, len(labels)) as chunks:
+        config = LoudnessConfig(SAMPLE_RATE_HZ, labels, "EBU v5.0 test PCM")
         meter = ProgramLoudnessStream(config, epoch_id=name, start_sample=0)
-        for data in _pcm_chunks(pcm, source, name):
-            planes = _decode_planes(data, width, channels)
+        for planes in chunks:
             result = meter.push(meter.next_sample, planes, epoch_id=name)
             momentary.extend(result["momentary"])
             short_term.extend(result["short_term"])
