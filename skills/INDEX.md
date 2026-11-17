@@ -29,6 +29,7 @@ are not standalone installed host plugins.
 | [audio-vu-metering](audio-vu-metering/SKILL.md) | Calibrate and verify VU-style mean-rectified indication, 300 ms second-order needle ballistics, analog/digital alignment, sample clocks and distinct peak/RMS/loudness semantics |
 | [audio-ppm-metering](audio-ppm-metering/SKILL.md) | Distinguish historic PPM profiles from VU/true peak/loudness; verify published EBU Type IIb burst/return tests and explicitly reject unearned full standard conformance |
 | [audio-program-loudness](audio-program-loudness/SKILL.md) | BS.1770 programme LUFS/LKFS, EBU R 128 delivery analysis, M/S windows and two-stage integrated gating for labeled channel beds |
+| [audio-loudness-range](audio-loudness-range/SKILL.md) | EBU Tech 3342 programme LRA, gated short-term distributions, percentiles, timing and fixture verification |
 
 ## Core mathematics (independent curriculum)
 
