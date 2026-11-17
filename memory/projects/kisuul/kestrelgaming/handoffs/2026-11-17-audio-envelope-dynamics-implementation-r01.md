@@ -15,7 +15,9 @@ sources: "Owner request to write skill #22; audio curriculum branch observed at 
 
 ## Summary
 
-**Task outcome: PARTIAL — implementation and focused local tests complete; full-repository CI and independent review pending.** User reports 21/73 modules accepted; this new module is #22 and is **not** yet accepted. Preserve the owner's independent-review requirement and prohibit early umbrella PR #2 merge to `main` until all 73 modules are accepted and the owner explicitly authorizes integration.
+**Task outcome:** PARTIAL
+
+Implementation and focused local tests are complete; full-repository CI and independent review are pending. User reports 21/73 modules accepted; this new module is #22 and is **not** yet accepted. Preserve the owner's independent-review requirement and prohibit early umbrella PR #2 merge to `main` until all 73 modules are accepted and the owner explicitly authorizes integration.
 
 The staged package defines envelope detection and gain-control reasoning, not a certified production compressor. It includes a concise agent skill, equation and streaming contract, stdlib Python offline reference, independent arithmetic fixture ledger, and focused adversarial tests. Reference supports causal per-sample peak/absolute and exponential-RMS followers, explicit 1/e vs 90% vs -60 dB timing conventions, independent/max linking, zero-time tracking, full-callback atomic rejection, exact integer frame epochs, hard-knee compressor/expander *gain requests*, and a separate dB gain-reduction follower. No lookahead, audio output, Hilbert processing, hardware calibration or true-peak guarantee is provided.
 
@@ -41,6 +43,10 @@ The staged package defines envelope detection and gain-control reasoning, not a 
 3. Ask Gauge to challenge the mathematics: independent Decimal one-pole oracles, near-equality A/R switching, high and subnormal binary64 RMS, `expm1` timing at very large tau, zero-time semantics, linked anti-phase, gain-map boundaries, silent expander request vs finite gain follower, exact sample clocks above `2**53`, epoch reuse, and late malformed input.
 4. Evaluate skill usefulness separately with matched tasks with and without the skill. Mathematical fixture success does not establish measured improvement in agent decisions.
 5. After independent corrections and owner review, merge only into the audio development branch. Do not self-accept #22 or merge umbrella PR #2 to `main`.
+
+## Next action
+
+Run full CI on the updated child PR, investigate any failures, and request Gauge's independent hostile audit. Do not count this module as accepted or merge umbrella PR #2 without the owner's explicit approval.
 
 ## Revisit when
 
