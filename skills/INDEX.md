@@ -28,6 +28,7 @@ are not standalone installed host plugins.
 | [audio-numerical-stability](audio-numerical-stability/SKILL.md) | Diagnose audio finite-arithmetic errors in RMS, FFT, PSD, Welch, ENBW, quantization and IIR poles; verify portable mathematical remedies with independent extreme-input fixtures |
 | [audio-vu-metering](audio-vu-metering/SKILL.md) | Calibrate and verify VU-style mean-rectified indication, 300 ms second-order needle ballistics, analog/digital alignment, sample clocks and distinct peak/RMS/loudness semantics |
 | [audio-ppm-metering](audio-ppm-metering/SKILL.md) | Distinguish historic PPM profiles from VU/true peak/loudness; verify published EBU Type IIb burst/return tests and explicitly reject unearned full standard conformance |
+| [audio-program-loudness](audio-program-loudness/SKILL.md) | BS.1770 programme LUFS/LKFS, EBU R 128 delivery analysis, M/S windows and two-stage integrated gating for labeled channel beds |
 
 ## Core mathematics (independent curriculum)
 
