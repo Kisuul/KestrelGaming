@@ -1,7 +1,9 @@
 """Offline educational envelope/gain-control reference; NOT a certified dynamics processor.
 
-1/e (63.212% step) time constants; sample-clocked and allocation-heavy by design.
-No interpolation, lookahead, gain application, host callbacks or true-peak guarantee.
+One-pole time conventions govern the smoothed state: peak amplitude,
+RMS mean-square energy, or dB attenuation. RMS output takes the square root.
+Sample-clocked and allocation-heavy; no interpolation, lookahead, gain
+application, host callbacks or true-peak guarantee.
 """
 from __future__ import annotations
 
@@ -53,10 +55,11 @@ def _sample_index(value: int) -> None:
 
 def one_pole_weight(sample_rate_hz: int, time_seconds: float,
                     convention: Convention = "one_e") -> float:
-    """Return beta for e <- e + beta*(target-e); tau=0 tracks immediately.
+    """Return beta for state <- state + beta*(target-state); tau=0 is immediate.
 
-    The alternate time conventions mean 90% rise or -60dB amplitude error
-    remaining after *time_seconds*, respectively. No hidden conversion.
+    Named conventions act on the smoothed state. For RMS, that state is
+    mean-square power, so the square-root output has different step timing.
+    The -60 dB name describes peak-amplitude residual, not RMS amplitude.
     """
     _sample_rate(sample_rate_hz)
     seconds = _nonnegative(time_seconds, "time_seconds")
