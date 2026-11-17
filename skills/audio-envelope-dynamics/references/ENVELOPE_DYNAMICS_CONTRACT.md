@@ -14,7 +14,7 @@ There is no established IEC/EBU/ITU standard prescribing the attack and release 
 - `max` linking computes `d[n] = max_i |x_i[n]|` and processes one shared state. When `detector=rms`, this represents exponential RMS of the **maximum instantaneous channel power**, **not** sum-channel or average-channel RMS. `independent` maintains one state for every channel.
 - Both detectors include DC, preserve polarity invariance and have no leading or trailing padding.
 
-The canonical convention, `one_e`, defines a **residual-error** time constant `tau` in seconds. For a sample rate `fs` in Hz:
+The canonical convention, `one_e`, defines a **residual-error time constant for the smoothed state**, `tau` in seconds. In `peak` mode the state is amplitude `e`; in `rms` mode the smoothed state is **mean-square energy** `q=e²` (the reported RMS amplitude `sqrt(q)` has different timing); in `GainReductionStream` the state is attenuation depth in dB. For a sample rate `fs` in Hz:
 
 ```
 alpha = exp(-1/(fs*tau))
@@ -35,21 +35,23 @@ For the RMS follower, attack and release compare the **magnitude** `d=|x|` to th
 q_new = (1-beta)*q_old + beta*d*d
 ```
 
-The reference evaluates its square root using `hypot(sqrt(1-beta)*e_old, sqrt(beta)*d)` to avoid overflow from squaring finite, large PCM samples. With `beta=1`, the reference assigns `d` directly to avoid unnecessary last-bit rounding. Inputs are never silently denormal-flushed; binary64 rounding can nevertheless make very small nonzero updates have no observable effect.
+The reference evaluates its square root using `hypot(sqrt(1-beta)*e_old, sqrt(beta)*d)` to avoid overflow from squaring finite, large PCM samples. With `beta=1`, the reference assigns `d` directly to avoid unnecessary last-bit rounding. **RMS attack/release coefficients control the decay of error in `q`, not the decay of error in the displayed RMS amplitude.** For a step from zero power to unit power, `q(T)=1-alpha^N`; for release from unit power to zero, `q(T)=alpha^N`, with `N=fs*T` for an integer-sample checkpoint. Inputs are never silently denormal-flushed; binary64 rounding can nevertheless make very small nonzero updates have no observable effect.
 
-Alternative **named** conventions use the same recurrence but a different exponent factor `c`:
+Alternative **named** conventions use the same recurrence but a different exponent factor `c`. The percentage or residual refers to the **filtered state** (`e` for peak, `q` for RMS), not necessarily the amplitude returned to callers:
 
-| Convention | Meaning of `time_seconds=T` | `c` in `alpha=exp(-c/(fs*T))` |
+| Convention | State-domain meaning of `time_seconds=T` | `c` in `alpha=exp(-c/(fs*T))` |
 | --- | --- | --- |
-| `one_e` | Step error decays to `1/e` at `T`; rise is 63.212% | 1 |
-| `rise_90` | Step rises 90% by `T` | `ln(10)` |
-| `residual_minus60_db` | Step amplitude error reaches −60 dB, i.e. 0.001, at `T` | `ln(1000)` |
+| `one_e` | State error retains `1/e` after `T`; peak attack rises 63.212%, RMS attack rises 79.506% | 1 |
+| `rise_90` | State rises 90% toward its target by `T`; peak amplitude reaches 90%, RMS amplitude reaches `sqrt(0.9)` ≈ 94.868% | `ln(10)` |
+| `residual_minus60_db` | State residual fraction is 0.001 by `T`; peak amplitude residual is −60 dB, **RMS release amplitude residual is `sqrt(0.001)` ≈ 0.031623 (−30 dB)** | `ln(1000)` |
+
+The historical name `residual_minus60_db` is retained for API compatibility; it is an amplitude-decibel description **only for the amplitude-domain peak follower**. It must not be interpreted as an RMS output reaching −60 dB. Achieving a −60 dB RMS amplitude residual requires a mean-square residual of `1e-6` and a different coefficient; that alternative is not implemented or implicitly selected.
 
 The W3C's compressor describes the time to change *gain* by 10 dB, and JUCE uses a separate coefficient law. Neither is interchangeable with Kestrel's canonical time parameter without a full design/topology comparison.
 
 ### Analytic checkpoints
 
-For a constant target `A` and zero initial envelope, an **amplitude peak** follower has `e[n] = A*(1-alpha**(n+1))`; on release from `A` to zero it has `e[n] = A*alpha**(n+1)`. A constant target `A` in RMS mode gives `r[n] = A*sqrt(1-alpha**(n+1))`, assuming only attack samples. The first update takes place at the first sample index `origin`, so a 1000 Hz reference with 100 ms `one_e` attack reaches the 1/e residual checkpoint after **100 processed samples**, at index `origin+99`.
+For a constant target `A` and zero initial envelope, an **amplitude peak** follower has `e[n] = A*(1-alpha**(n+1))`; on release from `A` to zero it has `e[n] = A*alpha**(n+1)`. A constant target `A` in RMS mode gives `r[n] = A*sqrt(1-alpha**(n+1))` on attack from zero and `r[n] = A*sqrt(alpha**(n+1))` on release from a settled amplitude `A` to zero. The first update takes place at the first sample index `origin`, so a 1000 Hz reference with a 100 ms convention reaches its state-domain checkpoint after **100 processed samples**, at index `origin+99`. See the independent four-scenario peak/RMS fixtures in the [golden ledger](../../../tests/fixtures/AUDIO_ENVELOPE_DYNAMICS_GOLDENS.md).
 
 For abrupt changes that cross the old state, re-evaluate attack versus release *each sample*. A branch choice cannot be inferred from `x[n]-x[n-1]`. A zero target following a high envelope uses release, even if the input value is negative or a DC component is present.
 

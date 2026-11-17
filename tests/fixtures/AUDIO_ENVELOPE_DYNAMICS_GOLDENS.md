@@ -2,7 +2,7 @@
 
 ## Provenance and precision
 
-These are mathematical consequences of a **declared Kestrel one-pole model**, not EBU/IEC instrument targets. Values are frozen before reference verification using `Decimal` with at least 80 decimal digits, and are rounded here for readability. The stated contract uses a nonnegative amplitude envelope, `one_e` attack/release and `fs=1000 Hz` unless a row says otherwise. The [reference contract](../../skills/audio-envelope-dynamics/references/ENVELOPE_DYNAMICS_CONTRACT.md) defines units and sample clocks. A `1/e` time of 0.1 s contains 100 samples, whose final index is `origin+99`.
+These are mathematical consequences of a **declared Kestrel one-pole model**, not EBU/IEC instrument targets. Values are frozen before reference verification using `Decimal` with at least 80 decimal digits, and are rounded here for readability. Time constants apply to the **smoothed state**: amplitude for peak, squared amplitude/power for exponential RMS, and dB attenuation for the gain follower. The stated contract uses a nonnegative amplitude envelope, `one_e` attack/release and `fs=1000 Hz` unless a row says otherwise. The [reference contract](../../skills/audio-envelope-dynamics/references/ENVELOPE_DYNAMICS_CONTRACT.md) defines units and sample clocks. A `1/e` time of 0.1 s contains 100 samples, whose final index is `origin+99`.
 
 | Scenario | Independent expression | Expected numerical value |
 | --- | --- | --- |
@@ -11,8 +11,11 @@ These are mathematical consequences of a **declared Kestrel one-pole model**, no
 | Peak release `1 -> 0`, after 100 samples | `exp(-1)` | `0.36787944117144232159552` amplitude |
 | Exponential RMS step `0 -> 1`, after 100 samples | `sqrt(1-exp(-1))` | `0.79506009762065010729577` RMS amplitude |
 | Exponential RMS first sample | `sqrt(1-exp(-1/100))` | `0.09975052005293980634533` RMS amplitude |
-| 90%-rise convention after `T=0.1 s` | `1-exp(-ln(10))` | `0.9` amplitude |
-| −60 dB residual convention after `T=0.1 s` | `exp(-ln(1000))` | `0.001` amplitude residual |
+| Peak `rise_90` attack from zero after 100 samples | `1-exp(-ln(10))` | `0.9` amplitude |
+| RMS `rise_90` attack from zero after 100 samples | `sqrt(1-exp(-ln(10)))` | `0.94868329805051379959967` RMS amplitude |
+| Peak `residual_minus60_db` release after 100 samples | `exp(-ln(1000))` | `0.001` amplitude (−60 dB) |
+| RMS `residual_minus60_db` release after 100 samples | `sqrt(exp(-ln(1000)))` | `0.03162277660168379331999` RMS amplitude (−30 dB) |
+| Exponential RMS `one_e` release after 100 samples | `sqrt(exp(-1)) = exp(-1/2)` | `0.60653065971263342360380` RMS amplitude |
 | Gain-reduction step `0 -> 12 dB` after 100 samples | `12*(1-exp(-1))` | `7.58544670594269214085371` dB attenuation |
 | Applied gain at previous checkpoint | `10**(-12*(1-exp(-1))/20)` | `0.41756843772092928605487` linear gain |
 | Compressor `L=-10 dBFS, T=-20 dBFS, R=4` | `-(1-1/4)*10` | `-7.5 dB` gain request |

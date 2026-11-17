@@ -79,6 +79,49 @@ class CoefficientTests(unittest.TestCase):
                 beta = mod.one_pole_weight(1000, 0.1, convention)
                 self.assertAlmostEqual((1-beta) ** 100, expected, delta=3e-14)
 
+    # ED-22-01: frozen closed-form checkpoints independent of one_pole_weight
+    # or the reference's sample-by-sample recurrence. Both detector modes are
+    # exercised over exactly 100 samples (100 ms at 1,000 Hz).
+    def assert_peak_and_rms_checkpoint(self, *, convention, release, peak, rms):
+        for detector, expected in (("peak", peak), ("rms", rms)):
+            with self.subTest(detector=detector, convention=convention, release=release):
+                settings = cfg(channel_labels=("L",), detector=detector,
+                               convention=convention,
+                               attack_seconds=0.1, release_seconds=0.1,
+                               initial_envelope=1.0 if release else 0.0)
+                stream = mod.EnvelopeStream(settings, epoch_id="oracle", start_sample=101)
+                frames = stream.push(101, ([0.0 if release else 1.0] * 100,),
+                                     epoch_id="oracle")
+                self.assertEqual(len(frames), 100)
+                self.assertEqual(frames[-1].sample_index, 200)
+                self.assertEqual(frames[-1].phases, ("release" if release else "attack",))
+                self.assertAlmostEqual(frames[-1].envelopes[0], expected,
+                                       delta=2e-14)
+
+    def test_ed_22_01_one_e_attack_state_domain(self):
+        # Peak: 1-exp(-1); RMS: sqrt(1-exp(-1)).
+        self.assert_peak_and_rms_checkpoint(
+            convention="one_e", release=False,
+            peak=0.63212055882855767840448, rms=0.79506009762065010729577)
+
+    def test_ed_22_01_rise_90_attack_state_domain(self):
+        # Peak: 9/10; RMS: sqrt(9/10), because 90% refers to mean-square q.
+        self.assert_peak_and_rms_checkpoint(
+            convention="rise_90", release=False,
+            peak=0.9, rms=0.94868329805051379959967)
+
+    def test_ed_22_01_one_e_release_state_domain(self):
+        # Peak: exp(-1); RMS: exp(-1/2), because q(tau)=exp(-1).
+        self.assert_peak_and_rms_checkpoint(
+            convention="one_e", release=True,
+            peak=0.36787944117144232159552, rms=0.60653065971263342360380)
+
+    def test_ed_22_01_minus60_release_state_domain(self):
+        # Peak: 1/1000 (-60 dB amplitude); RMS: sqrt(1/1000) (-30 dB).
+        self.assert_peak_and_rms_checkpoint(
+            convention="residual_minus60_db", release=True,
+            peak=0.001, rms=0.03162277660168379331999)
+
     def test_tau_zero_is_immediate(self):
         s = mod.EnvelopeStream(cfg(channel_labels=("L",), attack_seconds=0,
                                        release_seconds=0), epoch_id="e", start_sample=0)
