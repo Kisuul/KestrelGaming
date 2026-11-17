@@ -3,6 +3,7 @@ from __future__ import annotations
 
 from collections import deque
 from dataclasses import dataclass
+from fractions import Fraction
 from itertools import chain, islice
 import math
 from typing import Literal, Sequence
@@ -26,7 +27,10 @@ _LAYOUTS = (
     frozenset(("L", "R")), _FIVE_MAIN, _FIVE_MAIN | {"LFE"},
 )
 _LOUDNESS_OFFSET = -0.691
-_ABSOLUTE_GATE_RMS = 10.0 ** ((-70.0 - _LOUDNESS_OFFSET) / 20.0)
+# Exact published gate T = 10**(-69309/20000) lies strictly between this
+# binary64 value and its successor. Compare to the lower neighbor, not a
+# rounded evaluation of T. See the contract and exact-integer bracket test.
+_ABSOLUTE_GATE_RMS_FLOOR = float.fromhex("0x1.670bbcee4aad0p-12")
 _RELATIVE_GATE_DIVISOR = math.sqrt(10.0)
 _FilterState = tuple[float, float, float, float]
 _ZERO_FILTER_STATE = (0.0, 0.0, 0.0, 0.0)
@@ -109,21 +113,29 @@ def _lufs(rms: float) -> float:
 
 
 def integrate_block_rms(block_rms: Sequence[float]) -> GatedLoudness:
-    """Apply both gates to the roots of complete weighted block powers."""
+    """Gate exact binary64 roots; RMS reductions and LUFS outputs remain rounded.
+
+    Relative decisions use exact rational powers: 10*N*r_j**2 > sum(r_i**2).
+    This offline reference deliberately favors correctness over query speed.
+    """
     roots = [_finite(value, "block RMS") for value in block_rms]
     if any(value < 0.0 for value in roots):
         raise ValueError("block RMS must be nonnegative")
     count = len(roots)
     if count == 0:
         return GatedLoudness("insufficient_data", None, None, None, 0, 0, 0)
-    absolute = [value for value in roots if value > _ABSOLUTE_GATE_RMS]
+    absolute = [value for value in roots if value > _ABSOLUTE_GATE_RMS_FLOOR]
     if not absolute:
         status = "below_absolute_gate" if any(roots) else "silence"
         return GatedLoudness(status, None, None, None, count, 0, 0)
 
     absolute_mean_rms = _root_mean_power(absolute, len(absolute))
     relative_gate_rms = absolute_mean_rms / _RELATIVE_GATE_DIVISOR
-    survivors = [value for value in absolute if value > relative_gate_rms]
+    # Avoid rounding a sqrt/normalization chain before a discontinuous decision.
+    powers = [Fraction.from_float(value) ** 2 for value in absolute]
+    power_sum = sum(powers, Fraction(0))
+    survivors = [value for value, power in zip(absolute, powers)
+                 if 10 * len(absolute) * power > power_sum]
     integrated_rms = _root_mean_power(survivors, len(survivors))
     return GatedLoudness("ok", _lufs(integrated_rms), _lufs(absolute_mean_rms),
                          _lufs(relative_gate_rms), count, len(absolute), len(survivors))

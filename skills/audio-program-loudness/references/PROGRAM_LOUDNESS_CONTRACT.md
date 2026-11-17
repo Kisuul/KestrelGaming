@@ -18,6 +18,11 @@ Tech 3341 §§2.1–2.3 specifies M, S and I. Sections 2.5, 2.9 and Table 1 cove
 units, alignment and the ±0.1 LUFS loudness test tolerance. Use Tech 3342
 for Loudness Range. [EBU Tech 3341 v4 (11/2023)](https://tech.ebu.ch/docs/tech/tech3341.pdf)
 
+BS.1770 loudness is a standardized measurement model, not a universal
+subjective-loudness estimate or an acoustic SPL measurement. Calibration tones
+test meter behavior; agreement on tones alone does not validate perception
+across listeners, content and playback conditions.
+
 R 128 recommends normalizing whole-programme I to −23 LUFS for its delivery
 workflow. It allows ±1.0 LU in impractical cases such as live programmes and
 ±0.2 LU for QC implementation errors. Under its reference, 0 LU corresponds
@@ -82,8 +87,8 @@ For I, keep complete block powers `P_j` above `L^-1(-70)`. Compute their
 energy mean `P_abs`. Keep powers above both `L^-1(-70)` and `P_abs / 10`.
 Convert the new energy mean to LUFS. In the square-root representation the
 relative threshold is `sqrt(P_abs) / sqrt(10)`. Compare unrounded values
-strictly with `>`. At machine precision this comparison uses the actual
-binary64 threshold, even when two formatted LUFS readings round identically.
+strictly with `>`. Gate membership uses the precision policy below; rounded
+RMS thresholds and formatted LUFS readings do not decide membership.
 With no complete blocks or an empty absolute gate, there is no final mean.
 Store block history so new material can change the relative gate and which
 earlier blocks pass it.
@@ -146,6 +151,45 @@ scales, roundoff in the filters or the RMS can erase a residual. Test the
 required numerical range explicitly. The reference is single-caller offline
 code. It keeps up to 3 s of window summaries, plus the 10 gate blocks per
 second needed to reevaluate I. Querying I scans the history.
+
+### Gate precision policy
+
+`integrate_block_rms` first validates and converts inputs to finite nonnegative
+binary64 values. The gate decisions are exact for those **represented roots**
+and the published decimal gate constants, not for an unrounded PCM history or
+an arbitrary-precision integer before conversion.
+
+- **Absolute:** the published threshold is
+  `T = 10**((-70 + 0.691)/20) = 10**(-69309/20000)`.
+  It lies strictly between adjacent binary64 roots
+  `a = 0x1.670bbcee4aad0p-12` and `b = 0x1.670bbcee4aad1p-12`.
+  Thus for any binary64 root `r`, `r > T` is equivalent to `r > a`.
+  This is a representation-specific cutoff, not an epsilon or `>=` rule.
+  The regression certifies both endpoints by exact integer inequalities:
+  for `v = n/d`, compare `n**20000 * 10**69309` with `d**20000`.
+  The lower endpoint is strictly below and the upper strictly above, with
+  no binary64 number between. No runtime transcendental fallback is needed.
+- **Relative:** for the `N` absolute survivors, form each squared root as an
+  exact `Fraction` from its binary64 value. A candidate `r_j` passes exactly
+  when `10*N*r_j**2 > sum(r_i**2)`. No normalization, square root, logarithm,
+  or binary64 power intermediate participates in this decision. Equality
+  remains excluded. Python integer arithmetic avoids intermediate range loss.
+
+The scaled reductions, filter recurrence, channel weights, block roots and
+LUFS conversions still round in binary64. In particular, `relative_gate_lufs`
+is a rounded diagnostic, not the comparator's threshold. This policy does not
+make the entire PCM-to-LUFS pipeline exact. High-precision oracle tests use
+`Decimal.from_float` at 100 and 160 digits to check the exact input roots;
+survivor identities/counts are checked separately from a fixture-specific
+5e-12 LU output budget. Tests cover the hostile roots, both error directions,
+strict ties and neighbors, exact power-of-two rescaling, seeded nearby cases,
+and finite range extremes.
+
+Exact rational comparison adds allocation and integer-arithmetic cost per
+historical block. Both memory and query work grow with programme length;
+`integrated()` is not a real-time-safe callback. A production meter needs a
+separate performance and accuracy contract, including its own verified gate
+strategy. No real-time or physical-device certification follows from this code.
 
 ## Verification and use cases
 

@@ -6,8 +6,11 @@ reads PCM without extraction, playback, resampling, or network access.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
+import hashlib
 import math
 from pathlib import Path
+import sys
 import wave
 import zipfile
 
@@ -19,6 +22,55 @@ _FIVE = ("L", "R", "C", "LS", "RS")
 _SIX = ("L", "R", "C", "LFE", "LS", "RS")
 _SIX_FIXTURE = "seq-3341-6-6channels-WAVEEX-16bit.wav"
 _TOLERANCE_LU = 0.1  # Tech 3341 v4 Table 1
+_OFFICIAL_SHA256 = "9cc500b4df83f7c21855c74dce795ef5209a752bf884253ae57d0ce512efb062"
+# Deliberately generous bounds for the pinned v5.0 release, not general ZIP support.
+_MAX_ARCHIVE_BYTES = 1 << 30
+_MAX_ENTRIES = 256
+_MAX_ENTRY_BYTES = 256 << 20
+_MAX_EXPANDED_BYTES = 2 << 30
+# Longest measured case is case 8: 246.357334 seconds; allow up to five minutes.
+_MAX_PCM_FRAMES = 48_000 * 300
+
+
+def _validate_entries(archive):
+    entries = archive.infolist()
+    if len(entries) > _MAX_ENTRIES:
+        raise ValueError("too many ZIP entries")
+    names = [entry.filename for entry in entries]
+    if len(set(names)) != len(names):
+        raise ValueError("duplicate ZIP entry")
+    if sum(entry.file_size for entry in entries) > _MAX_EXPANDED_BYTES:
+        raise ValueError("ZIP expanded size exceeds limit")
+    for entry in entries:
+        if entry.file_size > _MAX_ENTRY_BYTES:
+            raise ValueError(f"ZIP entry exceeds size limit: {entry.filename}")
+        if entry.flag_bits & 1:
+            raise ValueError(f"encrypted ZIP entry: {entry.filename}")
+    for _, name, _ in _fixtures():
+        if name not in names or archive.getinfo(name).is_dir():
+            raise ValueError(f"missing fixture entry: {name}")
+
+
+@contextmanager
+def _official_archive(path):
+    # Hash and parse the same open file; reject unpinned bytes before ZIP parsing.
+    print("Verification mode: official EBU v5.0 (pinned SHA-256)", flush=True)
+    with path.open("rb") as source:
+        digest = hashlib.sha256()
+        size = 0
+        while chunk := source.read(1 << 20):
+            size += len(chunk)
+            if size > _MAX_ARCHIVE_BYTES:
+                raise ValueError("archive exceeds size limit")
+            digest.update(chunk)
+        observed = digest.hexdigest()
+        print(f"Archive SHA-256: {observed}", flush=True)
+        if observed != _OFFICIAL_SHA256:
+            raise ValueError(f"official archive SHA-256 mismatch; expected {_OFFICIAL_SHA256}")
+        source.seek(0)
+        with zipfile.ZipFile(source) as archive:
+            _validate_entries(archive)
+            yield archive
 
 
 def _fixtures():
@@ -77,6 +129,8 @@ def _measure(archive, name, labels):
         rate, channels, width = pcm.getframerate(), pcm.getnchannels(), pcm.getsampwidth()
         if rate != 48_000 or channels != len(labels) or width not in (2, 3):
             raise ValueError(f"unexpected PCM format: {name}")
+        if not 0 < pcm.getnframes() <= _MAX_PCM_FRAMES:
+            raise ValueError(f"PCM frame count exceeds limits: {name}")
         config = LoudnessConfig(rate, labels, "EBU v5.0 test PCM")
         meter = ProgramLoudnessStream(config, epoch_id=name, start_sample=0)
         for data in _pcm_chunks(pcm, source, name):
@@ -114,25 +168,29 @@ def _observations(case, integrated, momentary, short_term):
     return list(_segment_maxima(momentary, 38_400))
 
 
-def main() -> int:
+def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("archive", type=Path, help="EBU Loudness Test Set v5.0 ZIP")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     total = failed = 0
     worst = 0.0
     print("Test sequences © EBU. Offline M/S/I window and gate checks.", flush=True)
-    with zipfile.ZipFile(args.archive) as archive:
-        for case, name, labels in _fixtures():
-            observations = _observations(case, *_measure(archive, name, labels))
-            errors = [abs(actual - expected) if actual is not None and math.isfinite(actual) else math.inf
-                      for actual, expected in observations]
-            largest = max(errors, default=math.inf)
-            passed = largest <= _TOLERANCE_LU
-            total += 1
-            failed += not passed
-            worst = max(worst, largest)
-            print(f"{case:2d}  {name}: {'PASS' if passed else 'FAIL'}  max error {largest:.6f} LU",
-                  flush=True)
+    try:
+        with _official_archive(args.archive) as archive:
+            for case, name, labels in _fixtures():
+                observations = _observations(case, *_measure(archive, name, labels))
+                errors = [abs(actual - expected) if actual is not None and math.isfinite(actual) else math.inf
+                          for actual, expected in observations]
+                largest = max(errors, default=math.inf)
+                passed = largest <= _TOLERANCE_LU
+                total += 1
+                failed += not passed
+                worst = max(worst, largest)
+                print(f"{case:2d}  {name}: {'PASS' if passed else 'FAIL'}  max error {largest:.6f} LU",
+                      flush=True)
+    except (OSError, ValueError, EOFError, zipfile.BadZipFile, wave.Error) as exc:
+        print(f"Fixture verification error: {exc}", file=sys.stderr)
+        return 2
     print(f"{total - failed}/{total} files passed, worst difference {worst:.6f} LU")
     return int(failed != 0)
 

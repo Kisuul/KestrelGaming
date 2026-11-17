@@ -1,12 +1,16 @@
 """Published loudness expectations plus independent and adversarial fixtures."""
 
+from decimal import Decimal, localcontext
 import math
 from pathlib import Path
+import random
 import sys
 import unittest
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] /
                        "skills/audio-program-loudness/scripts"))
+import reference_program_loudness as reference
 from reference_program_loudness import LoudnessConfig, ProgramLoudnessStream, integrate_block_rms
 
 
@@ -44,6 +48,26 @@ def feed_segments(stream, segments):
             momentary.extend(result["momentary"])
             short_term.extend(result["short_term"])
     return momentary, short_term
+
+
+def gate_oracle(roots, precision=100):
+    """Independent Decimal evaluation of published energy equations.
+
+    Inputs are exact binary64 values, thresholds use published decimal constants.
+    Return survivor indices as well as final LUFS; repeat at higher precision.
+    """
+    with localcontext() as ctx:
+        ctx.prec = precision
+        values = [Decimal.from_float(float(v)) for v in roots]
+        threshold = Decimal(10) ** ((Decimal("-70") + Decimal("0.691")) / Decimal(20))
+        absolute = tuple(i for i, v in enumerate(values) if v > threshold)
+        if not absolute:
+            return absolute, (), None
+        mean = sum((values[i]**2 for i in absolute), Decimal(0)) / len(absolute)
+        final = tuple(i for i in absolute if values[i]**2 > mean / Decimal(10))
+        power = sum((values[i]**2 for i in final), Decimal(0)) / len(final)
+        level = Decimal("-0.691") + Decimal(10) * power.log10()
+        return absolute, final, float(level)
 
 
 class PublishedToneTests(unittest.TestCase):
@@ -135,6 +159,75 @@ class PublishedToneTests(unittest.TestCase):
 
 
 class GateTests(unittest.TestCase):
+    def assert_oracle(self, roots):
+        expected = gate_oracle(roots, precision=100)
+        self.assertEqual(expected, gate_oracle(roots, precision=160))
+        # Observe the actual selected roots without adding diagnostics to the API.
+        with patch.object(reference, "_root_mean_power", wraps=reference._root_mean_power) as reduction:
+            observed = integrate_block_rms(roots)
+        absolute, final, level = expected
+        self.assertEqual(observed.absolute_survivor_count, len(absolute))
+        self.assertEqual(observed.final_survivor_count, len(final))
+        if final:
+            self.assertEqual(observed.status, "ok")
+            self.assertEqual(reduction.call_args_list[0].args[0], [roots[i] for i in absolute])
+            self.assertEqual(reduction.call_args_list[-1].args[0], [roots[i] for i in final])
+            # Fixture-specific output budget; gate membership above is exact.
+            self.assertAlmostEqual(observed.integrated_lufs, level, delta=5e-12)
+        else:
+            self.assertIsNone(observed.integrated_lufs)
+        return observed
+
+    def test_hostile_three_root_counterexample(self):
+        roots = (0.011456406447987386, 0.03771438262924999, 0.04882472278710498)
+        result = self.assert_oracle(roots)
+        self.assertEqual(gate_oracle(roots)[1], (1, 2))
+        self.assertEqual(result.final_survivor_count, 2)
+        self.assertAlmostEqual(result.integrated_lufs, -27.896351716735627, delta=1e-12)
+
+    def test_relative_gate_also_repairs_over_rejection(self):
+        roots = (1.1252446619914225, 5.091974929021372, 3.2849478311052853)
+        result = self.assert_oracle(roots)
+        self.assertEqual(gate_oracle(roots)[1], (0, 1, 2))
+        self.assertEqual(result.final_survivor_count, 3)
+        self.assertAlmostEqual(result.integrated_lufs, 10.333939227621691, delta=1e-12)
+
+    def test_relative_boundary_across_exact_power_of_two_scales(self):
+        hostile = (0.011456406447987386, 0.03771438262924999, 0.04882472278710498)
+        for exponent in (-5, 0, 20, 300, 1000):
+            roots = tuple(math.ldexp(v, exponent) for v in hostile)
+            with self.subTest(exponent=exponent):
+                self.assertEqual(self.assert_oracle(roots).final_survivor_count, 2)
+        for exponent in (-10, 0, 100, 1020):
+            for boundary, survivors in ((math.nextafter(1.0, 0), 2), (1.0, 2),
+                                        (math.nextafter(1.0, 2), 3)):
+                roots = tuple(math.ldexp(v, exponent) for v in (boundary, 2.0, 5.0))
+                with self.subTest(exponent=exponent, boundary=boundary):
+                    self.assertEqual(self.assert_oracle(roots).final_survivor_count, survivors)
+
+    def test_seeded_neighboring_relative_boundaries(self):
+        rng = random.Random(20261116)
+        for case in range(32):
+            # For three blocks (b,x,y), b lies on the relative gate when
+            # 29*b*b=x*x+y*y. Generate a boundary independently at 160 digits.
+            x, y = rng.uniform(0.05, 1.0), rng.uniform(0.05, 1.0)
+            with localcontext() as ctx:
+                ctx.prec = 160
+                dx, dy = Decimal.from_float(x), Decimal.from_float(y)
+                boundary = float(((dx*dx + dy*dy) / Decimal(29)).sqrt())
+            for b in (math.nextafter(boundary, 0), boundary, math.nextafter(boundary, math.inf)):
+                with self.subTest(case=case, b=b):
+                    self.assert_oracle((b, x, y))
+
+    def test_gate_extreme_finite_roots_do_not_square_in_binary64(self):
+        tiny = math.nextafter(0.0, 1.0)
+        for roots in ((tiny,), (sys.float_info.min, 1e-200),
+                      (tiny, 1.0, 2.0, 5.0, sys.float_info.max),
+                      (sys.float_info.max, sys.float_info.max), (1e200, 2e200, 5e200),
+                      (0.0, -0.0)):
+            with self.subTest(roots=roots):
+                self.assert_oracle(roots)
+
     def test_independent_two_pass_fixture(self):
         roots = [10 ** ((level + 0.691) / 20) for level in (-23, -40, -23, -40)]
         result = integrate_block_rms(roots)
@@ -143,14 +236,30 @@ class GateTests(unittest.TestCase):
         self.assertAlmostEqual(result.integrated_lufs, -23.0, places=12)
         self.assertEqual((result.absolute_survivor_count, result.final_survivor_count), (4, 2))
 
-    def test_absolute_gate_is_strict_even_when_relative_gate_is_lower(self):
-        gate = 0.0003424128070885051  # 10^((-70 + 0.691)/20), in binary64
-        just_under = math.nextafter(gate, 0)
-        just_over = math.nextafter(gate, math.inf)
-        result = integrate_block_rms([just_under, gate, just_over])
-        self.assertEqual((result.absolute_survivor_count, result.final_survivor_count), (1, 1))
-        self.assertLess(result.relative_gate_lufs, -70)
-        self.assertEqual(integrate_block_rms([gate]).status, "below_absolute_gate")
+    def test_absolute_gate_uses_published_constants_not_rounded_source_formula(self):
+        # Decimal oracle does not import the implementation's threshold constant.
+        below = float.fromhex("0x1.670bbcee4aad0p-12")
+        above = math.nextafter(below, math.inf)
+        old_gate = 10.0 ** ((-70.0 + 0.691) / 20.0)
+        roots = (math.nextafter(below, 0), below, above,
+                 math.nextafter(above, math.inf), old_gate)
+        self.assert_oracle(roots)
+        for root in roots:
+            self.assert_oracle((root,))
+        self.assertEqual(integrate_block_rms((below,)).status, "below_absolute_gate")
+        self.assertEqual(integrate_block_rms((above,)).status, "ok")
+        self.assertEqual(integrate_block_rms((old_gate,)).status, "ok")
+        self.assertLess(integrate_block_rms((above,)).relative_gate_lufs, -70)
+
+    def test_absolute_boundary_bracket_has_exact_integer_certificate(self):
+        # T=10**(-69309/20000). For rational v=n/d, v<T iff
+        # n**20000 * 10**69309 < d**20000. No logs or Decimal rounding.
+        below = float.fromhex("0x1.670bbcee4aad0p-12")
+        above = math.nextafter(below, math.inf)
+        for root, relation in ((below, -1), (above, 1)):
+            n, d = root.as_integer_ratio()
+            difference = n**20000 * 10**69309 - d**20000
+            self.assertEqual((difference > 0) - (difference < 0), relation)
 
     def test_relative_gate_is_strict(self):
         # Mean of {1, 4, 25} is 10. A power of 1 falls exactly on the second gate.
@@ -190,7 +299,7 @@ class GateTests(unittest.TestCase):
                 self.assertEqual(math.isfinite(result["momentary"][0].lufs), peak != 0)
 
     def test_gate_rejects_invalid_roots(self):
-        for bad in (-1.0, math.inf, math.nan, True, "1", 10**400):
+        for bad in (-1.0, math.inf, math.nan, True, "1", 10**400, None, [], 1j):
             with self.subTest(bad=str(bad)[:20]), self.assertRaises(ValueError):
                 integrate_block_rms([1.0, bad])
 

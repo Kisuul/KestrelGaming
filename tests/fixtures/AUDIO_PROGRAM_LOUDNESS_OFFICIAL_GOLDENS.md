@@ -59,9 +59,60 @@ Tech 3342 tests LRA. Neither measurement belongs to this reference.
   external test material. Inspect the case edition and expected response
   before making a conformance claim.
 
-## Observed offline results
+## Adversarial gate fixtures
 
-Test sequences © EBU. The [fixture checker](../../skills/audio-program-loudness/scripts/check_ebu_loudness.py)
+The [reference regressions](../test_audio_program_loudness_reference.py) preserve
+these exact binary64 input values. Expected survivor indices are zero-based.
+`Decimal.from_float` at 100 and 160 digits evaluates published energy equations
+independently of the implementation's Fraction comparisons. Survivor identity
+and count must agree exactly; final LUFS uses an absolute-only 5e-12 LU
+fixture budget for rounded reductions/logarithms, not a gate tolerance.
+
+| Fixture | Roots | Expected final indices | Expected I (LUFS) |
+| --- | --- | --- | ---: |
+| Gauge G-20-01 | `(0.011456406447987386, 0.03771438262924999, 0.04882472278710498)` | `(1, 2)` | −27.896351716735627 |
+| Opposite rounding direction | `(1.1252446619914225, 5.091974929021372, 3.2849478311052853)` | `(0, 1, 2)` | 10.333939227621691 |
+| Exact relative equality | `(1.0, 2.0, 5.0)` | `(1, 2)` | 10.922680022349748 |
+
+The original implementation retains three roots in G-20-01 and two in the
+opposite-direction fixture. The old absolute-gate constant
+`10.0**((-70.0+0.691)/20.0)` must yield `ok`, not `below_absolute_gate`.
+The threshold itself is irrational; its adjacent binary64 roots are certified
+by exact integer powers in `test_absolute_boundary_bracket_has_exact_integer_certificate`.
+These fixtures exercise the block-root API; no contiguous PCM sequence
+producing those exact overlapping roots is claimed. Further regressions cover
+neighbors, exact power-of-two scales, seeded boundaries, finite extremes and
+callback continuity. See the contract's [gate precision policy](../../skills/audio-program-loudness/references/PROGRAM_LOUDNESS_CONTRACT.md#gate-precision-policy).
+
+## Fixture identity and parser checks
+
+The checker has one mode: **official EBU v5.0**, requiring SHA-256
+`9cc500b4df83f7c21855c74dce795ef5209a752bf884253ae57d0ce512efb062`.
+It reports the selected mode and observed digest before opening the ZIP,
+and refuses a mismatch. It hashes and parses the same open file. There is
+no command-line digest override or nonofficial compliance mode.
+
+Before measuring, it requires all 53 expected entries and rejects duplicate
+names, encrypted entries, more than 256 members, any member over 256 MiB,
+or total expanded size over 2 GiB. Hashing is capped at 1 GiB; decoded
+PCM is capped at 300 seconds per fixture, covering the longest measured
+file (case 8, approximately 246.358 seconds). These deliberately generous
+limits bound work for this pinned release. PCM reads remain chunked, and
+no ZIP members are extracted to disk.
+
+Synthetic archive regressions check accepted test identities, rejected
+identities, malformed ZIP/WAV input, missing/duplicate entries and resource
+bounds. Only the tests patch the pinned digest for their synthetic files;
+those checks establish parser/control behavior, **not** official-corpus
+compliance. A synthetic six-channel WAVE_FORMAT_EXTENSIBLE file exercises
+the original case-6 last-frame handling and rejects truncated or extra
+trailers and unrelated filenames.
+
+## Historical offline results (baseline `dc272e8`)
+
+The following results were recorded by the original implementation at
+`dc272e8ebc60f38078c98d99bd099a66645842f2`. They are not a corrected-source
+rerun. Test sequences © EBU. The [fixture checker](../../skills/audio-program-loudness/scripts/check_ebu_loudness.py)
 ran with Python 3.12.14 on the v5.0 ZIP from the EBU publication page. ZIP
 SHA-256 was `9cc500b4df83f7c21855c74dce795ef5209a752bf884253ae57d0ce512efb062`.
 Use the separately obtained archive with Python 3.12 or later.
@@ -104,3 +155,23 @@ expectations at 25, 100, 500, 2,000, 10,000 and 16,000 Hz. Those checks
 verify the implemented response of the supplied coefficients. Official file
 testing here covered EBU loudness cases 1–14. Full ITU BS.2217 testing and
 full EBU Mode coverage require more evidence.
+
+
+## Corrected-source official replay (2026-11-16, America/Los_Angeles)
+
+The correction pass downloaded the original 91,631,421-byte EBU v5.0 archive
+from the publication's official file link, kept it outside this repository,
+and ran the identity-enforcing checker with Python 3.12.14. The reported
+mode was **official EBU v5.0 (pinned SHA-256)** and the observed hash was
+`9cc500b4df83f7c21855c74dce795ef5209a752bf884253ae57d0ce512efb062`.
+All **53/53 files passed**, cases 1–14, with maximum absolute error
+**0.046486 LU**, below the published ±0.1 LUFS tolerance. Case 6 passed in
+both five- and six-channel forms. The first replay stopped at case 8 because
+an initial 180-second parser budget was too short; the final 300-second bound
+covers the actual 246.358-second file, and the complete replay then passed.
+The source revision, exact commands and remaining review gates are recorded
+in the [correction handoff](../../memory/projects/kisuul/kestrelgaming/handoffs/2026-11-16-audio-program-loudness-gauge-correction-r02.md).
+
+The historical libebur128/FFmpeg comparisons above were not rerun in this
+correction pass. Neither this corpus replay nor synthetic gate tests establish
+full EBU Mode, physical-device accuracy, real-time safety or agent efficacy.

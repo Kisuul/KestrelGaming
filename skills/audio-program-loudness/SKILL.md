@@ -21,6 +21,10 @@ delivery policy calls for EBU R 128. Check the actual delivery policy before
 suggesting gain. `target - I` estimates the change in gain in dB. Remeasure
 after gain or limiting because the gate can select a different set of blocks.
 
+BS.1770 defines a standardized measurement model, not a universal subjective
+loudness or acoustic SPL measurement. Calibration-tone agreement alone does
+not establish perceptual accuracy for arbitrary programmes.
+
 ## Procedure
 
 1. Identify the input tap, exact sample rate, PCM format and full-scale
@@ -41,8 +45,10 @@ after gain or limiting because the gate can select a different set of blocks.
 4. Use full, ungated windows for M and S. For I, use complete 400 ms blocks at
    100 ms intervals. Keep blocks strictly above −70 LUFS for the first energy
    mean. Set the relative gate 10 LU below that mean's loudness. Keep blocks
-   strictly above both gates for the final energy mean. Convert the means to
-   LUFS after averaging power. Recompute both passes from block history when
+   strictly above both gates for the final energy mean. For binary64 block
+   roots, follow the contract's exact gate-decision policy; displayed LUFS
+   and rounded RMS thresholds cannot resolve boundary membership. Convert the
+   means to LUFS after averaging power. Recompute both passes from block history when
    the programme grows. Leave an incomplete last block out of I.
 5. Report an incomplete measurement separately from an empty absolute gate.
    Preserve the distinction between a zero-energy window and a finite value
@@ -63,7 +69,9 @@ after gain or limiting because the gate can select a different set of blocks.
   an invocation example. The reference implements M/S/I. Full EBU Mode also
   requires other measurements and meter behavior, including LRA and true peak.
 - Run the [fixture checker](scripts/check_ebu_loudness.py) with the original
-  EBU Loudness Test Set v5.0 ZIP for an offline check of cases 1–14.
+  EBU Loudness Test Set v5.0 ZIP for an offline check of cases 1–14. It reports
+  the observed SHA-256 and rejects any archive differing from the pinned release
+  before parsing. Synthetic parser tests are not official compliance evidence.
 - Use [channel mapping](../audio-channel-mapping/SKILL.md) to resolve speaker
   identities, [sample formats](../audio-sample-formats/SKILL.md) for PCM
   scaling, [timebase sync](../audio-timebase-sync/SKILL.md) for discontinuities,
