@@ -31,6 +31,7 @@ are not standalone installed host plugins.
 | [audio-program-loudness](audio-program-loudness/SKILL.md) | BS.1770 programme LUFS/LKFS, EBU R 128 delivery analysis, M/S windows and two-stage integrated gating for labeled channel beds |
 | [audio-loudness-range](audio-loudness-range/SKILL.md) | EBU Tech 3342 programme LRA, gated short-term distributions, percentiles, timing and fixture verification |
 | [audio-envelope-dynamics](audio-envelope-dynamics/SKILL.md) | Select and verify attack/release amplitude and RMS envelopes, explicit time constants, per-channel linking, and compressor/expander gain-reduction control |
+| [audio-fractional-octave-rta](audio-fractional-octave-rta/SKILL.md) | Measure octave and fractional-octave band power with IEC base-10 geometry, Welch integration, per-channel levels, and explicit frequency coverage |
 
 ## Core mathematics (independent curriculum)
 
