@@ -170,7 +170,12 @@ def validate(root: Path) -> list[str]:
             for field in ("created", "updated"):
                 if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", data[field]):
                     raise ValueError(f"Invalid ISO date: {field}")
-                date.fromisoformat(data[field])
+                try:
+                    date.fromisoformat(data[field])
+                except ValueError as exc:
+                    # Python versions format calendar-range errors differently.
+                    # Give callers and tests a stable validation diagnostic.
+                    raise ValueError(f"Invalid calendar date: {field}") from exc
             if data["updated"] < data["created"]:
                 raise ValueError("Updated date precedes created date")
             expected, index = scope_for(path, root)
