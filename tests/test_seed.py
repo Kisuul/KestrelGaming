@@ -103,7 +103,11 @@ class SeedValidatorTests(unittest.TestCase):
 
     def test_invalid_dates_and_reversed_dates(self):
         original = (self.root / RECORD).read_text()
-        for value, expected in [("2026-02-30", "day is out of range"), ("2026-10-01", "Updated date precedes")]:
+        for value, expected in [
+            ("2026-02-30", "Invalid calendar date: updated"),
+            ("2025-02-29", "Invalid calendar date: updated"),
+            ("2026-10-01", "Updated date precedes"),
+        ]:
             with self.subTest(value=value):
                 self.write(RECORD, original.replace("updated: 2026-11-02", "updated: " + value))
                 self.assert_error(expected)
