@@ -1,5 +1,7 @@
 # Kisuul/KestrelGaming
 
+**Current audio curriculum status:** [23/73 accepted; 50 pending](handoffs/2026-11-17-audio-curriculum-status-r01.md) as of 2026-11-17. Earlier implementation handoffs preserve historical scope, reviews and test evidence; do not treat their older next-action sections as current assignments.
+
 | Record | Status | Use |
 | --- | --- | --- |
 | [Project profile](PROFILE.md) | Active | Repository identity, source baseline, and maintenance map |
@@ -7,12 +9,13 @@
 | [Mathematics independent audit](2026-11-03-math-skills-independent-audit.md) | Archived | Historical audit and evidence corrections at the listed revisions |
 | [Mathematics documentation hardening work order](handoffs/2026-11-03-math-documentation-hardening-r01.md) | Superseded | Earlier documentation-only plan; replaced by the full package completion handoff |
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
-| [Audio skill library implementation and backlog](handoffs/2026-11-03-audio-skills-roadmap.md) | Active | Current audio skills, numerical test evidence, pending modules, and next work |
-| [Programme loudness skill #20 research and test matrix](handoffs/2026-11-14-audio-program-loudness-research-r01.md) | Active | BS.1770-5 and EBU R128/3341 versions; K-weighting, two-stage gating, test cases 1-6, independent edge cases; research only (19/73) |
-| [Programme loudness skill #20 review handoff](handoffs/2026-11-16-audio-program-loudness-implementation-r01.md) | Active | Child branch, 48 kHz Annex 1 M/S/I, 53 original EBU file checks and review evidence |
-| [Loudness Range skill #21 review handoff](handoffs/2026-11-17-audio-loudness-range-implementation-r01.md) | Active | Tech 3342 gates and percentiles, 12 official measurements, 528 repository tests and pending independent review |
-| [Envelope dynamics skill #22 implementation and review handoff](handoffs/2026-11-17-audio-envelope-dynamics-implementation-r01.md) | Active | Offline A/R amplitude and RMS model, separate gain-control demonstrator, 32 focused local tests; remote CI and independent review pending |
-| [Fractional-octave RTA skill #23 review handoff](handoffs/2026-11-17-audio-fractional-octave-rta-implementation-r01.md) | Active | Exact base-10 bands, Welch bin-power integration, independent numerical checks and scope limits |
+| [Audio curriculum current status — 23/73](handoffs/2026-11-17-audio-curriculum-status-r01.md) | Active | Authoritative dated owner-accepted inventory, 50 pending modules, next assignment and umbrella merge gate |
+| [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
+| [Programme loudness skill #20 research and test matrix](handoffs/2026-11-14-audio-program-loudness-research-r01.md) | Active | Historical research baseline at 19/73; BS.1770-5, R128/3341, gates and independent test-case planning |
+| [Programme loudness skill #20 review handoff](handoffs/2026-11-16-audio-program-loudness-implementation-r01.md) | Archived | Historical implementation and review evidence; skill now accepted |
+| [Loudness Range skill #21 review handoff](handoffs/2026-11-17-audio-loudness-range-implementation-r01.md) | Archived | Historical Tech 3342 gates, official LRA measures and 528-test implementation checkpoint; skill now accepted |
+| [Envelope dynamics skill #22 implementation and review handoff](handoffs/2026-11-17-audio-envelope-dynamics-implementation-r01.md) | Archived | Initial 32-test implementation snapshot; subsequent corrected PR #21 passed 564 tests and merged |
+| [Fractional-octave RTA skill #23 review handoff](handoffs/2026-11-17-audio-fractional-octave-rta-implementation-r01.md) | Archived | Historical IEC base-10 geometry, Welch integration and reviewed test evidence; PR #23 merged |
 | [PPM metering skill #19 primary-source research](handoffs/2026-11-05-audio-ppm-metering-research-r01.md) | Active | Legacy EBU Type IIb vs modern loudness, published burst acceptance tests, one-pole falsification; research only, 18/73 remains |
 | [PPM skill #19 implementation — known standard nonconformance](handoffs/2026-11-05-audio-ppm-metering-completion-r01.md) | Active | Fitted historical burst model, 32 tests/451 CI, explicit frequency-flatness failure, 19/73 milestone and next loudness assignment |
 | [Audio VU metering skill #18 completion](handoffs/2026-11-05-audio-vu-metering-completion-r01.md) | Active | Verified calibrated VU detector, 42 tests, independent SciPy ballistics and 18/73 milestone |

@@ -3,15 +3,17 @@ schema: 1
 id: 2026-11-03-audio-skills-roadmap
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: superseded
 evidence: observed
 author: ChatGPT
 created: 2026-11-03
-updated: 2026-11-05
+updated: 2026-11-17
 sources: "2026-11-05 audio-ppm-metering educational reference 4ee7e72c0457d9a71d35b799c0b7cc62374b74e0; GitHub Actions 42004049812 passed 451 repository tests and structural checks (32 new); local optional SciPy 1.17.0 NumPy 2.3.5 differential 24 cases/15186 sample comparisons; EBU Tech 3205-E Table 2 trained burst fit, 31.5Hz-16kHz flatness fails; owner prohibits early PR #2 merge."
 ---
 
 # Audio-analysis skill library — implementation handoff and running backlog
+
+> **Historical 19/73 checkpoint — superseded on 2026-11-17.** The counts, "current" claims, next assignments and milestone CI below describe the original snapshot, not the present audio branch. For current accepted/pending modules and the next task, follow the [current curriculum status](2026-11-17-audio-curriculum-status-r01.md). Retained here for engineering evidence and provenance.
 
 ## Summary
 
@@ -401,3 +403,7 @@ Preserve [parallel-agent onboarding](2026-11-04-audio-parallel-work-onboarding-r
 ## Revisit when
 
 At every new batch, on PR merge/rebase, when any standard or authoritative reference changes, or if fixtures reveal incorrect math. Re-read current instructions and revision rather than assuming this backlog is binding authority.
+
+## Superseded by
+
+[Audio engineering curriculum — current status (2026-11-17)](2026-11-17-audio-curriculum-status-r01.md).
