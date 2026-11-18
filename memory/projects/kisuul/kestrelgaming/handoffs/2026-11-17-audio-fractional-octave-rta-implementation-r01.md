@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-17-audio-fractional-octave-rta-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Codex
 created: 2026-11-17
@@ -14,6 +14,8 @@ sources: "Owner request to write Skill #23, Skill #23 Research Report (2026-11-1
 # Skill #23 fractional-octave RTA review handoff
 
 ## Summary
+
+**Archive note (2026-11-17):** #23 `audio-fractional-octave-rta` is now part of the owner-accepted 23/73 curriculum. The pending-review wording and recorded test evidence below reflect this handoff's original implementation checkpoint; do not use it as a current assignment. See the [current curriculum status](2026-11-17-audio-curriculum-status-r01.md).
 
 **Task outcome:** COMPLETE
 

@@ -3,17 +3,19 @@ schema: 1
 id: 2026-11-16-audio-program-loudness-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-16
-updated: 2026-11-16
+updated: 2026-11-17
 sources: "Owner assigned audio skill 20 on 2026-11-16. Audio PR 2 base fbd88c658c4f0d5e73c14493827b8b0150a841b5, implementation 9543a4b9c490556ec89e51135643920e33feafa8. Python 3.12.14 ran 31 focused and 482 repository tests. EBU Loudness Test Set v5.0 original files for Tech 3341 cases 1-14 and independent libebur128 1.2.6 and FFmpeg 7.1.5-0+deb13u1 integrated-loudness comparisons."
 ---
 
 # Programme loudness skill #20 review handoff
 
 ## Summary
+
+**Archive note (2026-11-17):** #20 `audio-program-loudness` is now part of the owner-accepted 23/73 curriculum. The pending-review wording and recorded test evidence below reflect this handoff's original implementation checkpoint; do not use it as a current assignment. See the [current curriculum status](2026-11-17-audio-curriculum-status-r01.md).
 
 **Task outcome:** PARTIAL
 

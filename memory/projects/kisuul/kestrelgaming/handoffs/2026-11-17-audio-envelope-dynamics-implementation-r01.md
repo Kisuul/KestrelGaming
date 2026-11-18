@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-17-audio-envelope-dynamics-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: ChatGPT
 created: 2026-11-17
@@ -14,6 +14,8 @@ sources: "Owner request to write skill #22; audio curriculum branch observed at 
 # Skill #22 — envelope dynamics implementation and review handoff
 
 ## Summary
+
+**Archive note (2026-11-17):** #22 `audio-envelope-dynamics` is now part of the owner-accepted 23/73 curriculum. The pending-review wording and recorded test evidence below reflect this handoff's original implementation checkpoint; do not use it as a current assignment. See the [current curriculum status](2026-11-17-audio-curriculum-status-r01.md).
 
 **Task outcome:** PARTIAL
 

@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-17-audio-loudness-range-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Codex
 created: 2026-11-17
@@ -14,6 +14,8 @@ sources: "Owner assignment for Skill #21. KestrelGaming base fe89ed525854a16e6a2
 # Skill #21 — Loudness Range implementation review
 
 ## Summary
+
+**Archive note (2026-11-17):** #21 `audio-loudness-range` is now part of the owner-accepted 23/73 curriculum. The pending-review wording and recorded test evidence below reflect this handoff's original implementation checkpoint; do not use it as a current assignment. See the [current curriculum status](2026-11-17-audio-curriculum-status-r01.md).
 
 **Task outcome:** COMPLETE
 
