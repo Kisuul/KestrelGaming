@@ -52,6 +52,8 @@ stated by the owner.
 ## Revisit when
 
 - Version metadata moves off `0.4.6`, or the 0.5.0 milestone closes.
-- The mypy gate definition changes (`[tool.mypy] files` in `pyproject.toml`
-  once the type-gate PR lands; `bot services modules` in CI before it).
+- The mypy gate definition changes. Since PR #16 (merged 2026-11-19 at
+  `6491be9`) it is plain `python -m mypy` over `[tool.mypy] files` in
+  `pyproject.toml`, guarded by `tests/test_type_check_coverage.py`. Older
+  CHANGELOG entries and issues still cite `mypy bot services modules`.
 - Org membership or repository visibility changes.

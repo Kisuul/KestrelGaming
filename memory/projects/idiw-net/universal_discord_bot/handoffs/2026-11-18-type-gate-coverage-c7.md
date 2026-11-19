@@ -3,11 +3,11 @@ schema: 1
 id: 2026-11-18-udb-type-gate-coverage-c7
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
-updated: 2026-11-18
+updated: 2026-11-19
 sources: "User request 2026-11-18 to redo PR #4 (Codex docs/CI accuracy pass) better; UDB master 61fdf41; local branch ci/type-gate-coverage-20261118; checks run locally with CPython 3.12.11, discord.py 2.7.1, mypy 1.20.2."
 ---
 
@@ -21,11 +21,12 @@ checklist) could be done much better. Redo its remit, accurate verification CI
 guidance, against current master. Make every factual claim true, back each one
 with a check, and prevent the drift from recurring.
 
-**Task outcome:** PARTIAL
+**Task outcome:** COMPLETE
 
-Implemented, verified locally, and opened as
-[PR #16](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/16) at the
-user's request (commit `cb6b389`). Not merged; the owner reviews and merges.
+Opened as [PR #16](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/16)
+(commit `cb6b389`) and merged by the owner on 2026-11-19 at `6491be9`. The
+gate is now `python -m mypy` with `[tool.mypy] files`. Archived; the
+Windows-tooling lessons below remain useful.
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 verification CI maintenance, which AGENTS.md explicitly permits. No product
