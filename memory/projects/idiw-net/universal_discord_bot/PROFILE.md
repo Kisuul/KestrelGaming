@@ -7,8 +7,8 @@ status: active
 evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
-updated: 2026-11-18
-sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff."
+updated: 2026-11-19
+sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list."
 ---
 
 # IDIW-NET/Universal_Discord_Bot ("UDB")
@@ -30,6 +30,21 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   (e.g. C2a, C2b, D1), implemented as one PR per work order and merged by the
   owner after review, often a hostile/independent audit. Version metadata
   stays at `0.4.6` while bounded 0.5.0 work merges as `[Unreleased]`. (observed)
+  Work-order issues stay open after their PR merges (#11, #13, #15 and #18
+  were all open on 2026-11-19), so judge status by PR state, not issue state.
+  (observed)
+- **Where merged status lives:** since PR #20 (`39f02c2`), ROADMAP.md's
+  "Current implementation status (unreleased)" table and AGENTS.md list each
+  merged 0.5.0 work order and what is still planned. Read those rather than
+  rebuilding the list from memory. (observed)
+- **Scheduler:** dispatch is handler-aware since D2a (PR #19, merged as
+  `5336150`). Due jobs with no registered handler stay pending, consume no
+  attempt and are counted as `unhandled_due` in `/health` and `/doctor`.
+  [docs/SCHEDULER_CONTRACT.md](https://github.com/IDIW-NET/Universal_Discord_Bot/blob/master/docs/SCHEDULER_CONTRACT.md)
+  is the project-owned contract. D2b (bounded retry, permanent errors,
+  recovery-safe Tickets inactivity) and D3 (offline automation conformance)
+  are planned, not merged. Tickets inactivity jobs still get one attempt.
+  (observed; details in [the D2a handoff](handoffs/2026-11-19-d2a-safe-dispatch-d2a.md))
 - **Verification gate:** `pytest -q`, `ruff check .`, `ruff format --check .`,
   `mypy`, then `scripts/doctor.py`; `scripts/verify.py` runs the first four.
   CI (`.github/workflows/verify.yml`) runs all five on Python 3.12 without
@@ -47,7 +62,9 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
 Source inspection and executed checks at `61fdf41` on 2026-11-18, recorded in
 [the type-gate handoff](handoffs/2026-11-18-type-gate-coverage-c7.md). The
 claims about workflow conventions are inferred from issue and PR titles, not
-stated by the owner.
+stated by the owner. The merged-status, open-issue and scheduler notes were
+rechecked on `master` at `39f02c2` on 2026-11-19 against the files and `gh`
+queries named in `sources`.
 
 ## Revisit when
 
@@ -56,4 +73,5 @@ stated by the owner.
   `6491be9`) it is plain `python -m mypy` over `[tool.mypy] files` in
   `pyproject.toml`, guarded by `tests/test_type_check_coverage.py`. Older
   CHANGELOG entries and issues still cite `mypy bot services modules`.
+- D2b or D3 merges, or the scheduler contract changes.
 - Org membership or repository visibility changes.

@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-19-udb-d2a-safe-dispatch-d2a
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-19
 created: 2026-11-19
@@ -22,11 +22,13 @@ must not run, with only that dispatch's own claim released. The order also
 required negative tests first, an `unhandled_due_count` diagnostic, and a draft
 PR for hostile audit. It forbade merge, release, deployment and D2b.
 
-**Task outcome:** PARTIAL
+**Task outcome:** COMPLETE
 
-Implemented, verified locally and in CI, and opened as draft
-[PR #19](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/19).
-Awaiting hostile audit and owner decision.
+Opened as [PR #19](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/19)
+at head `1a14e3d` and merged by the owner on 2026-11-19 as `5336150`. Docs PR
+[#20](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/20) (`39f02c2`)
+then recorded D2a as merged in AGENTS.md, ROADMAP.md, CHANGELOG.md and the
+operator docs. Archived; the residual risks below still apply to `master`.
 
 **Authorized scope and boundaries (historical; recheck on resume):** the
 `services/scheduler.py` dispatch path, `services/diagnostics.py`, tests and
@@ -84,8 +86,8 @@ the D1 handoff, on branch `memory/udb-type-gate-coverage-20261118` at `de39aa9`.
 | Full gates on `1a14e3d`, clean tree | pytest 1774 passed; ruff check and format clean (238 files); mypy 127 files; doctor OK, 13 checks | Same |
 | GitHub Actions run 44621528075 on `1a14e3d` | success; same five results (confirms `json_each` on CI's Linux SQLite) | ubuntu-latest, Python 3.12 |
 
-**Persistence:** UDB work is pushed in draft PR #19. This record is committed
-locally on KestrelGaming branch `memory/udb-d2a-safe-dispatch-20261119`.
+**Persistence:** UDB work merged via PR #19. This record was first pushed on
+KestrelGaming branch `memory/udb-d2a-safe-dispatch-20261119`.
 
 ## Next action
 
@@ -100,10 +102,11 @@ in the PR:
 
 Handler idempotency, retry policy and permanent errors belong to D2b.
 
-**Next useful step:** answer hostile-audit findings on #19. After
-merge, archive this handoff. Then note in the PROFILE that scheduler dispatch
-is handler-aware.
+**Next useful step:** none for D2a. D2b (bounded retry, permanent-error
+classification, recovery-safe Tickets inactivity) needs its own work order;
+none was open on 2026-11-19. The PROFILE now notes that dispatch is
+handler-aware.
 
 ## Revisit when
 
-PR #19 is audited, merged or closed, or D2b begins.
+D2b begins, or a residual risk above surfaces in practice.
