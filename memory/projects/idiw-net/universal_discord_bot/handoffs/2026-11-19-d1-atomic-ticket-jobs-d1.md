@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-19-udb-d1-atomic-ticket-jobs-d1
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-19
@@ -22,11 +22,11 @@ Same-owner replays add nothing, and audit stays optional. The work order also
 required a D0 contract note, 15 adversarial acceptance cases, and a draft PR
 for hostile audit with no merge.
 
-**Task outcome:** PARTIAL
+**Task outcome:** COMPLETE
 
-Implemented, verified locally, and opened as draft
-[PR #17](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/17) at the
-user's request. Awaiting CI, hostile audit and owner decision.
+Opened as [PR #17](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/17)
+and merged by the owner at `10ae6eb` (observed on `origin/master` 2026-11-19).
+Archived; D2a ([handoff](2026-11-19-d2a-safe-dispatch-d2a.md)) builds on it.
 
 **Authorized scope and boundaries (historical; recheck on resume):** scheduler
 joined-insert API, Tickets store/cog wiring, tests, D0 docs. Not authorized:
