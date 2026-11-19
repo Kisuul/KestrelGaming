@@ -16,7 +16,14 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
+      # Pin the interpreter: ubuntu-latest's default python3 changes with the
+      # runner image (ubuntu-24.04 -> ubuntu-26.04 broke a date-message test).
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: "3.12"
       - name: Validate contract, links, records, and skills
-        run: python3 tools/validate_seed.py
+        run: |
+          python3 --version
+          python3 tools/validate_seed.py
       - name: Run validator regression tests
         run: python3 -m unittest discover -s tests -v

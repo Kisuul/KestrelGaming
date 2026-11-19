@@ -18,10 +18,11 @@ holds source and provenance. Profiles are observations and conventions, not acce
 | Validator | `python3 tools/validate_seed.py` | Read-only; no network or third-party dependencies |
 | Regression tests | `python3 -m unittest discover -s tests -v` | Temporary fixtures; Python may write ignored bytecode |
 | Whitespace check | `git diff --check` | Read-only |
-| CI | `.github/workflows/validate.yml` | Runs the validator and tests; no write token permissions |
+| CI | `.github/workflows/validate.yml` | Runs the validator and tests on pinned CPython 3.12; no write token permissions |
 | Build / deployment | None | No application runtime to build or deploy |
 
-Python 3.9+ is the supported validation runtime. Use UTF-8, relative Markdown links,
+Python 3.9+ is the supported validation runtime; CI pins 3.12 as the reference
+interpreter so results do not drift with the runner image. Use UTF-8, relative Markdown links,
 lowercase directory slugs, and short source-backed records. Templates are examples,
 not completed work. There are no generated memory indexes to rebuild.
 
