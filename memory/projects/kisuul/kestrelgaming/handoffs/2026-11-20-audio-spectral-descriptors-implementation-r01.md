@@ -15,8 +15,10 @@ sources: "Owner requested the next skill after reviewing PR #29. Audio developme
 
 ## Summary
 
-**Task outcome:** COMPLETE for implementation. Independent review and owner
-acceptance are pending. The curriculum count is 24 of 73 accepted.
+**Task outcome:** COMPLETE
+
+The implementation is ready for independent review. Owner acceptance is
+pending. The curriculum count is 24 of 73 accepted.
 [Audio curriculum PR #2](https://github.com/Kisuul/KestrelGaming/pull/2)
 
 The skill teaches power-weighted shape and flux from a calibrated PSD frame.
