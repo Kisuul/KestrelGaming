@@ -12,6 +12,11 @@
 | [Audio curriculum current status — 23/73](handoffs/2026-11-17-audio-curriculum-status-r01.md) | Active | Authoritative dated owner-accepted inventory, 50 pending modules, next assignment and umbrella merge gate |
 | [Multiresolution spectrum skill #24 implementation and review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Active | Review candidate: common-end independent STFT PSDs, frozen fixtures, 35 focused/627 full tests, SciPy and hostile probes; acceptance pending, tally unchanged |
 | [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
+| [Spectral descriptors research](handoffs/2026-11-20-audio-spectral-descriptors-research-r01.md) | Active | Discrete PSD weighting, endpoint mass, gain invariance and flux checks |
+| [Harmonic analysis research](handoffs/2026-11-20-audio-harmonic-analysis-research-r01.md) | Active | Peak interpolation, harmonic assignment, resolution and ambiguous fundamentals |
+| [Cepstral analysis research](handoffs/2026-11-20-audio-cepstral-analysis-research-r01.md) | Active | Real cepstrum, parity, spectral nulls, echo coefficients and liftering |
+| [Oscilloscope waveform capture research](handoffs/2026-11-20-audio-oscilloscope-research-r01.md) | Active | Sample-clocked waveform capture, min/max projection and transient preservation |
+| [Scope triggering research](handoffs/2026-11-20-audio-scope-triggering-research-r01.md) | Active | Edge qualification, exact pre/post capture, holdoff and callback boundaries |
 | [Programme loudness skill #20 research and test matrix](handoffs/2026-11-14-audio-program-loudness-research-r01.md) | Active | Historical research baseline at 19/73; BS.1770-5, R128/3341, gates and independent test-case planning |
 | [Programme loudness skill #20 review handoff](handoffs/2026-11-16-audio-program-loudness-implementation-r01.md) | Archived | Historical implementation and review evidence; skill now accepted |
 | [Loudness Range skill #21 review handoff](handoffs/2026-11-17-audio-loudness-range-implementation-r01.md) | Archived | Historical Tech 3342 gates, official LRA measures and 528-test implementation checkpoint; skill now accepted |
