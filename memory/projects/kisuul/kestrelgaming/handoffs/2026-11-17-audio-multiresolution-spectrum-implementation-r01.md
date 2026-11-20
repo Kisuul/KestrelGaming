@@ -3,15 +3,19 @@ schema: 1
 id: 2026-11-17-audio-multiresolution-spectrum-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Codex
 created: 2026-11-17
-updated: 2026-11-17
-sources: "AUDIO-24-01 owner handoff and uploaded Deep Research report; inspected audio branch fe65c8c900608873911d7f9b64e8a95881fa80c8; implementation fd93092e047a5f9db72627727e9194fae4ee86d0; executed Python 3.12.14 analytical, direct-DFT, SciPy 1.17.0 differential and repository checks; independent hostile-review agent probes."
+updated: 2026-11-20
+sources: "AUDIO-24-01 owner handoff and uploaded Deep Research report; inspected audio branch fe65c8c900608873911d7f9b64e8a95881fa80c8; implementation fd93092e047a5f9db72627727e9194fae4ee86d0; executed Python 3.12.14 analytical, direct-DFT, SciPy 1.17.0 differential and repository checks; independent hostile-review agent probes. Gauge approved b1c0d71084759912e979a4ec96e7b1169529fdce; owner merged PR #25 as 4dc854e450bac96ec985c7ab226941cc8efe13c9."
 ---
 
 # Skill #24 multiresolution spectrum implementation and review handoff
+
+Gauge approved the review candidate at `b1c0d71084759912e979a4ec96e7b1169529fdce`. The owner accepted Skill #24 and merged PR #25 into the audio development branch at `4dc854e450bac96ec985c7ab226941cc8efe13c9`. [Gauge review](https://github.com/Kisuul/KestrelGaming/pull/25#pullrequestreview-5950813470) · [Merged PR #25](https://github.com/Kisuul/KestrelGaming/pull/25)
+
+The sections below record the pre-merge implementation and test evidence. [Current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md)
 
 ## Summary
 

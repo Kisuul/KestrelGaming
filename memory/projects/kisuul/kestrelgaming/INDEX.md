@@ -1,6 +1,6 @@
 # Kisuul/KestrelGaming
 
-**Current audio curriculum status:** [23/73 accepted; 50 pending](handoffs/2026-11-17-audio-curriculum-status-r01.md) as of 2026-11-17. Earlier implementation handoffs preserve historical scope, reviews and test evidence; do not treat their older next-action sections as current assignments.
+**24 of 73 audio skills accepted as of 2026-11-20.** 49 modules remain. Next is Skill #25, `audio-spectral-descriptors`. [Current curriculum ledger](handoffs/2026-11-17-audio-curriculum-status-r01.md)
 
 | Record | Status | Use |
 | --- | --- | --- |
@@ -9,8 +9,8 @@
 | [Mathematics independent audit](2026-11-03-math-skills-independent-audit.md) | Archived | Historical audit and evidence corrections at the listed revisions |
 | [Mathematics documentation hardening work order](handoffs/2026-11-03-math-documentation-hardening-r01.md) | Superseded | Earlier documentation-only plan; replaced by the full package completion handoff |
 | [Mathematics package completion](handoffs/2026-11-03-math-package-completion-r02.md) | Active | Six completed procedures, fixture repairs, evaluation protocol, exact local evidence and remaining limits |
-| [Audio curriculum current status — 23/73](handoffs/2026-11-17-audio-curriculum-status-r01.md) | Active | Authoritative dated owner-accepted inventory, 50 pending modules, next assignment and umbrella merge gate |
-| [Multiresolution spectrum skill #24 implementation and review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Active | Review candidate: common-end independent STFT PSDs, frozen fixtures, 35 focused/627 full tests, SciPy and hostile probes; acceptance pending, tally unchanged |
+| [Audio curriculum status](handoffs/2026-11-17-audio-curriculum-status-r01.md) | Active | Accepted inventory, pending modules, next skill, and the owner merge gate |
+| [Multiresolution spectrum skill #24 review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Archived | Accepted in PR #25. Implementation evidence includes 35 focused tests, 627 repository tests, and numerical comparisons. |
 | [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
 | [Programme loudness skill #20 research and test matrix](handoffs/2026-11-14-audio-program-loudness-research-r01.md) | Active | Historical research baseline at 19/73; BS.1770-5, R128/3341, gates and independent test-case planning |
 | [Programme loudness skill #20 review handoff](handoffs/2026-11-16-audio-program-loudness-implementation-r01.md) | Archived | Historical implementation and review evidence; skill now accepted |
