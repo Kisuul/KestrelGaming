@@ -32,7 +32,7 @@ are not standalone installed host plugins.
 | [audio-loudness-range](audio-loudness-range/SKILL.md) | EBU Tech 3342 programme LRA, gated short-term distributions, percentiles, timing and fixture verification |
 | [audio-envelope-dynamics](audio-envelope-dynamics/SKILL.md) | Select and verify attack/release amplitude and RMS envelopes, explicit time constants, per-channel linking, and compressor/expander gain-reduction control |
 | [audio-fractional-octave-rta](audio-fractional-octave-rta/SKILL.md) | Measure octave and fractional-octave band power with IEC base-10 geometry, Welch integration, per-channel levels, and explicit frequency coverage |
-| [audio-multiresolution-spectrum](audio-multiresolution-spectrum/SKILL.md) | Engineer parallel independent STFT profiles, calibrated PSD, exact common-end timing and deterministic frequency selection; review candidate pending acceptance |
+| [audio-multiresolution-spectrum](audio-multiresolution-spectrum/SKILL.md) | Engineer parallel STFT profiles with calibrated PSD, exact common-end timing, and deterministic frequency selection |
 
 ## Core mathematics (independent curriculum)
 
