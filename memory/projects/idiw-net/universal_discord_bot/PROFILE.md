@@ -8,7 +8,7 @@ evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
 updated: 2026-11-19
-sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list."
+sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff."
 ---
 
 # IDIW-NET/Universal_Discord_Bot ("UDB")
@@ -41,10 +41,17 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   `5336150`). Due jobs with no registered handler stay pending, consume no
   attempt and are counted as `unhandled_due` in `/health` and `/doctor`.
   [docs/SCHEDULER_CONTRACT.md](https://github.com/IDIW-NET/Universal_Discord_Bot/blob/master/docs/SCHEDULER_CONTRACT.md)
-  is the project-owned contract. D2b (bounded retry, permanent errors,
-  recovery-safe Tickets inactivity) and D3 (offline automation conformance)
-  are planned, not merged. Tickets inactivity jobs still get one attempt.
-  (observed; details in [the D2a handoff](handoffs/2026-11-19-d2a-safe-dispatch-d2a.md))
+  is the project-owned contract. (observed; details in
+  [the D2a handoff](handoffs/2026-11-19-d2a-safe-dispatch-d2a.md))
+- **Retry and replay (D2b):**
+  - PR #21 merged as `8e8e303` on 2026-11-20 UTC.
+  - New Tickets inactivity jobs get three attempts. Rows stored earlier keep their own `max_attempts`.
+  - A handler raises `services.scheduler.NonRetryableJobError` to fail a job terminally; other exceptions retry within the budget.
+  - Tickets rejects malformed payloads, and envelope/payload guild mismatches, before touching the store.
+  - Replays are safe because `flag_inactive()` is conditional and atomic.
+  - D3 (offline automation conformance) is planned.
+  - Follow-up gaps are filed as issues #22–#24 (D2c–D2e).
+  - (observed; details in [the D2b handoff](handoffs/2026-11-19-d2b-recovery-safe-inactivity-d2b.md))
 - **Verification gate:** `pytest -q`, `ruff check .`, `ruff format --check .`,
   `mypy`, then `scripts/doctor.py`; `scripts/verify.py` runs the first four.
   CI (`.github/workflows/verify.yml`) runs all five on Python 3.12 without
@@ -55,7 +62,13 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   intent. (observed from AGENTS.md)
 - **Local setup that works on Windows:** `uv venv --python 3.12 .venv` then
   `uv pip install --python .venv\Scripts\python.exe -r requirements.txt`.
-  The full suite takes about 6–7 minutes (1,650+ tests). (observed 2026-11-18)
+  On this Windows machine the full suite took about 10 minutes for 1,826
+  tests on 2026-11-19; the whole CI job takes about 40 s on Linux. Run
+  `pytest` on the touched files first. (observed)
+- **Test hygiene:** close every `StorageService` a test opens, even on failure.
+  Use an autouse fixture that closes leftovers. Otherwise the aiosqlite thread
+  outlives its loop and pytest reports "Event loop is closed" as an ERROR in
+  a later, unrelated test. (observed 2026-11-19)
 
 ## Evidence
 
@@ -64,7 +77,8 @@ Source inspection and executed checks at `61fdf41` on 2026-11-18, recorded in
 claims about workflow conventions are inferred from issue and PR titles, not
 stated by the owner. The merged-status, open-issue and scheduler notes were
 rechecked on `master` at `39f02c2` on 2026-11-19 against the files and `gh`
-queries named in `sources`.
+queries named in `sources`. The D2b, test-runtime and test-hygiene notes come
+from the D2b work and PR #21 (merged as `8e8e303`), recorded in its handoff.
 
 ## Revisit when
 
@@ -73,5 +87,5 @@ queries named in `sources`.
   `6491be9`) it is plain `python -m mypy` over `[tool.mypy] files` in
   `pyproject.toml`, guarded by `tests/test_type_check_coverage.py`. Older
   CHANGELOG entries and issues still cite `mypy bot services modules`.
-- D2b or D3 merges, or the scheduler contract changes.
+- D2c, D2d, D2e or D3 merges, or the scheduler contract changes.
 - Org membership or repository visibility changes.
