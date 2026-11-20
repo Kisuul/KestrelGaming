@@ -12,6 +12,7 @@ are not standalone installed host plugins.
 | [audio-dsp-core](audio-dsp-core/SKILL.md) | Architect or harden audio-analysis data paths, FFT input preparation, energy detection, timing, and measurement contracts; verify with deterministic fixtures |
 | [audio-window-functions](audio-window-functions/SKILL.md) | Select and calibrate FFT/STFT windows, including coherent gain, ENBW, leakage, periodicity and verification |
 | [audio-fft-spectrum](audio-fft-spectrum/SKILL.md) | Build and audit amplitude spectra, calibrated frequency bins, one-sided FFT scaling, and analytic reference tests |
+| [audio-harmonic-analysis](audio-harmonic-analysis/SKILL.md) | Measure FFT peak candidates and match them to a supplied fundamental. Check frequency error, resolution, and gate coverage. |
 | [audio-power-spectral-density](audio-power-spectral-density/SKILL.md) | Estimate and verify power density, window-energy normalization, Welch averaging, and Parseval integration |
 | [audio-rms-crest-factor](audio-rms-crest-factor/SKILL.md) | Measure RMS, mean-square level, sample-peak-to-RMS ratio, and channel/silence semantics |
 | [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
