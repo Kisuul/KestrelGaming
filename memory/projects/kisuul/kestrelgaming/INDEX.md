@@ -35,6 +35,7 @@
 | [Independent audio skills audit](2026-11-03-audio-skills-independent-audit.md) | Active | Review findings, verification gaps, numerical edges, and targeted remediation |
 | [PR #2 mathematics integration assignment](handoffs/2026-11-03-audio-math-integration-workorder-r01.md) | Archived | Completed Math core merge, conditional audio reuse, numerical/timing repairs and 153-test/live differential evidence |
 | [Skill 20 Gauge gate/provenance corrections](handoffs/2026-11-16-audio-program-loudness-gauge-correction-r02.md) | Active | Exact-input gate decisions, original hostile failures, 502-test checks, verified 53-file EBU replay and pending adversarial acceptance |
+| [Spectral descriptors skill #25 implementation and review](handoffs/2026-11-20-audio-spectral-descriptors-implementation-r01.md) | Active | Single-profile PSD shape, exact rolloff ties, numerical and timing fixtures, and review evidence |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
