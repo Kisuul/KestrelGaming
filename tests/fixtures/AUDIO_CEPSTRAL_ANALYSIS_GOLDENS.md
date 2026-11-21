@@ -45,12 +45,12 @@ pair in a full-array FFT introduces an imaginary residual.
 For $N=16$, use $L[k]=0.3(-1)^k$. Then $c[8]=0.3$. At $Q=7$ the log
 envelope is zero within roundoff. At $Q=8$ the envelope recovers the input.
 At $N=4$, use $L[k]=[700,700,-700]$ and the signs reversed. The $Q=1$
-envelope at bin zero has absolute log magnitude 1050 or −1050. Keep that
+envelope at bin zero has log magnitude 1050 or −1050. Keep that
 log result and mark only the unrepresentable linear bin.
 
 For the wide-range regression, set $N=1024$ and $Q=417$. Use constant
 magnitude $2^{-900}$ except for $2^{900}$ at stored bin $j=123$.
-The log envelope at bin $k$ is:
+Use the following expression for the log envelope at bin $k$.
 
 $$
 -900\ln 2 + \frac{1800\ln 2}{N}\left[D_Q(k-j)+D_Q(k+j)\right].

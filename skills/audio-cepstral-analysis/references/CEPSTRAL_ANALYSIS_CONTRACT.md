@@ -27,12 +27,12 @@ Nyquist is also a singleton. At odd length, the final stored bin is paired.
 [Real cepstrum convention](https://www.fceia.unr.edu.ar/prodivoz/Oppenheim_Schafer_2004.pdf) ·
 [Packed inverse parity](https://numpy.org/doc/2.3/reference/generated/numpy.fft.irfft.html)
 
-For each reported index $q$ from zero through $\lfloor N/2\rfloor$, use:
+Compute $c[q]$ for each integer $q$ from zero through $\lfloor N/2\rfloor$.
 
 $$
 c[q]=\frac{1}{N}\left(L[0]+
 2\sum_{k=1}^{\lfloor (N-1)/2\rfloor} L[k]\cos(2\pi kq/N)+
-\mathbf{1}_{N\ \mathrm{even}}L[N/2](-1)^q\right).
+\mathbf{1}_{N\ \mathrm{even}}\,(-1)^q L[N/2]\right).
 $$
 
 The coefficients are signed log ratios. Return quefrency as the integer
@@ -75,7 +75,7 @@ roundoff. The cosine reference applies the paired terms directly.
 $Q=0$ gives a constant envelope. The full cutoff recovers the floor-processed
 input. The reference uses that identity to preserve the original linear
 ordinates at the representable endpoints. For other cutoffs, exponentiate
-the absolute log magnitude. Derive it from the frame peak and the
+the log magnitude in the original units. Derive it from the frame peak and the
 reconstructed log ratio. Return packed log magnitudes relative to
 $A_\mathrm{ref}$ and the available linear magnitudes in the original
 convention. A positive reconstruction that rounds to zero or overflows
