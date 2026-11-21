@@ -40,6 +40,7 @@
 | [Cepstral analysis skill #27 implementation and review](handoffs/2026-11-20-audio-cepstral-analysis-implementation-r01.md) | Active | Raw FFT parity, exact spectral floors, symmetric envelopes, and review evidence |
 | [Oscilloscope skill #28 implementation and review](handoffs/2026-11-20-audio-oscilloscope-implementation-r01.md) | Active | Complete sample-clock captures, block validation, and exact display bucket ownership |
 | [Scope triggering skill #29 implementation and review](handoffs/2026-11-20-audio-scope-triggering-implementation-r01.md) | Active | Exact edge interpolation, holdoff and busy boundaries, and complete capture spans |
+| [Audio vectorscope skill #30 implementation and review](handoffs/2026-11-20-audio-vectorscope-implementation-r01.md) | Active | Aligned stereo axes, numerical headroom, and continuous viewport geometry |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.

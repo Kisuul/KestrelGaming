@@ -1,0 +1,53 @@
+---
+schema: 1
+id: 2026-11-20-audio-vectorscope-implementation-r01
+kind: handoff
+scope: project:kisuul/kestrelgaming
+status: active
+evidence: observed
+author: Kestrel
+created: 2026-11-20
+updated: 2026-11-20
+sources: "Owner requested Skill #30 after prep. Audio development base ca59f7a30c60b39810f22dd173e4588fb6654fb7 includes Skill #29. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused, capture, independent numeric, and deliberate-fault checks executed."
+---
+
+# Skill #30 audio vectorscope implementation and review
+
+## Summary
+
+**Task outcome:** COMPLETE
+
+The skill and offline reference are ready for independent review.
+The reference projects ordered PCM pairs from the shared capture type.
+It keeps the measured axes separate from the continuous viewport
+positions and reports the two level and viewport flags.
+[Skill](../../../../../skills/audio-vectorscope/SKILL.md) ·
+[Contract](../../../../../skills/audio-vectorscope/references/VECTORSCOPE_CONTRACT.md)
+
+## Evidence
+
+- All 25 vectorscope tests and 60 adjacent capture and trigger tests
+  passed locally. Forward projection matched 8,192 callback partitions
+  against direct indexed slices. The fixtures include opposite slopes,
+  quadrature direction, a strided dot, a shared viewport scale, and
+  reuse of the complete triggered capture.
+  [Fixtures](../../../../../tests/fixtures/AUDIO_VECTORSCOPE_GOLDENS.md) ·
+  [Tests](../../../../../tests/test_audio_vectorscope_reference.py)
+- An independent 160-digit rotation matched 776 finite projections and
+  eight out-of-range pairs with seed 3020261120. The tests caught seven
+  deliberate changes to signs, channel selection, numerical range or
+  rounding, and view geometry.
+  [Research handoff](https://github.com/Kisuul/KestrelGaming/blob/e2e622d9644dad922a079653b9301826f73c4919/memory/projects/kisuul/kestrelgaming/handoffs/2026-11-20-audio-vectorscope-research-r01.md)
+
+## Next action
+
+Review the exact child PR head. Challenge the tiny channel difference,
+true overflow, and the nominal-versus-viewport fixtures. Record the
+agent's decisions on the prepared review tasks. Count Skill #30 after
+owner acceptance.
+[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+
+## Revisit when
+
+The channel map, capture clock, displayed basis, DC policy, viewport,
+or point selection changes.
