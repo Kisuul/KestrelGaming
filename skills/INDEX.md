@@ -19,6 +19,7 @@ are not standalone installed host plugins.
 | [audio-oscilloscope](audio-oscilloscope/SKILL.md) | Capture aligned PCM windows on the sample clock and retain signed transient extrema in display columns. |
 | [audio-scope-triggering](audio-scope-triggering/SKILL.md) | Qualify PCM edges, report holdoff and single-shot decisions, and complete exact pretrigger and posttrigger spans. |
 | [audio-vectorscope](audio-vectorscope/SKILL.md) | Project aligned stereo pairs with declared axes and diagnose trace shape, scale, and point selection. |
+| [audio-stereo-correlation](audio-stereo-correlation/SKILL.md) | Measure signed stereo correlation on aligned PCM and verify suspected loss in the mono fold-down. |
 | [audio-rms-crest-factor](audio-rms-crest-factor/SKILL.md) | Measure RMS, mean-square level, sample-peak-to-RMS ratio, and channel/silence semantics |
 | [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
 | [audio-sample-peak](audio-sample-peak/SKILL.md) | Implement channel-specific sample peaks, timestamps, rolling holds, program peaks and reference threshold diagnostics |
