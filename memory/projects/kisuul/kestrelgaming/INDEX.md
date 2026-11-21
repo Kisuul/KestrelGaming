@@ -50,6 +50,7 @@
 | [Oscilloscope skill #28 implementation and review](handoffs/2026-11-20-audio-oscilloscope-implementation-r01.md) | Archived | Accepted in PR #34. Complete sample-clock captures, block validation, and exact display bucket ownership |
 | [Scope triggering skill #29 implementation and review](handoffs/2026-11-20-audio-scope-triggering-implementation-r01.md) | Archived | Accepted in PR #35. Exact edge interpolation, holdoff and busy boundaries, and complete capture spans |
 | [Audio vectorscope skill #30 implementation and review](handoffs/2026-11-20-audio-vectorscope-implementation-r01.md) | Archived | Accepted in PR #36. Aligned stereo axes, numerical headroom, and continuous viewport geometry |
+| [Mid/Side analysis skill #32 research](handoffs/2026-11-21-audio-mid-side-analysis-research-r01.md) | Active | Matrix conventions, band power, Side gain, headroom and mono fold-down fixtures |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
