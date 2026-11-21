@@ -41,6 +41,7 @@
 | [Audio owner full-completion merge gate](2026-11-04-audio-curriculum-full-completion-gate-r01.md) | Active | Owner decision: no merge of PR #2 until all 73 audio modules are completed |
 | [Mid/Side analysis skill #32 implementation and review](handoffs/2026-11-21-audio-mid-side-analysis-implementation-r01.md) | Active | Exact component power, RMS rounding, gain and mono delivery, and band cancellation |
 | [Phase and coherence skill #33 implementation and review](handoffs/2026-11-21-audio-phase-coherence-implementation-r01.md) | Active | Paired Welch support, signed cross phase, exact pooled powers, and diagnostic fixtures |
+| [Cross-correlation skill #34 research](handoffs/2026-11-21-audio-cross-correlation-research-r01.md) | Active | Signed lag and sample support, linear FFT checks, peak ambiguity, and PHAT limits |
 | [Harmonic analysis skill #26 implementation and review](handoffs/2026-11-20-audio-harmonic-analysis-implementation-r01.md) | Archived | Accepted in PR #32. Peak refinement, controlled resolution fixtures, exact harmonic gates, and review evidence |
 | [Audio parallel-agent onboarding](handoffs/2026-11-04-audio-parallel-work-onboarding-r01.md) | Active | Proposed unclaimed work lanes, safe branches, agent handoffs and coordinator checks |
 | [Independent audio skills audit](2026-11-03-audio-skills-independent-audit.md) | Active | Review findings, verification gaps, numerical edges, and targeted remediation |
