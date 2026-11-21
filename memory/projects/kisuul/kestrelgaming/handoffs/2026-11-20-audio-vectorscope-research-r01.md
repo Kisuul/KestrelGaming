@@ -25,7 +25,7 @@ identity, alignment, and display scale before interpreting the trace. The first 
 should produce coordinates from complete, aligned frames. Rendering, persistence and point
 selection are consumers of that result.
 
-The [audio curriculum backlog](2026-11-17-audio-curriculum-status-r01.md#oscilloscopes-and-phase-8-pending)
+The [audio curriculum backlog](https://github.com/Kisuul/KestrelGaming/blob/bc94f0562f8fa4eca0d92e9587ede044fb5d9b36/memory/projects/kisuul/kestrelgaming/handoffs/2026-11-17-audio-curriculum-status-r01.md#oscilloscopes-and-phase-8-pending)
 places vectorscope after [oscilloscope waveform capture](2026-11-20-audio-oscilloscope-research-r01.md)
 and [scope triggering](2026-11-20-audio-scope-triggering-research-r01.md).
 The numbering follows that planning order.

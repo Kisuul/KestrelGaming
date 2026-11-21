@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-oscilloscope-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested Skill #28 after prep. Audio development base f9094d66f387ec5c689bc294138dfae37c347dfe includes Skill #27. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused regression tests and deliberate-fault checks executed on the implementation."
+sources: "Owner requested Skill #28 after prep. Audio development base f9094d66f387ec5c689bc294138dfae37c347dfe includes Skill #27. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused regression tests and deliberate-fault checks executed on the implementation. Gauge approved the final head and the owner merged PR #34."
 ---
 
 # Skill #28 oscilloscope implementation and review
@@ -17,7 +17,11 @@ sources: "Owner requested Skill #28 after prep. Audio development base f9094d66f
 
 **Task outcome:** COMPLETE
 
-The skill and offline reference are ready for review. Capture advances on
+Gauge approved `f98904d`. The owner accepted Skill #28 and merged
+PR #34 into the audio development branch at `ab34d4b`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/34#pullrequestreview-6002096132) · [Merged PR #34](https://github.com/Kisuul/KestrelGaming/pull/34)
+
+Capture advances on
 the sample clock. Display projection preserves recorded extrema from
 each channel. Skill #29 owns trigger selection and pending capture.
 [Skill](../../../../../skills/audio-oscilloscope/SKILL.md) ·
@@ -41,10 +45,7 @@ each channel. Skill #29 owns trigger selection and pending capture.
 
 ## Next action
 
-Review the exact child PR head. Replay the oversized block, gap and retry,
-and projection cases with separate oracles. Record the agent's decisions
-on the proposed review tasks. Count Skill #28 after owner acceptance.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 

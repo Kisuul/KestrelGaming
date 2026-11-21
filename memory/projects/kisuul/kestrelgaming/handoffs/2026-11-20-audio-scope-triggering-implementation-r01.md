@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-scope-triggering-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested Skill #29 after prep. Audio development base ab34d4ba89e8bea2c8dfe69137a72b87b9a0c02d includes Skill #28. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused, direct-tape and deliberate-fault checks executed."
+sources: "Owner requested Skill #29 after prep. Audio development base ab34d4ba89e8bea2c8dfe69137a72b87b9a0c02d includes Skill #28. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused, direct-tape and deliberate-fault checks executed. Gauge approved the final head and the owner merged PR #35."
 ---
 
 # Skill #29 scope triggering implementation and review
@@ -17,8 +17,11 @@ sources: "Owner requested Skill #29 after prep. Audio development base ab34d4ba8
 
 **Task outcome:** COMPLETE
 
-The edge-trigger skill and bounded offline reference are ready for
-independent review. Report crossing decisions on the sample clock.
+Gauge approved `137cdbe`. The owner accepted Skill #29 and merged
+PR #35 into the audio development branch at `ca59f7a`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/35#pullrequestreview-6002637261) · [Merged PR #35](https://github.com/Kisuul/KestrelGaming/pull/35)
+
+The reference reports crossing decisions on the sample clock.
 Publish a shared oscilloscope capture when its complete span is ready.
 [Skill](../../../../../skills/audio-scope-triggering/SKILL.md) ·
 [Contract](../../../../../skills/audio-scope-triggering/references/SCOPE_TRIGGERING_CONTRACT.md)
@@ -40,11 +43,7 @@ Publish a shared oscilloscope capture when its complete span is ready.
 
 ## Next action
 
-Review the exact child PR head. Challenge the sample at holdoff release,
-the last sample of a pending span, and the recovery after an invalid
-block. Record the agent's decisions on the prepared review tasks. Count
-Skill #29 after owner acceptance.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 

@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-cepstral-analysis-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested Skill #27 after the checked work order. Audio development base e1dc50ae91ec25fde4c17706fba8edcda64b311c after PR #32. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14, NumPy 2.3.5, Decimal and rational comparisons, seed 27201120."
+sources: "Owner requested Skill #27 after the checked work order. Audio development base e1dc50ae91ec25fde4c17706fba8edcda64b311c after PR #32. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14, NumPy 2.3.5, Decimal and rational comparisons, seed 27201120. Gauge approved the final head and the owner merged PR #33."
 ---
 
 # Skill #27 cepstral analysis implementation and review
@@ -17,9 +17,13 @@ sources: "Owner requested Skill #27 after the checked work order. Audio developm
 
 **Task outcome:** COMPLETE
 
-The implementation is ready for independent review. The skill teaches
+Gauge approved `bdc8aac`. The owner accepted Skill #27 and merged
+PR #33 into the audio development branch at `f9094d6`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/33#pullrequestreview-6001377469) · [Merged PR #33](https://github.com/Kisuul/KestrelGaming/pull/33)
+
+The skill teaches
 the real cepstrum from one measured frame and a symmetric lifter for a
-magnitude envelope. Owner acceptance is pending.
+magnitude envelope.
 [Skill](../../../../../skills/audio-cepstral-analysis/SKILL.md) ·
 [Contract](../../../../../skills/audio-cepstral-analysis/references/CEPSTRAL_ANALYSIS_CONTRACT.md) ·
 [Curriculum PR #2](https://github.com/Kisuul/KestrelGaming/pull/2)
@@ -47,11 +51,7 @@ magnitude envelope. Owner acceptance is pending.
 
 ## Next action
 
-Review the exact child PR head. Challenge original length and singleton
-weights, floating floor decisions, and the signed echo and envelope cases.
-Use the proposed agent tasks to evaluate the procedure. Count Skill #27
-after owner acceptance.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 
