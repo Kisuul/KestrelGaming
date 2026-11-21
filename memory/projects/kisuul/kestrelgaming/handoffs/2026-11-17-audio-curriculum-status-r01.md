@@ -8,7 +8,7 @@ evidence: observed
 author: ChatGPT
 created: 2026-11-17
 updated: 2026-11-20
-sources: "Prior owner acceptance through Skill #23 is recorded at aa54d7c55a313e144b21e09605701cdd7faa5276. Gauge approved Skill #24 at b1c0d71084759912e979a4ec96e7b1169529fdce. The owner confirmed acceptance and merged Kisuul/KestrelGaming PR #25 as 4dc854e450bac96ec985c7ab226941cc8efe13c9, the inspected PR #2 head with 24 indexed audio skills. PR #29 research was inspected at e2e622d9644dad922a079653b9301826f73c4919."
+sources: "Owner confirmed acceptance through Skill #30. Gauge approved the final heads of PRs #31 through #36 and the owner merged them into the audio development branch. Research PR #29 merged at b52ad24d470664b4f8151ab9f47dccda463a208c, the inspected head of PR #2. Actions 44864874896 passed 800 tests for reviewed Skill #30 at 80d9060035627cc14ac2e0b0eba83b57c1efe774."
 ---
 
 # Audio engineering curriculum status (2026-11-20)
@@ -17,15 +17,15 @@ sources: "Prior owner acceptance through Skill #23 is recorded at aa54d7c55a313e
 
 **Task outcome:** PARTIAL
 
-**24 of 73 audio skills are accepted.** 49 modules remain. The 73 audio modules are counted separately from the six shared mathematics skills.
+**30 of 73 audio skills are accepted.** 43 modules remain. The six shared mathematics skills have their own inventory.
 
-The development branch is `skills/audio-dsp-core-foundation-2026-11-03`. At this checkpoint its head was `4dc854e450bac96ec985c7ab226941cc8efe13c9`, the merge commit for [Skill #24 in PR #25](https://github.com/Kisuul/KestrelGaming/pull/25).
+The audio development branch is `skills/audio-dsp-core-foundation-2026-11-03`. At this checkpoint, its head `b52ad24d470664b4f8151ab9f47dccda463a208c` includes Skills #25–30 and their merged research handoffs. [Research PR #29](https://github.com/Kisuul/KestrelGaming/pull/29)
 
-**Next is Skill #25, `audio-spectral-descriptors`.** [PR #29](https://github.com/Kisuul/KestrelGaming/pull/29) contains research handoffs for skills #25–30 and was open at this checkpoint.
+**Next is Skill #31, `audio-stereo-correlation`.**
 
-[Umbrella PR #2](https://github.com/Kisuul/KestrelGaming/pull/2) may merge to `main` only after all 73 modules are complete, independent review and the combined branch's acceptance checks have passed, and the owner explicitly authorizes the final merge. Reviewed child PRs target the audio development branch. [Owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Keep [umbrella PR #2](https://github.com/Kisuul/KestrelGaming/pull/2) open until all 73 modules are complete, independent review and the combined branch's acceptance checks have passed, and the owner explicitly authorizes merging into `main`. Reviewed child PRs target the audio development branch. [Owner decision](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
 
-## Accepted inventory (24)
+## Accepted inventory (30)
 
 The inventory follows the catalog at the inspected development head and the owner's acceptance decisions. [Audio skill catalog](../../../../../skills/INDEX.md)
 
@@ -53,18 +53,20 @@ The inventory follows the catalog at the inspected development head and the owne
 22. [`audio-envelope-dynamics`](../../../../../skills/audio-envelope-dynamics/SKILL.md)
 23. [`audio-fractional-octave-rta`](../../../../../skills/audio-fractional-octave-rta/SKILL.md)
 24. [`audio-multiresolution-spectrum`](../../../../../skills/audio-multiresolution-spectrum/SKILL.md)
+25. [`audio-spectral-descriptors`](../../../../../skills/audio-spectral-descriptors/SKILL.md)
+26. [`audio-harmonic-analysis`](../../../../../skills/audio-harmonic-analysis/SKILL.md)
+27. [`audio-cepstral-analysis`](../../../../../skills/audio-cepstral-analysis/SKILL.md)
+28. [`audio-oscilloscope`](../../../../../skills/audio-oscilloscope/SKILL.md)
+29. [`audio-scope-triggering`](../../../../../skills/audio-scope-triggering/SKILL.md)
+30. [`audio-vectorscope`](../../../../../skills/audio-vectorscope/SKILL.md)
 
-## Pending inventory (49)
+## Pending inventory (43)
 
-The foundations and the levels, loudness, and dynamics families are complete.
+Foundations, levels and dynamics, and spectra and frequency-domain analysis are complete.
 
-### Spectra and frequency-domain analysis (3 pending)
+### Oscilloscopes and phase (5 pending)
 
-`audio-spectral-descriptors`, `audio-harmonic-analysis`, `audio-cepstral-analysis`.
-
-### Oscilloscopes and phase (8 pending)
-
-`audio-oscilloscope`, `audio-scope-triggering`, `audio-vectorscope`, `audio-stereo-correlation`, `audio-mid-side-analysis`, `audio-phase-coherence`, `audio-cross-correlation`, `audio-group-delay`.
+`audio-stereo-correlation`, `audio-mid-side-analysis`, `audio-phase-coherence`, `audio-cross-correlation`, `audio-group-delay`.
 
 ### Temporal and music structure (8 pending)
 
@@ -88,13 +90,24 @@ The foundations and the levels, loudness, and dynamics families are complete.
 
 ## Evidence
 
-- Gauge approved Skill #24 at reviewed head `b1c0d71084759912e979a4ec96e7b1169529fdce`. GitHub Actions passed structural validation and all 627 tests for that candidate. The owner then merged it into the audio branch and confirmed acceptance. [Gauge review](https://github.com/Kisuul/KestrelGaming/pull/25#pullrequestreview-5950813470) · [Candidate CI](https://github.com/Kisuul/KestrelGaming/actions/runs/44237027642)
-- The archived Skill #24 handoff preserves the implementation checks and measurement limits. The 19/73 handoff records the earlier milestone and its 451-test result. [Skill #24 handoff](2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) · [19/73 checkpoint](2026-11-03-audio-skills-roadmap.md)
-- The course teaches audio engineering methods. The true-peak reference is experimental, the Type IIb PPM reference has a documented frequency-flatness failure, and IEC filter-class validation is outside the fractional-octave RTA reference's scope. Tests, instrument certification, and agent-use evaluations each require their own evidence.
+Gauge approved these candidate heads. The owner accepted the skills and merged their child PRs into the audio development branch.
+
+| Skill | Approved head | Gauge approval | Merged PR |
+| --- | --- | --- | --- |
+| 25 `audio-spectral-descriptors` | `4a08708` | [Review](https://github.com/Kisuul/KestrelGaming/pull/31#pullrequestreview-6000848928) | [PR #31](https://github.com/Kisuul/KestrelGaming/pull/31) |
+| 26 `audio-harmonic-analysis` | `b41647d` | [Review](https://github.com/Kisuul/KestrelGaming/pull/32#pullrequestreview-6000950113) | [PR #32](https://github.com/Kisuul/KestrelGaming/pull/32) |
+| 27 `audio-cepstral-analysis` | `bdc8aac` | [Review](https://github.com/Kisuul/KestrelGaming/pull/33#pullrequestreview-6001377469) | [PR #33](https://github.com/Kisuul/KestrelGaming/pull/33) |
+| 28 `audio-oscilloscope` | `f98904d` | [Review](https://github.com/Kisuul/KestrelGaming/pull/34#pullrequestreview-6002096132) | [PR #34](https://github.com/Kisuul/KestrelGaming/pull/34) |
+| 29 `audio-scope-triggering` | `137cdbe` | [Review](https://github.com/Kisuul/KestrelGaming/pull/35#pullrequestreview-6002637261) | [PR #35](https://github.com/Kisuul/KestrelGaming/pull/35) |
+| 30 `audio-vectorscope` | `80d9060` | [Review](https://github.com/Kisuul/KestrelGaming/pull/36#pullrequestreview-6002763313) | [PR #36](https://github.com/Kisuul/KestrelGaming/pull/36) |
+
+- Structural validation and all 800 repository tests passed on the reviewed Skill #30 candidate `80d9060`. [Skill #30 CI](https://github.com/Kisuul/KestrelGaming/actions/runs/44864874896)
+- The merged research and archived implementation records preserve the evidence for this batch. Earlier checkpoints remain available through the project index. [Project index](../INDEX.md) · [Skill #24 handoff](2026-11-17-audio-multiresolution-spectrum-implementation-r01.md)
+- The course teaches audio engineering methods. The true-peak reference is experimental. The Type IIb PPM reference has a documented frequency-flatness failure. IEC filter-class compliance requires validation beyond the fractional-octave RTA reference's numerical integration checks. Instrument certification and agent-use evaluation require their own evidence.
 
 ## Next action
 
-Implement and independently review Skill #25 on a child branch targeting the audio development branch. Use the spectral descriptors handoff for its single-frame PSD measurement contract and flux fixtures. [Research PR #29](https://github.com/Kisuul/KestrelGaming/pull/29)
+Prepare and independently review Skill #31 on a child branch that targets the audio development branch.
 
 Update this ledger, the project index, and PR #2's description when the owner accepts another skill. Keep test results tied to the revision checked.
 

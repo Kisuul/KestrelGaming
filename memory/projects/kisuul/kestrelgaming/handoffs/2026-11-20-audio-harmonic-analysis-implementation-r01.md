@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-harmonic-analysis-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested Skill #26 after the checked work order. Audio development base bc94f0562f8fa4eca0d92e9587ede044fb5d9b36 after PR #30. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14, NumPy 2.3.5, Kestrel FFT oracle, and brute-force rational probe seed 26201120."
+sources: "Owner requested Skill #26 after the checked work order. Audio development base bc94f0562f8fa4eca0d92e9587ede044fb5d9b36 after PR #30. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14, NumPy 2.3.5, Kestrel FFT oracle, and brute-force rational probe seed 26201120. Gauge approved the final head and the owner merged PR #32."
 ---
 
 # Skill #26 harmonic analysis implementation and review
@@ -17,10 +17,14 @@ sources: "Owner requested Skill #26 after the checked work order. Audio developm
 
 **Task outcome:** COMPLETE
 
-The implementation is ready for independent review. The skill teaches
+Gauge approved `b41647d`. The owner accepted Skill #26 and merged
+PR #32 into the audio development branch at `e1dc50a`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/32#pullrequestreview-6000950113) · [Merged PR #32](https://github.com/Kisuul/KestrelGaming/pull/32)
+
+The skill teaches
 an agent to locate peak candidates from one calibrated FFT frame, check
 the window's resolving ability, and evaluate harmonic support for a
-supplied fundamental. Owner acceptance is pending.
+supplied fundamental.
 [Skill](../../../../../skills/audio-harmonic-analysis/SKILL.md) ·
 [Contract](../../../../../skills/audio-harmonic-analysis/references/HARMONIC_ANALYSIS_CONTRACT.md) ·
 [Curriculum PR #2](https://github.com/Kisuul/KestrelGaming/pull/2)
@@ -49,11 +53,7 @@ supplied fundamental. Owner acceptance is pending.
 
 ## Next action
 
-Review the exact child PR head. Challenge the paired-flank rule, the
-two-tone error bound, and the exact assignment edges. Use the agent-review
-tasks in the fixture record to evaluate engineering decisions. Count
-Skill #26 after owner acceptance.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 

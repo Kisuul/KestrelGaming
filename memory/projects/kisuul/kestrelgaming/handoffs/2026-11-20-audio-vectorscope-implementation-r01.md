@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-vectorscope-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested Skill #30 after prep. Audio development base ca59f7a30c60b39810f22dd173e4588fb6654fb7 includes Skill #29. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused, capture, independent numeric, and deliberate-fault checks executed."
+sources: "Owner requested Skill #30 after prep. Audio development base ca59f7a30c60b39810f22dd173e4588fb6654fb7 includes Skill #29. Research PR #29 at e2e622d9644dad922a079653b9301826f73c4919. Focused, capture, independent numeric, and deliberate-fault checks executed. Gauge approved the final head and the owner merged PR #36."
 ---
 
 # Skill #30 audio vectorscope implementation and review
@@ -17,7 +17,10 @@ sources: "Owner requested Skill #30 after prep. Audio development base ca59f7a30
 
 **Task outcome:** COMPLETE
 
-The skill and offline reference are ready for independent review.
+Gauge approved `80d9060`. The owner accepted Skill #30 and merged
+PR #36 into the audio development branch at `f1268f8`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/36#pullrequestreview-6002763313) · [Merged PR #36](https://github.com/Kisuul/KestrelGaming/pull/36)
+
 The reference projects ordered PCM pairs from the shared capture type.
 It keeps the measured axes separate from the continuous viewport
 positions and reports the two level and viewport flags.
@@ -41,11 +44,7 @@ positions and reports the two level and viewport flags.
 
 ## Next action
 
-Review the exact child PR head. Challenge the tiny channel difference,
-true overflow, and the nominal-versus-viewport fixtures. Record the
-agent's decisions on the prepared review tasks. Count Skill #30 after
-owner acceptance.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 

@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-audio-spectral-descriptors-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-20
 updated: 2026-11-20
-sources: "Owner requested the next skill after reviewing PR #29. Audio development base 4dc854e450bac96ec985c7ab226941cc8efe13c9. VeNerVRA handoff at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14 focused tests and independent Decimal comparison, seed 50251120."
+sources: "Owner requested the next skill after reviewing PR #29. Audio development base 4dc854e450bac96ec985c7ab226941cc8efe13c9. VeNerVRA handoff at e2e622d9644dad922a079653b9301826f73c4919. CPython 3.12.14 focused tests and independent Decimal comparison, seed 50251120. Gauge approved the final head and the owner merged PR #31."
 ---
 
 # Skill #25 spectral descriptors implementation and review
@@ -17,8 +17,9 @@ sources: "Owner requested the next skill after reviewing PR #29. Audio developme
 
 **Task outcome:** COMPLETE
 
-The implementation is ready for independent review. Owner acceptance is
-pending. The curriculum count is 24 of 73 accepted.
+Gauge approved `4a08708`. The owner accepted Skill #25 and merged
+PR #31 into the audio development branch at `c9927ee`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/31#pullrequestreview-6000848928) · [Merged PR #31](https://github.com/Kisuul/KestrelGaming/pull/31)
 [Audio curriculum PR #2](https://github.com/Kisuul/KestrelGaming/pull/2)
 
 The skill teaches power-weighted shape and flux from a calibrated PSD frame.
@@ -50,11 +51,7 @@ the source clock and the exact frame support. Read the
 
 ## Next action
 
-Review the exact child PR head. Try to falsify the tie rule, the difference
-between zero and underflow, the window provenance, and the gap recovery path.
-Use the agent tasks in the fixture document to evaluate routing and engineering
-decisions. Record the owner's acceptance before counting Skill #25.
-[Curriculum acceptance gate](../2026-11-04-audio-curriculum-full-completion-gate-r01.md)
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
 
 ## Revisit when
 

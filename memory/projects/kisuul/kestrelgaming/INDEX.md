@@ -1,6 +1,6 @@
 # Kisuul/KestrelGaming
 
-**24 of 73 audio skills accepted as of 2026-11-20.** 49 modules remain. Next is Skill #25, `audio-spectral-descriptors`. [Current curriculum ledger](handoffs/2026-11-17-audio-curriculum-status-r01.md)
+**30 of 73 audio skills accepted as of 2026-11-20.** 43 modules remain. Next is Skill #31, `audio-stereo-correlation`. [Current curriculum ledger](handoffs/2026-11-17-audio-curriculum-status-r01.md)
 
 | Record | Status | Use |
 | --- | --- | --- |
@@ -23,7 +23,7 @@
 | [Loudness Range skill #21 review handoff](handoffs/2026-11-17-audio-loudness-range-implementation-r01.md) | Archived | Historical Tech 3342 gates, official LRA measures and 528-test implementation checkpoint; skill now accepted |
 | [Envelope dynamics skill #22 implementation and review handoff](handoffs/2026-11-17-audio-envelope-dynamics-implementation-r01.md) | Archived | Initial 32-test implementation snapshot; subsequent corrected PR #21 passed 564 tests and merged |
 | [Fractional-octave RTA skill #23 review handoff](handoffs/2026-11-17-audio-fractional-octave-rta-implementation-r01.md) | Archived | Historical IEC base-10 geometry, Welch integration and reviewed test evidence; PR #23 merged |
-| [PPM metering skill #19 primary-source research](handoffs/2026-11-05-audio-ppm-metering-research-r01.md) | Active | Legacy EBU Type IIb vs modern loudness, published burst acceptance tests, one-pole falsification; research only, 18/73 remains |
+| [PPM metering skill #19 primary-source research](handoffs/2026-11-05-audio-ppm-metering-research-r01.md) | Active | Historical research at 18 of 73 accepted. Type IIb profiles, burst tests, and one-pole falsification. |
 | [PPM skill #19 implementation — known standard nonconformance](handoffs/2026-11-05-audio-ppm-metering-completion-r01.md) | Active | Fitted historical burst model, 32 tests/451 CI, explicit frequency-flatness failure, 19/73 milestone and next loudness assignment |
 | [Audio VU metering skill #18 completion](handoffs/2026-11-05-audio-vu-metering-completion-r01.md) | Active | Verified calibrated VU detector, 42 tests, independent SciPy ballistics and 18/73 milestone |
 | [Audio parallel execution plan](handoffs/2026-11-04-audio-parallel-execution-plan-r01.md) | Active | Bounded concurrent development, coordinator-owned ledger and reviewable child branches; 15/73 baseline |
@@ -37,16 +37,16 @@
 | [Audio filter-design skill #14 completion](handoffs/2026-11-04-audio-filter-design-completion-r01.md) | Active | Verified FIR/IIR module and SciPy evidence; 14/73, 59 pending; next audio-buffering assignment |
 | [Audio curriculum checkpoint — 13/73](handoffs/2026-11-04-audio-curriculum-checkpoint-13-of-73-r01.md) | Active | Verified 2026-11-04 branch snapshot, 60 pending modules, owner merge gate and safe next-agent pickup |
 | [Audio owner full-completion merge gate](2026-11-04-audio-curriculum-full-completion-gate-r01.md) | Active | Owner decision: no merge of PR #2 until all 73 audio modules are completed |
-| [Harmonic analysis skill #26 implementation and review](handoffs/2026-11-20-audio-harmonic-analysis-implementation-r01.md) | Active | Peak refinement, controlled resolution fixtures, exact harmonic gates, and review evidence |
+| [Harmonic analysis skill #26 implementation and review](handoffs/2026-11-20-audio-harmonic-analysis-implementation-r01.md) | Archived | Accepted in PR #32. Peak refinement, controlled resolution fixtures, exact harmonic gates, and review evidence |
 | [Audio parallel-agent onboarding](handoffs/2026-11-04-audio-parallel-work-onboarding-r01.md) | Active | Proposed unclaimed work lanes, safe branches, agent handoffs and coordinator checks |
 | [Independent audio skills audit](2026-11-03-audio-skills-independent-audit.md) | Active | Review findings, verification gaps, numerical edges, and targeted remediation |
 | [PR #2 mathematics integration assignment](handoffs/2026-11-03-audio-math-integration-workorder-r01.md) | Archived | Completed Math core merge, conditional audio reuse, numerical/timing repairs and 153-test/live differential evidence |
 | [Skill 20 Gauge gate/provenance corrections](handoffs/2026-11-16-audio-program-loudness-gauge-correction-r02.md) | Active | Exact-input gate decisions, original hostile failures, 502-test checks, verified 53-file EBU replay and pending adversarial acceptance |
-| [Spectral descriptors skill #25 implementation and review](handoffs/2026-11-20-audio-spectral-descriptors-implementation-r01.md) | Active | Single-profile PSD shape, exact rolloff ties, numerical and timing fixtures, and review evidence |
-| [Cepstral analysis skill #27 implementation and review](handoffs/2026-11-20-audio-cepstral-analysis-implementation-r01.md) | Active | Raw FFT parity, exact spectral floors, symmetric envelopes, and review evidence |
-| [Oscilloscope skill #28 implementation and review](handoffs/2026-11-20-audio-oscilloscope-implementation-r01.md) | Active | Complete sample-clock captures, block validation, and exact display bucket ownership |
-| [Scope triggering skill #29 implementation and review](handoffs/2026-11-20-audio-scope-triggering-implementation-r01.md) | Active | Exact edge interpolation, holdoff and busy boundaries, and complete capture spans |
-| [Audio vectorscope skill #30 implementation and review](handoffs/2026-11-20-audio-vectorscope-implementation-r01.md) | Active | Aligned stereo axes, numerical headroom, and continuous viewport geometry |
+| [Spectral descriptors skill #25 implementation and review](handoffs/2026-11-20-audio-spectral-descriptors-implementation-r01.md) | Archived | Accepted in PR #31. Single-profile PSD shape, exact rolloff ties, numerical and timing fixtures, and review evidence |
+| [Cepstral analysis skill #27 implementation and review](handoffs/2026-11-20-audio-cepstral-analysis-implementation-r01.md) | Archived | Accepted in PR #33. Raw FFT parity, exact spectral floors, symmetric envelopes, and review evidence |
+| [Oscilloscope skill #28 implementation and review](handoffs/2026-11-20-audio-oscilloscope-implementation-r01.md) | Archived | Accepted in PR #34. Complete sample-clock captures, block validation, and exact display bucket ownership |
+| [Scope triggering skill #29 implementation and review](handoffs/2026-11-20-audio-scope-triggering-implementation-r01.md) | Archived | Accepted in PR #35. Exact edge interpolation, holdoff and busy boundaries, and complete capture spans |
+| [Audio vectorscope skill #30 implementation and review](handoffs/2026-11-20-audio-vectorscope-implementation-r01.md) | Archived | Accepted in PR #36. Aligned stereo axes, numerical headroom, and continuous viewport geometry |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
