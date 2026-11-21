@@ -17,6 +17,7 @@ are not standalone installed host plugins.
 | [audio-spectral-descriptors](audio-spectral-descriptors/SKILL.md) | Measure calibrated PSD shape and adjacent-frame flux. Diagnose gain, band selection, and timing errors. |
 | [audio-cepstral-analysis](audio-cepstral-analysis/SKILL.md) | Analyze a real cepstrum and liftered log-magnitude envelope. Check FFT parity, spectral nulls, and quefrency evidence. |
 | [audio-oscilloscope](audio-oscilloscope/SKILL.md) | Capture aligned PCM windows on the sample clock and retain signed transient extrema in display columns. |
+| [audio-scope-triggering](audio-scope-triggering/SKILL.md) | Qualify PCM edges, report holdoff and single-shot decisions, and complete exact pretrigger and posttrigger spans. |
 | [audio-rms-crest-factor](audio-rms-crest-factor/SKILL.md) | Measure RMS, mean-square level, sample-peak-to-RMS ratio, and channel/silence semantics |
 | [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
 | [audio-sample-peak](audio-sample-peak/SKILL.md) | Implement channel-specific sample peaks, timestamps, rolling holds, program peaks and reference threshold diagnostics |
