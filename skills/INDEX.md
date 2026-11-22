@@ -31,6 +31,7 @@ are not standalone installed host plugins.
 | [audio-channel-mapping](audio-channel-mapping/SKILL.md) | Identify WAVE speaker/unknown/Mid-Side layouts, use exact rational routing matrices, flag gain/loss, and protect sample-clock continuity |
 | [audio-mid-side-analysis](audio-mid-side-analysis/SKILL.md) | Measure aligned stereo Mid and Side. Check polarity, Side gain, delivered mono, and band cancellation. |
 | [audio-phase-coherence](audio-phase-coherence/SKILL.md) | Measure Welch phase and coherence on paired PCM. Check delay, polarity, segment support, and band cancellation. |
+| [audio-cross-correlation](audio-cross-correlation/SKILL.md) | Estimate signed PCM delay with exact overlap support. Check polarity, tied peaks, and clock alignment. |
 | [audio-filter-design](audio-filter-design/SKILL.md) | Choose and verify FIR/IIR filters, band specifications, group delay, SOS stability, coefficient quantization and streaming state |
 | [audio-stream-buffering](audio-stream-buffering/SKILL.md) | Design frame-indexed rings, producer-consumer buffering, overflow/underrun recovery, latency, epoch continuity and independent FIFO verification |
 | [audio-analysis-provenance](audio-analysis-provenance/SKILL.md) | Preserve source-to-DSP-to-visualization lineage, sample timebases, explicit gaps, units, uncertainty and honest content digest claims |
