@@ -37,6 +37,7 @@
 | [Audio provenance reviewed integration — skill #16](handoffs/2026-11-04-audio-provenance-integration-r01.md) | Active | PR #11 accepted into audio branch; 3 defects fixed, 337 passing tests, 16/73 milestone |
 | [Audio stream-buffering skill #15 completion](handoffs/2026-11-04-audio-stream-buffering-completion-r01.md) | Active | Verified FIFO/xrun module with 36 tests, CI evidence, 15/73 milestone and next numerical-stability assignment |
 | [Audio filter-design skill #14 completion](handoffs/2026-11-04-audio-filter-design-completion-r01.md) | Active | Verified FIR/IIR module and SciPy evidence; 14/73, 59 pending; next audio-buffering assignment |
+| [Group delay skill #35 implementation and review](handoffs/2026-11-21-audio-group-delay-implementation-r01.md) | Active | Filter derivatives, qualified aperture slopes, timing offsets, and spectral support |
 | [Audio curriculum checkpoint — 13/73](handoffs/2026-11-04-audio-curriculum-checkpoint-13-of-73-r01.md) | Active | Verified 2026-11-04 branch snapshot, 60 pending modules, owner merge gate and safe next-agent pickup |
 | [Audio owner full-completion merge gate](2026-11-04-audio-curriculum-full-completion-gate-r01.md) | Active | Owner decision: no merge of PR #2 until all 73 audio modules are completed |
 | [Cross-correlation skill #34 implementation and review](handoffs/2026-11-21-audio-cross-correlation-implementation-r01.md) | Active | Clock-referenced delay, paired lag support, exact score ranking, and peak ambiguity |
