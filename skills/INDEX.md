@@ -10,6 +10,12 @@ are not standalone installed host plugins.
 | [kestrel-remember](kestrel-remember/SKILL.md) | Save a useful lesson, decision, project profile, or resumable handoff |
 | [kestrel-html-conformance](kestrel-html-conformance/SKILL.md) | Lesson 1: create, edit, generate, or ship HTML; validate final artifacts with the official Nu Html Checker and require a verified zero-error gate |
 
+## Core engineering (selectively activated)
+
+| Skill | Trigger |
+| --- | --- |
+| [engineering-adversarial-review](engineering-adversarial-review/SKILL.md) | Skeptical PR/code review, baseline regression attribution, green-test defects, test-integrity checks and false-positive restraint |
+
 ## Core mathematics (independent curriculum)
 
 Load **only** the relevant module; consult [the mathematics curriculum](../docs/MATH_CURRICULUM.md) for dependencies, assumptions, and the deferred audio integration plan.

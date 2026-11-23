@@ -12,5 +12,10 @@
 | [CI Python runner drift (2026-11-19)](2026-11-19-ci-python-runner-drift-k1.md) | Active | Why `main`-based CI broke on `ubuntu-26.04`, how to diagnose runner drift, the 3.12 pin decision (PR #27), and local 3.12 test command |
 | [Audio engineering curriculum progress and audit checkpoint (2026-11-05)](handoffs/2026-11-05-audio-curriculum-mainline-checkpoint-r01.md) | Active | PR #2 pinned 19/73 status, no-early-merge gate, 451-test CI provenance, numerical audit findings, PPM limitation, next-agent directions |
 
+| [P0 engineering program coordination](handoffs/2026-11-04-p0-engineering-program-coordination-r01.md) | Active | Three-skill proposal program, child PR strategy, evaluation separation, merge gates |
+| [P0 requirements agent handoff](handoffs/2026-11-04-p0-requirements-acceptance-agent-r01.md) | Active | Issue #5 staged implementation and evidence requirements |
+| [P0 interface evolution agent handoff](handoffs/2026-11-04-p0-interface-evolution-agent-r01.md) | Active | Issue #6 staged architecture and migration skill development |
+| [P0 adversarial review agent handoff](handoffs/2026-11-04-p0-adversarial-review-agent-r01.md) | Active | Issue #7 staged review, regression and evaluator discipline |
+
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
