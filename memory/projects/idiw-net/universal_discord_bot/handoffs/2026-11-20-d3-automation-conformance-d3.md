@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-20-udb-d3-automation-conformance-d3
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-20
 created: 2026-11-20
-updated: 2026-11-20
-sources: "Work order UDB-D3 (pasted by the user in the session). Draft PR #29, branch test/0.5.0-d3-automation-conformance: fc665b2 (tests) and 5c6584e (docs) on master a58a67e. Checks run locally on CPython 3.12.11, SQLite 3.49.1, discord.py 2.7.1, mypy 1.20.2; GitHub Actions run 44873097786."
+updated: 2026-11-23
+sources: "Work order UDB-D3 (pasted by the user on 2026-11-20). PR #29, branch test/0.5.0-d3-automation-conformance: fc665b2 (tests) and 5c6584e (docs) on master a58a67e; second-audit revision d68884f (tests) and 8cfe8e8 (docs); merged as 5681471 at 2026-11-23T22:50Z (gh pr view 29). First audit: PR review at 5c6584e (GO). Second audit: PR review 6029972436 at 5c6584e (claude-code-session-2026-11-23, read-only). Checks run locally on CPython 3.12.11, SQLite 3.49.1, discord.py 2.7.1, mypy 1.20.2; GitHub Actions runs 44873097786 (5c6584e) and 45281636235 (8cfe8e8)."
 ---
 
 # UDB D3: offline workflow and automation conformance
@@ -35,8 +35,9 @@ corrective work order.
 
 **Task outcome:** COMPLETE
 
-This covers this session's scope. Draft PR #29 is open, but the independent
-hostile audit and the owner's merge decision are still pending.
+PR #29 merged as `5681471` on 2026-11-23 after two audits and one test/doc
+revision. No production defect was found. Archived on merge: its lessons are in
+the [project profile](../PROFILE.md).
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -44,18 +45,20 @@ hostile audit and the owner's merge decision are still pending.
   and `[Unreleased]` CHANGELOG and ROADMAP lines.
 - **Excluded:** production changes, schema, migrations, dependencies, version
   bumps, live smoke tests, merging, and marking D3 merged or accepted.
+- The second audit was requested read-only. The revision, its push and the PR
+  description update were each separately approved by the user.
 
 **Target repository, branch, and commit:** `IDIW-NET/Universal_Discord_Bot`,
-branch `test/0.5.0-d3-automation-conformance`. Base is `a58a67e`, which matched
-the verified base, so there were no intervening changes. Commits:
+branch `test/0.5.0-d3-automation-conformance`, base `a58a67e`. Commits:
 
-- `fc665b2`: tests, the tested head;
-- `5c6584e`: docs only, the final head.
+- `fc665b2`: tests, the originally tested head;
+- `5c6584e`: docs only;
+- `d68884f`: second-audit test revision;
+- `8cfe8e8`: second-audit docs revision, the final head;
+- merge `5681471` on `master`.
 
-Pushed, with [PR #29](https://github.com/IDIW-NET/Universal_Discord_Bot/pull/29) open as a draft.
-
-**Memory revision loaded:** KestrelGaming `main` at `8331a4d`: the UDB
-PROFILE and the D2b handoff.
+**Memory revision loaded:** KestrelGaming `main` at `8331a4d` (2026-11-20) and
+`d7949c3` (2026-11-23).
 
 ## Evidence
 
@@ -64,93 +67,98 @@ PROFILE and the D2b handoff.
 - **What D3 delivered:**
   - `tests/test_automation_conformance.py`: 9 tests. They reuse
     `_bot`/`_assert_clean`/`startup_spies` from `test_capability_lifecycle.py`,
-    and `OfflineInteraction`/`preview`/`click` from `test_intake_ticket_flow.py`.
-  - `docs/D3_AUTOMATION_CONFORMANCE.md`, the evidence matrix.
+    and `OfflineInteraction`/`click`/`interaction_for` from
+    `test_intake_ticket_flow.py`.
+  - `docs/D3_AUTOMATION_CONFORMANCE.md`, the evidence matrix, with a
+    "Revision after the second audit" section.
 - **No production defect found.** Every D3 scenario passed on unchanged code at
-  `a58a67e`.
+  `a58a67e`, and again after the revision.
 - **Controlled-clock technique.** Patch `datetime` in `modules.tickets.store`
   and `modules.tickets.inactivity` only, starting 30 days in the past.
-  - This lets the commands stamp day 0 and day 3, and still leaves day-0 jobs
-    overdue for the real scheduler loop and the live `/doctor`.
+  - Those are the only Tickets files that read the clock (grep at `5c6584e`).
   - It works across restarts because extension unload drops only
-    `modules.tickets.cog` from `sys.modules`. The store and inactivity modules
-    stay cached.
-- **Running the real scheduler loop offline.** It never ticks by itself,
-  because it waits in `bot.wait_until_ready()`.
-  - Patching that method on the instance with an `asyncio.Event` gate lets the
-    started loop run its first tick.
-  - `UDBBot.close()` then cancels a stalled tick through `scheduler.stop()`'s
-    timeout. That is the real shutdown path.
+    `modules.tickets.cog` from `sys.modules`.
+- **Running the real scheduler loop offline.** Patch `wait_until_ready` on the
+  instance with an `asyncio.Event` gate so the started loop runs a tick.
+  `UDBBot.close()` then cancels a stalled tick through `scheduler.stop()`.
 - **Proving that the UPDATE ran before the INSERT.** A `TEMP` trigger whose
-  `WHEN` requires `(SELECT inactivity_flagged_at ...) IS NOT NULL` rejects the
-  flag-event INSERT only after the conditional UPDATE is visible in the same
-  transaction. The rejection itself therefore proves the UPDATE ran, and the
-  unchanged row proves it rolled back.
-- **Sensitivity check.** Eight source mutations were applied one at a time in
-  a scratch worktree at the base, and each made its D3 test fail.
-  - On Windows, read and write files as bytes in such scripts, because
-    `Path.write_text` rewrites line endings.
-- **Gate runtime.** The full suite now runs 1922 tests in about 6 minutes on
-  this machine, down from the roughly 10 minutes recorded at D2b.
+  `WHEN` requires the flag to be set rejects the flag-event INSERT only after
+  the conditional UPDATE is visible in the same transaction.
+- **Second audit (2026-11-23, read-only, review 6029972436).** No production
+  defect, nothing merge-blocking. It found:
+  - an undisclosed substitution: `_bot()` builds `SchedulerService` with
+    `shutdown_timeout_seconds=0.01`, against the production 10 s. The first
+    audit's note that D3-06 "waits for the real scheduler stop timeout" was
+    wrong;
+  - the claim "commands run their checks" failed for `/intake ticket`: the
+    shared `preview()` helper calls `command.callback` without
+    `_check_can_run`;
+  - weak oracles: D3-05's `"unavailable"` also matched
+    `Submission unavailable`; D3-08's doctor WARNING came only from
+    `unhandled_due`, because `recent=0` was an artifact of injected tick times;
+  - disclosure gaps (hand-built `AppContext`, re-implemented audit selection,
+    bypassed argument transformation and `on_error`, private discord.py hooks)
+    and missing positive log-capture controls.
+- **Revision (`d68884f`, `8cfe8e8`).** D3 drives `/intake ticket` through
+  `_command()`; exact reasons are asserted; positive log controls were added;
+  every substitution is disclosed in the module, report and PR description.
+- **Sensitivity.** Eight source mutations at `a58a67e` were each detected.
+  Two more for the revision (absent provider reported as
+  `Submission unavailable`; a `/intake ticket` check that denies everyone) were
+  passed by the original module and caught by the revised one.
 
-**Hypotheses and assumptions:** none affecting the result. Whether the
-controlled-clock and readiness-gate substitutions are acceptable is for the
-audit to decide; the report and PR list them.
+**Hypotheses and assumptions:** `flag_inactive()` compares ISO timestamps as
+text (`last_activity_at <= ?`). Upgraded 0.4.6 rows in another format would
+compare wrongly. Not verified: the 0.4.6 format was not checked (no tags).
 
 **Decisions and rationale:**
 
-- **Commit split.** The tests are one commit and the docs another, so the
-  report can name a tested head. The gate re-ran on the final head.
-- **Commit hygiene.** The tests commit was amended once before any push, to
-  add the D3-05 no-write assertion and a permanent pending-task check
-  (`_assert_shut_down`).
-- **Status docs.** ROADMAP describes D3 without a "merged" row. AGENTS.md and
-  README are untouched and are left for a post-merge reconcile PR, matching
-  #20 and #28.
-- **Review requests.** No GitHub reviewers were requested, because the work
-  order named none. The PR body asks for the hostile audit.
+- **Commit split.** Tests and docs in separate commits, so the report can name
+  a tested head; repeated for the revision.
+- **Limitation pin kept.** D3-06 still asserts the lost audit is `[]`, labelled
+  as a pin rather than a requirement, instead of weakening it to "at most one".
+- **Report names no revision hashes.** It defers to the PR description, so the
+  report stayed accurate after committing.
 
-**Changed files and uncommitted state to preserve:** UDB: none uncommitted.
-This record lives on the KestrelGaming branch
-`memory/udb-d3-automation-conformance-2026-11-20`.
+**Changed files and uncommitted state to preserve:** none. Everything is
+merged on UDB `master` at `5681471`.
 
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
-| Full gate in a clean worktree at `fc665b2` | pytest 1922 passed; ruff check and format clean (244 files); mypy clean (127 files); doctor OK (13 checks) | Windows, CPython 3.12.11 |
-| Same gate at the final head `5c6584e` | Identical results; tree clean afterwards | Same |
+| Full gate at `fc665b2` and at `5c6584e` | pytest 1922 passed; ruff check and format clean (244 files); mypy clean (127 files); doctor OK (13 checks) | Windows, CPython 3.12.11 |
 | 8 source mutations at `a58a67e` | 8 of 8 detected | Scratch worktree, since removed |
-| D3 tests with non-loopback connects and DNS refused | 9 passed, 0 attempts; 14 shutdowns with no pending task, no stray thread | Probe script in scratchpad |
-| GitHub Actions on PR #29, run 44873097786 | Verify passed (`success`) on `5c6584e` | ubuntu-latest, Python 3.12 |
+| D3 tests with non-loopback connects and DNS refused | 9 passed, 0 attempts; 14 shutdowns with no pending task | Probe script in scratchpad |
+| Second audit: D3 module at `5c6584e` | 9 passed in 18.94 s | Read-only; full gate not re-run |
+| Full gate on the revised tree (tests as in `d68884f`) | 1922 passed in 292 s; ruff, format, mypy clean; doctor OK | Same machine |
+| After the final doc edits | docs invariants, doctor-script and D3 tests: 49 passed; doctor OK; `git diff --check` clean | Same machine |
+| 2 revision mutations at `5c6584e` | Original module passed both; revised module caught both | Scratch worktree, since removed |
+| GitHub Actions Verify | success on `5c6584e` (44873097786) and `8cfe8e8` (45281636235) | ubuntu-latest, Python 3.12 |
 
-**Persistence:**
-
-- **UDB:** pushed, with PR #29 open as a draft.
-- **This handoff:** pushed, with the user's approval, to the KestrelGaming
-  branch `memory/udb-d3-automation-conformance-2026-11-20` for review. Its Git
-  history shows whether it has been integrated into `main`.
+**Persistence:** UDB work merged on `master` at `5681471`. This record is
+updated on the KestrelGaming branch `memory/udb-d3-merged-2026-11-23`; its Git
+history shows whether it reached `main`.
 
 ## Next action
 
-**Open blockers or risks:**
-
-- **Audit outcome:** the hostile audit has not happened yet.
-- **Accepted by design, not defects:**
-  - superseded inactivity checks pile up as no-ops;
-  - a flag audit lost before completion is not recreated.
+**Open blockers or risks:** none for D3. Accepted by design, not defects:
+superseded inactivity checks pile up as no-ops, and a flag audit lost before
+completion is not recreated.
 
 **Next useful step:**
 
-1. Answer the audit findings on PR #29. A real defect gets its own corrective
-   work order; D3 goes on HOLD and its tests are not weakened.
-2. After merge, open a status-reconcile docs PR for the ROADMAP table,
-   `AGENTS.md`, `README.md` and the report's "Status when written" line.
-3. Then the separate 0.5.0 release-readiness gate:
-   - upgrade from 0.4.6 databases;
-   - operator procedures;
-   - explicitly authorized dev-guild testing;
-   - the lockstep version bump.
+1. A status-reconcile docs PR: the ROADMAP status table, `AGENTS.md`,
+   `README.md`, and the report's "Status when written" line (still "proposed").
+2. The separate 0.5.0 release-readiness gate:
+   - upgrade from 0.4.6 databases, including the timestamp-format hypothesis
+     above;
+   - `scheduler_jobs` retention (nothing deletes rows; each ticket activity
+     adds a job);
+   - an operator note that a hung audit call holds the sequential scheduler
+     loop until shutdown;
+   - operator procedures, explicitly authorized dev-guild testing, and the
+     lockstep version bump.
 
 ## Revisit when
 
-PR #29 is audited, changed or merged, or the release-readiness gate starts. On
-resume, compare `master` and the PR head with this record before relying on it.
+The status-reconcile PR or the release-readiness gate starts. Compare `master`
+with this record before relying on it.
