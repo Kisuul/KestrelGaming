@@ -4,6 +4,10 @@
 fixtures and an unexecuted behavioral evaluation protocol. This package is not a
 numerical runtime or an installed host capability. The owner is Kisuul/KestrelGaming.
 
+**Status:** accepted for Kestrel Core on 2026-11-23 as bounded procedural documents
+([decision](../memory/projects/kisuul/kestrelgaming/2026-11-23-math-package-final-acceptance-3bec.md));
+the behavioral trials below remain NOT RUN.
+
 ## Use and shared conventions
 
 Start at the [skill catalog](../skills/INDEX.md). Load a module when the task needs
@@ -50,8 +54,9 @@ examples beyond those cases are not silently counted as executable coverage.
 
 ## Verification and falsifiable skill evaluation
 
-Repository checks are dependency-free Python 3.9+ source; the completion run uses
-CPython 3.12.14 on Linux. Other interpreter versions and backends are unverified.
+Repository checks are dependency-free Python 3.9+ source; the completion run used
+CPython 3.12.14 on Linux, and the 2026-11-23 acceptance re-run used CPython 3.12.11
+and 3.14.4 on Windows. Other interpreter versions and backends are unverified.
 
 ```sh
 python3 tools/validate_seed.py

@@ -127,7 +127,9 @@ class SeedValidatorTests(unittest.TestCase):
         # project. Registration despite alternate paths is tested separately.
         self.write("memory/INDEX.md", "# Memory index\n\n[Projects](projects/INDEX.md)\n")
         self.write("memory/projects/INDEX.md", "# Project catalog\n")
-        self.assert_error("Unreachable memory file: " + PROJECT + "/INDEX.md")
+        # The validator reports OS-native relative paths; Path keeps the exact
+        # match on POSIX and Windows alike.
+        self.assert_error("Unreachable memory file: " + str(Path(PROJECT, "INDEX.md")))
 
     def test_project_index_must_be_registered_even_if_linked_elsewhere(self):
         self.write("memory/projects/INDEX.md", "# Project catalog\n")
