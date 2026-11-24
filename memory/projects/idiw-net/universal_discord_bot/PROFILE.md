@@ -8,7 +8,7 @@ evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
 updated: 2026-11-24
-sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff. R1 notes from PR #31 (gh pr view 31: merged as 23cbdbd on 2026-11-24) and the R1 handoff; R2 notes from local commits 412100f and 7ce915b and the R2 handoff; R2/R2.5 merge status from gh pr view 32 and 33 (merged as 60755a5 and 9d762c8 on 2026-11-24) and ROADMAP.md/AGENTS.md at 9d762c8."
+sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff. R1 notes from PR #31 (gh pr view 31: merged as 23cbdbd on 2026-11-24) and the R1 handoff; R2 notes from local commits 412100f and 7ce915b and the R2 handoff; R2/R2.5 merge status from gh pr view 32 and 33 (merged as 60755a5 and 9d762c8 on 2026-11-24) and ROADMAP.md/AGENTS.md at 9d762c8. R3 audit lesson from the PR #34 reviews and the sources cited in the R3 handoff."
 ---
 
 # IDIW-NET/Universal_Discord_Bot ("UDB")
@@ -97,9 +97,9 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   spots. The next gates in ROADMAP.md are R3 (release candidate: lockstep
   version, release notes, verification), then R4 (dev-guild acceptance) and
   R5 (release decision). Each needs separate approval. (observed)
-- **R3 release candidate:** draft PR #34 (commit `b621943` on
-  `release/0.5.0-candidate`) sets version metadata to `0.5.0` (not merged;
-  `master` still says `0.4.6`). The upgrade tests now pin the
+- **R3 release candidate:** draft PR #34 (`b621943`, plus docs-only audit
+  revision `7e55566`, on `release/0.5.0-candidate`) sets version metadata to
+  `0.5.0` (not merged; `master` still says `0.4.6`). The upgrade tests now pin the
   target as `CANDIDATE_VERSION` in `tests/test_upgrade_conformance.py`, a
   sixth lockstep location. (observed; details in
   [the R3 handoff](handoffs/2026-11-24-r3-release-candidate-r3.md))
@@ -108,6 +108,12 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   migration still shows the new version. Judge an upgrade by the
   `udb_migrations` ledger, not the version row. (observed in `services/storage.py`
   and `bot/app.py` at `9d762c8`)
+- **Live-acceptance lesson:** never run the bot against a copy of real data.
+  Reminders delivers every due reminder by DM, from any guild, once ready,
+  and `python -m bot.main` logs in to Discord before it opens the database.
+  Keep live runs on a fresh database and migration evidence offline. Check
+  that a manual step is possible in the client: ephemeral messages cannot be
+  clicked by another member. (observed in the R3 audits of PR #34)
 - **Timing lesson for tests:** stored UDB timestamps have one-second
   resolution, so fast Linux CI can put two startups in the same second.
   Never require `set_at` or similar values to change between operations.

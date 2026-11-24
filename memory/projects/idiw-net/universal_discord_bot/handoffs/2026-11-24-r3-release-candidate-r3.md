@@ -26,7 +26,9 @@ feature set is frozen.
 
 All twelve requirements PASS locally; candidate disposition READY FOR
 HOSTILE AUDIT, no HOLD. With the user's approval, the branch was pushed and
-opened as draft PR #34; it is not merged or accepted. No tag, publication,
+opened as draft PR #34; it is not merged or accepted. The first two hostile
+audits held R3-10 on the R4 checklist only; docs-only commit `7e55566`
+corrects it, and re-review is pending. No tag, publication,
 deployment or Discord access.
 
 **Authorized scope and boundaries (historical; recheck on resume):**
@@ -40,7 +42,7 @@ deployment or Discord access.
   order. Earlier R1/R2 approvals do not carry over.
 
 **Target repository, branch, and commit:** `IDIW-NET/Universal_Discord_Bot`,
-branch `release/0.5.0-candidate` from `9d762c8`. Candidate commit `b621943` (one commit, 18 files).
+branch `release/0.5.0-candidate` from `9d762c8`. Candidate commit `b621943` (18 files), then audit revision `7e55566` (4 Markdown files).
 Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
 
 **Memory revision loaded:** KestrelGaming branch
@@ -83,8 +85,31 @@ Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
   their reports; audit and verification evidence kept.
 - **ROADMAP anchor renamed** to `#current-implementation-status-release-candidate`;
   all links updated.
+- **Audit revision (`7e55566`).** Both audits on PR #34 (a review and a
+  comment signed VeNerVRA, both from `Kisuul`) said HOLD on the R4 checklist.
+  All findings were confirmed in source, then fixed in Markdown only:
+  - Live rows A-D need a fresh database, a dedicated dev application and
+    authorized guilds; new pre-start row A4 checks `db_path` and
+    `UDB_PROFILE_*` overrides.
+  - Section E is offline only. Upgrading a real copy is BLOCKED.
+  - No pruning, overriding the linked smoke-test playbooks.
+  - C7 tests the lookup live, C7b checks the preview is invisible, and
+    offline tests are cited. C6 uses fresh submissions. C10 needs an
+    authorized second guild.
+  - The failure-shape row covers the Tickets conflict only.
 - **R4 checklist** is a separate file, `docs/R4_ACCEPTANCE_CHECKLIST.md`, all
   rows NOT RUN.
+
+- **Why live R4 must never use copied real data.** `ReminderStore.due_pending`
+  selects due reminders from every guild and the dispatcher DMs the stored
+  user, so guild-scoped sync does not contain a copied database.
+  `python -m bot.main` logs in (`Client.login`: `static_login`, then
+  `setup_hook`) before it opens the database, so the entry point offers no
+  offline upgrade. The Intake ticket preview is ephemeral, so a second member
+  cannot click it; non-owner clicks are offline-only evidence.
+- **Link count correction.** The report's first figure, 166 links, came from
+  an overlapping file list. The same 12 changed Markdown files give 154 at
+  `b621943` and 158 at `7e55566`.
 
 **Changed files and uncommitted state to preserve:** none uncommitted in UDB. The PR description lives on PR #34.
 
@@ -92,13 +117,14 @@ Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
 | --- | --- | --- |
 | Baseline `python -m pytest -q` at `9d762c8` (clean worktree) | 1958 passed, 4 xfailed, no skips | Windows |
 | Full gate on `b621943` (clean detached worktree) | pytest 1959 passed, 4 xfailed (R1-D1); ruff check clean; ruff format 248 files; mypy 127 files clean; doctor OK (13), version 0.5.0 | Windows |
+| Full gate on `7e55566` (clean detached worktree), after the audit revision | pytest 1959 passed, 4 xfailed; ruff, format (248), mypy (127) and doctor (13 OK) clean; upgrade module alone 23 passed, 4 xfailed; 158 links, none broken | Windows; Linux CI on `7e55566` was pending when written |
 | Linux CI on PR #34 (`Verify` run 45502918198, head `b621943`) | success: pytest 1959 passed, 4 xfailed in 24 s; ruff, format, mypy (127 files) and doctor steps passed | GitHub Actions, Python 3.12.16 |
 | `build_udb_0_4_6.py --source <818964f worktree> --check` | Both dumps match 0.4.6 output; fixture blobs identical to base | Windows |
 | Offline probe: upgrade 0.4.6 fixture, call `/about`, `/health`, boot summary, HTTP header, read SQLite read-only | All report `0.5.0`; 10 ledger rows, hashes match code; integrity ok | Scratch test outside repo |
 | Upgrade-module sensitivity, scratch worktree | Control 23 passed; pre-R3 oracle on 0.5.0 code: 2 failed; R3 tests on unbumped code: 5 failed; bootstrap keeps old value: 4; extra meta row: 8; wrong version value: 4 | Scratch worktree, since removed |
 | Link and anchor check on changed Markdown | 166 links, none broken (one pre-existing false positive at `MODULES.md:171`) | Scratch script |
 
-**Persistence:** UDB commit `b621943` is on the pushed branch
+**Persistence:** UDB commits `b621943` and `7e55566` are on the pushed branch
 `release/0.5.0-candidate`, draft PR #34. This record is on the pushed
 KestrelGaming branch `memory/udb-r3-release-candidate-2026-11-24`, stacked on
 the unmerged R2 memory branch; its Git history shows whether it reached
@@ -106,11 +132,13 @@ the unmerged R2 memory branch; its Git history shows whether it reached
 
 ## Next action
 
-**Open blockers or risks:** maintainer dispositions listed in the R3 report
+**Open blockers or risks:** re-review of `7e55566` by the auditors; Linux CI
+on `7e55566` was pending when written (check `gh pr view 34`). Maintainer
+dispositions listed in the R3 report
 section 8: R2 risk acceptance not recorded; R1-D1 xfails; version written
 before migrations; final version number on a candidate.
 
-**Next useful step:** an independent hostile audit of PR #34. R4 needs separate explicit authorization.
+**Next useful step:** re-review of PR #34's final head by the auditors. R4 needs separate explicit authorization.
 
 ## Revisit when
 
