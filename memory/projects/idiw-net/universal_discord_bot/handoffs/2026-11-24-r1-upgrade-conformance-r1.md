@@ -33,8 +33,8 @@ a separate corrective work order.
 
 **Task outcome:** IN PROGRESS
 
-All eight areas PASS locally, with R1-D1 recorded and no HOLD. The draft PR
-waits for the user's push approval; nothing has been pushed.
+All eight areas PASS locally, with R1-D1 recorded and no HOLD. Draft PR #31
+is open for independent hostile audit; it is not merged or accepted.
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -120,15 +120,18 @@ the same test must clear or scope the capture. Earlier modules in the full
 suite leave the `udb` logger at INFO, so a module-only run can hide the leak.
 
 **Persistence:** UDB commits `4b15056` (tests and fixtures, the tested head)
-and `5b2740d` (docs) exist only on the local branch
-`test/0.5.0-r1-upgrade-conformance`; not pushed. This record is on the
-KestrelGaming branch `memory/udb-r1-upgrade-conformance-2026-11-24`, local only.
+and `5b2740d` (docs) were pushed, with the user's approval, to
+`test/0.5.0-r1-upgrade-conformance` and opened as draft PR #31. GitHub
+Actions Verify run 45359244217 was in progress on `5b2740d` when this was
+written; check `gh pr view 31` for its result. This record is on the pushed
+KestrelGaming branch `memory/udb-r1-upgrade-conformance-2026-11-24`; its Git
+history shows whether it reached `main`.
 
 ## Next action
 
-**Open blockers or risks:** the user's approval to push and open the draft PR.
-R1-D1 needs a corrective work order only if noncanonical rows are to be
-supported.
+**Open blockers or risks:** CI on PR #31 had not finished when this was
+written. R1-D1 needs a corrective work order only if noncanonical rows are to
+be supported.
 
 **Next useful step:** independent hostile audit of the R1 PR, then R2
 (operational risk disposition).
