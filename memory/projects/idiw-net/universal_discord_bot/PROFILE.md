@@ -8,7 +8,7 @@ evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
 updated: 2026-11-24
-sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff. R1 notes from PR #31 (gh pr view 31: merged as 23cbdbd on 2026-11-24) and the R1 handoff; R2 notes from local commits 412100f and 7ce915b and the R2 handoff."
+sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff. R1 notes from PR #31 (gh pr view 31: merged as 23cbdbd on 2026-11-24) and the R1 handoff; R2 notes from local commits 412100f and 7ce915b and the R2 handoff; R2/R2.5 merge status from gh pr view 32 and 33 (merged as 60755a5 and 9d762c8 on 2026-11-24) and ROADMAP.md/AGENTS.md at 9d762c8."
 ---
 
 # IDIW-NET/Universal_Discord_Bot ("UDB")
@@ -83,13 +83,20 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   0.4.6 runtime and rebuilt by `tests/upgrade_fixtures/build_udb_0_4_6.py`.
   (observed; details in
   [the R1 handoff](handoffs/2026-11-24-r1-upgrade-conformance-r1.md))
-- **R2 scheduler risks:** draft PR #32
-  (`test/0.5.0-r2-scheduler-risk-conformance`), open at the time of writing. History costs about 360 bytes per `scheduler_jobs`
+- **R2 scheduler risks:** PR #32 merged as `60755a5` on 2026-11-24.
+  History costs about 360 bytes per `scheduler_jobs`
   row and hot queries read `scheduler_jobs_status_run_idx`. A non-returning
   handler holds the loop while `/doctor` stays OK, and `stop()` lets the rest
   of an in-progress batch run inside its timeout. The recommendation is
-  ACCEPT plus DEFER, with no HOLD. (observed; details in
+  ACCEPT plus DEFER, with no HOLD, still awaiting maintainer acceptance.
+  (observed; details in
   [the R2 handoff](handoffs/2026-11-24-r2-scheduler-risk-r2.md))
+- **R2.5 operator docs:** PR #33 merged as `9d762c8` on 2026-11-24, docs only
+  (six Markdown files). `docs/SCHEDULER_CONTRACT.md` and `OPERATOR_GUIDE.md`
+  now describe stalled handlers, retained history and the diagnostics' blind
+  spots. The next gates in ROADMAP.md are R3 (release candidate: lockstep
+  version, release notes, verification), then R4 (dev-guild acceptance) and
+  R5 (release decision). Each needs separate approval. (observed)
 - **Timing lesson for tests:** stored UDB timestamps have one-second
   resolution, so fast Linux CI can put two startups in the same second.
   Never require `set_at` or similar values to change between operations.

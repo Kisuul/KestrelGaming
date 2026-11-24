@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-24-udb-r2-scheduler-risk-r2
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-24
 created: 2026-11-24
 updated: 2026-11-24
-sources: "Work order UDB-R2 (pasted by the user on 2026-11-24). UDB master 23cbdbd (merge of PR #31), read locally: services/scheduler.py, services/storage.py, services/audit.py, services/diagnostics.py, modules/tickets/store.py, modules/tickets/inactivity.py, docs/SCHEDULER_CONTRACT.md, OPERATOR_GUIDE.md. Local branch test/0.5.0-r2-scheduler-risk-conformance, commits 412100f (tests and helper) and 7ce915b (docs). Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below."
+sources: "Work order UDB-R2 (pasted by the user on 2026-11-24). UDB master 23cbdbd (merge of PR #31), read locally: services/scheduler.py, services/storage.py, services/audit.py, services/diagnostics.py, modules/tickets/store.py, modules/tickets/inactivity.py, docs/SCHEDULER_CONTRACT.md, OPERATOR_GUIDE.md. Local branch test/0.5.0-r2-scheduler-risk-conformance, commits 412100f (tests and helper) and 7ce915b (docs). Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below. Merge status from gh pr view 32 and 33 and gh pr checks 32 and 33 on 2026-11-24, and git show 79a83c7 on local master 9d762c8."
 ---
 
 # UDB R2: scheduler retention and stalled-handler risks
@@ -25,11 +25,21 @@ characterizations, with a disposition (ACCEPT, DEFER or HOLD) for two risks:
 Eight areas, R2-01 to R2-08, each PASS, FAIL or BLOCKED. Tests, measurement
 code and docs only; no deletion, timeouts or concurrency.
 
-**Task outcome:** IN PROGRESS
+**Task outcome:** COMPLETE
 
 All eight areas PASS locally. The recommendation is ACCEPT plus DEFER for both
 risks, with no HOLD. With the user's approval, the branch was pushed and opened
-as draft PR #32; it is not merged or accepted.
+as draft PR #32. PR #32 merged as `60755a5` on 2026-11-24 at 20:21 UTC, after
+the Linux "Local quality gate" check passed. Its only review is a COMMENTED
+review from `Kisuul`. The dispositions are still recommendations awaiting
+maintainer acceptance, as PR #33 restates. (observed)
+
+**Follow-up merged:** PR #33, UDB-R2.5 operator documentation, merged as
+`9d762c8` on 2026-11-24 at 20:41 UTC. Another session did that work, not
+this one. Its one commit, `79a83c7`, changes six Markdown files. It fixes the
+D2a sentence noted below: a hung handler now reads as `running` and blocking.
+It also documents retained terminal rows, diagnostic blind spots and
+cooperative shutdown. CI passed. PR #33 itself ran no local suite. (observed)
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -98,27 +108,27 @@ unmerged R1 memory branch, on which this branch is stacked.
 | Measurement helper, scaled and fixed mixes, 0-100,000 rows, 30 samples | Exit 0; figures in the R2 report | Local timings only |
 | 11 planted defects (deletion, re-dispatch, no-await, timeout, budget, stop abandons batch, running counted as pending, audit before flag, recovery rewrites pending, resolved schedules, stop without waiting) | 11 of 11 caught, the timeout defect after tightening two tests | Scratch worktree, since removed |
 
-**Persistence:** UDB commits `412100f` and `7ce915b` are on the pushed
-branch `test/0.5.0-r2-scheduler-risk-conformance`, draft PR #32. This record
-is on the pushed KestrelGaming branch
+**Persistence:** UDB commits `412100f` and `7ce915b` are on `master` through
+the PR #32 merge `60755a5`. This record is on the KestrelGaming branch
 `memory/udb-r2-scheduler-risk-2026-11-24`, stacked on the unmerged R1 memory
 branch; its Git history shows whether it reached `main`.
 
 ## Next action
 
-**Open blockers or risks:** Linux CI on PR #32 had not finished when this was
-written; check `gh pr view 32`.
+**Open blockers or risks:** none for R2. The maintainer has not yet stated
+acceptance of the R2 dispositions or of R2.5.
 
-**Next useful step:** independent audit of PR #32. Then the recommended
-follow-ups:
+**Next useful step:** per ROADMAP.md at `9d762c8`, R3 (lockstep version
+update, release notes and verification) comes after R2.5 is accepted. R4
+(authorized dev-guild acceptance) and R5 (the maintainer's release decision)
+each need separate approval. The R2 follow-ups stay deferred:
 
 - stall observability: a running count, the oldest claim age, and a warning;
-- an operator-documentation checkpoint (migration-failure advice, the D2a
-  sentence, the CHANGELOG wording, scheduler guidance);
 - a terminal-only retention API once a size requirement exists.
+
+PR #33 covered the operator-documentation checkpoint.
 
 ## Revisit when
 
-The R2 PR opens, is audited or merges, or the scheduler dispatch, diagnostics
-or retention behavior changes. Compare `master` with this record before relying
-on it.
+The scheduler dispatch, diagnostics or retention behavior changes, or R3
+starts. Compare `master` with this record before relying on it.
