@@ -97,6 +97,17 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   spots. The next gates in ROADMAP.md are R3 (release candidate: lockstep
   version, release notes, verification), then R4 (dev-guild acceptance) and
   R5 (release decision). Each needs separate approval. (observed)
+- **R3 release candidate:** local commit `b621943` on
+  `release/0.5.0-candidate` sets version metadata to `0.5.0` (not yet pushed
+  or merged; `master` still says `0.4.6`). The upgrade tests now pin the
+  target as `CANDIDATE_VERSION` in `tests/test_upgrade_conformance.py`, a
+  sixth lockstep location. (observed; details in
+  [the R3 handoff](handoffs/2026-11-24-r3-release-candidate-r3.md))
+- **Bootstrap order:** `StorageService.bootstrap()` commits
+  `udb_meta.framework_version` before any module migration runs, so a failed
+  migration still shows the new version. Judge an upgrade by the
+  `udb_migrations` ledger, not the version row. (observed in `services/storage.py`
+  and `bot/app.py` at `9d762c8`)
 - **Timing lesson for tests:** stored UDB timestamps have one-second
   resolution, so fast Linux CI can put two startups in the same second.
   Never require `set_at` or similar values to change between operations.
