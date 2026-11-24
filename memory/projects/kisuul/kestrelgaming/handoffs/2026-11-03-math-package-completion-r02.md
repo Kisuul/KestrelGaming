@@ -3,11 +3,11 @@ schema: 1
 id: 2026-11-03-math-package-completion-r02
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Codex
 created: 2026-11-03
-updated: 2026-11-03
+updated: 2026-11-23
 sources: "User request to take over PR #3 and finish the mathematics skills package; starting branch head bcdab5aa8070c8be3a3d9f5d4f18273cc6507c82; current source, executed local checks and independent mathematical review described below; delivered implementation 57b6f8572f24426c9db828782f509bad5ee8dd6c; successful PR CI 41785745700."
 ---
 
@@ -120,6 +120,15 @@ Branch-scoped memory is not integrated into the shared default branch merely by 
 Review the delivered package on PR #3; no merge is requested. Keep current-head CI
 evidence on the PR. A later independent harness may run the registered behavioral
 pilot; publish measured results separately.
+
+## Archived 2026-11-23
+
+PR #3 merged on 2026-11-04 (`c268a4d`) with provisional acceptance. On 2026-11-23
+the owner gave final acceptance; see the
+[acceptance decision](../2026-11-23-math-package-final-acceptance-3bec.md) for the
+re-verification, a Windows portability fix to this delivery's catalog test, and the
+lesson extracted. The "Next action" above is historical. The behavioral pilot remains
+NOT RUN and is not an acceptance condition.
 
 ## Revisit when
 
