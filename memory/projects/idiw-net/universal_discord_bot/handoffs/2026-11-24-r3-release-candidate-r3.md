@@ -8,7 +8,7 @@ evidence: observed
 author: claude-code-session-2026-11-24
 created: 2026-11-24
 updated: 2026-11-24
-sources: "Work order UDB-R3 (pasted by the user on 2026-11-24). Draft PR #34 (gh pr create output; ccd PR status: open, draft, mergeable). UDB master 9d762c8 (merge of PR #33), read locally: services/storage.py bootstrap and apply_migrations, bot/app.py _initialize_runtime, tests/test_upgrade_conformance.py, tests/test_version.py, tests/test_docs_invariants.py, tests/upgrade_fixtures/build_udb_0_4_6.py, AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md. Local branch release/0.5.0-candidate. Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below."
+sources: "Work order UDB-R3 (pasted by the user on 2026-11-24). Draft PR #34 (gh pr create output; ccd PR status: open, draft, mergeable; gh run view 45502918198). UDB master 9d762c8 (merge of PR #33), read locally: services/storage.py bootstrap and apply_migrations, bot/app.py _initialize_runtime, tests/test_upgrade_conformance.py, tests/test_version.py, tests/test_docs_invariants.py, tests/upgrade_fixtures/build_udb_0_4_6.py, AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md. Local branch release/0.5.0-candidate. Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below."
 ---
 
 # UDB R3: 0.5.0 release candidate
@@ -91,7 +91,8 @@ Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
 | Command or check actually performed | Observed result | Environment / limits |
 | --- | --- | --- |
 | Baseline `python -m pytest -q` at `9d762c8` (clean worktree) | 1958 passed, 4 xfailed, no skips | Windows |
-| Full gate on `b621943` (clean detached worktree) | pytest 1959 passed, 4 xfailed (R1-D1); ruff check clean; ruff format 248 files; mypy 127 files clean; doctor OK (13), version 0.5.0 | Windows; Linux CI not yet run |
+| Full gate on `b621943` (clean detached worktree) | pytest 1959 passed, 4 xfailed (R1-D1); ruff check clean; ruff format 248 files; mypy 127 files clean; doctor OK (13), version 0.5.0 | Windows |
+| Linux CI on PR #34 (`Verify` run 45502918198, head `b621943`) | success: pytest 1959 passed, 4 xfailed in 24 s; ruff, format, mypy (127 files) and doctor steps passed | GitHub Actions, Python 3.12.16 |
 | `build_udb_0_4_6.py --source <818964f worktree> --check` | Both dumps match 0.4.6 output; fixture blobs identical to base | Windows |
 | Offline probe: upgrade 0.4.6 fixture, call `/about`, `/health`, boot summary, HTTP header, read SQLite read-only | All report `0.5.0`; 10 ledger rows, hashes match code; integrity ok | Scratch test outside repo |
 | Upgrade-module sensitivity, scratch worktree | Control 23 passed; pre-R3 oracle on 0.5.0 code: 2 failed; R3 tests on unbumped code: 5 failed; bootstrap keeps old value: 4; extra meta row: 8; wrong version value: 4 | Scratch worktree, since removed |
@@ -105,14 +106,11 @@ the unmerged R2 memory branch; its Git history shows whether it reached
 
 ## Next action
 
-**Open blockers or risks:** Linux CI on PR #34 (`Verify` run 45502918198)
-had not finished when this was written; check `gh pr view 34`. Maintainer
-dispositions listed in the R3 report section 8: R2 risk acceptance not
-recorded; R1-D1 xfails; version written before migrations; final version
-number on a candidate; Windows-only local evidence.
+**Open blockers or risks:** maintainer dispositions listed in the R3 report
+section 8: R2 risk acceptance not recorded; R1-D1 xfails; version written
+before migrations; final version number on a candidate.
 
-**Next useful step:** confirm Linux CI on PR #34, then an independent
-hostile audit. R4 needs separate explicit authorization.
+**Next useful step:** an independent hostile audit of PR #34. R4 needs separate explicit authorization.
 
 ## Revisit when
 
