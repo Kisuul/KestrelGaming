@@ -3,7 +3,7 @@ schema: 1
 id: 2026-11-24-udb-r1-upgrade-conformance-r1
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-24
 created: 2026-11-24
@@ -31,10 +31,11 @@ test-first and bounded, with eight areas R1-01 to R1-08:
 Each area must be PASS, FAIL or BLOCKED. A product defect would mean HOLD plus
 a separate corrective work order.
 
-**Task outcome:** IN PROGRESS
+**Task outcome:** COMPLETE
 
-All eight areas PASS locally, with R1-D1 recorded and no HOLD. Draft PR #31
-is open for independent hostile audit; it is not merged or accepted.
+All eight areas PASS, with R1-D1 recorded and no HOLD. PR #31 merged as
+`23cbdbd` on 2026-11-24 (gh pr view 31). Archived on merge: its lessons are in
+the [project profile](../PROFILE.md).
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -123,18 +124,18 @@ suite leave the `udb` logger at INFO, so a module-only run can hide the leak.
 and `5b2740d` (docs) were pushed, with the user's approval, to
 `test/0.5.0-r1-upgrade-conformance` and opened as draft PR #31. GitHub
 Actions Verify run 45359244217 was in progress on `5b2740d` when this was
-written; check `gh pr view 31` for its result. This record is on the pushed
-KestrelGaming branch `memory/udb-r1-upgrade-conformance-2026-11-24`; its Git
-history shows whether it reached `main`.
+written. That run failed on a same-second `set_at` assumption in R1-05. The
+test was fixed in `9606230` and the report in `ba2dd21`, and PR #31 merged as
+`23cbdbd`. This record's Git history shows whether it reached KestrelGaming
+`main`.
 
 ## Next action
 
-**Open blockers or risks:** CI on PR #31 had not finished when this was
-written. R1-D1 needs a corrective work order only if noncanonical rows are to
-be supported.
+**Open blockers or risks:** none for R1. R1-D1 needs a corrective work order
+only if noncanonical rows are to be supported.
 
-**Next useful step:** independent hostile audit of the R1 PR, then R2
-(operational risk disposition).
+**Next useful step:** R2 (scheduler operational risks); see
+[the R2 handoff](2026-11-24-r2-scheduler-risk-r2.md).
 
 ## Revisit when
 
