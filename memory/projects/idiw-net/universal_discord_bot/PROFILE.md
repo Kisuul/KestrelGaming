@@ -83,8 +83,8 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   0.4.6 runtime and rebuilt by `tests/upgrade_fixtures/build_udb_0_4_6.py`.
   (observed; details in
   [the R1 handoff](handoffs/2026-11-24-r1-upgrade-conformance-r1.md))
-- **R2 scheduler risks:** local branch `test/0.5.0-r2-scheduler-risk-conformance`
-  at the time of writing. History costs about 360 bytes per `scheduler_jobs`
+- **R2 scheduler risks:** draft PR #32
+  (`test/0.5.0-r2-scheduler-risk-conformance`), open at the time of writing. History costs about 360 bytes per `scheduler_jobs`
   row and hot queries read `scheduler_jobs_status_run_idx`. A non-returning
   handler holds the loop while `/doctor` stays OK, and `stop()` lets the rest
   of an in-progress batch run inside its timeout. The recommendation is

@@ -28,7 +28,8 @@ code and docs only; no deletion, timeouts or concurrency.
 **Task outcome:** IN PROGRESS
 
 All eight areas PASS locally. The recommendation is ACCEPT plus DEFER for both
-risks, with no HOLD. Nothing has been pushed and no PR has been opened.
+risks, with no HOLD. With the user's approval, the branch was pushed and opened
+as draft PR #32; it is not merged or accepted.
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -97,17 +98,19 @@ unmerged R1 memory branch, on which this branch is stacked.
 | Measurement helper, scaled and fixed mixes, 0-100,000 rows, 30 samples | Exit 0; figures in the R2 report | Local timings only |
 | 11 planted defects (deletion, re-dispatch, no-await, timeout, budget, stop abandons batch, running counted as pending, audit before flag, recovery rewrites pending, resolved schedules, stop without waiting) | 11 of 11 caught, the timeout defect after tightening two tests | Scratch worktree, since removed |
 
-**Persistence:** UDB commits are local only. This record is on the local
-KestrelGaming branch `memory/udb-r2-scheduler-risk-2026-11-24`, stacked on
-the unmerged R1 memory branch.
+**Persistence:** UDB commits `412100f` and `7ce915b` are on the pushed
+branch `test/0.5.0-r2-scheduler-risk-conformance`, draft PR #32. This record
+is on the pushed KestrelGaming branch
+`memory/udb-r2-scheduler-risk-2026-11-24`, stacked on the unmerged R1 memory
+branch; its Git history shows whether it reached `main`.
 
 ## Next action
 
-**Open blockers or risks:** the user's approval to push and open the draft
-PR. Linux CI has not run these tests.
+**Open blockers or risks:** Linux CI on PR #32 had not finished when this was
+written; check `gh pr view 32`.
 
-**Next useful step:** a draft PR and independent audit. Then the
-recommended follow-ups:
+**Next useful step:** independent audit of PR #32. Then the recommended
+follow-ups:
 
 - stall observability: a running count, the oldest claim age, and a warning;
 - an operator-documentation checkpoint (migration-failure advice, the D2a
