@@ -117,7 +117,8 @@ Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
 | --- | --- | --- |
 | Baseline `python -m pytest -q` at `9d762c8` (clean worktree) | 1958 passed, 4 xfailed, no skips | Windows |
 | Full gate on `b621943` (clean detached worktree) | pytest 1959 passed, 4 xfailed (R1-D1); ruff check clean; ruff format 248 files; mypy 127 files clean; doctor OK (13), version 0.5.0 | Windows |
-| Full gate on `7e55566` (clean detached worktree), after the audit revision | pytest 1959 passed, 4 xfailed; ruff, format (248), mypy (127) and doctor (13 OK) clean; upgrade module alone 23 passed, 4 xfailed; 158 links, none broken | Windows; Linux CI on `7e55566` was pending when written |
+| Full gate on `7e55566` (clean detached worktree), after the audit revision | pytest 1959 passed, 4 xfailed; ruff, format (248), mypy (127) and doctor (13 OK) clean; upgrade module alone 23 passed, 4 xfailed; 158 links, none broken | Windows |
+| Linux CI on `7e55566` (`Verify` run 45511036942) | success: pytest 1959 passed, 4 xfailed; ruff, format, mypy (127) and doctor (13 OK) passed | GitHub Actions |
 | Linux CI on PR #34 (`Verify` run 45502918198, head `b621943`) | success: pytest 1959 passed, 4 xfailed in 24 s; ruff, format, mypy (127 files) and doctor steps passed | GitHub Actions, Python 3.12.16 |
 | `build_udb_0_4_6.py --source <818964f worktree> --check` | Both dumps match 0.4.6 output; fixture blobs identical to base | Windows |
 | Offline probe: upgrade 0.4.6 fixture, call `/about`, `/health`, boot summary, HTTP header, read SQLite read-only | All report `0.5.0`; 10 ledger rows, hashes match code; integrity ok | Scratch test outside repo |
@@ -132,8 +133,8 @@ the unmerged R2 memory branch; its Git history shows whether it reached
 
 ## Next action
 
-**Open blockers or risks:** re-review of `7e55566` by the auditors; Linux CI
-on `7e55566` was pending when written (check `gh pr view 34`). Maintainer
+**Open blockers or risks:** re-review of `7e55566` by the auditors, requested
+in a PR #34 comment on 2026-11-24. Maintainer
 dispositions listed in the R3 report
 section 8: R2 risk acceptance not recorded; R1-D1 xfails; version written
 before migrations; final version number on a candidate.
