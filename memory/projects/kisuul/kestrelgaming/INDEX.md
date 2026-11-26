@@ -20,6 +20,7 @@
 | [Scope triggering research](handoffs/2026-11-20-audio-scope-triggering-research-r01.md) | Active | Edge qualification, exact pre/post capture, holdoff and callback boundaries |
 | [Vectorscope research](handoffs/2026-11-20-audio-vectorscope-research-r01.md) | Active | Aligned stereo pairs, sum/difference geometry, viewport scaling and sampling artifacts |
 | [Stereo correlation skill #31 research](handoffs/2026-11-21-audio-stereo-correlation-research-r01.md) | Active | Zero-lag correlation, level and DC effects, mono fold-down, and portable fixtures |
+| [Group delay skill #35 research](handoffs/2026-11-21-audio-group-delay-research-r01.md) | Active | Phase-slope units, timing origin, branch ambiguity, spectral nulls, and aperture checks |
 | [Programme loudness skill #20 research and test matrix](handoffs/2026-11-14-audio-program-loudness-research-r01.md) | Active | Historical research baseline at 19/73; BS.1770-5, R128/3341, gates and independent test-case planning |
 | [Programme loudness skill #20 review handoff](handoffs/2026-11-16-audio-program-loudness-implementation-r01.md) | Archived | Historical implementation and review evidence; skill now accepted |
 | [Loudness Range skill #21 review handoff](handoffs/2026-11-17-audio-loudness-range-implementation-r01.md) | Archived | Historical Tech 3342 gates, official LRA measures and 528-test implementation checkpoint; skill now accepted |
