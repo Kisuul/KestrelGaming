@@ -7,8 +7,8 @@ status: active
 evidence: observed
 author: claude-code-session-2026-11-18
 created: 2026-11-18
-updated: 2026-11-23
-sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff."
+updated: 2026-11-26
+sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master at 61fdf41 on 2026-11-18: AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md, pyproject.toml, .github/workflows/verify.yml, scripts/, tests/; executed checks listed in the 2026-11-18 type-gate handoff. Status and scheduler notes rechecked on master 39f02c2 (2026-11-19): AGENTS.md, ROADMAP.md, MODULES.md, docs/SCHEDULER_CONTRACT.md, pyproject.toml version, gh pr view 19/20, gh issue list. D2b notes from PR #21 (gh pr view 21: merged as 8e8e303, two GO reviews) and the checks in the D2b handoff. D3 notes from PR #29 (gh pr view 29: merged as 5681471 on 2026-11-23), source read at 5c6584e (tests/test_capability_lifecycle.py, tests/test_intake_ticket_flow.py, services/scheduler.py, services/diagnostics.py, modules/tickets/store.py) and the checks in the D3 handoff. R1 notes from PR #31 (gh pr view 31: merged as 23cbdbd on 2026-11-24) and the R1 handoff; R2 notes from local commits 412100f and 7ce915b and the R2 handoff; R2/R2.5 merge status from gh pr view 32 and 33 (merged as 60755a5 and 9d762c8 on 2026-11-24) and ROADMAP.md/AGENTS.md at 9d762c8. R3 audit lesson from the PR #34 reviews and the sources cited in the R3 handoff. R3 merge and PR #36 from gh pr view 34 and 36 (merged as fee4af3 on 2026-11-25 and 46f74c6 on 2026-11-26), gh run list on master (Verify success on both), and pyproject.toml, bot/__init__.py and CHANGELOG.md at 46f74c6 on 2026-11-26."
 ---
 
 # IDIW-NET/Universal_Discord_Bot ("UDB")
@@ -28,8 +28,10 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   contract), CHANGELOG.md (`Verification` blocks record commands actually run).
 - **Workflow:** work arrives as GitHub issues titled "Codex handoff — <id>"
   (e.g. C2a, C2b, D1), implemented as one PR per work order and merged by the
-  owner after review, often a hostile/independent audit. Version metadata
-  stays at `0.4.6` while bounded 0.5.0 work merges as `[Unreleased]`. (observed)
+  owner after review, often a hostile/independent audit. Bounded 0.5.0 work
+  merged as `[Unreleased]` with version metadata at `0.4.6` until R3; since
+  `fee4af3` master says `0.5.0`, with a `[0.5.0] — Release candidate
+  (pending release approval)` changelog entry. (observed)
   Work-order issues stay open after their PR merges (#11, #13, #15 and #18
   were all open on 2026-11-19), so judge status by PR state, not issue state.
   (observed)
@@ -75,7 +77,56 @@ sources: "Inspected github.com/IDIW-NET/Universal_Discord_Bot (private) master a
   inactivity job (observed); a hung audit call holds the sequential scheduler
   loop until shutdown (observed); `flag_inactive()` compares ISO timestamps as
   text, so upgraded 0.4.6 rows in another format could compare wrongly
-  (hypothesis, unverified).
+  (hypothesis, refuted by R1 for rows 0.4.6 writes).
+- **R1 upgrade conformance:** PR #31 merged as `23cbdbd` on 2026-11-24.
+  0.4.6 databases upgrade cleanly; only `tickets_0002` is new. 0.4.6 writes
+  canonical UTC timestamps. Noncanonical forms are a low defensive defect,
+  R1-D1, kept as 4 strict `xfail`s. Fixtures are SQL dumps written by the
+  0.4.6 runtime and rebuilt by `tests/upgrade_fixtures/build_udb_0_4_6.py`.
+  (observed; details in
+  [the R1 handoff](handoffs/2026-11-24-r1-upgrade-conformance-r1.md))
+- **R2 scheduler risks:** PR #32 merged as `60755a5` on 2026-11-24.
+  History costs about 360 bytes per `scheduler_jobs`
+  row and hot queries read `scheduler_jobs_status_run_idx`. A non-returning
+  handler holds the loop while `/doctor` stays OK, and `stop()` lets the rest
+  of an in-progress batch run inside its timeout. The recommendation is
+  ACCEPT plus DEFER, with no HOLD, still awaiting maintainer acceptance.
+  (observed; details in
+  [the R2 handoff](handoffs/2026-11-24-r2-scheduler-risk-r2.md))
+- **R2.5 operator docs:** PR #33 merged as `9d762c8` on 2026-11-24, docs only
+  (six Markdown files). `docs/SCHEDULER_CONTRACT.md` and `OPERATOR_GUIDE.md`
+  now describe stalled handlers, retained history and the diagnostics' blind
+  spots. The next gates in ROADMAP.md are R3 (release candidate: lockstep
+  version, release notes, verification), then R4 (dev-guild acceptance) and
+  R5 (release decision). Each needs separate approval. (observed)
+- **R3 release candidate:** PR #34 (`b621943`, plus docs-only audit
+  revision `7e55566`) merged as `fee4af3` on 2026-11-25 after a GO re-audit
+  of `7e55566`; version metadata on `master` is now `0.5.0`. The upgrade tests now pin the
+  target as `CANDIDATE_VERSION` in `tests/test_upgrade_conformance.py`, a
+  sixth lockstep location. (observed; details in
+  [the R3 handoff](handoffs/2026-11-24-r3-release-candidate-r3.md))
+- **Profile alignment:** PR #36 (`68dc588`, merged as `46f74c6` on
+  2026-11-26, maintainer-authored, not Kestrel work) fixes profile drift found
+  during R4: `profiles/dev.toml` now ships the Intake Feedback → Tickets
+  mapping, production/minimal gain inactive examples, and the R4 checklist
+  asks operators to verify that mapping rather than add it. Its PR body says
+  tests were not run locally; Linux CI `Verify` passed on `46f74c6`. (observed)
+- **Bootstrap order:** `StorageService.bootstrap()` commits
+  `udb_meta.framework_version` before any module migration runs, so a failed
+  migration still shows the new version. Judge an upgrade by the
+  `udb_migrations` ledger, not the version row. (observed in `services/storage.py`
+  and `bot/app.py` at `9d762c8`)
+- **Live-acceptance lesson:** never run the bot against a copy of real data.
+  Reminders delivers every due reminder by DM, from any guild, once ready,
+  and `python -m bot.main` logs in to Discord before it opens the database.
+  Keep live runs on a fresh database and migration evidence offline. Check
+  that a manual step is possible in the client: ephemeral messages cannot be
+  clicked by another member. (observed in the R3 audits of PR #34)
+- **Timing lesson for tests:** stored UDB timestamps have one-second
+  resolution, so fast Linux CI can put two startups in the same second.
+  Never require `set_at` or similar values to change between operations.
+  Also clear `caplog` between startups in one test: earlier modules leave
+  INFO logging on. (observed in R1 CI)
 - **Reviews:** PR #29 was opened, audited twice and merged from the same
   `Kisuul` account, so its audit reviews are COMMENTED, not approvals, and
   GitHub cannot show their independence (observed). Agents posting audits via
@@ -116,7 +167,7 @@ test-helper and release-gate notes were read from source at `5c6584e`.
 
 ## Revisit when
 
-- Version metadata moves off `0.4.6`, or the 0.5.0 milestone closes.
+- R4 acceptance runs, R5 approves or tags a release, or version metadata moves off `0.5.0`.
 - The mypy gate definition changes. Since PR #16 (merged 2026-11-19 at
   `6491be9`) it is plain `python -m mypy` over `[tool.mypy] files` in
   `pyproject.toml`, guarded by `tests/test_type_check_coverage.py`. Older
