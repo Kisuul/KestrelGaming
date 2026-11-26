@@ -27,6 +27,7 @@
 | [Source separation skill #66 research](handoffs/2026-11-26-audio-source-separation-research-r01.md) | Active | Stem assignment, gain, reconstruction and SI-SDR |
 | [Denoising evaluation skill #67 research](handoffs/2026-11-26-audio-denoising-evaluation-research-r01.md) | Active | Target preservation, noise reduction, listening and scorer evidence |
 | [Onset detection skill #36 research](handoffs/2026-11-21-audio-onset-detection-research-r01.md) | Active | Positive flux, attack timing, spectral motion, peak readiness, and scoring fixtures |
+| [Onset detection skill #36 implementation](handoffs/2026-11-26-audio-onset-detection-implementation-r01.md) | Active | Positive novelty, exact peak readiness, callback replay, and event matching |
 | [Stereo correlation skill #31 implementation and review](handoffs/2026-11-21-audio-stereo-correlation-implementation-r01.md) | Active | Exact window moments, binary64 rounding, and measured mono retention |
 | [Multiresolution spectrum skill #24 review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Archived | Accepted in PR #25. Implementation evidence includes 35 focused tests, 627 repository tests, and numerical comparisons. |
 | [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
