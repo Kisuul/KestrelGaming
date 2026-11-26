@@ -59,6 +59,12 @@
 | [Audio vectorscope skill #30 implementation and review](handoffs/2026-11-20-audio-vectorscope-implementation-r01.md) | Archived | Accepted in PR #36. Aligned stereo axes, numerical headroom, and continuous viewport geometry |
 | [Mid/Side analysis skill #32 research](handoffs/2026-11-21-audio-mid-side-analysis-research-r01.md) | Active | Matrix conventions, band power, Side gain, headroom and mono fold-down fixtures |
 | [Phase and coherence skill #33 research](handoffs/2026-11-21-audio-phase-coherence-research-r01.md) | Active | Welch averaging, signed cross phase, segment alignment and uncertainty fixtures |
+| [Rhythm analysis skill #38 research](handoffs/2026-11-26-audio-rhythm-analysis-research-r01.md) | Active | Beat-relative positions, subdivision ties, swing and tempo harmonics |
+| [Pitch tracking skill #39 research](handoffs/2026-11-26-audio-pitch-tracking-research-r01.md) | Active | Lag-difference candidates, voicing, missing fundamental and interpolation fixtures |
+| [Tuning analysis skill #40 research](handoffs/2026-11-26-audio-tuning-analysis-research-r01.md) | Active | Circular offsets, note weighting, clock calibration and harmonic bias |
+| [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
+| [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
+| [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
