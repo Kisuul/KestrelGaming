@@ -14,6 +14,7 @@
 | [Stereo correlation skill #31 implementation and review](handoffs/2026-11-21-audio-stereo-correlation-implementation-r01.md) | Active | Exact window moments, binary64 rounding, and measured mono retention |
 | [Multiresolution spectrum skill #24 review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Archived | Accepted in PR #25. Implementation evidence includes 35 focused tests, 627 repository tests, and numerical comparisons. |
 | [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
+| [Beat tracking skill #37 research](handoffs/2026-11-21-audio-beat-tracking-research-r01.md) | Active | Tempo and phase hypotheses, weak-evidence paths, timing, and beat-scoring fixtures |
 | [Spectral descriptors research](handoffs/2026-11-20-audio-spectral-descriptors-research-r01.md) | Active | Discrete PSD weighting, endpoint mass, gain invariance and flux checks |
 | [Harmonic analysis research](handoffs/2026-11-20-audio-harmonic-analysis-research-r01.md) | Active | Peak interpolation, harmonic assignment, resolution and ambiguous fundamentals |
 | [Cepstral analysis research](handoffs/2026-11-20-audio-cepstral-analysis-research-r01.md) | Active | Real cepstrum, parity, spectral nulls, echo coefficients and liftering |
