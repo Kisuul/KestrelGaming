@@ -94,8 +94,8 @@ The replay checks this model and basic envelope correlation.
 
 | Probe | Verified result |
 | --- | --- |
-| Score `turn on a light now` against `turn on the light`, with whitespace tokens and no other normalization. | One substitution and one insertion give WER `2/4 = 0.5`. |
-| Score `light then keep reading` against `light` under the same rules. | Three insertions give WER `3/1 = 3`. Clipping at 1 would discard observed errors. |
+| Use `reference="turn on the light"` and `hypothesis="turn on a light now"`. Split on whitespace with no other normalization. | One substitution and one insertion give WER `2/4 = 0.5`. |
+| Use `reference="light"` and `hypothesis="light then keep reading"` under the same rules. | Three insertions give WER `3/1 = 3`. Clipping at 1 would discard observed errors. |
 | Use $\tau=0.10$ s and $f_m=4$ Hz. Sum the first 32,000 impulse weights $(1-a)a^n$ against $\exp(-j2\pi f_m n/f_s)$, with $f_s=16000$ Hz and $a=\exp[-1/(f_s\tau)]$. | The continuous magnitude is `0.36969785`. The infinite discrete value is `0.36969789`. The finite sum agrees with the discrete value within `3e-9`. |
 | Add independent, unmodulated noise with $P_s/P_n=4$ to the continuous example. | Relative modulation transfer falls to `0.29575828`. |
 | Correlate the envelope `[1,3,2,4]` with twice itself and then with its own reversal. | The correlations are `+1` and `−1`. The two versions have different effects even though a level change alone leaves this correlation unchanged. |
