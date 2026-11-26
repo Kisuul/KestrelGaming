@@ -18,6 +18,14 @@
 | [Spatial localization skill #57 research](handoffs/2026-11-26-audio-spatial-localization-research-r01.md) | Active | Signed pair delays, propagation bounds, narrowband and geometry ambiguity |
 | [Surround analysis skill #58 research](handoffs/2026-11-26-audio-surround-analysis-research-r01.md) | Active | Channel identity, labeled routing probes, headroom and LFE paths |
 | [Loopback latency skill #59 research](handoffs/2026-11-26-audio-loopback-latency-research-r01.md) | Active | Path timing, first and strongest arrivals, exact clocks and drift |
+| [Voice activity skill #60 research](handoffs/2026-11-26-audio-voice-activity-research-r01.md) | Active | Decision support, speech boundaries, hysteresis and readiness |
+| [Formant analysis skill #61 research](handoffs/2026-11-26-audio-formant-analysis-research-r01.md) | Active | Pole conversion, LPC model support and sparse harmonics |
+| [Speech intelligibility skill #62 research](handoffs/2026-11-26-audio-speech-intelligibility-research-r01.md) | Active | Listening and recognizer scores, modulation transfer and matched references |
+| [Perceptual quality skill #63 research](handoffs/2026-11-26-audio-perceptual-quality-research-r01.md) | Active | Listening methods, error localization and aggregation |
+| [Psychoacoustics skill #64 research](handoffs/2026-11-26-audio-psychoacoustics-research-r01.md) | Active | Calibrated level, auditory bandwidth and spectral masking |
+| [Sound classification skill #65 research](handoffs/2026-11-26-audio-sound-classification-research-r01.md) | Active | Annotation support, source partitioning, ranking and threshold scores |
+| [Source separation skill #66 research](handoffs/2026-11-26-audio-source-separation-research-r01.md) | Active | Stem assignment, gain, reconstruction and SI-SDR |
+| [Denoising evaluation skill #67 research](handoffs/2026-11-26-audio-denoising-evaluation-research-r01.md) | Active | Target preservation, noise reduction, listening and scorer evidence |
 | [Onset detection skill #36 research](handoffs/2026-11-21-audio-onset-detection-research-r01.md) | Active | Positive flux, attack timing, spectral motion, peak readiness, and scoring fixtures |
 | [Stereo correlation skill #31 implementation and review](handoffs/2026-11-21-audio-stereo-correlation-implementation-r01.md) | Active | Exact window moments, binary64 rounding, and measured mono retention |
 | [Multiresolution spectrum skill #24 review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Archived | Accepted in PR #25. Implementation evidence includes 35 focused tests, 627 repository tests, and numerical comparisons. |
