@@ -65,6 +65,14 @@
 | [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
+| [Audio test signals skill #44 research](handoffs/2026-11-26-audio-test-signals-research-r01.md) | Active | Exact phase, coherent tones, multitone headroom, and logarithmic sweep fixtures |
+| [THD and THD+N skill #45 research](handoffs/2026-11-26-audio-thd-thdn-research-r01.md) | Active | Harmonic and residual powers, ratio references, and off-bin rejection |
+| [Intermodulation skill #46 research](handoffs/2026-11-26-audio-intermodulation-research-r01.md) | Active | Two-tone product amplitudes, carrier references, aliasing and collisions |
+| [Noise, SNR and SINAD skill #47 research](handoffs/2026-11-26-audio-noise-snr-sinad-research-r01.md) | Active | Band and reference definitions, PSD integration, and quantizer limits |
+| [Transfer response skill #48 research](handoffs/2026-11-26-audio-transfer-response-research-r01.md) | Active | Paired response estimates, noise location, delay sign and nulls |
+| [Clipping detection skill #49 research](handoffs/2026-11-26-audio-clipping-detection-research-r01.md) | Active | Asymmetric rails, contiguous runs, soft saturation and intersample peaks |
+| [Dropout detection skill #50 research](handoffs/2026-11-26-audio-dropout-detection-research-r01.md) | Active | Source coverage, overlap, concealed audio and suspect quiet intervals |
+| [Codec artifacts skill #51 research](handoffs/2026-11-26-audio-codec-artifacts-research-r01.md) | Active | Presentation alignment, codec trim, transient residuals, and controlled comparisons |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
