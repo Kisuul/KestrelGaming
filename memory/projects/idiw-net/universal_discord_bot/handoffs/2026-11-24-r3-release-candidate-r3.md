@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-24-udb-r3-release-candidate-r3
 kind: handoff
 scope: project:idiw-net/universal_discord_bot
-status: active
+status: archived
 evidence: observed
 author: claude-code-session-2026-11-24
 created: 2026-11-24
-updated: 2026-11-24
-sources: "Work order UDB-R3 (pasted by the user on 2026-11-24). Draft PR #34 (gh pr create output; ccd PR status: open, draft, mergeable; gh run view 45502918198). UDB master 9d762c8 (merge of PR #33), read locally: services/storage.py bootstrap and apply_migrations, bot/app.py _initialize_runtime, tests/test_upgrade_conformance.py, tests/test_version.py, tests/test_docs_invariants.py, tests/upgrade_fixtures/build_udb_0_4_6.py, AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md. Local branch release/0.5.0-candidate. Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below."
+updated: 2026-11-26
+sources: "Work order UDB-R3 (pasted by the user on 2026-11-24). Draft PR #34 (gh pr create output; ccd PR status: open, draft, mergeable; gh run view 45502918198). UDB master 9d762c8 (merge of PR #33), read locally: services/storage.py bootstrap and apply_migrations, bot/app.py _initialize_runtime, tests/test_upgrade_conformance.py, tests/test_version.py, tests/test_docs_invariants.py, tests/upgrade_fixtures/build_udb_0_4_6.py, AGENTS.md, CONTRIBUTING.md, README.md, ROADMAP.md, CHANGELOG.md. Local branch release/0.5.0-candidate. Checks run on Windows 10, CPython 3.12.11, SQLite 3.49.1; results in the table below. Merge status from gh pr view 34 (merged as fee4af3 on 2026-11-25T00:23Z; re-audit of 7e55566 GO at 00:20Z) and gh run list on master (Verify 45517687291 success on fee4af3) on 2026-11-26."
 ---
 
 # UDB R3: 0.5.0 release candidate
@@ -22,14 +22,14 @@ reconciliation, an R4 dev-guild acceptance checklist (not run), and the report
 `docs/R3_RELEASE_CANDIDATE.md` with acceptance matrix R3-01 to R3-12. The
 feature set is frozen.
 
-**Task outcome:** IN PROGRESS
+**Task outcome:** COMPLETE
 
-All twelve requirements PASS locally; candidate disposition READY FOR
-HOSTILE AUDIT, no HOLD. With the user's approval, the branch was pushed and
-opened as draft PR #34; it is not merged or accepted. The first two hostile
-audits held R3-10 on the R4 checklist only; docs-only commit `7e55566`
-corrects it, and re-review is pending. No tag, publication,
-deployment or Discord access.
+All twelve requirements PASS locally. The first two hostile audits held R3-10
+on the R4 checklist only; docs-only commit `7e55566` corrected it, the
+re-audit of `7e55566` said GO for maintainer-controlled merge, and the owner
+merged PR #34 as `fee4af3` on 2026-11-25 (Linux CI `Verify` passed on the
+merge commit). Candidate acceptance only: no tag, publication, deployment,
+R4 execution or R5 release approval.
 
 **Authorized scope and boundaries (historical; recheck on resume):**
 
@@ -125,21 +125,23 @@ Draft PR: https://github.com/IDIW-NET/Universal_Discord_Bot/pull/34.
 | Upgrade-module sensitivity, scratch worktree | Control 23 passed; pre-R3 oracle on 0.5.0 code: 2 failed; R3 tests on unbumped code: 5 failed; bootstrap keeps old value: 4; extra meta row: 8; wrong version value: 4 | Scratch worktree, since removed |
 | Link and anchor check on changed Markdown | 166 links, none broken (one pre-existing false positive at `MODULES.md:171`) | Scratch script |
 
-**Persistence:** UDB commits `b621943` and `7e55566` are on the pushed branch
-`release/0.5.0-candidate`, draft PR #34. This record is on the pushed
+**Persistence:** UDB commits `b621943` and `7e55566` are on `master` via the
+PR #34 merge `fee4af3`. This record is on the pushed
 KestrelGaming branch `memory/udb-r3-release-candidate-2026-11-24`, stacked on
 the unmerged R2 memory branch; its Git history shows whether it reached
 `main`.
 
 ## Next action
 
-**Open blockers or risks:** re-review of `7e55566` by the auditors, requested
-in a PR #34 comment on 2026-11-24. Maintainer
+**Open blockers or risks:** none for R3. Maintainer
 dispositions listed in the R3 report
 section 8: R2 risk acceptance not recorded; R1-D1 xfails; version written
 before migrations; final version number on a candidate.
 
-**Next useful step:** re-review of PR #34's final head by the auditors. R4 needs separate explicit authorization.
+**Next useful step:** R4 dev-guild acceptance, which needs separate explicit
+authorization. Note that maintainer PR #36 (merged as `46f74c6` on
+2026-11-26) has since changed `docs/R4_ACCEPTANCE_CHECKLIST.md` and the
+bundled profiles; read the checklist at current `master`, not at `7e55566`.
 
 ## Revisit when
 
