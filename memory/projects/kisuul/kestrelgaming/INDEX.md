@@ -89,6 +89,12 @@
 | [Clipping detection skill #49 research](handoffs/2026-11-26-audio-clipping-detection-research-r01.md) | Active | Asymmetric rails, contiguous runs, soft saturation and intersample peaks |
 | [Dropout detection skill #50 research](handoffs/2026-11-26-audio-dropout-detection-research-r01.md) | Active | Source coverage, overlap, concealed audio and suspect quiet intervals |
 | [Codec artifacts skill #51 research](handoffs/2026-11-26-audio-codec-artifacts-research-r01.md) | Active | Presentation alignment, codec trim, transient residuals, and controlled comparisons |
+| [Reference validation skill #68 research](handoffs/2026-11-26-audio-reference-validation-research-r01.md) | Active | Independent oracles, FFT parity, tolerance, and zero padding |
+| [Measurement uncertainty skill #69 research](handoffs/2026-11-26-audio-measurement-uncertainty-research-r01.md) | Active | Budget inputs, common calibration, covariance, and expanded uncertainty |
+| [Visualization integrity skill #70 research](handoffs/2026-11-26-audio-visualization-integrity-research-r01.md) | Active | Display support, transient extrema, gaps, and density rebinning |
+| [Color scale design skill #71 research](handoffs/2026-11-26-audio-color-scale-design-research-r01.md) | Active | Range, palette semantics, availability cues, and contrast |
+| [Real-time integration skill #72 research](handoffs/2026-11-26-audio-realtime-integration-research-r01.md) | Active | Callback deadlines, bounded queues, and analysis coverage |
+| [Offline analysis skill #73 research](handoffs/2026-11-26-audio-offline-analysis-research-r01.md) | Active | Chunk state, crop support, convolution tails, and reduction |
 
 Task handoffs belong under handoffs/ with a unique task filename.
 Historical GitHub checks cover structure and small mathematical examples, not Kestrel agent behavior or production host activation.
