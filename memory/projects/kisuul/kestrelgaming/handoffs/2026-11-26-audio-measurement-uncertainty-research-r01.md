@@ -82,12 +82,15 @@ for $\Delta L=L_A-L_B$ is $(1,-1)$.
 | Zero covariance | $\sqrt{0.40+0.45}=0.921954$ dB |
 
 At $k=2$ the first budget gives $U\approx0.721110$ dB.
-For an arithmetic cross-check, draw 500,000 independent
-normal triples with the specified standard deviations
-and share each $c$ within its pair. With PCG64 seed
-690069 in NumPy 2.3.5, the sample standard deviation
-of $\Delta L$ was 0.360006 dB. This checks the
-stipulated covariance model.
+For an arithmetic cross-check, initialize a fresh NumPy
+2.3.5 `Generator` with PCG64 seed 690069. Use one
+`standard_normal` call to draw a `(3, 500000)` array
+of `float64` values. Scale the rows in order by 0.6,
+0.2, and 0.3 dB to obtain $c$, $e_A$, and $e_B$.
+Each column gives one pair of levels with the same $c$.
+With $N-1$ as the variance denominator, the sample
+standard deviation of $\Delta L$ was 0.360006 dB.
+This checks the stipulated covariance model.
 
 For sixteen absolute readings with common calibration
 uncertainty 0.6 dB and independent repeat uncertainty
