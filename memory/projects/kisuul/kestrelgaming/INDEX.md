@@ -86,6 +86,7 @@
 | [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
 | [Chroma and harmony skill #41 implementation and review](handoffs/2026-11-26-audio-chroma-harmony-implementation-r01.md) | Active | Conserved pitch-class power, anchored tuning, exact triad scores, bass and frame clock evidence |
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
+| [Event segmentation skill #42 implementation and review](handoffs/2026-11-26-audio-event-segmentation-implementation-r01.md) | Active | Exact mean-change scores, gap handling, local peaks and confirmation clocks |
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
 | [Audio test signals skill #44 research](handoffs/2026-11-26-audio-test-signals-research-r01.md) | Active | Exact phase, coherent tones, multitone headroom, and logarithmic sweep fixtures |
 | [THD and THD+N skill #45 research](handoffs/2026-11-26-audio-thd-thdn-research-r01.md) | Active | Harmonic and residual powers, ratio references, and off-bin rejection |
