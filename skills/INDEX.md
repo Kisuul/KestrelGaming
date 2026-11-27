@@ -19,6 +19,7 @@ are not standalone installed host plugins.
 | [audio-event-segmentation](audio-event-segmentation/SKILL.md) | Find cuts with two-sided feature changes. Check peak readiness, gaps, coverage, and boundary accuracy. |
 | [audio-temporal-fusion](audio-temporal-fusion/SKILL.md) | Associate compatible audio events on one clock. Check fractional gates, coverage, and decision readiness. |
 | [audio-test-signals](audio-test-signals/SKILL.md) | Generate and verify clocked tones, impulses, mixtures, and sweeps. Check phase, headroom, and response tails. |
+| [audio-thd-thdn](audio-thd-thdn/SKILL.md) | Measure harmonic and residual power. Check fundamental rejection, bin assignment, and ratio references. |
 | [audio-power-spectral-density](audio-power-spectral-density/SKILL.md) | Estimate and verify power density, window-energy normalization, Welch averaging, and Parseval integration |
 | [audio-spectral-descriptors](audio-spectral-descriptors/SKILL.md) | Measure calibrated PSD shape and adjacent-frame flux. Diagnose gain, band selection, and timing errors. |
 | [audio-cepstral-analysis](audio-cepstral-analysis/SKILL.md) | Analyze a real cepstrum and liftered log-magnitude envelope. Check FFT parity, spectral nulls, and quefrency evidence. |
