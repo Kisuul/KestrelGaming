@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-26-audio-onset-detection-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-26
 updated: 2026-11-26
-sources: "Audio development head 5681c370b4c9ecca97f94845f43ffbd14895e16a, merged research PR #49, calibration and peak fixtures, local repository tests, and independent NumPy and SciPy checks."
+sources: "Audio development head 5681c370b4c9ecca97f94845f43ffbd14895e16a, merged research PR #49, calibration and peak fixtures, local repository tests, and independent NumPy and SciPy checks. Gauge reviewed 34ed09d3dc9cd8c6e947d4bc5dcf9c6772ff0d3d. PR #59 merged at 319c5dd96b433aa47f8f32747b5f52ca4b376a7c."
 ---
 
 # Onset detection skill #36 implementation and review
@@ -16,6 +16,10 @@ sources: "Audio development head 5681c370b4c9ecca97f94845f43ffbd14895e16a, merge
 ## Summary
 
 **Task outcome:** COMPLETE
+
+Gauge gave a technical GO on `34ed09d`. Skill #36 merged
+in PR #59 at `319c5dd`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/59#pullrequestreview-6081285859) · [Merged PR #59](https://github.com/Kisuul/KestrelGaming/pull/59)
 
 The [skill](../../../../../skills/audio-onset-detection/SKILL.md)
 defines the event, measures positive spectral flux and weighted RMS
@@ -58,6 +62,10 @@ doubled samples and an inclusive tolerance.
 
 ## Next action
 
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
+
+### Review plan at submission
+
 Replay the impulse at the two readiness prefixes. Check the placement
 of the center and the first ready boundary. Replay the slow attack
 and state which point the application should label. Use the soft
@@ -66,7 +74,7 @@ earlier maximum comes from the held tone. Check the plateau and
 inclusive separation, and verify one-to-one event matching with
 a case where nearest-first loses a feasible pair.
 
-Gauge review remains open. Measure accuracy on held-out annotated
+Measure accuracy on held-out annotated
 audio before selecting a field threshold. Measure dispatch latency
 on the target host if there is a delivery deadline.
 
