@@ -94,6 +94,7 @@
 | [THD and THD+N skill #45 research](handoffs/2026-11-26-audio-thd-thdn-research-r01.md) | Active | Harmonic and residual powers, ratio references, and off-bin rejection |
 | [THD and THD+N skill #45 implementation and review](handoffs/2026-11-27-audio-thd-thdn-implementation-r01.md) | Active | Coherent power accounting, ratio references, and rejection fixtures |
 | [Intermodulation skill #46 research](handoffs/2026-11-26-audio-intermodulation-research-r01.md) | Active | Two-tone product amplitudes, carrier references, aliasing and collisions |
+| [Intermodulation skill #46 implementation and review](handoffs/2026-11-27-audio-intermodulation-implementation-r01.md) | Active | Signed product geometry, collision groups, calibrated powers, and carrier references |
 | [Noise, SNR and SINAD skill #47 research](handoffs/2026-11-26-audio-noise-snr-sinad-research-r01.md) | Active | Band and reference definitions, PSD integration, and quantizer limits |
 | [Transfer response skill #48 research](handoffs/2026-11-26-audio-transfer-response-research-r01.md) | Active | Paired response estimates, noise location, delay sign and nulls |
 | [Clipping detection skill #49 research](handoffs/2026-11-26-audio-clipping-detection-research-r01.md) | Active | Asymmetric rails, contiguous runs, soft saturation and intersample peaks |
