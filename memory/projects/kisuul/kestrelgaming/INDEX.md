@@ -84,6 +84,7 @@
 | [Tuning analysis skill #40 research](handoffs/2026-11-26-audio-tuning-analysis-research-r01.md) | Active | Circular offsets, note weighting, clock calibration and harmonic bias |
 | [Tuning analysis skill #40 implementation and review](handoffs/2026-11-26-audio-tuning-analysis-implementation-r01.md) | Active | Circular estimates, note-event weights, known-note errors, and calibrated pitch replay |
 | [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
+| [Chroma and harmony skill #41 implementation and review](handoffs/2026-11-26-audio-chroma-harmony-implementation-r01.md) | Active | Conserved pitch-class power, anchored tuning, exact triad scores, bass and frame clock evidence |
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
 | [Audio test signals skill #44 research](handoffs/2026-11-26-audio-test-signals-research-r01.md) | Active | Exact phase, coherent tones, multitone headroom, and logarithmic sweep fixtures |
