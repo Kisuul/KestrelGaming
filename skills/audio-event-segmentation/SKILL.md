@@ -15,10 +15,12 @@ description: Detect boundaries between regimes in sample-clocked audio features.
    Treat a measured zero as available. Break support at a gap
    or a change in epoch or feature profile.
    [Score and support](references/EVENT_SEGMENTATION_CONTRACT.md#score-and-support)
-3. **Confirm the peak.** Declare how many scores to compare on
-   each flank. Use a fixed threshold. Keep the first eligible
-   plateau point and record when the score and its flanks are
-   ready. Keep the estimate position and delivery time.
+3. **Confirm the peak.** Set the peak radius and threshold.
+   Require every score within the radius. The cut must meet
+   the threshold, exceed every score on the left, and meet or
+   exceed every score on the right. Record the cut position,
+   when the score and its flanks are ready, and any reported
+   evidence delivery.
    [Selection and timing](references/EVENT_SEGMENTATION_CONTRACT.md#selection-and-timing) ·
    [Offline reference](scripts/reference_event_segmentation.py)
 4. **Report coverage and evaluate.** Partition supported runs

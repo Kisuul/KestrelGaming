@@ -73,12 +73,16 @@ Choose a positive threshold in squared feature units and a
 peak radius $R\ge1$ in feature steps. Require every score in
 $[b-R,b+R]$ to be available. Admit threshold equality.
 Require $D(b)$ to exceed every left score and equal or
-exceed every right score. This selects the first eligible
-point of a plateau. Two selected cuts are at least $R+1$
-steps apart, or $(R+1)H$ samples. The reference keeps the score when a peak
-flank is unavailable, the threshold fails, or a neighbor
-wins. Choose $L$ and $R$ with nearby changes and delayed
-features in view.
+exceed every right score. Only the first cut in a run of
+equal scores can pass the left comparison. If that cut
+lacks a complete flank, the run yields no detection. Each
+later cut in the run ties its immediate left neighbor.
+
+Two selected cuts are at least $R+1$ steps apart, or
+$(R+1)H$ samples. Keep the score when a peak flank is
+unavailable, the threshold fails, or a neighbor wins.
+Choose $L$ and $R$ for the expected spacing between
+changes and the readiness of the features.
 
 A strongest-first selection over an entire recording can
 change an early decision when a later peak suppresses a

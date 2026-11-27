@@ -39,6 +39,7 @@ the same frames. Check both squared scores at cut 4.
 | Probe | Expected evidence |
 | --- | --- |
 | Eight zeros, three twos, nine zeros. | Width one selects cuts 8 and 11. Width four selects 7 and 11. With width four, scores at 7, 8, 11 and 12 equal $9/4$. Threshold $9/4$ admits the earlier point on each plateau. Threshold 3 admits neither. |
+| `[0,2,4,4,4]` at width one, radius one, and threshold 4. | Scores at cuts 1 through 4 are $[4,4,0,0]$. Cut 1 lacks its left flank. Cut 2 has both flanks and ties its left neighbor. The plateau yields no detection. |
 | Six zeros, two twos, six zeros at width one. | Radius one selects cuts 6 and 8. Radius two selects cut 6 only. |
 | First six and first seven slots of the abrupt step. | Both give cut 4 a score of 4. With six slots, its right flank is unavailable. The seventh slot confirms cut 4. |
 | Shared prefix `[0,0,0,0,2,2,2]` and five more frames of either 2 or 32. | The confirmed cut 4 and all of its evidence agree. The second continuation also selects cut 7. |
