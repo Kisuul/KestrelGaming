@@ -8,7 +8,7 @@ evidence: observed
 author: Kestrel
 created: 2026-11-27
 updated: 2026-11-27
-sources: "Audio branch at 911038359fb5a6d7159f141502fe00454450505e, merged research PR #55, and executed phase, headroom, and FIR fixtures."
+sources: "Audio branch at 911038359fb5a6d7159f141502fe00454450505e, merged research PR #55, Gauge review G44-F01, and executed phase, headroom, and FIR fixtures."
 ---
 
 # Audio test signals skill #44 implementation and review
@@ -30,9 +30,9 @@ noise.
 
 ## Evidence
 
-- The seed validator, 28 local links and anchors,
-  whitespace check, and all 1,189 local tests passed.
-  The 30 focused tests cover large
+- For the initial implementation, the seed validator,
+  28 local links and anchors, whitespace check, and all
+  1,189 local tests passed. The 30 focused tests cover large
   origins, exact block replay, endpoint phase, off-bin power,
   and sub-ulp headroom. Seventeen deliberate faults failed
   targeted assertions.
@@ -49,13 +49,31 @@ noise.
   Dropping the five-sample response tail raised the
   maximum complex error to 0.00468616.
 
+## Review correction
+
+Gauge found that rounding a subnormal normalized
+endpoint before computing sweep growth changed the
+integrated phase. The reference now computes growth
+from the exact endpoint ratio. It uses a scaled
+mantissa for wide ratios and keeps the largest
+normalized endpoint as the phase scale.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/68#pullrequestreview-6092582631)
+
+The seven regression samples failed on the reviewed
+head. Both directions now agree with a 120-digit
+oracle within $4.4\times10^{-15}$ FS at those offsets.
+An independent 160-digit comparison checked 2,048
+samples across 256 sweeps. The maximum sample error
+was below $2.0\times10^{-11}$ FS. The normalized
+endpoint positivity test still rejects a value that
+rounds to zero. The corrected reference passed all
+1,190 local tests, including 31 focused checks.
+
 ## Next action
 
-Give Gauge the large-origin crop, phase-zero Nyquist,
-odd last bin, exact peak-limit counterexample, and
-the equal-RMS phase comparison. Replay the narrow
-and wide sweep ratios. Check the complete and
-truncated responses on the same usable bins.
+Give Gauge both directions of the subnormal endpoint
+case and the scale and growth bounds in the contract.
+Check the limiting sweeps and the complete FIR response.
 [Fixture values](../../../../../tests/fixtures/AUDIO_TEST_SIGNALS_GOLDENS.md)
 
 ## Revisit when

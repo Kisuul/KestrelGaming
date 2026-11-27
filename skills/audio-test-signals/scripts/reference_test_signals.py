@@ -197,27 +197,32 @@ def _tone_at(tone: Tone, rate: Fraction) -> Callable[[int], float]:
     return lambda offset: tone.amplitude * _sine(start + stride * offset, ticks)
 
 
+def _log_ratio(ratio: Fraction) -> float:
+    relative_change = ratio - 1
+    if abs(relative_change) <= Fraction(1, 2):
+        return math.log1p(float(relative_change))
+    # Keep the mantissa in [1/2, 2) before converting it to binary64.
+    exponent = ratio.numerator.bit_length() - ratio.denominator.bit_length()
+    mantissa = ratio / Fraction(2) ** exponent
+    return math.log(float(mantissa)) + exponent * math.log(2)
+
+
 def _sweep_at(sweep: LogSweep, rate: Fraction, frame_count: int) -> Callable[[int], float]:
     if sweep.start_hz == sweep.end_hz:
         return _tone_at(Tone(sweep.start_hz, sweep.amplitude, sweep.phase_turns), rate)
-    start = float(sweep.start_hz / rate)
-    end = float(sweep.end_hz / rate)
-    relative_change = (sweep.end_hz - sweep.start_hz) / sweep.start_hz
-    if abs(relative_change) <= Fraction(1, 2):
-        growth = math.log1p(float(relative_change))
-    else:
-        growth = math.log(end) - math.log(start)
+    growth = _log_ratio(sweep.end_hz / sweep.start_hz)
+    anchor = float(max(sweep.start_hz, sweep.end_hz) / rate)
 
     def sample(offset: int) -> float:
         z = growth * (offset / frame_count)
         if z > 0:
             # Factor out exp(z) and use the end frequency to keep the exponential bounded.
-            cycles = end * offset * math.exp(growth * ((offset - frame_count) / frame_count))
+            cycles = anchor * offset * math.exp(growth * ((offset - frame_count) / frame_count))
             cycles *= -math.expm1(-z) / z
         elif z < 0:
-            cycles = start * offset * (math.expm1(z) / z)
+            cycles = anchor * offset * (math.expm1(z) / z)
         else:
-            cycles = start * offset
+            cycles = anchor * offset
         phase = sweep.phase_turns + Fraction(cycles)
         return sweep.amplitude * _sine(phase.numerator, phase.denominator)
 

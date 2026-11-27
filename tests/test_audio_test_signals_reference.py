@@ -299,6 +299,29 @@ class SweepTests(unittest.TestCase):
         for actual, target in zip(block, (-0.9480104645122006, -0.44283748116327565)):
             self.assertAlmostEqual(actual, target, delta=2e-12)
 
+    def test_nonrepresentable_subnormal_endpoint_preserves_sweep_phase(self):
+        # The exact normalized low endpoint, 3/2**1076, rounds to 2**-1074.
+        low = F(3 * RATE, 2**1076)
+        cases = (
+            ("ascending", low, 12000, (
+                (65438, 0.9998803894356549),
+                (65534, -0.2888909484115301),
+                (65535, -0.9646781601669617),
+            )),
+            ("descending", 12000, low, (
+                (1, 0.9999606193497695),
+                (97, -0.9617247960767547),
+                (65534, 0.25485972176566834),
+                (65535, 0.25485972176566834),
+            )),
+        )
+        for direction, start, end, golden in cases:
+            spec = plan(LogSweep(start, end, 1), count=MAX_SIGNAL_FRAMES)
+            for offset, target in golden:
+                with self.subTest(direction=direction, offset=offset):
+                    value, = samples(spec, start_sample=ORIGIN + offset, frame_count=1)
+                    self.assertAlmostEqual(value, target, delta=2e-12)
+
     def test_known_fir_sweep_recovers_complex_response_with_the_tail(self):
         excitation = samples(plan(LogSweep(100, 8000, 1), count=12000))
         full = apply_fir(excitation)

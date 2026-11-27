@@ -94,16 +94,34 @@ $$
 f(t)=f_0\exp(gt/T).
 $$
 
-Use `log1p` near equal endpoints and `expm1` for
-$gt/T$ near zero. The ratio has limit one at zero. The
-equal-endpoint case renders the corresponding tone. For
-an ascending sweep the reference factors out the positive
-exponential and evaluates it with the end frequency
-anchor. This keeps the exponential argument nonpositive.
-The last rendered sample is at $T-1/f_s$. The endpoint
-frequency $f_1$ is defined at the exclusive boundary $T$.
-The phase uses the active span even when the returned
-record includes guards.
+Form $f_1/f_0$ as an exact rational. Near equal endpoints,
+use `log1p` on the ratio minus one. For wide ratios, write
+$f_1/f_0=m2^k$ with $1/2\le m<2$. Convert $m$ to
+binary64 and compute $\log(m)+k\log(2)$. This keeps the
+growth independent of rounding the normalized endpoints,
+even when an endpoint is subnormal.
+
+Use `expm1` for $gt/T$ near zero. The quotient has limit
+one at zero. Equal exact endpoints render the corresponding
+tone. Use the larger normalized frequency $a=\max(f_0,f_1)/f_s$
+as the phase scale. Anchor the exponential at $T$ for a rising
+sweep and at zero for a falling sweep. Both arguments then
+stay nonpositive. The last rendered sample is at $T-1/f_s$.
+The endpoint frequency $f_1$ is defined at the exclusive
+boundary $T$. The phase uses the active span with or without
+guards.
+
+Both normalized endpoints must round to positive binary64
+values. Rounding $a$ contributes at most $j2^{-55}$ turns
+at sample offset $j$, or $j2^{-1075}$ when $a$ is subnormal.
+The exponential is at most one, and its derivative with
+respect to $g$ has magnitude at most one on the anchored
+interval. For approximations with the same sweep direction,
+the phase change from rounding the scale and growth is
+bounded by $j(|\Delta a|+|\Delta g|/2)$ turns before further
+evaluation rounding. Thus the scale term is below $2^{-39}$
+turns over the supported span. Check sample error against a
+high-precision phase calculation at the intended amplitude.
 [SciPy chirp phase convention](https://docs.scipy.org/doc/scipy-1.17.0/reference/generated/scipy.signal.chirp.html)
 
 Specify the taper or use the unfaded active span. Check the
@@ -130,7 +148,7 @@ target tap when the acceptance claim concerns playback.
 | --- | --- |
 | `Tone` | Set exact nonnegative Hz up to Nyquist, a signed amplitude, and exact initial phase in turns. |
 | `Impulse` | Set an integer offset inside the active span and a signed amplitude. |
-| `LogSweep` | Set positive exact start and end Hz below Nyquist, amplitude, and initial phase in turns. Normalized endpoints must be representable as positive binary64 values. |
+| `LogSweep` | Set positive exact start and end Hz below Nyquist, amplitude, and initial phase in turns. Normalized endpoints must round to positive binary64 values. |
 | `ChannelSignal` | Supply the component tuple and optional active DC level. Its `peak_bound` gives the exact conservative bound. |
 | `SignalPlan` | Supply a `ScopeEpoch`, active start and count, ordered channel recipes, guards, and optional peak limit. |
 | `render_signal` | Render the whole planned record or an absolute subspan. Retain the original plan, generator identity, half-open block support, planar samples, and per-channel sample peaks. |

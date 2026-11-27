@@ -53,6 +53,20 @@ when `exp(z)-1` would round to zero. At offset 4,801, the
 value is within $3\times10^{-13}$ of the coherent 1,000 Hz
 tone and exceeds 0.1.
 
+Use 48 kHz, 65,536 active frames, and zero initial phase.
+Set one endpoint to $3f_s/2^{1076}$ and the other to
+12,000 Hz. The normalized low endpoint rounds to $2^{-1074}$.
+Use the exact ratio to obtain a growth magnitude of about
+743.341459633. A high-precision phase calculation gives the
+following unit-amplitude samples.
+
+| Direction | Offset | Expected sample |
+| --- | ---: | ---: |
+| Ascending | 65,534 | −0.2888909484115301 |
+| Ascending | 65,535 | −0.9646781601669617 |
+| Descending | 97 | −0.9617247960767547 |
+| Descending | 65,535 | 0.25485972176566834 |
+
 Convolve the up-sweep with the same six-tap FIR and use
 16,384-point transforms. Compare $Y/X$ with the analytic
 filter at 250–5,000 Hz where $|X|>1$ with the unnormalized
