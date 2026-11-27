@@ -14,6 +14,7 @@ are not standalone installed host plugins.
 | [audio-fft-spectrum](audio-fft-spectrum/SKILL.md) | Build and audit amplitude spectra, calibrated frequency bins, one-sided FFT scaling, and analytic reference tests |
 | [audio-harmonic-analysis](audio-harmonic-analysis/SKILL.md) | Measure FFT peak candidates and match them to a supplied fundamental. Check frequency error, resolution, and gate coverage. |
 | [audio-pitch-tracking](audio-pitch-tracking/SKILL.md) | Estimate monophonic pitch from fixed-support lag differences. Diagnose voicing, octave ambiguity, band edges, and sample timing. |
+| [audio-tuning-analysis](audio-tuning-analysis/SKILL.md) | Estimate a shared 12-TET tuning offset and measure labeled notes. Check circular residues, note weights, partial bias, and rate calibration. |
 | [audio-power-spectral-density](audio-power-spectral-density/SKILL.md) | Estimate and verify power density, window-energy normalization, Welch averaging, and Parseval integration |
 | [audio-spectral-descriptors](audio-spectral-descriptors/SKILL.md) | Measure calibrated PSD shape and adjacent-frame flux. Diagnose gain, band selection, and timing errors. |
 | [audio-cepstral-analysis](audio-cepstral-analysis/SKILL.md) | Analyze a real cepstrum and liftered log-magnitude envelope. Check FFT parity, spectral nulls, and quefrency evidence. |
