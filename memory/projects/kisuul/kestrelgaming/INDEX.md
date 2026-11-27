@@ -79,6 +79,7 @@
 | [Phase and coherence skill #33 research](handoffs/2026-11-21-audio-phase-coherence-research-r01.md) | Active | Welch averaging, signed cross phase, segment alignment and uncertainty fixtures |
 | [Rhythm analysis skill #38 research](handoffs/2026-11-26-audio-rhythm-analysis-research-r01.md) | Active | Beat-relative positions, subdivision ties, swing and tempo harmonics |
 | [Pitch tracking skill #39 research](handoffs/2026-11-26-audio-pitch-tracking-research-r01.md) | Active | Lag-difference candidates, voicing, missing fundamental and interpolation fixtures |
+| [Pitch tracking skill #39 implementation and review](handoffs/2026-11-26-audio-pitch-tracking-implementation-r01.md) | Active | Fixed lag support, range-edge fits, voicing, sample clock, and review evidence |
 | [Tuning analysis skill #40 research](handoffs/2026-11-26-audio-tuning-analysis-research-r01.md) | Active | Circular offsets, note weighting, clock calibration and harmonic bias |
 | [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
