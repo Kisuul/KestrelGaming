@@ -88,6 +88,7 @@
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
 | [Event segmentation skill #42 implementation and review](handoffs/2026-11-26-audio-event-segmentation-implementation-r01.md) | Active | Exact mean-change scores, gap handling, local peaks and confirmation clocks |
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
+| [Temporal fusion skill #43 implementation and review](handoffs/2026-11-26-audio-temporal-fusion-implementation-r01.md) | Active | Exact event association, coverage, frontier replay and revisions |
 | [Audio test signals skill #44 research](handoffs/2026-11-26-audio-test-signals-research-r01.md) | Active | Exact phase, coherent tones, multitone headroom, and logarithmic sweep fixtures |
 | [THD and THD+N skill #45 research](handoffs/2026-11-26-audio-thd-thdn-research-r01.md) | Active | Harmonic and residual powers, ratio references, and off-bin rejection |
 | [Intermodulation skill #46 research](handoffs/2026-11-26-audio-intermodulation-research-r01.md) | Active | Two-tone product amplitudes, carrier references, aliasing and collisions |
