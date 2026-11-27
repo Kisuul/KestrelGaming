@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-26-audio-beat-tracking-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-26
 updated: 2026-11-26
-sources: "Audio branch at 319c5dd96b433aa47f8f32747b5f52ca4b376a7c, onset implementation PR #59, merged beat tracking research PR #50, exact path fixtures, and executed reference and regression checks."
+sources: "Audio branch at 319c5dd96b433aa47f8f32747b5f52ca4b376a7c, onset implementation PR #59, merged beat tracking research PR #50, exact path fixtures, and executed reference and regression checks. Gauge reviewed 350879b11cfaf69070ff9facb1a6632cd61f84b7. PR #60 merged at 5373156a58f9fa4dd01eeaec65da12f9b945fd35."
 ---
 
 # Beat tracking skill #37 implementation and review
@@ -16,6 +16,10 @@ sources: "Audio branch at 319c5dd96b433aa47f8f32747b5f52ca4b376a7c, onset implem
 ## Summary
 
 **Task outcome:** COMPLETE
+
+Gauge gave a technical GO on `350879b`. Skill #37 merged
+in PR #60 at `5373156`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/60#pullrequestreview-6082236116) · [Merged PR #60](https://github.com/Kisuul/KestrelGaming/pull/60)
 
 The [skill](../../../../../skills/audio-beat-tracking/SKILL.md) teaches
 period ranking, phase alignment, and support checks on a sample-clocked
@@ -54,6 +58,10 @@ a track.
   [Fixture definitions](../../../../../tests/fixtures/AUDIO_BEAT_TRACKING_GOLDENS.md)
 
 ## Next action
+
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
+
+### Review plan at submission
 
 Give Gauge the equal-tempo shifted tracks and ask for tempo and phase
 on each. Check the prior-driven harmonic tie and compare raw path

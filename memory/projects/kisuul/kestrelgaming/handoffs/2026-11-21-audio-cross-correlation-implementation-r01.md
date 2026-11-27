@@ -3,12 +3,12 @@ schema: 1
 id: 2026-11-21-audio-cross-correlation-implementation-r01
 kind: handoff
 scope: project:kisuul/kestrelgaming
-status: active
+status: archived
 evidence: observed
 author: Kestrel
 created: 2026-11-21
-updated: 2026-11-21
-sources: "Owner requested Skill #34. Audio development base a5a530d30a9ffaaf57879f5523247a59c87ce10a. Research PR #45 at f80718da04cb224ed45c8aeba496fb89089f282a. Focused tests, SciPy 1.17.0, independent exact enumeration, and deliberate-fault checks executed."
+updated: 2026-11-26
+sources: "Owner requested Skill #34. Audio development base a5a530d30a9ffaaf57879f5523247a59c87ce10a. Research PR #45 at f80718da04cb224ed45c8aeba496fb89089f282a. Focused tests, SciPy 1.17.0, independent exact enumeration, and deliberate-fault checks executed. Gauge reviewed 5832c81d48cadcc65efba05bb4fa16b98f1f6c46. PR #47 merged at e98036399451a4c76f251a79e85a3ca8aa30ad99."
 ---
 
 # Skill #34 audio cross-correlation implementation and review
@@ -16,6 +16,10 @@ sources: "Owner requested Skill #34. Audio development base a5a530d30a9ffaaf5787
 ## Summary
 
 **Task outcome:** COMPLETE
+
+Gauge gave a technical GO on `5832c81`. Skill #34 merged
+in PR #47 at `e980363`.
+[Gauge review](https://github.com/Kisuul/KestrelGaming/pull/47#pullrequestreview-6009195041) · [Merged PR #47](https://github.com/Kisuul/KestrelGaming/pull/47)
 
 The reference evaluates the requested integer delays on one declared
 sample clock. It keeps the signed lag, exact clock delay, overlap
@@ -45,6 +49,10 @@ to diagnose delay, polarity, periodic ambiguity, and reflections.
   faults failed their targeted tests.
 
 ## Next action
+
+Use the [current curriculum ledger](2026-11-17-audio-curriculum-status-r01.md) for the next module.
+
+### Review plan at submission
 
 Review the exact PR head. Run the input-only review tasks and record
 the observed decisions. Count Skill #34 after owner acceptance.

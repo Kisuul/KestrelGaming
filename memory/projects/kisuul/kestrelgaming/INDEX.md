@@ -1,6 +1,6 @@
 # Kisuul/KestrelGaming
 
-**30 of 73 audio skills accepted as of 2026-11-20.** 43 modules remain. Next is Skill #31, `audio-stereo-correlation`. [Current curriculum ledger](handoffs/2026-11-17-audio-curriculum-status-r01.md)
+**40 of 73 audio skills accepted as of 2026-11-26.** 33 modules remain. Next is Skill #41, `audio-chroma-harmony`. [Current curriculum ledger](handoffs/2026-11-17-audio-curriculum-status-r01.md)
 
 | Record | Status | Use |
 | --- | --- | --- |
@@ -27,12 +27,12 @@
 | [Source separation skill #66 research](handoffs/2026-11-26-audio-source-separation-research-r01.md) | Active | Stem assignment, gain, reconstruction and SI-SDR |
 | [Denoising evaluation skill #67 research](handoffs/2026-11-26-audio-denoising-evaluation-research-r01.md) | Active | Target preservation, noise reduction, listening and scorer evidence |
 | [Onset detection skill #36 research](handoffs/2026-11-21-audio-onset-detection-research-r01.md) | Active | Positive flux, attack timing, spectral motion, peak readiness, and scoring fixtures |
-| [Onset detection skill #36 implementation](handoffs/2026-11-26-audio-onset-detection-implementation-r01.md) | Active | Positive novelty, exact peak readiness, callback replay, and event matching |
-| [Stereo correlation skill #31 implementation and review](handoffs/2026-11-21-audio-stereo-correlation-implementation-r01.md) | Active | Exact window moments, binary64 rounding, and measured mono retention |
+| [Onset detection skill #36 implementation](handoffs/2026-11-26-audio-onset-detection-implementation-r01.md) | Archived | Accepted in PR #59. Positive novelty, exact peak readiness, callback replay, and event matching |
+| [Stereo correlation skill #31 implementation and review](handoffs/2026-11-21-audio-stereo-correlation-implementation-r01.md) | Archived | Accepted in PR #41. Exact window moments, binary64 rounding, and measured mono retention |
 | [Multiresolution spectrum skill #24 review handoff](handoffs/2026-11-17-audio-multiresolution-spectrum-implementation-r01.md) | Archived | Accepted in PR #25. Implementation evidence includes 35 focused tests, 627 repository tests, and numerical comparisons. |
 | [Audio skill library implementation and backlog — 19/73 checkpoint](handoffs/2026-11-03-audio-skills-roadmap.md) | Superseded | Historical milestone, prior numerical evidence and past assignments; follow the current status above |
 | [Beat tracking skill #37 research](handoffs/2026-11-21-audio-beat-tracking-research-r01.md) | Active | Tempo and phase hypotheses, weak-evidence paths, timing, and beat-scoring fixtures |
-| [Beat tracking skill #37 implementation](handoffs/2026-11-26-audio-beat-tracking-implementation-r01.md) | Active | Period evidence, phase paths, elapsed support, and merged onset replay |
+| [Beat tracking skill #37 implementation](handoffs/2026-11-26-audio-beat-tracking-implementation-r01.md) | Archived | Accepted in PR #60. Period evidence, phase paths, elapsed support, and merged onset replay |
 | [Spectral descriptors research](handoffs/2026-11-20-audio-spectral-descriptors-research-r01.md) | Active | Discrete PSD weighting, endpoint mass, gain invariance and flux checks |
 | [Harmonic analysis research](handoffs/2026-11-20-audio-harmonic-analysis-research-r01.md) | Active | Peak interpolation, harmonic assignment, resolution and ambiguous fundamentals |
 | [Cepstral analysis research](handoffs/2026-11-20-audio-cepstral-analysis-research-r01.md) | Active | Real cepstrum, parity, spectral nulls, echo coefficients and liftering |
@@ -58,12 +58,12 @@
 | [Audio provenance reviewed integration — skill #16](handoffs/2026-11-04-audio-provenance-integration-r01.md) | Active | PR #11 accepted into audio branch; 3 defects fixed, 337 passing tests, 16/73 milestone |
 | [Audio stream-buffering skill #15 completion](handoffs/2026-11-04-audio-stream-buffering-completion-r01.md) | Active | Verified FIFO/xrun module with 36 tests, CI evidence, 15/73 milestone and next numerical-stability assignment |
 | [Audio filter-design skill #14 completion](handoffs/2026-11-04-audio-filter-design-completion-r01.md) | Active | Verified FIR/IIR module and SciPy evidence; 14/73, 59 pending; next audio-buffering assignment |
-| [Group delay skill #35 implementation and review](handoffs/2026-11-21-audio-group-delay-implementation-r01.md) | Active | Filter derivatives, qualified aperture slopes, timing offsets, and spectral support |
+| [Group delay skill #35 implementation and review](handoffs/2026-11-21-audio-group-delay-implementation-r01.md) | Archived | Accepted in PR #48. Filter derivatives, qualified aperture slopes, timing offsets, and spectral support |
 | [Audio curriculum checkpoint — 13/73](handoffs/2026-11-04-audio-curriculum-checkpoint-13-of-73-r01.md) | Active | Verified 2026-11-04 branch snapshot, 60 pending modules, owner merge gate and safe next-agent pickup |
 | [Audio owner full-completion merge gate](2026-11-04-audio-curriculum-full-completion-gate-r01.md) | Active | Owner decision: no merge of PR #2 until all 73 audio modules are completed |
-| [Cross-correlation skill #34 implementation and review](handoffs/2026-11-21-audio-cross-correlation-implementation-r01.md) | Active | Clock-referenced delay, paired lag support, exact score ranking, and peak ambiguity |
-| [Mid/Side analysis skill #32 implementation and review](handoffs/2026-11-21-audio-mid-side-analysis-implementation-r01.md) | Active | Exact component power, RMS rounding, gain and mono delivery, and band cancellation |
-| [Phase and coherence skill #33 implementation and review](handoffs/2026-11-21-audio-phase-coherence-implementation-r01.md) | Active | Paired Welch support, signed cross phase, exact pooled powers, and diagnostic fixtures |
+| [Cross-correlation skill #34 implementation and review](handoffs/2026-11-21-audio-cross-correlation-implementation-r01.md) | Archived | Accepted in PR #47. Clock-referenced delay, paired lag support, exact score ranking, and peak ambiguity |
+| [Mid/Side analysis skill #32 implementation and review](handoffs/2026-11-21-audio-mid-side-analysis-implementation-r01.md) | Archived | Accepted in PR #42. Exact component power, RMS rounding, gain and mono delivery, and band cancellation |
+| [Phase and coherence skill #33 implementation and review](handoffs/2026-11-21-audio-phase-coherence-implementation-r01.md) | Archived | Accepted in PR #44. Paired Welch support, signed cross phase, exact pooled powers, and diagnostic fixtures |
 | [Cross-correlation skill #34 research](handoffs/2026-11-21-audio-cross-correlation-research-r01.md) | Active | Signed lag and sample support, linear FFT checks, peak ambiguity, and PHAT limits |
 | [Harmonic analysis skill #26 implementation and review](handoffs/2026-11-20-audio-harmonic-analysis-implementation-r01.md) | Archived | Accepted in PR #32. Peak refinement, controlled resolution fixtures, exact harmonic gates, and review evidence |
 | [Audio parallel-agent onboarding](handoffs/2026-11-04-audio-parallel-work-onboarding-r01.md) | Active | Proposed unclaimed work lanes, safe branches, agent handoffs and coordinator checks |
@@ -78,11 +78,11 @@
 | [Mid/Side analysis skill #32 research](handoffs/2026-11-21-audio-mid-side-analysis-research-r01.md) | Active | Matrix conventions, band power, Side gain, headroom and mono fold-down fixtures |
 | [Phase and coherence skill #33 research](handoffs/2026-11-21-audio-phase-coherence-research-r01.md) | Active | Welch averaging, signed cross phase, segment alignment and uncertainty fixtures |
 | [Rhythm analysis skill #38 research](handoffs/2026-11-26-audio-rhythm-analysis-research-r01.md) | Active | Beat-relative positions, subdivision ties, swing and tempo harmonics |
-| [Rhythm analysis skill #38 implementation](handoffs/2026-11-26-audio-rhythm-analysis-implementation-r01.md) | Active | Exact rhythm measurements, signed grid fits, voice continuity, and timing replay |
+| [Rhythm analysis skill #38 implementation](handoffs/2026-11-26-audio-rhythm-analysis-implementation-r01.md) | Archived | Accepted in PR #61. Exact rhythm measurements, signed grid fits, voice continuity, and timing replay |
 | [Pitch tracking skill #39 research](handoffs/2026-11-26-audio-pitch-tracking-research-r01.md) | Active | Lag-difference candidates, voicing, missing fundamental and interpolation fixtures |
-| [Pitch tracking skill #39 implementation and review](handoffs/2026-11-26-audio-pitch-tracking-implementation-r01.md) | Active | Fixed lag support, range-edge fits, voicing, sample clock, and review evidence |
+| [Pitch tracking skill #39 implementation and review](handoffs/2026-11-26-audio-pitch-tracking-implementation-r01.md) | Archived | Accepted in PR #62. Fixed lag support, range-edge fits, voicing, sample clock, and review evidence |
 | [Tuning analysis skill #40 research](handoffs/2026-11-26-audio-tuning-analysis-research-r01.md) | Active | Circular offsets, note weighting, clock calibration and harmonic bias |
-| [Tuning analysis skill #40 implementation and review](handoffs/2026-11-26-audio-tuning-analysis-implementation-r01.md) | Active | Circular estimates, note-event weights, known-note errors, and calibrated pitch replay |
+| [Tuning analysis skill #40 implementation and review](handoffs/2026-11-26-audio-tuning-analysis-implementation-r01.md) | Archived | Accepted in PR #63. Circular estimates, note-event weights, known-note errors, and calibrated pitch replay |
 | [Chroma and harmony skill #41 research](handoffs/2026-11-26-audio-chroma-harmony-research-r01.md) | Active | Calibrated pitch-class folding, tuning, spectral support and triad ambiguity |
 | [Event segmentation skill #42 research](handoffs/2026-11-26-audio-event-segmentation-research-r01.md) | Active | Two-sided novelty, unavailable support, boundary timing and scoring |
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
