@@ -78,6 +78,7 @@
 | [Mid/Side analysis skill #32 research](handoffs/2026-11-21-audio-mid-side-analysis-research-r01.md) | Active | Matrix conventions, band power, Side gain, headroom and mono fold-down fixtures |
 | [Phase and coherence skill #33 research](handoffs/2026-11-21-audio-phase-coherence-research-r01.md) | Active | Welch averaging, signed cross phase, segment alignment and uncertainty fixtures |
 | [Rhythm analysis skill #38 research](handoffs/2026-11-26-audio-rhythm-analysis-research-r01.md) | Active | Beat-relative positions, subdivision ties, swing and tempo harmonics |
+| [Rhythm analysis skill #38 implementation](handoffs/2026-11-26-audio-rhythm-analysis-implementation-r01.md) | Active | Exact rhythm measurements, signed grid fits, voice continuity, and timing replay |
 | [Pitch tracking skill #39 research](handoffs/2026-11-26-audio-pitch-tracking-research-r01.md) | Active | Lag-difference candidates, voicing, missing fundamental and interpolation fixtures |
 | [Pitch tracking skill #39 implementation and review](handoffs/2026-11-26-audio-pitch-tracking-implementation-r01.md) | Active | Fixed lag support, range-edge fits, voicing, sample clock, and review evidence |
 | [Tuning analysis skill #40 research](handoffs/2026-11-26-audio-tuning-analysis-research-r01.md) | Active | Circular offsets, note weighting, clock calibration and harmonic bias |

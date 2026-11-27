@@ -38,6 +38,7 @@ are not standalone installed host plugins.
 | [audio-group-delay](audio-group-delay/SKILL.md) | Measure filter derivatives and qualified transfer slopes. Check time offsets, spectral nulls, phase branches, and aperture. |
 | [audio-onset-detection](audio-onset-detection/SKILL.md) | Detect onsets from spectral flux and RMS rise. Audit peak estimates, data readiness, and event matching. |
 | [audio-beat-tracking](audio-beat-tracking/SKILL.md) | Rank tempos and align beats from clocked novelty. Check metrical ambiguity, phase, quiet spans, and timing. |
+| [audio-rhythm-analysis](audio-rhythm-analysis/SKILL.md) | Measure inter-onset intervals, beat phase, subdivision residuals, and labelled swing. Audit support and ambiguity. |
 | [audio-stream-buffering](audio-stream-buffering/SKILL.md) | Design frame-indexed rings, producer-consumer buffering, overflow/underrun recovery, latency, epoch continuity and independent FIFO verification |
 | [audio-analysis-provenance](audio-analysis-provenance/SKILL.md) | Preserve source-to-DSP-to-visualization lineage, sample timebases, explicit gaps, units, uncertainty and honest content digest claims |
 | [audio-numerical-stability](audio-numerical-stability/SKILL.md) | Diagnose audio finite-arithmetic errors in RMS, FFT, PSD, Welch, ENBW, quantization and IIR poles; verify portable mathematical remedies with independent extreme-input fixtures |
