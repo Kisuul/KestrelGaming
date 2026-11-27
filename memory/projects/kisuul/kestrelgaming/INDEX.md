@@ -90,6 +90,7 @@
 | [Temporal fusion skill #43 research](handoffs/2026-11-26-audio-temporal-fusion-research-r01.md) | Active | Exact clock alignment, event association, readiness, late data and shared uncertainty |
 | [Temporal fusion skill #43 implementation and review](handoffs/2026-11-26-audio-temporal-fusion-implementation-r01.md) | Active | Exact event association, coverage, frontier replay and revisions |
 | [Audio test signals skill #44 research](handoffs/2026-11-26-audio-test-signals-research-r01.md) | Active | Exact phase, coherent tones, multitone headroom, and logarithmic sweep fixtures |
+| [Audio test signals skill #44 implementation and review](handoffs/2026-11-27-audio-test-signals-implementation-r01.md) | Active | Exact phase, block renders, multitone headroom, and sweep response tails |
 | [THD and THD+N skill #45 research](handoffs/2026-11-26-audio-thd-thdn-research-r01.md) | Active | Harmonic and residual powers, ratio references, and off-bin rejection |
 | [THD and THD+N skill #45 implementation and review](handoffs/2026-11-27-audio-thd-thdn-implementation-r01.md) | Active | Coherent power accounting, ratio references, and rejection fixtures |
 | [Intermodulation skill #46 research](handoffs/2026-11-26-audio-intermodulation-research-r01.md) | Active | Two-tone product amplitudes, carrier references, aliasing and collisions |
