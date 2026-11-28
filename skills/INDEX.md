@@ -44,6 +44,7 @@ are not standalone installed host plugins.
 | [audio-filter-design](audio-filter-design/SKILL.md) | Choose and verify FIR/IIR filters, band specifications, group delay, SOS stability, coefficient quantization and streaming state |
 | [audio-group-delay](audio-group-delay/SKILL.md) | Measure filter derivatives and qualified transfer slopes. Check time offsets, spectral nulls, phase branches, and aperture. |
 | [audio-transfer-response](audio-transfer-response/SKILL.md) | Measure paired H1 and H2 response. Check excitation, noise location, nulls, and delay sign. |
+| [audio-dropout-detection](audio-dropout-detection/SKILL.md) | Audit missing source frames, playout provenance, and quiet intervals with exact timing. |
 | [audio-onset-detection](audio-onset-detection/SKILL.md) | Detect onsets from spectral flux and RMS rise. Audit peak estimates, data readiness, and event matching. |
 | [audio-beat-tracking](audio-beat-tracking/SKILL.md) | Rank tempos and align beats from clocked novelty. Check metrical ambiguity, phase, quiet spans, and timing. |
 | [audio-rhythm-analysis](audio-rhythm-analysis/SKILL.md) | Measure inter-onset intervals, beat phase, subdivision residuals, and labelled swing. Audit support and ambiguity. |
