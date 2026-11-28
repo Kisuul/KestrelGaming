@@ -249,12 +249,15 @@ class FloatEvidenceTests(unittest.TestCase):
         profile = FloatReferenceProfile(-.5, .75)
         lower = math.nextafter(-.5, -math.inf)
         upper = math.nextafter(.75, math.inf)
-        data = ((-.5, lower, .75, upper, .75),)
-        (counts,), runs = replay(data, (5,), profile=profile)
+        data = ((-.5, lower, -.875, lower, .75, upper, .75),)
+        whole = replay(data, (7,), profile=profile)
+        self.assertEqual(whole, replay(data, (2, 1, 4), profile=profile))
+        (counts,), runs = whole
         self.assertEqual((counts.negative_contacts, counts.positive_contacts), (1, 2))
-        self.assertEqual((counts.negative_exceedances, counts.positive_exceedances), (1, 1))
+        self.assertEqual((counts.negative_exceedances, counts.positive_exceedances), (3, 1))
         self.assertEqual([run.boundary for run in runs], [-.5, .75])
-        self.assertEqual([run.extreme for run in runs], [lower, upper])
+        self.assertEqual([positions(run) for run in runs], [(1, 4), (5, 6)])
+        self.assertEqual([run.extreme for run in runs], [-.875, upper])
 
     def test_repeated_exact_reference_values_register_contacts_only(self):
         counts, runs = replay(((1.0, 1.0, -1.0, -1.0, 0.0),), (5,), profile=FloatReferenceProfile())

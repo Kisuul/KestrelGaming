@@ -25,7 +25,7 @@ plateau rule, add $O$ to each reported index below.
 | Set a 300-sample plateau rule and accept 256 then 100 positive contacts. | The run qualifies at frontier $O+300$. Its observed end after the second block is $O+356$. |
 | Decode `00 00 80 F0 FF 7F` as signed 24-bit little-endian PCM with 20 valid bits. | Expect centered codes $-524288$ and $524287$. Their normalized values are $-1$ and $0.9999980926513672$. |
 | Feed floats `[0.8,1,1.125,1.25,1,-1.25,-1,0]` with references $\pm1$. | Three contacts and three strict exceedances. The positive excess run is $[2,4)$ with extreme $1.25$. The negative excess run is $[5,6)$ with extreme $-1.25$. |
-| Use references $-0.5$ and $0.75$. Test equality and the adjacent representable value beyond each reference. | Equality increments the contact count. Each outward step increments the matching strict excess count. |
+| Use references $-0.5$ and $0.75$. Let $l$ and $h$ be the adjacent representable values outside them. Feed $(-0.5,l,-0.875,l,0.75,h,0.75)$ as one block and in blocks of 2, 1, and 4. | The negative run is $[1,4)$ with extreme $-0.875$. The positive run is $[5,6)$ with extreme $h$. The counts are three negative and one positive excess, with one negative and two positive contacts. |
 
 ## Conversion evidence
 
