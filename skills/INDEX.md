@@ -21,6 +21,7 @@ are not standalone installed host plugins.
 | [audio-test-signals](audio-test-signals/SKILL.md) | Generate and verify clocked tones, impulses, mixtures, and sweeps. Check phase, headroom, and response tails. |
 | [audio-thd-thdn](audio-thd-thdn/SKILL.md) | Measure harmonic and residual power. Check fundamental rejection, bin assignment, and ratio references. |
 | [audio-intermodulation](audio-intermodulation/SKILL.md) | Measure two-tone mixed products and diagnose aliases, shared bins, and carrier references. |
+| [audio-noise-snr-sinad](audio-noise-snr-sinad/SKILL.md) | Integrate quiet noise and driven residuals. Check bands, spur membership, signal references, and quantizer assumptions. |
 | [audio-power-spectral-density](audio-power-spectral-density/SKILL.md) | Estimate and verify power density, window-energy normalization, Welch averaging, and Parseval integration |
 | [audio-spectral-descriptors](audio-spectral-descriptors/SKILL.md) | Measure calibrated PSD shape and adjacent-frame flux. Diagnose gain, band selection, and timing errors. |
 | [audio-cepstral-analysis](audio-cepstral-analysis/SKILL.md) | Analyze a real cepstrum and liftered log-magnitude envelope. Check FFT parity, spectral nulls, and quefrency evidence. |
