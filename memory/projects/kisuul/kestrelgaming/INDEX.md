@@ -100,6 +100,7 @@
 | [Transfer response skill #48 research](handoffs/2026-11-26-audio-transfer-response-research-r01.md) | Active | Paired response estimates, noise location, delay sign and nulls |
 | [Transfer response skill #48 implementation and review](handoffs/2026-11-27-audio-transfer-response-implementation-r01.md) | Active | Paired H1 and H2, coherence gates, exact nulls, and timing restoration |
 | [Clipping detection skill #49 research](handoffs/2026-11-26-audio-clipping-detection-research-r01.md) | Active | Asymmetric rails, contiguous runs, soft saturation and intersample peaks |
+| [Clipping detection skill #49 implementation and review](handoffs/2026-11-27-audio-clipping-detection-implementation-r01.md) | Active | Signed rails, float references, streaming run timing, and stage evidence |
 | [Dropout detection skill #50 research](handoffs/2026-11-26-audio-dropout-detection-research-r01.md) | Active | Source coverage, overlap, concealed audio and suspect quiet intervals |
 | [Codec artifacts skill #51 research](handoffs/2026-11-26-audio-codec-artifacts-research-r01.md) | Active | Presentation alignment, codec trim, transient residuals, and controlled comparisons |
 | [Reference validation skill #68 research](handoffs/2026-11-26-audio-reference-validation-research-r01.md) | Active | Independent oracles, FFT parity, tolerance, and zero padding |
