@@ -96,6 +96,7 @@
 | [Intermodulation skill #46 research](handoffs/2026-11-26-audio-intermodulation-research-r01.md) | Active | Two-tone product amplitudes, carrier references, aliasing and collisions |
 | [Intermodulation skill #46 implementation and review](handoffs/2026-11-27-audio-intermodulation-implementation-r01.md) | Active | Signed product geometry, collision groups, calibrated powers, and carrier references |
 | [Noise, SNR and SINAD skill #47 research](handoffs/2026-11-26-audio-noise-snr-sinad-research-r01.md) | Active | Band and reference definitions, PSD integration, and quantizer limits |
+| [Noise, SNR and SINAD skill #47 implementation and review](handoffs/2026-11-27-audio-noise-snr-sinad-implementation-r01.md) | Active | Quiet-input power, driven residual membership, and SNR and SINAD verification |
 | [Transfer response skill #48 research](handoffs/2026-11-26-audio-transfer-response-research-r01.md) | Active | Paired response estimates, noise location, delay sign and nulls |
 | [Transfer response skill #48 implementation and review](handoffs/2026-11-27-audio-transfer-response-implementation-r01.md) | Active | Paired H1 and H2, coherence gates, exact nulls, and timing restoration |
 | [Clipping detection skill #49 research](handoffs/2026-11-26-audio-clipping-detection-research-r01.md) | Active | Asymmetric rails, contiguous runs, soft saturation and intersample peaks |
