@@ -33,6 +33,7 @@ are not standalone installed host plugins.
 | [audio-spectrogram-waterfall](audio-spectrogram-waterfall/SKILL.md) | Build sample-timed STFT histories, calibrated heatmaps, bounded waterfall rendering, and synthetic ridge/impulse fixtures |
 | [audio-sample-peak](audio-sample-peak/SKILL.md) | Implement channel-specific sample peaks, timestamps, rolling holds, program peaks and reference threshold diagnostics |
 | [audio-true-peak](audio-true-peak/SKILL.md) | Analyze intersample reconstruction, boundary error, oversampling and BS.1770-5 evidence; experimental reference only |
+| [audio-clipping-detection](audio-clipping-detection/SKILL.md) | Measure per-channel rail contacts, plateau runs, and float reference exceedances with exact sample support. |
 | [audio-dsp-test-fixtures](audio-dsp-test-fixtures/SKILL.md) | Generate reproducible sample-timed audio vectors, test metamorphic and callback invariants, and check independent DSP references |
 | [audio-timebase-sync](audio-timebase-sync/SKILL.md) | Keep sample-frame time exact across blocks, gap/seek epochs, fractional rate mapping and external capture/playback/UI clock anchors |
 | [audio-sample-formats](audio-sample-formats/SKILL.md) | Decode, encode and verify bounded raw PCM integer/float formats, channel layouts, valid-bit packing, scaling, quantization and byte order |
